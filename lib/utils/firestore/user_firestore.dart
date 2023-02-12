@@ -17,10 +17,8 @@ class UserFireStore {
         'created_time': Timestamp.now(),
         'update_time': Timestamp.now(),
       });
-      print('新規登録完了');
       return true;
-    } on FirebaseException catch (e) {
-      print('error is $e');
+    } on FirebaseException catch (_) {
       return false;
     }
   }
@@ -41,10 +39,8 @@ class UserFireStore {
       );
 
       Authentication.myAccount = myAccount;
-      print('ユーザー取得完了');
       return true;
-    } on FirebaseException catch (e) {
-      print('error was $e');
+    } on FirebaseException catch (_) {
       return false;
     }
   }
@@ -58,10 +54,8 @@ class UserFireStore {
         'self_introduction': updateAccount.selfIntroduction,
         'updated_time': Timestamp.now(),
       });
-      print('ユーザー情報の更新完了');
       return true;
-    } on FirebaseException catch (e) {
-      print('error with $e');
+    } on FirebaseException catch (_) {
       return false;
     }
   }
@@ -84,10 +78,8 @@ class UserFireStore {
         );
         map[accountId] = postAccount;
       });
-      print('投稿ユーザーの情報取得完了');
       return map;
-    } on FirebaseException catch (e) {
-      print('error is an apple $e');
+    } on FirebaseException catch (_) {
       return null;
     }
   }

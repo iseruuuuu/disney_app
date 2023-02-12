@@ -63,6 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (result is UserCredential) {
                     var result0 = await UserFireStore.getUser(result.user!.uid);
                     if (result0 == true) {
+                      if (!mounted) return;
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(

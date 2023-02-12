@@ -1,6 +1,4 @@
 import 'package:disney_app/model/account.dart';
-import 'package:disney_app/model/post.dart';
-import 'package:disney_app/screen/edit/edit_screen.dart';
 import 'package:flutter/material.dart';
 
 class AccountHeader extends StatelessWidget {

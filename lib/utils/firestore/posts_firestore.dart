@@ -22,10 +22,8 @@ class PostFirestore {
         'post_id': result.id,
         'created_time': Timestamp.now(),
       });
-      print('投稿完了');
       return true;
-    } on FirebaseException catch (e) {
-      print('error is a $e');
+    } on FirebaseException catch (_) {
       return false;
     }
   }
@@ -47,8 +45,7 @@ class PostFirestore {
         postList.add(post);
       });
       return postList;
-    } on FirebaseException catch (e) {
-      print('error was at $e');
+    } on FirebaseException catch (_) {
       return null;
     }
   }

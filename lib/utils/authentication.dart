@@ -16,10 +16,8 @@ class Authentication {
         email: email,
         password: pass,
       );
-      print('auth登録完了');
       return newAccount;
-    } on FirebaseAuthException catch (e) {
-      print('error is  as $e');
+    } on FirebaseException catch (_) {
       return false;
     }
   }
@@ -35,10 +33,8 @@ class Authentication {
         password: pass,
       );
       currentFirebaseUser = result.user;
-      print('authログイン成功');
       return result;
-    } on FirebaseAuthException catch (e) {
-      print('error is $e}');
+    } on FirebaseException catch (_) {
       return false;
     }
   }

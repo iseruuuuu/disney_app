@@ -17,7 +17,6 @@ class FunctionUtils {
     final Reference ref = storageInstance.ref();
     await ref.child(uid).putFile(image);
     String downloadUrl = await storageInstance.ref(uid).getDownloadURL();
-    print(downloadUrl);
     return downloadUrl;
   }
 }

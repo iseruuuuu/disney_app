@@ -66,6 +66,7 @@ class _PostScreenState extends State<PostScreen> {
       );
       var result = await PostFirestore.addPost(newPost);
       if (result == true) {
+        if (!mounted) return;
         Navigator.pop(context);
       }
     }

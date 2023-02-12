@@ -4,9 +4,7 @@ import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({Key? key}) : super(key: key);
@@ -30,7 +28,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         title: const Text('新規作成'),
         elevation: 0,
       ),
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         child: Column(
           children: [
@@ -47,7 +45,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               child: CircleAvatar(
                 foregroundImage: image == null ? null : FileImage(image!),
                 radius: 40,
-                child: Icon(Icons.add),
+                child: const Icon(Icons.add),
               ),
             ),
             TextField(
@@ -96,6 +94,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     );
                     var result0 = await UserFireStore.setUser(newAccount);
                     if (result0 == true) {
+                      if (!mounted) return;
                       Navigator.pop(context);
                     }
                   }

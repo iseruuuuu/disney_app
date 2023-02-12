@@ -61,6 +61,7 @@ class _EditScreenState extends State<EditScreen> {
       Authentication.myAccount = updateAccount;
       var result = await UserFireStore.updateUser(updateAccount);
       if (result == true) {
+        if (!mounted) return;
         Navigator.pop(context, true);
       }
     }

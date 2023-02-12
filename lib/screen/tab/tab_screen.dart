@@ -1,4 +1,3 @@
-import 'package:disney_app/model/account.dart';
 import 'package:disney_app/screen/account/account_screen.dart';
 import 'package:disney_app/screen/time_line/time_line_screen.dart';
 import 'package:flutter/material.dart';
