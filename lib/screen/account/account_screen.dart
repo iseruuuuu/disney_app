@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
+import 'package:disney_app/screen/account/component/account_cell.dart';
+import 'package:disney_app/screen/account/component/account_container.dart';
+import 'package:disney_app/screen/account/component/account_header.dart';
 import 'package:disney_app/screen/edit/edit_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
@@ -24,58 +27,23 @@ class _AccountScreenState extends State<AccountScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(
-              height: 200,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CircleAvatar(
-                        radius: 32,
-                        foregroundImage: NetworkImage(myAccount.imagePath),
-                      ),
-                      Column(
-                        children: [
-                          Text(myAccount.name),
-                          Text(myAccount.userId),
-                        ],
-                      ),
-                      OutlinedButton(
-                        onPressed: () async {
-                          var result = await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const EditScreen(),
-                            ),
-                          );
-                          if (result == true) {
-                            setState(() {
-                              myAccount = Authentication.myAccount!;
-                            });
-                          }
-                        },
-                        child: const Text('編集'),
-                      ),
-                    ],
+            AccountHeader(
+              account: myAccount,
+              onTapEdit: () async {
+                var result = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const EditScreen(),
                   ),
-                  Text(myAccount.selfIntroduction),
-                ],
-              ),
+                );
+                if (result == true) {
+                  setState(() {
+                    myAccount = Authentication.myAccount!;
+                  });
+                }
+              },
             ),
-            Container(
-              alignment: Alignment.center,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: Colors.blue,
-                    width: 3,
-                  ),
-                ),
-              ),
-              child: Text('投稿'),
-            ),
+           const AccountContainer(),
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
                   stream: UserFireStore.users
@@ -100,56 +68,10 @@ class _AccountScreenState extends State<AccountScreen> {
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (context, index) {
                                   Post post = snapshot.data![index];
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      border: index == 0
-                                          ? const Border(
-                                              top: BorderSide(
-                                                color: Colors.grey,
-                                                width: 1,
-                                              ),
-                                              bottom: BorderSide(
-                                                color: Colors.grey,
-                                                width: 1,
-                                              ),
-                                            )
-                                          : const Border(
-                                              bottom: BorderSide(
-                                                color: Colors.grey,
-                                                width: 1,
-                                              ),
-                                            ),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 30,
-                                          foregroundImage:
-                                              NetworkImage(myAccount.imagePath),
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(myAccount.name),
-                                                Text(myAccount.userId),
-                                                Text(
-                                                  DateFormat('yyyy/MM/dd')
-                                                      .format(
-                                                    post.createdTime!.toDate(),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Text(post.content),
-                                            Text(post.rank.toString()),
-                                            Text(post.attractionName),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                  return AccountCell(
+                                    index: index,
+                                    account: myAccount,
+                                    post: post,
                                   );
                                 },
                               );
