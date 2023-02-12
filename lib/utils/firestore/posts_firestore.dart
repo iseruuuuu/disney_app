@@ -15,6 +15,8 @@ class PostFirestore {
         'content': newPost.content,
         'post_account_id': newPost.postAccountId,
         'created_time': Timestamp.now(),
+        'rank': newPost.rank,
+        'attraction_name': newPost.attractionName,
       });
       userPosts.doc(result.id).set({
         'post_id': result.id,
@@ -39,6 +41,8 @@ class PostFirestore {
           content: data['content'],
           postAccountId: data['post_account_id'],
           createdTime: data['created_time'],
+          rank: data['rank'],
+          attractionName: data['attraction_name'],
         );
         postList.add(post);
       });

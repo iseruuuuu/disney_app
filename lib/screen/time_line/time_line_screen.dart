@@ -54,6 +54,8 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                             content: data['content'],
                             postAccountId: data['post_account_id'],
                             createdTime: data['created_time'],
+                            rank: data['rank'],
+                            attractionName: data['attraction_name'],
                           );
                           Account postAccount =
                               userSnapshot.data![post.postAccountId]!;
@@ -99,6 +101,8 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                                       ],
                                     ),
                                     Text(post.content),
+                                    Text(post.rank.toString()),
+                                    Text(post.attractionName),
                                   ],
                                 ),
                               ],

@@ -12,6 +12,8 @@ class PostScreen extends StatefulWidget {
 
 class _PostScreenState extends State<PostScreen> {
   TextEditingController controller = TextEditingController();
+  TextEditingController rankController = TextEditingController();
+  TextEditingController attractionNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +27,22 @@ class _PostScreenState extends State<PostScreen> {
           TextField(
             controller: controller,
           ),
+          TextField(
+            controller: rankController,
+          ),
+          TextField(
+            controller: attractionNameController,
+          ),
           ElevatedButton(
             onPressed: () async {
-              if (controller.text.isNotEmpty) {
+              if (controller.text.isNotEmpty &&
+                  rankController.text.isNotEmpty &&
+                  attractionNameController.text.isNotEmpty) {
                 Post newPost = Post(
                   content: controller.text,
                   postAccountId: Authentication.myAccount!.id,
+                  rank: int.parse(rankController.text),
+                  attractionName: attractionNameController.text,
                 );
                 var result = await PostFirestore.addPost(newPost);
                 if (result == true) {

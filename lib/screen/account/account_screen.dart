@@ -144,6 +144,8 @@ class _AccountScreenState extends State<AccountScreen> {
                                               ],
                                             ),
                                             Text(post.content),
+                                            Text(post.rank.toString()),
+                                            Text(post.attractionName),
                                           ],
                                         ),
                                       ],
