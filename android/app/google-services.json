@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "416062561034",
+    "project_id": "disney-app-b7a71",
+    "storage_bucket": "disney-app-b7a71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416062561034:android:b3405085c5ea47b42bf8f3",
+        "android_client_info": {
+          "package_name": "com.disney_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "416062561034-7ksu4r14vn8oblkrin7fef0cv8g05mop.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApOVcaBJJCWSdvJURdyw53wwIbhuPBBfk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "416062561034-7ksu4r14vn8oblkrin7fef0cv8g05mop.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "416062561034-2jmn6d43e89e2phe03hnramg9lk0ef9h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.disneyApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
