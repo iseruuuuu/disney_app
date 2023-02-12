@@ -10,8 +10,28 @@ class CommentTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: TextField(
+        controller: controller,
+        maxLines: 5,
+        decoration: const InputDecoration(
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Color(0xFF4A67AD),
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Color(0xFF4A67AD),
+            ),
+          ),
+          labelText: 'コメント',
+          filled: true,
+          fillColor: Colors.white,
+          border: InputBorder.none,
+        ),
+      ),
     );
   }
 }

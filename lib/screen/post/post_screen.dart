@@ -3,7 +3,6 @@ import 'package:disney_app/constants/attraction.dart';
 import 'package:disney_app/model/post.dart';
 import 'package:disney_app/screen/post/component/attraction_picker.dart';
 import 'package:disney_app/screen/post/component/comment_text_field.dart';
-import 'package:disney_app/screen/post/component/post_button.dart';
 import 'package:disney_app/screen/post/component/rank_picker.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
@@ -75,9 +74,29 @@ class _PostScreenState extends State<PostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: const Text('投稿'),
         elevation: 0,
+        actions: [
+          TextButton(
+            onPressed: post,
+            child: const Text(
+              '投稿する',
+              style: TextStyle(fontSize: 15),
+            ),
+          ),
+        ],
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.black,
+          ),
+        ),
       ),
       body: Column(
         children: [
@@ -90,7 +109,7 @@ class _PostScreenState extends State<PostScreen> {
             attractionName: attractionName,
           ),
           CommentTextField(controller: controller),
-          PostButton(onPressed: post),
+          const Spacer(),
         ],
       ),
     );

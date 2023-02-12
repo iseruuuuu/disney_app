@@ -12,14 +12,36 @@ class AttractionPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: double.infinity,
-        height: 100,
-        color: Colors.grey.shade200,
-        child: Center(
-          child: Text(attractionName),
+    return Padding(
+      padding: const EdgeInsets.only(right: 20, left: 20, top: 50, bottom: 50),
+      child: ListTile(
+        onTap: onTap,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(color: Color(0xFF4A67AD)),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        tileColor: Colors.white,
+        title: const Text(
+          'アトラクション',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 10,
+            color: Colors.black,
+          ),
+        ),
+        trailing: SizedBox(
+          width: MediaQuery.of(context).size.width - 160,
+          child: Text(
+            //TODO テキストの全て出したい
+            attractionName,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+              color: Colors.black,
+            ),
+            textAlign: TextAlign.end,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ),
     );
