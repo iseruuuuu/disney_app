@@ -18,6 +18,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +65,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       );
                     }
+                  } else {
+                    if (!mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('ログインの際にエラーが発生しました。'),
+                        behavior: SnackBarBehavior.fixed,
+                      ),
+                    );
                   }
                 },
               ),
