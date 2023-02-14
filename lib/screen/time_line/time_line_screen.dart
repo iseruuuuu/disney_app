@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
+import 'package:disney_app/screen/detail/detail_account_screen.dart';
 import 'package:disney_app/screen/detail/detail_screen.dart';
 import 'package:disney_app/screen/post/post_screen.dart';
 import 'package:disney_app/screen/time_line/component/empty_time_line_screen.dart';
@@ -74,6 +75,17 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                           index: index,
                           postAccount: postAccount,
                           post: post,
+                          onTapImage: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailAccountScreen(
+                                  account: postAccount,
+                                  post: post,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       );
                     },

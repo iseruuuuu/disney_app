@@ -4,6 +4,7 @@ import 'package:disney_app/model/post.dart';
 import 'package:disney_app/screen/account/component/account_cell.dart';
 import 'package:disney_app/screen/account/component/account_container.dart';
 import 'package:disney_app/screen/account/component/account_header.dart';
+import 'package:disney_app/screen/detail/detail_account_screen.dart';
 import 'package:disney_app/screen/detail/detail_screen.dart';
 import 'package:disney_app/screen/edit/edit_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
@@ -84,6 +85,18 @@ class _AccountScreenState extends State<AccountScreen> {
                                       index: index,
                                       account: myAccount,
                                       post: post,
+                                      onTapImage: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                DetailAccountScreen(
+                                              account: myAccount,
+                                              post: post,
+                                            ),
+                                          ),
+                                        );
+                                      },
                                     ),
                                   );
                                 },

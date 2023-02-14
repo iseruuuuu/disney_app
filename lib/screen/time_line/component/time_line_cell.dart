@@ -9,11 +9,13 @@ class TimeLineCell extends StatelessWidget {
     required this.index,
     required this.postAccount,
     required this.post,
+    required this.onTapImage,
   }) : super(key: key);
 
   final int index;
   final Account postAccount;
   final Post post;
+  final Function() onTapImage;
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +43,12 @@ class TimeLineCell extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(10),
-            child: CircleAvatar(
-              radius: 30,
-              foregroundImage: NetworkImage(postAccount.imagePath),
+            child: GestureDetector(
+              onTap: onTapImage,
+              child: CircleAvatar(
+                radius: 30,
+                foregroundImage: NetworkImage(postAccount.imagePath),
+              ),
             ),
           ),
           Column(
