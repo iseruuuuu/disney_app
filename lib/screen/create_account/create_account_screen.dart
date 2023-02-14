@@ -107,6 +107,25 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     );
                     var result0 = await UserFireStore.setUser(newAccount);
                     if (result0 == true) {
+                      showDialog<void>(
+                        context: context,
+                        builder: (_) {
+                          return AlertDialog(
+                            title: const Center(child: Text('登録が完了しました')),
+                            content: const Text('ログイン画面でログインを試みてください'),
+                            actions: [
+                              Center(
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('閉じる'),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                       if (!mounted) return;
                       Navigator.pop(context);
                     }
