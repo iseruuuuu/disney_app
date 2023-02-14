@@ -1,4 +1,7 @@
 import 'package:disney_app/screen/create_account/create_account_screen.dart';
+import 'package:disney_app/screen/login/component/login_button.dart';
+import 'package:disney_app/screen/login/component/login_new_button.dart';
+import 'package:disney_app/screen/login/component/login_text_field.dart';
 import 'package:disney_app/screen/tab/tab_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
@@ -19,31 +22,21 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF4A67AD),
+        elevation: 0,
+      ),
       body: SafeArea(
         child: SizedBox(
           width: double.infinity,
           child: Column(
             children: [
-              const Text('ログイン'),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: TextField(
-                  controller: emailController,
-                  decoration: const InputDecoration(
-                    hintText: 'メールアドレス',
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: TextField(
-                  controller: passwordController,
-                  decoration: const InputDecoration(
-                    hintText: 'パスワード',
-                  ),
-                ),
-              ),
-              ElevatedButton(
+              const Spacer(),
+              LoginTextField(controller: emailController, hintText: 'メールアドレス'),
+              const SizedBox(height: 50),
+              LoginTextField(controller: passwordController, hintText: 'パスワード'),
+              const Spacer(),
+              LoginNewButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -52,9 +45,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   );
                 },
-                child: const Text('新規登録'),
               ),
-              ElevatedButton(
+              const SizedBox(height: 50),
+              LoginButton(
                 onPressed: () async {
                   var result = await Authentication.signIn(
                     email: emailController.text,
@@ -73,8 +66,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   }
                 },
-                child: const Text('ログイン'),
               ),
+              const Spacer(),
             ],
           ),
         ),
