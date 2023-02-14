@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:disney_app/model/account.dart';
+import 'package:disney_app/screen/create_account/component/create_account_button.dart';
+import 'package:disney_app/screen/create_account/component/create_account_text_field.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
@@ -25,14 +27,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('新規作成'),
+        backgroundColor: const Color(0xFF4A67AD),
         elevation: 0,
       ),
       body: SizedBox(
         width: double.infinity,
         child: Column(
           children: [
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
             GestureDetector(
               onTap: () async {
                 var result = await FunctionUtils.getImageFromGallery();
@@ -43,32 +45,43 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 }
               },
               child: CircleAvatar(
+                backgroundColor: const Color(0xFF4A67AD),
                 foregroundImage: image == null ? null : FileImage(image!),
-                radius: 40,
-                child: const Icon(Icons.add),
+                radius: 55,
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
               ),
             ),
-            TextField(
+            const SizedBox(height: 20),
+            CreateAccountTextField(
               controller: nameController,
-              decoration: const InputDecoration(hintText: '名前'),
+              hintText: '名前',
+              maxLines: 1,
             ),
-            TextField(
+            CreateAccountTextField(
               controller: userIdController,
-              decoration: const InputDecoration(hintText: 'ユーザーID'),
+              hintText: 'ユーザーID',
+              maxLines: 1,
             ),
-            TextField(
+            CreateAccountTextField(
               controller: selfIntroductionController,
-              decoration: const InputDecoration(hintText: '自己紹介'),
+              hintText: '自己紹介',
+              maxLines: 3,
             ),
-            TextField(
+            CreateAccountTextField(
               controller: emailController,
-              decoration: const InputDecoration(hintText: 'メールアドレス'),
+              hintText: 'メールアドレス',
+              maxLines: 1,
             ),
-            TextField(
+            CreateAccountTextField(
               controller: passwordController,
-              decoration: const InputDecoration(hintText: 'パスワード'),
+              hintText: 'パスワード',
+              maxLines: 1,
             ),
-            ElevatedButton(
+            const Spacer(),
+            CreateAccountButton(
               onPressed: () async {
                 if (nameController.text.isNotEmpty &&
                     userIdController.text.isNotEmpty &&
@@ -100,8 +113,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   }
                 }
               },
-              child: const Text('アカウントを作成'),
             ),
+            const Spacer(),
+            const Spacer(),
           ],
         ),
       ),
