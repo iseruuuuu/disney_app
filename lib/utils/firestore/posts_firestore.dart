@@ -50,7 +50,7 @@ class PostFirestore {
     }
   }
 
-  static Future<dynamic> deletePosts(String accountId) async {
+  static Future<dynamic> deleteAllPosts(String accountId) async {
     final CollectionReference userPosts = firebaseInstance
         .collection('users')
         .doc(accountId)
@@ -61,5 +61,14 @@ class PostFirestore {
       await posts.doc(doc.id).delete();
       userPosts.doc(doc.id).delete();
     });
+  }
+
+  static Future<dynamic> deletePost(String accountId, Post newPost) async {
+    final CollectionReference userPost = firebaseInstance
+        .collection('users')
+        .doc(newPost.postAccountId)
+        .collection('my_posts');
+    await posts.doc(accountId).delete();
+    userPost.doc(accountId).delete();
   }
 }
