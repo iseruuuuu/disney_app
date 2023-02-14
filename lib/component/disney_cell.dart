@@ -1,5 +1,6 @@
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
+import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -78,11 +79,20 @@ class DisneyCell extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 5, top: 10),
+                    padding: const EdgeInsets.only(top: 10, right: 10),
                     child: Text(
-                      DateFormat('yyyy/MM/dd').format(
+                      DateFormat('MM/dd').format(
                         post.createdTime!.toDate(),
                       ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, left: 20),
+                    child: GestureDetector(
+                      onTap: () {
+                        PostFirestore.deletePost(post.id, post);
+                      },
+                      child: const Icon(Icons.reorder),
                     ),
                   ),
                 ],
