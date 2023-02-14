@@ -111,6 +111,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       Navigator.pop(context);
                     }
                   }
+                } else {
+                  if (!mounted) return;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('いずれかの値がエラーとなっています'),
+                      behavior: SnackBarBehavior.fixed,
+                    ),
+                  );
                 }
               },
             ),
