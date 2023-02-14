@@ -86,6 +86,6 @@ class UserFireStore {
 
   static Future<dynamic> deleteUser(String accountId) async {
     users.doc(accountId).delete();
-    PostFirestore.deletePosts(accountId);
+    PostFirestore.deleteAllPosts(accountId);
   }
 }
