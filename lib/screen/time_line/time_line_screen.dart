@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:disney_app/component/disney_cell.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
 import 'package:disney_app/screen/detail/detail_account_screen.dart';
 import 'package:disney_app/screen/detail/detail_screen.dart';
 import 'package:disney_app/screen/post/post_screen.dart';
 import 'package:disney_app/screen/time_line/component/empty_time_line_screen.dart';
-import 'package:disney_app/screen/time_line/component/time_line_cell.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:flutter/material.dart';
@@ -71,9 +71,9 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                             ),
                           );
                         },
-                        child: TimeLineCell(
+                        child: DisneyCell(
                           index: index,
-                          postAccount: postAccount,
+                          account: postAccount,
                           post: post,
                           onTapImage: () {
                             Navigator.push(

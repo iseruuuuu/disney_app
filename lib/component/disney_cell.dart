@@ -3,8 +3,8 @@ import 'package:disney_app/model/post.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class AccountCell extends StatelessWidget {
-  const AccountCell({
+class DisneyCell extends StatelessWidget {
+  const DisneyCell({
     Key? key,
     required this.index,
     required this.account,
@@ -57,7 +57,7 @@ class AccountCell extends StatelessWidget {
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.only(right: 5, top: 10),
                     child: Text(
                       account.name,
                       style: const TextStyle(
@@ -68,7 +68,7 @@ class AccountCell extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.only(right: 5, top: 10),
                     child: Text(
                       account.userId,
                       style: TextStyle(
@@ -77,28 +77,47 @@ class AccountCell extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Text(
-                    DateFormat('yyyy/MM/dd').format(
-                      post.createdTime!.toDate(),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 5, top: 10),
+                    child: Text(
+                      DateFormat('yyyy/MM/dd').format(
+                        post.createdTime!.toDate(),
+                      ),
                     ),
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Text(post.attractionName),
-                  ),
-                  Text('${post.rank}点'),
-                ],
+              Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: Row(
+                  children: [
+                    Text(
+                      post.attractionName,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Text(
+                      '${post.rank}点',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   post.content,
                   style: const TextStyle(
-                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
                     color: Colors.black,
                   ),
                 ),

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:disney_app/component/disney_cell.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
-import 'package:disney_app/screen/account/component/account_cell.dart';
 import 'package:disney_app/screen/account/component/account_container.dart';
 import 'package:disney_app/screen/account/component/account_header.dart';
 import 'package:disney_app/screen/detail/detail_account_screen.dart';
@@ -81,7 +81,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                         ),
                                       );
                                     },
-                                    child: AccountCell(
+                                    child: DisneyCell(
                                       index: index,
                                       account: myAccount,
                                       post: post,
