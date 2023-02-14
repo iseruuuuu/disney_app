@@ -110,6 +110,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       if (!mounted) return;
                       Navigator.pop(context);
                     }
+                  } else {
+                    if (!mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Firebaseのエラーです。もう一度お確かめください'),
+                        behavior: SnackBarBehavior.fixed,
+                      ),
+                    );
                   }
                 } else {
                   if (!mounted) return;
