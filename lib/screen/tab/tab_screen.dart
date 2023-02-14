@@ -20,23 +20,41 @@ class _TabScreenState extends State<TabScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: pageList[selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle),
-            label: '',
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(
+              color: Colors.grey.shade400,
+              width: 1,
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle),
-            label: '',
-          ),
-        ],
-        currentIndex: selectedIndex,
-        onTap: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
+        ),
+        child: BottomNavigationBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          selectedItemColor: const Color(0xFF4A67AD),
+          unselectedItemColor: Colors.black,
+          iconSize: 30,
+          selectedFontSize: 13,
+          unselectedFontSize: 13,
+          type: BottomNavigationBarType.fixed,
+          currentIndex: selectedIndex,
+          onTap: (index) {
+            setState(() {
+              selectedIndex = index;
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_box_sharp),
+              label: 'Profile',
+            ),
+          ],
+        ),
       ),
     );
   }
