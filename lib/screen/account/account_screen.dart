@@ -4,6 +4,7 @@ import 'package:disney_app/model/post.dart';
 import 'package:disney_app/screen/account/component/account_cell.dart';
 import 'package:disney_app/screen/account/component/account_container.dart';
 import 'package:disney_app/screen/account/component/account_header.dart';
+import 'package:disney_app/screen/detail/detail_screen.dart';
 import 'package:disney_app/screen/edit/edit_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
@@ -42,7 +43,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 }
               },
             ),
-           const AccountContainer(),
+            const AccountContainer(),
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
                   stream: UserFireStore.users
@@ -67,10 +68,23 @@ class _AccountScreenState extends State<AccountScreen> {
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (context, index) {
                                   Post post = snapshot.data![index];
-                                  return AccountCell(
-                                    index: index,
-                                    account: myAccount,
-                                    post: post,
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => DetailScreen(
+                                            account: myAccount,
+                                            post: post,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: AccountCell(
+                                      index: index,
+                                      account: myAccount,
+                                      post: post,
+                                    ),
                                   );
                                 },
                               );
