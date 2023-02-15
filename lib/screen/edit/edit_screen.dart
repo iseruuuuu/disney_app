@@ -82,6 +82,7 @@ class _EditScreenState extends State<EditScreen> {
   void signOut() async {
     await EasyLoading.show(status: 'loading....');
     Authentication.signOut();
+    if (mounted) return;
     while (Navigator.canPop(context)) {
       Navigator.pop(context);
     }
