@@ -85,6 +85,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                       index: index,
                                       account: myAccount,
                                       post: post,
+                                      myAccount: myAccount.id,
                                       onTapImage: () {
                                         Navigator.push(
                                           context,

@@ -11,12 +11,14 @@ class DisneyCell extends StatelessWidget {
     required this.account,
     required this.post,
     required this.onTapImage,
+    required this.myAccount,
   }) : super(key: key);
 
   final int index;
   final Account account;
   final Post post;
   final Function() onTapImage;
+  final String myAccount;
 
   @override
   Widget build(BuildContext context) {
@@ -55,80 +57,81 @@ class DisneyCell extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 5, top: 10),
-                    child: Text(
-                      account.name,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 5, top: 10),
-                    child: Text(
-                      account.userId,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.grey.shade600,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10, right: 10),
-                    child: Text(
-                      DateFormat('MM/dd').format(
-                        post.createdTime!.toDate(),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10, left: 20),
-                    child: GestureDetector(
-                      onTap: () {
-                        PostFirestore.deletePost(post.id, post);
-                      },
-                      child: const Icon(Icons.reorder),
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5),
+              SizedBox(
+                width: MediaQuery.of(context).size.width - 80,
                 child: Row(
                   children: [
-                    Text(
-                      post.attractionName,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: Colors.black,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Text(
+                        account.name,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
-                    const SizedBox(width: 10),
-                    Text(
-                      '${post.rank}点',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: Colors.black,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, left: 5),
+                      child: Text(
+                        '@${account.userId}',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.grey.shade600,
+                        ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, left: 15),
+                      child: Text(
+                        DateFormat('MM/dd').format(
+                          post.createdTime!.toDate(),
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    (post.postAccountId == myAccount)
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 15, right: 20),
+                            child: GestureDetector(
+                              onTap: () {
+                                PostFirestore.deletePost(post.id, post);
+                              },
+                              child: const Icon(Icons.reorder),
+                            ),
+                          )
+                        : Container(),
                   ],
                 ),
               ),
               Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width - 80,
+                  child: Text(
+                    post.attractionName,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ),
+              Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  post.content,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    color: Colors.black,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width - 100,
+                  child: Text(
+                    post.content,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                      color: Colors.black,
+                    ),
+                    overflow: TextOverflow.visible,
                   ),
                 ),
               ),

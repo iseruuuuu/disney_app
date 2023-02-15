@@ -6,6 +6,7 @@ import 'package:disney_app/screen/detail/detail_account_screen.dart';
 import 'package:disney_app/screen/detail/detail_screen.dart';
 import 'package:disney_app/screen/post/post_screen.dart';
 import 'package:disney_app/screen/time_line/component/empty_time_line_screen.dart';
+import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,8 @@ class TimeLineScreen extends StatefulWidget {
 }
 
 class _TimeLineScreenState extends State<TimeLineScreen> {
+  Account myAccount = Authentication.myAccount!;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,8 +60,10 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                         rank: data['rank'],
                         attractionName: data['attraction_name'],
                       );
-                      Account postAccount =
-                          userSnapshot.data![post.postAccountId]!;
+                      Account postAccount = userSnapshot.data![post.postAccountId]!;
+
+
+
                       return GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -75,6 +80,7 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                           index: index,
                           account: postAccount,
                           post: post,
+                          myAccount: myAccount.id,
                           onTapImage: () {
                             Navigator.push(
                               context,
