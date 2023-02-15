@@ -7,6 +7,7 @@ import 'package:disney_app/screen/post/component/rank_picker.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_picker/picker.dart';
 
 class PostScreen extends StatefulWidget {
@@ -57,6 +58,7 @@ class _PostScreenState extends State<PostScreen> {
   }
 
   void post() async {
+    await EasyLoading.show(status: 'loading....');
     if (controller.text.isNotEmpty && attractionName != '') {
       Post newPost = Post(
         content: controller.text,
@@ -70,6 +72,7 @@ class _PostScreenState extends State<PostScreen> {
         Navigator.pop(context);
       }
     }
+    await EasyLoading.dismiss();
   }
 
   @override
