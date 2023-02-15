@@ -2,6 +2,7 @@ import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
 
 class DisneyCell extends StatelessWidget {
@@ -95,8 +96,10 @@ class DisneyCell extends StatelessWidget {
                         ? Padding(
                             padding: const EdgeInsets.only(top: 15, right: 20),
                             child: GestureDetector(
-                              onTap: () {
+                              onTap: () async {
+                                await EasyLoading.show(status: 'loading....');
                                 PostFirestore.deletePost(post.id, post);
+                                await EasyLoading.dismiss();
                               },
                               child: const Icon(Icons.reorder),
                             ),
