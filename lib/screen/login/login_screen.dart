@@ -7,6 +7,7 @@ import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -49,6 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 50),
               LoginButton(
                 onPressed: () async {
+                  await EasyLoading.show(status: 'loading....');
                   var result = await Authentication.signIn(
                     email: emailController.text,
                     pass: passwordController.text,
@@ -73,6 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     );
                   }
+                  await EasyLoading.dismiss();
                 },
               ),
               const Spacer(),

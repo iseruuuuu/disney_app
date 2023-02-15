@@ -7,6 +7,7 @@ import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({Key? key}) : super(key: key);
@@ -83,6 +84,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
             const Spacer(),
             CreateAccountButton(
               onPressed: () async {
+                await EasyLoading.show(status: 'loading....');
                 if (nameController.text.isNotEmpty &&
                     userIdController.text.isNotEmpty &&
                     selfIntroductionController.text.isNotEmpty &&
@@ -120,6 +122,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     ),
                   );
                 }
+                await EasyLoading.dismiss();
               },
             ),
             const Spacer(),
