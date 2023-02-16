@@ -11,11 +11,13 @@ class DetailScreen extends StatefulWidget {
     required this.account,
     required this.post,
     required this.myAccount,
+    required this.onTapImage,
   }) : super(key: key);
 
   final Account account;
   final Post post;
   final String myAccount;
+  final Function() onTapImage;
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -118,11 +120,14 @@ class _DetailScreenState extends State<DetailScreen> {
         children: [
           Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: CircleAvatar(
-                  radius: 25,
-                  foregroundImage: NetworkImage(widget.account.imagePath),
+              GestureDetector(
+                onTap: widget.onTapImage,
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: CircleAvatar(
+                    radius: 25,
+                    foregroundImage: NetworkImage(widget.account.imagePath),
+                  ),
                 ),
               ),
               Column(

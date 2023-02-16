@@ -81,6 +81,18 @@ class _AccountScreenState extends State<AccountScreen> {
                                               account: myAccount,
                                               post: post,
                                               myAccount: myAccount.id,
+                                              onTapImage: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        DetailAccountScreen(
+                                                      account: myAccount,
+                                                      post: post,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
                                             ),
                                           ),
                                         );

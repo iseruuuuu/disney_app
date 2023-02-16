@@ -76,6 +76,18 @@ class DetailAccountScreen extends StatelessWidget {
                                             account: account,
                                             post: post,
                                             myAccount: account.id,
+                                            onTapImage: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DetailAccountScreen(
+                                                    account: account,
+                                                    post: post,
+                                                  ),
+                                                ),
+                                              );
+                                            },
                                           ),
                                         ),
                                       );

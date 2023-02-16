@@ -73,6 +73,17 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                                       account: postAccount,
                                       post: post,
                                       myAccount: myAccount.id,
+                                      onTapImage: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => DetailAccountScreen(
+                                              account: postAccount,
+                                              post: post,
+                                            ),
+                                          ),
+                                        );
+                                      },
                                     ),
                                   ),
                                 );
