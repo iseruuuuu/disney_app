@@ -80,6 +80,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                             builder: (context) => DetailScreen(
                                               account: myAccount,
                                               post: post,
+                                              myAccount: myAccount.id,
                                             ),
                                           ),
                                         );

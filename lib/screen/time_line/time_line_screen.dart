@@ -72,6 +72,7 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                                     builder: (context) => DetailScreen(
                                       account: postAccount,
                                       post: post,
+                                      myAccount: myAccount.id,
                                     ),
                                   ),
                                 );

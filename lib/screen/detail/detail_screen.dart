@@ -1,17 +1,94 @@
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
+import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   const DetailScreen({
     Key? key,
     required this.account,
     required this.post,
+    required this.myAccount,
   }) : super(key: key);
 
   final Account account;
   final Post post;
+  final String myAccount;
+
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  void openCheckDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            '削除確認',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 17,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: const Text(
+            '投稿を削除してもよろしいでしょうか？\n'
+            '復元はできなくなっております',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 15,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: TextButton(
+                child: const Text(
+                  "Cancel",
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                  ),
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  deletePosts();
+                },
+                child: const Text(
+                  "OK",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void deletePosts() async {
+    await EasyLoading.show(status: 'loading....');
+    PostFirestore.deletePost(widget.post.id, widget.post);
+    await EasyLoading.dismiss();
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +122,7 @@ class DetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(15),
                 child: CircleAvatar(
                   radius: 25,
-                  foregroundImage: NetworkImage(account.imagePath),
+                  foregroundImage: NetworkImage(widget.account.imagePath),
                 ),
               ),
               Column(
@@ -54,7 +131,7 @@ class DetailScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Text(
-                      account.name,
+                      widget.account.name,
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
@@ -65,7 +142,7 @@ class DetailScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Text(
-                      account.userId,
+                      widget.account.userId,
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.grey.shade600,
@@ -74,6 +151,16 @@ class DetailScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              const Spacer(),
+              (widget.post.postAccountId == widget.myAccount)
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 15, right: 20),
+                      child: GestureDetector(
+                        onTap: openCheckDialog,
+                        child: const Icon(Icons.reorder),
+                      ),
+                    )
+                  : Container(),
             ],
           ),
           Column(
@@ -82,7 +169,7 @@ class DetailScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: Text(
-                  post.attractionName,
+                  widget.post.attractionName,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
@@ -92,7 +179,7 @@ class DetailScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: Text(
-                  '${post.rank}点',
+                  '${widget.post.rank}点',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -102,7 +189,7 @@ class DetailScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: Text(
-                  post.content,
+                  widget.post.content,
                   style: const TextStyle(
                     fontSize: 17,
                     color: Colors.black,
@@ -116,7 +203,7 @@ class DetailScreen extends StatelessWidget {
                   children: [
                     Text(
                       DateFormat('yyyy/MM/dd').format(
-                        post.createdTime!.toDate(),
+                        widget.post.createdTime!.toDate(),
                       ),
                       style: TextStyle(
                         fontSize: 15,
