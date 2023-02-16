@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/component/disney_cell.dart';
+import 'package:disney_app/component/empty_screen.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
 import 'package:disney_app/screen/account/component/account_container.dart';
@@ -47,69 +48,73 @@ class _AccountScreenState extends State<AccountScreen> {
             const AccountContainer(),
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
-                  stream: UserFireStore.users
-                      .doc(myAccount.id)
-                      .collection('my_posts')
-                      .orderBy(
-                        'created_time',
-                        descending: true,
-                      )
-                      .snapshots(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      List<String> myPostIds =
-                          List.generate(snapshot.data!.docs.length, (index) {
-                        return snapshot.data!.docs[index].id;
-                      });
-                      return FutureBuilder<List<Post>?>(
-                          future: PostFirestore.getPostsFromIds(myPostIds),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return ListView.builder(
-                                itemCount: snapshot.data!.length,
-                                itemBuilder: (context, index) {
-                                  Post post = snapshot.data![index];
-                                  return GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => DetailScreen(
-                                            account: myAccount,
-                                            post: post,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: DisneyCell(
-                                      index: index,
-                                      account: myAccount,
-                                      post: post,
-                                      myAccount: myAccount.id,
-                                      onTapImage: () {
+                stream: UserFireStore.users
+                    .doc(myAccount.id)
+                    .collection('my_posts')
+                    .orderBy(
+                      'created_time',
+                      descending: true,
+                    )
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<String> myPostIds =
+                        List.generate(snapshot.data!.docs.length, (index) {
+                      return snapshot.data!.docs[index].id;
+                    });
+                    return FutureBuilder<List<Post>?>(
+                      future: PostFirestore.getPostsFromIds(myPostIds),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return (snapshot.data!.isNotEmpty)
+                              ? ListView.builder(
+                                  itemCount: snapshot.data!.length,
+                                  itemBuilder: (context, index) {
+                                    Post post = snapshot.data![index];
+                                    return GestureDetector(
+                                      onTap: () {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                DetailAccountScreen(
+                                            builder: (context) => DetailScreen(
                                               account: myAccount,
                                               post: post,
                                             ),
                                           ),
                                         );
                                       },
-                                    ),
-                                  );
-                                },
-                              );
-                            } else {
-                              return Container();
-                            }
-                          });
-                    } else {
-                      return Container();
-                    }
-                  }),
+                                      child: DisneyCell(
+                                        index: index,
+                                        account: myAccount,
+                                        post: post,
+                                        myAccount: myAccount.id,
+                                        onTapImage: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetailAccountScreen(
+                                                account: myAccount,
+                                                post: post,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                )
+                              : const EmptyScreen();
+                        } else {
+                          return const Center(child: CircularProgressIndicator());
+                        }
+                      },
+                    );
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
             ),
           ],
         ),

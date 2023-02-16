@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/component/disney_cell.dart';
+import 'package:disney_app/component/empty_screen.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
 import 'package:disney_app/screen/detail/detail_account_screen.dart';
 import 'package:disney_app/screen/detail/detail_screen.dart';
 import 'package:disney_app/screen/post/post_screen.dart';
-import 'package:disney_app/screen/time_line/component/empty_time_line_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
@@ -47,62 +47,63 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
               builder: (context, userSnapshot) {
                 if (userSnapshot.hasData &&
                     userSnapshot.connectionState == ConnectionState.done) {
-                  return ListView.builder(
-                    itemCount: postSnapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      Map<String, dynamic> data = postSnapshot.data!.docs[index]
-                          .data() as Map<String, dynamic>;
-                      Post post = Post(
-                        id: postSnapshot.data!.docs[index].id,
-                        content: data['content'],
-                        postAccountId: data['post_account_id'],
-                        createdTime: data['created_time'],
-                        rank: data['rank'],
-                        attractionName: data['attraction_name'],
-                      );
-                      Account postAccount = userSnapshot.data![post.postAccountId]!;
-
-
-
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailScreen(
+                  return (postSnapshot.data!.docs.isNotEmpty)
+                      ? ListView.builder(
+                          itemCount: postSnapshot.data!.docs.length,
+                          itemBuilder: (context, index) {
+                            Map<String, dynamic> data =
+                                postSnapshot.data!.docs[index].data()
+                                    as Map<String, dynamic>;
+                            Post post = Post(
+                              id: postSnapshot.data!.docs[index].id,
+                              content: data['content'],
+                              postAccountId: data['post_account_id'],
+                              createdTime: data['created_time'],
+                              rank: data['rank'],
+                              attractionName: data['attraction_name'],
+                            );
+                            Account postAccount =
+                                userSnapshot.data![post.postAccountId]!;
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailScreen(
+                                      account: postAccount,
+                                      post: post,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: DisneyCell(
+                                index: index,
                                 account: postAccount,
                                 post: post,
-                              ),
-                            ),
-                          );
-                        },
-                        child: DisneyCell(
-                          index: index,
-                          account: postAccount,
-                          post: post,
-                          myAccount: myAccount.id,
-                          onTapImage: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailAccountScreen(
-                                  account: postAccount,
-                                  post: post,
-                                ),
+                                myAccount: myAccount.id,
+                                onTapImage: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailAccountScreen(
+                                        account: postAccount,
+                                        post: post,
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                             );
                           },
-                        ),
-                      );
-                    },
-                  );
+                        )
+                      : const EmptyScreen();
                 } else {
-                  return const EmptyTimeLineScreen();
+                  return const Center(child: CircularProgressIndicator());
                 }
               },
             );
           } else {
-            return const EmptyTimeLineScreen();
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),
