@@ -8,6 +8,7 @@ import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -17,8 +18,35 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final storage = const FlutterSecureStorage();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool passwordHidden = true;
+  bool savePassword = true;
+
+  Future<void> readFromStorage() async {
+    emailController.text = await storage.read(key: "KEY_USERNAME") ?? '';
+    passwordController.text = await storage.read(key: "KEY_PASSWORD") ?? '';
+  }
+
+  store() async {
+    await storage.write(key: "KEY_USERNAME", value: emailController.text);
+    await storage.write(key: "KEY_PASSWORD", value: passwordController.text);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    readFromStorage();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
               LoginButton(
                 onPressed: () async {
                   await EasyLoading.show(status: 'loading....');
+
                   var result = await Authentication.signIn(
                     email: emailController.text,
                     pass: passwordController.text,
@@ -58,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (result is UserCredential) {
                     var result0 = await UserFireStore.getUser(result.user!.uid);
                     if (result0 == true) {
-                      if (!mounted) return;
+                      store();
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
