@@ -102,19 +102,20 @@ class _PostScreenState extends State<PostScreen> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          RankPicker(
-            onTap: rankPicker,
-            rank: rank.toString(),
-          ),
-          AttractionPicker(
-            onTap: attractionPicker,
-            attractionName: attractionName,
-          ),
-          CommentTextField(controller: controller),
-          const Spacer(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            RankPicker(
+              onTap: rankPicker,
+              rank: rank.toString(),
+            ),
+            AttractionPicker(
+              onTap: attractionPicker,
+              attractionName: attractionName,
+            ),
+            CommentTextField(controller: controller),
+          ],
+        ),
       ),
     );
   }
