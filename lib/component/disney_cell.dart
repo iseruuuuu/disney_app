@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
 
-class DisneyCell extends StatelessWidget {
+class DisneyCell extends StatefulWidget {
   const DisneyCell({
     Key? key,
     required this.index,
@@ -22,10 +22,82 @@ class DisneyCell extends StatelessWidget {
   final String myAccount;
 
   @override
+  State<DisneyCell> createState() => _DisneyCellState();
+}
+
+class _DisneyCellState extends State<DisneyCell> {
+  void openCheckDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            '削除確認',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 17,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: const Text(
+            '投稿を削除してもよろしいでしょうか？\n'
+            '復元はできなくなっております',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 15,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: TextButton(
+                child: const Text(
+                  "Cancel",
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                  ),
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  deletePosts();
+                },
+                child: const Text(
+                  "OK",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void deletePosts() async {
+    await EasyLoading.show(status: 'loading....');
+    PostFirestore.deletePost(widget.post.id, widget.post);
+    await EasyLoading.dismiss();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: index == 0
+        border: widget.index == 0
             ? const Border(
                 top: BorderSide(
                   color: Colors.grey,
@@ -48,10 +120,10 @@ class DisneyCell extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(10),
             child: GestureDetector(
-              onTap: onTapImage,
+              onTap: widget.onTapImage,
               child: CircleAvatar(
                 radius: 30,
-                foregroundImage: NetworkImage(account.imagePath),
+                foregroundImage: NetworkImage(widget.account.imagePath),
               ),
             ),
           ),
@@ -65,7 +137,7 @@ class DisneyCell extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Text(
-                        account.name,
+                        widget.account.name,
                         style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
@@ -76,7 +148,7 @@ class DisneyCell extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 10, left: 5),
                       child: Text(
-                        '@${account.userId}',
+                        '@${widget.account.userId}',
                         style: TextStyle(
                           fontSize: 15,
                           color: Colors.grey.shade600,
@@ -87,20 +159,16 @@ class DisneyCell extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 10, left: 15),
                       child: Text(
                         DateFormat('MM/dd').format(
-                          post.createdTime!.toDate(),
+                          widget.post.createdTime!.toDate(),
                         ),
                       ),
                     ),
                     const Spacer(),
-                    (post.postAccountId == myAccount)
+                    (widget.post.postAccountId == widget.myAccount)
                         ? Padding(
                             padding: const EdgeInsets.only(top: 15, right: 20),
                             child: GestureDetector(
-                              onTap: () async {
-                                await EasyLoading.show(status: 'loading....');
-                                PostFirestore.deletePost(post.id, post);
-                                await EasyLoading.dismiss();
-                              },
+                              onTap: openCheckDialog,
                               child: const Icon(Icons.reorder),
                             ),
                           )
@@ -113,7 +181,7 @@ class DisneyCell extends StatelessWidget {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width - 80,
                   child: Text(
-                    post.attractionName,
+                    widget.post.attractionName,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -128,7 +196,7 @@ class DisneyCell extends StatelessWidget {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width - 100,
                   child: Text(
-                    post.content,
+                    widget.post.content,
                     style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
