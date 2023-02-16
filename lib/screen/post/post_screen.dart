@@ -45,6 +45,12 @@ class _PostScreenState extends State<PostScreen> {
       ),
       changeToFirst: true,
       hideHeader: false,
+      height: 400,
+      textStyle: const TextStyle(
+        fontSize: 15,
+        color: Colors.black,
+        fontWeight: FontWeight.bold,
+      ),
       onConfirm: (Picker picker, List value) {
         setState(() {
           var text1 = picker.adapter.text.replaceAll('[', '');
