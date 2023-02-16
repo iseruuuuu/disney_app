@@ -8,6 +8,7 @@ import 'package:disney_app/screen/account/component/account_header.dart';
 import 'package:disney_app/screen/detail/detail_account_screen.dart';
 import 'package:disney_app/screen/detail/detail_screen.dart';
 import 'package:disney_app/screen/edit/edit_screen.dart';
+import 'package:disney_app/screen/post/post_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
@@ -106,7 +107,8 @@ class _AccountScreenState extends State<AccountScreen> {
                                 )
                               : const EmptyScreen();
                         } else {
-                          return const Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         }
                       },
                     );
@@ -118,6 +120,18 @@ class _AccountScreenState extends State<AccountScreen> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xFF4A67AD),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PostScreen(),
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
