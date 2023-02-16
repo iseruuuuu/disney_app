@@ -79,70 +79,6 @@ class _EditScreenState extends State<EditScreen> {
     }
   }
 
-  void openCheckDialog({
-    required String title,
-    required String comment,
-    required Function() confirm,
-  }) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(
-            title,
-            style: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 17,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          content: Text(
-            comment,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 17,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: TextButton(
-                child: const Text(
-                  "Cancel",
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
-                ),
-                onPressed: () => Navigator.pop(context),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  confirm();
-                },
-                child: const Text(
-                  "OK",
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   void signOut() async {
     await EasyLoading.show(status: 'loading....');
     Authentication.signOut();
@@ -226,22 +162,24 @@ class _EditScreenState extends State<EditScreen> {
             const Spacer(),
             LogoutButton(
               onPressed: () {
-                openCheckDialog(
+                FunctionUtils.openDialog(
+                  context: context,
                   title: 'ログアウト確認',
-                  comment: 'ログアウトします。\n'
+                  content: 'ログアウトします。\n'
                       'よろしいでしょうか？',
-                  confirm: signOut,
+                  onTap: signOut,
                 );
               },
             ),
             DeleteButton(
               onPressed: () {
-                openCheckDialog(
+                FunctionUtils.openDialog(
+                  context: context,
                   title: 'アカウント削除確認',
-                  comment: 'アカウントの情報を削除します。\n'
+                  content: 'アカウントの情報を削除します。\n'
                       '投稿内容も全て削除されます。\n'
                       'よろしいでしょうか？',
-                  confirm: delete,
+                  onTap: delete,
                 );
               },
             ),
