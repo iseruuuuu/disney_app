@@ -8,6 +8,7 @@ import 'package:disney_app/utils/function_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({Key? key}) : super(key: key);
@@ -30,6 +31,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF4A67AD),
         elevation: 0,
+        title: Text(
+          'Create Account',
+          style: GoogleFonts.pattaya(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
