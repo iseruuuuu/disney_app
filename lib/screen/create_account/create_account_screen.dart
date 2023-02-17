@@ -32,102 +32,100 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         elevation: 0,
       ),
       body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: [
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () async {
-                  var result = await FunctionUtils.getImageFromGallery();
-                  if (result != null) {
-                    setState(() {
-                      image = File(result.path);
-                    });
-                  }
-                },
-                child: CircleAvatar(
-                  backgroundColor: const Color(0xFF4A67AD),
-                  foregroundImage: image == null ? null : FileImage(image!),
-                  radius: 55,
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
+        child: Column(
+          children: [
+            const SizedBox(height: 10),
+            GestureDetector(
+              onTap: () async {
+                var result = await FunctionUtils.getImageFromGallery();
+                if (result != null) {
+                  setState(() {
+                    image = File(result.path);
+                  });
+                }
+              },
+              child: CircleAvatar(
+                backgroundColor: const Color(0xFF4A67AD),
+                foregroundImage: image == null ? null : FileImage(image!),
+                radius: 55,
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 20),
-              CreateAccountTextField(
-                controller: nameController,
-                hintText: '名前',
-                maxLines: 1,
-              ),
-              CreateAccountTextField(
-                controller: userIdController,
-                hintText: 'ユーザーID',
-                maxLines: 1,
-              ),
-              CreateAccountTextField(
-                controller: selfIntroductionController,
-                hintText: '自己紹介',
-                maxLines: 3,
-              ),
-              CreateAccountTextField(
-                controller: emailController,
-                hintText: 'メールアドレス',
-                maxLines: 1,
-              ),
-              CreateAccountTextField(
-                controller: passwordController,
-                hintText: 'パスワード',
-                maxLines: 1,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: CreateAccountButton(
-                  onPressed: () async {
-                    await EasyLoading.show(status: 'loading....');
-                    if (nameController.text.isNotEmpty &&
-                        userIdController.text.isNotEmpty &&
-                        selfIntroductionController.text.isNotEmpty &&
-                        emailController.text.isNotEmpty &&
-                        passwordController.text.isNotEmpty &&
-                        image != null) {
-                      var result = await Authentication.signUp(
-                        email: emailController.text,
-                        pass: passwordController.text,
+            ),
+            const SizedBox(height: 10),
+            CreateAccountTextField(
+              controller: nameController,
+              hintText: '名前',
+              maxLines: 1,
+            ),
+            CreateAccountTextField(
+              controller: userIdController,
+              hintText: 'ユーザーID',
+              maxLines: 1,
+            ),
+            CreateAccountTextField(
+              controller: selfIntroductionController,
+              hintText: '自己紹介',
+              maxLines: 3,
+            ),
+            CreateAccountTextField(
+              controller: emailController,
+              hintText: 'メールアドレス',
+              maxLines: 1,
+            ),
+            CreateAccountTextField(
+              controller: passwordController,
+              hintText: 'パスワード',
+              maxLines: 1,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15),
+              child: CreateAccountButton(
+                onPressed: () async {
+                  await EasyLoading.show(status: 'loading....');
+                  if (nameController.text.isNotEmpty &&
+                      userIdController.text.isNotEmpty &&
+                      selfIntroductionController.text.isNotEmpty &&
+                      emailController.text.isNotEmpty &&
+                      passwordController.text.isNotEmpty &&
+                      image != null) {
+                    var result = await Authentication.signUp(
+                      email: emailController.text,
+                      pass: passwordController.text,
+                    );
+                    if (result is UserCredential) {
+                      String imagePath = await FunctionUtils.uploadImage(
+                        result.user!.uid,
+                        image!,
                       );
-                      if (result is UserCredential) {
-                        String imagePath = await FunctionUtils.uploadImage(
-                          result.user!.uid,
-                          image!,
-                        );
-                        Account newAccount = Account(
-                          id: result.user!.uid,
-                          name: nameController.text,
-                          userId: userIdController.text,
-                          selfIntroduction: selfIntroductionController.text,
-                          imagePath: imagePath,
-                        );
-                        var result0 = await UserFireStore.setUser(newAccount);
-                        if (result0 == true) {
-                          Navigator.pop(context);
-                        }
+                      Account newAccount = Account(
+                        id: result.user!.uid,
+                        name: nameController.text,
+                        userId: userIdController.text,
+                        selfIntroduction: selfIntroductionController.text,
+                        imagePath: imagePath,
+                      );
+                      var result0 = await UserFireStore.setUser(newAccount);
+                      if (result0 == true) {
+                        Navigator.pop(context);
                       }
-                    } else {
-                      if (!mounted) return;
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('いずれかの値がエラーとなっています'),
-                          behavior: SnackBarBehavior.fixed,
-                        ),
-                      );
                     }
-                    await EasyLoading.dismiss();
-                  },
-                ),
+                  } else {
+                    if (!mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('いずれかの値がエラーとなっています'),
+                        behavior: SnackBarBehavior.fixed,
+                      ),
+                    );
+                  }
+                  await EasyLoading.dismiss();
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
