@@ -27,11 +27,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>登録のためにカメラの許可が必要となります。</string>
+	<string>プロフィールの登録のためにカメラの許可が必要となります。</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>登録のためにMicroPhoneの許可が必要となります。</string>
+	<string>プロフィールの登録のためにMicroPhoneの許可が必要となります。</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>登録のためにアルバムの許可が必要となります。</string>
+	<string>プロフィールの登録のためにアルバムの許可が必要となります。。</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
