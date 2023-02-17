@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -54,32 +55,49 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF4A67AD),
         elevation: 0,
+        title: Text(
+          'Login',
+          style: GoogleFonts.pattaya(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: SafeArea(
         child: SizedBox(
           width: double.infinity,
           child: Column(
             children: [
-              const Spacer(),
+              const SizedBox(height: 50),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const Spacer(),
+                  Image.asset(
+                    'assets/images/empty.png',
+                    width: 70,
+                    height: 70,
+                  ),
+                  Text(
+                    'TDR APP',
+                    style: GoogleFonts.pattaya(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+              const SizedBox(height: 50),
               LoginTextField(controller: emailController, hintText: 'メールアドレス'),
               const SizedBox(height: 50),
               LoginTextField(controller: passwordController, hintText: 'パスワード'),
               const Spacer(),
-              LoginNewButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CreateAccountScreen(),
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(height: 50),
+              const Spacer(),
               LoginButton(
                 onPressed: () async {
                   await EasyLoading.show(status: 'loading....');
-
                   var result = await Authentication.signIn(
                     email: emailController.text,
                     pass: passwordController.text,
@@ -105,6 +123,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     );
                   }
                   await EasyLoading.dismiss();
+                },
+              ),
+              const SizedBox(height: 30),
+              LoginNewButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CreateAccountScreen(),
+                    ),
+                  );
                 },
               ),
               const Spacer(),
