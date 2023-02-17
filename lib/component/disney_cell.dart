@@ -63,36 +63,31 @@ class DisneyCell extends StatelessWidget {
                 width: MediaQuery.of(context).size.width - 80,
                 child: Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Text(
-                        account.name,
-                        style: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, left: 5),
-                      child: Text(
-                        '@${account.userId}',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.grey.shade600,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, left: 15),
-                      child: Text(
-                        DateFormat('MM/dd').format(
-                          post.createdTime!.toDate(),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 2.5,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          account.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     ),
                     const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, right: 10),
+                      child: Text(
+                        DateFormat('yyyy/MM/dd').format(
+                          post.createdTime!.toDate(),
+                        ),
+                      ),
+                    ),
                     (post.postAccountId == myAccount)
                         ? Padding(
                             padding: const EdgeInsets.only(top: 15, right: 20),
@@ -114,12 +109,15 @@ class DisneyCell extends StatelessWidget {
                               child: const Icon(Icons.reorder),
                             ),
                           )
-                        : Container(),
+                        : const Padding(
+                            padding: EdgeInsets.only(top: 15, right: 40),
+                            child: SizedBox(),
+                          ),
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 10),
+                padding: const EdgeInsets.only(top: 5),
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width - 80,
                   child: Text(
@@ -134,7 +132,7 @@ class DisneyCell extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width - 100,
                   child: Text(
