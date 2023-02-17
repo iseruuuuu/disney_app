@@ -80,6 +80,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               hintText: 'パスワード',
               maxLines: 1,
             ),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.all(15),
               child: CreateAccountButton(
