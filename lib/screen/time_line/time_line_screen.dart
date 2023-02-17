@@ -108,7 +108,7 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                             );
                           },
                         )
-                      : const EmptyScreen();
+                      : const Center(child: EmptyScreen());
                 } else {
                   return const Center(child: CircularProgressIndicator());
                 }
