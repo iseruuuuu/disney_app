@@ -15,7 +15,6 @@ class AccountHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 200,
       child: Column(
         children: [
           Row(
@@ -27,13 +26,15 @@ class AccountHeader extends StatelessWidget {
                   foregroundImage: NetworkImage(account.imagePath),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       account.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -41,10 +42,12 @@ class AccountHeader extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      account.userId,
+                      '@${account.userId}',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontWeight: FontWeight.w300,
-                        fontSize: 15,
+                        fontSize: 13,
                         color: Colors.black,
                       ),
                     ),
@@ -53,7 +56,7 @@ class AccountHeader extends StatelessWidget {
               ),
               const Spacer(),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.only(right: 15),
                 child: OutlinedButton(
                   onPressed: onTapEdit,
                   child: const Text(
