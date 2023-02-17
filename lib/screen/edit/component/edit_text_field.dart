@@ -5,10 +5,12 @@ class EditTextField extends StatelessWidget {
     Key? key,
     required this.controller,
     required this.hintText,
+    required this.maxLine,
   }) : super(key: key);
 
   final TextEditingController controller;
   final String hintText;
+  final int maxLine;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class EditTextField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
         controller: controller,
-        maxLines: 1,
+        maxLines: maxLine,
         decoration: InputDecoration(
           hintText: hintText,
           focusedBorder: const OutlineInputBorder(

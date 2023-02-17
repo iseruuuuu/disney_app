@@ -148,16 +148,19 @@ class _EditScreenState extends State<EditScreen> {
             EditTextField(
               controller: nameController,
               hintText: '名前',
+              maxLine: 1,
             ),
             const Spacer(),
             EditTextField(
               controller: userIdController,
               hintText: 'ユーザーID',
+              maxLine: 1,
             ),
             const Spacer(),
             EditTextField(
               controller: selfIntroductionController,
               hintText: '自己紹介',
+              maxLine: 3,
             ),
             const Spacer(),
             LogoutButton(
