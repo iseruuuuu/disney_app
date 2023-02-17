@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>416062561034-2jmn6d43e89e2phe03hnramg9lk0ef9h.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.416062561034-2jmn6d43e89e2phe03hnramg9lk0ef9h</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBH0tg0LPhmEVp8LwIYnLTBHb19dZR84kY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>416062561034</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.disneyApp</string>
+	<key>PROJECT_ID</key>
+	<string>disney-app-b7a71</string>
+	<key>STORAGE_BUCKET</key>
+	<string>disney-app-b7a71.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:416062561034:ios:67bb47c30546f6822bf8f3</string>
+</dict>
+</plist>
