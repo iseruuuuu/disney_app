@@ -22,20 +22,8 @@ class _PostScreenState extends State<PostScreen> {
   int rank = 0;
   String attractionName = '';
 
-  void rankPicker() {
-    Picker(
-      adapter: NumberPickerAdapter(
-        data: [const NumberPickerColumn(begin: 0, end: 100)],
-      ),
-      hideHeader: true,
-      onConfirm: (Picker picker, List value) {
-        setState(
-          () {
-            rank = value[0];
-          },
-        );
-      },
-    ).showDialog(context);
+  void rankPicker(double rating) {
+    rank = rating.round();
   }
 
   void attractionPicker() {

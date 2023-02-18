@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class RankPicker extends StatelessWidget {
   const RankPicker({
@@ -7,41 +8,26 @@ class RankPicker extends StatelessWidget {
     required this.rank,
   }) : super(key: key);
 
-  final Function() onTap;
+  final Function(double) onTap;
   final String rank;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 20, left: 20, top: 50),
-      child: ListTile(
-        onTap: onTap,
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(color: Color(0xFF4A67AD)),
-          borderRadius: BorderRadius.circular(5),
+      //TODO ここを整数だけにしたい。
+      child: RatingBar.builder(
+        initialRating: 1,
+        minRating: 1,
+        direction: Axis.horizontal,
+        allowHalfRating: true,
+        itemCount: 5,
+        itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+        itemBuilder: (context, _) => const Icon(
+          Icons.star,
+          color: Colors.amber,
         ),
-        tileColor: Colors.white,
-        title: const Text(
-          '得点',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-            color: Colors.black,
-          ),
-        ),
-        trailing: SizedBox(
-          width: MediaQuery.of(context).size.width - 160,
-          child: Text(
-            rank,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-              color: Colors.black,
-            ),
-            textAlign: TextAlign.end,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
+        onRatingUpdate: onTap,
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:disney_app/model/post.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -172,22 +173,39 @@ class _DetailScreenState extends State<DetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(20),
-                child: Text(
-                  widget.post.attractionName,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
+                padding: const EdgeInsets.all(15),
+                child: Row(
+                  children: [
+                    RatingBarIndicator(
+                      direction: Axis.horizontal,
+                      itemCount: 5,
+                      rating: widget.post.rank.toDouble(),
+                      itemSize: 30,
+                      itemBuilder: (context, _) => const Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Text(
+                        '${widget.post.rank}点',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: Text(
-                  '${widget.post.rank}点',
+                  widget.post.attractionName,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: 18,
                   ),
                 ),
               ),
@@ -196,7 +214,8 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: Text(
                   widget.post.content,
                   style: const TextStyle(
-                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
                     color: Colors.black,
                   ),
                 ),
