@@ -46,12 +46,18 @@ class _TabScreenState extends State<TabScreen> {
           },
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+              icon: Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Icon(Icons.home, size: 30),
+              ),
+              label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.account_box_sharp),
-              label: 'Profile',
+              icon: Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Icon(Icons.account_box_sharp, size: 30),
+              ),
+              label: '',
             ),
           ],
         ),
