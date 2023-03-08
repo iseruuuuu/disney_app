@@ -17,8 +17,8 @@ class Authentication {
         password: pass,
       );
       return newAccount;
-    } on FirebaseException catch (_) {
-      return false;
+    } on FirebaseException catch (error) {
+      return error;
     }
   }
 

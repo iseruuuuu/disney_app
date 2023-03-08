@@ -85,7 +85,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
             ),
             CreateAccountTextField(
               controller: passwordController,
-              hintText: 'パスワード',
+              hintText: 'パスワード(６文字以上)',
               maxLines: 1,
             ),
             const SizedBox(height: 20),
@@ -120,12 +120,18 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       if (result0 == true) {
                         Navigator.pop(context);
                       }
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('登録エラー $result'),
+                          behavior: SnackBarBehavior.fixed,
+                        ),
+                      );
                     }
                   } else {
-                    if (!mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('いずれかの値がエラーとなっています'),
+                        content: Text('登録してた内容に不備があります'),
                         behavior: SnackBarBehavior.fixed,
                       ),
                     );
