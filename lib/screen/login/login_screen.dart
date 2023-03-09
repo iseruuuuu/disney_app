@@ -5,6 +5,7 @@ import 'package:disney_app/screen/login/component/login_text_field.dart';
 import 'package:disney_app/screen/tab/tab_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
+import 'package:disney_app/utils/function_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -114,10 +115,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     }
                   } else {
-                    if (!mounted) return;
+                    final errorMessage =
+                        FunctionUtils().checkLoginError(result.hashCode);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('ログインの際にエラーが発生しました。'),
+                      SnackBar(
+                        content: Text(errorMessage),
                         behavior: SnackBarBehavior.fixed,
                       ),
                     );

@@ -34,8 +34,8 @@ class Authentication {
       );
       currentFirebaseUser = result.user;
       return result;
-    } on FirebaseException catch (_) {
-      return false;
+    } on FirebaseException catch (error) {
+      return error;
     }
   }
 

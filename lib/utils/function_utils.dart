@@ -95,6 +95,18 @@ class FunctionUtils {
       case 407816929:
         return 'このメールアドレスはすでに使用されています';
     }
-    return '';
+    return '不鮮明のエラーです。運営側にお伝えください。';
+  }
+
+  String checkLoginError(int error) {
+    switch (error) {
+      case 489289217:
+        return 'パスワード又はメールアドレスが間違っています';
+      case 536596580:
+        return 'パスワード又はメールアドレスが間違っています';
+      case 498732620:
+        return 'パスワード又はメールアドレスが間違っています';
+    }
+    return '不鮮明のエラーです。運営側にお伝えください。';
   }
 }
