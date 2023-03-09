@@ -121,9 +121,11 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         Navigator.pop(context);
                       }
                     } else {
+                      final errorMessage =
+                          FunctionUtils().checkError(result.hashCode);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('登録エラー $result'),
+                          content: Text(errorMessage),
                           behavior: SnackBarBehavior.fixed,
                         ),
                       );

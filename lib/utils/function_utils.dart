@@ -85,4 +85,16 @@ class FunctionUtils {
       },
     );
   }
+
+  String checkError(int error) {
+    switch (error) {
+      case 262702665:
+        return 'メールアドレスのフォーマットが間違っています';
+      case 183248883:
+        return 'パスワードは６文字以上に設定してください';
+      case 407816929:
+        return 'このメールアドレスはすでに使用されています';
+    }
+    return '';
+  }
 }
