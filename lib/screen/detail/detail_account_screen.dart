@@ -97,6 +97,8 @@ class DetailAccountScreen extends StatelessWidget {
                                       account: account,
                                       post: post,
                                       myAccount: account.id,
+                                      isMaster: false,
+
                                       onTapImage: () {
                                         Navigator.push(
                                           context,

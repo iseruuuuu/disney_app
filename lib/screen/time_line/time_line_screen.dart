@@ -9,6 +9,7 @@ import 'package:disney_app/screen/post/post_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
+import 'package:disney_app/utils/function_utils.dart';
 import 'package:flutter/material.dart';
 
 class TimeLineScreen extends StatefulWidget {
@@ -20,6 +21,7 @@ class TimeLineScreen extends StatefulWidget {
 
 class _TimeLineScreenState extends State<TimeLineScreen> {
   Account myAccount = Authentication.myAccount!;
+  bool isMaster = false;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +53,8 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                       ? ListView.builder(
                           itemCount: postSnapshot.data!.docs.length,
                           itemBuilder: (context, index) {
+                            isMaster = FunctionUtils()
+                                .checkMasterAccount(myAccount.id);
                             Map<String, dynamic> data =
                                 postSnapshot.data!.docs[index].data()
                                     as Map<String, dynamic>;
@@ -77,7 +81,8 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => DetailAccountScreen(
+                                            builder: (context) =>
+                                                DetailAccountScreen(
                                               account: postAccount,
                                               post: post,
                                             ),
@@ -93,6 +98,7 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                                 account: postAccount,
                                 post: post,
                                 myAccount: myAccount.id,
+                                isMaster: isMaster,
                                 onTapImage: () {
                                   Navigator.push(
                                     context,

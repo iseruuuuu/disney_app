@@ -86,6 +86,14 @@ class FunctionUtils {
     );
   }
 
+  bool checkMasterAccount(String id) {
+    if (id == 'fuKP9kQcLUZe3ZgDDpVU5ZlPz5O2') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   String checkRegisterError(int error) {
     switch (error) {
       case 262702665:

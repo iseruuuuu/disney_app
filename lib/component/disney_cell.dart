@@ -14,6 +14,7 @@ class DisneyCell extends StatelessWidget {
     required this.post,
     required this.onTapImage,
     required this.myAccount,
+    required this.isMaster,
   }) : super(key: key);
 
   final int index;
@@ -21,6 +22,7 @@ class DisneyCell extends StatelessWidget {
   final Post post;
   final Function() onTapImage;
   final String myAccount;
+  final bool isMaster;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +65,7 @@ class DisneyCell extends StatelessWidget {
                 width: MediaQuery.of(context).size.width - 80,
                 child: Row(
                   children: [
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width / 2.5,
                       child: Padding(
                         padding: const EdgeInsets.only(top: 10),
@@ -88,7 +90,7 @@ class DisneyCell extends StatelessWidget {
                         ),
                       ),
                     ),
-                    (post.postAccountId == myAccount)
+                    (post.postAccountId == myAccount) || isMaster
                         ? Padding(
                             padding: const EdgeInsets.only(top: 15, right: 20),
                             child: GestureDetector(
