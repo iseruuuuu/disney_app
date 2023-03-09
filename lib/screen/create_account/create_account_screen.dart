@@ -122,7 +122,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       }
                     } else {
                       final errorMessage =
-                          FunctionUtils().checkError(result.hashCode);
+                          FunctionUtils().checkRegisterError(result.hashCode);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(errorMessage),

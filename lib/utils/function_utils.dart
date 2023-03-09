@@ -86,7 +86,7 @@ class FunctionUtils {
     );
   }
 
-  String checkError(int error) {
+  String checkRegisterError(int error) {
     switch (error) {
       case 262702665:
         return 'メールアドレスのフォーマットが間違っています';
