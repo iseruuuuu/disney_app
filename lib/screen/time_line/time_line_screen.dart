@@ -27,9 +27,12 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 1,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(70),
+        child: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 1,
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: PostFirestore.posts
@@ -116,12 +119,16 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                         )
                       : const Center(child: EmptyScreen());
                 } else {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }
               },
             );
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
         },
       ),
