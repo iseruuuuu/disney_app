@@ -5,7 +5,7 @@ class CreateAccountTextField extends StatelessWidget {
     Key? key,
     required this.controller,
     required this.hintText,
-    required this.maxLines
+    required this.maxLines,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -21,6 +21,8 @@ class CreateAccountTextField extends StatelessWidget {
         maxLines: maxLines,
         decoration: InputDecoration(
           hintText: hintText,
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
               color: Color(0xFF4A67AD),
