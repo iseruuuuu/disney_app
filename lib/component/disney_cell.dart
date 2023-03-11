@@ -92,7 +92,7 @@ class DisneyCell extends StatelessWidget {
                     ),
                     (post.postAccountId == myAccount) || isMaster
                         ? Padding(
-                            padding: const EdgeInsets.only(top: 15, right: 20),
+                            padding: const EdgeInsets.only(top: 15, right: 10),
                             child: GestureDetector(
                               onTap: () {
                                 FunctionUtils.openDialog(
@@ -134,7 +134,7 @@ class DisneyCell extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5),
+                padding: const EdgeInsets.symmetric(vertical: 15),
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width - 100,
                   child: Text(
