@@ -65,6 +65,14 @@ class _PostScreenState extends State<PostScreen> {
         if (!mounted) return;
         Navigator.pop(context);
       }
+    } else {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('いずれかの値が未記入となっています'),
+          behavior: SnackBarBehavior.fixed,
+        ),
+      );
     }
     await EasyLoading.dismiss();
   }
