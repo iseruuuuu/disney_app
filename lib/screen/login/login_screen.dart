@@ -55,14 +55,20 @@ class _LoginScreenState extends State<LoginScreen> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color(0xFF4A67AD),
-          elevation: 0,
-          title: Text(
-            'Login',
-            style: GoogleFonts.pattaya(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(70),
+          child: AppBar(
+            backgroundColor: const Color(0xFF4A67AD),
+            elevation: 0,
+            title: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Text(
+                'Login',
+                style: GoogleFonts.pattaya(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
         ),
