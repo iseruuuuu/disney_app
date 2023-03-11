@@ -16,6 +16,7 @@ class LoginTextField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
         controller: controller,
+        autocorrect: false,
         maxLines: 1,
         decoration: InputDecoration(
           hintText: hintText,

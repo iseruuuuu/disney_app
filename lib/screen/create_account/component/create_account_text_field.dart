@@ -19,6 +19,7 @@ class CreateAccountTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         maxLines: maxLines,
+        autocorrect: false,
         decoration: InputDecoration(
           hintText: hintText,
           contentPadding:
