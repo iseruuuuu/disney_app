@@ -17,47 +17,47 @@ class AccountHeader extends StatelessWidget {
       width: double.infinity,
       child: Column(
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: CircleAvatar(
-                  radius: 40,
-                  foregroundImage: NetworkImage(account.imagePath),
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: CircleAvatar(
+                    radius: 40,
+                    foregroundImage: NetworkImage(account.imagePath),
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width / 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      account.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.black,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        account.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '@${account.userId}',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w300,
-                        fontSize: 13,
-                        color: Colors.black,
+                      Text(
+                        '@${account.userId}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w300,
+                          fontSize: 13,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(right: 15),
-                child: OutlinedButton(
+                const Spacer(),
+                OutlinedButton(
                   onPressed: onTapEdit,
                   child: const Text(
                     '編集',
@@ -66,8 +66,8 @@ class AccountHeader extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(25),
