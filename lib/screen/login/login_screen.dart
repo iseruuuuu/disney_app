@@ -52,94 +52,98 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF4A67AD),
-        elevation: 0,
-        title: Text(
-          'Login',
-          style: GoogleFonts.pattaya(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color(0xFF4A67AD),
+          elevation: 0,
+          title: Text(
+            'Login',
+            style: GoogleFonts.pattaya(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-      ),
-      body: SafeArea(
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            children: [
-              const SizedBox(height: 50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
                 children: [
-                  const Spacer(),
-                  Image.asset(
-                    'assets/images/empty.png',
-                    width: 70,
-                    height: 70,
+                  const SizedBox(height: 50),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Image.asset(
+                        'assets/images/empty.png',
+                        width: 70,
+                        height: 70,
+                      ),
+                      Text(
+                        'TDR APP',
+                        style: GoogleFonts.pattaya(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    'TDR APP',
-                    style: GoogleFonts.pattaya(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  const SizedBox(height: 50),
+                  LoginTextField(
+                      controller: emailController, hintText: 'メールアドレス'),
+                  const SizedBox(height: 50),
+                  LoginTextField(
+                      controller: passwordController, hintText: 'パスワード'),
+                  const SizedBox(height: 80),
+                  LoginButton(
+                    onPressed: () async {
+                      await EasyLoading.show(status: 'loading....');
+                      var result = await Authentication.signIn(
+                        email: emailController.text,
+                        pass: passwordController.text,
+                      );
+                      if (result is UserCredential) {
+                        var result0 =
+                            await UserFireStore.getUser(result.user!.uid);
+                        if (result0 == true) {
+                          store();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const TabScreen(),
+                            ),
+                          );
+                        }
+                      } else {
+                        final errorMessage =
+                            FunctionUtils().checkLoginError(result.hashCode);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(errorMessage),
+                            behavior: SnackBarBehavior.fixed,
+                          ),
+                        );
+                      }
+                      await EasyLoading.dismiss();
+                    },
                   ),
-                  const Spacer(),
-                ],
-              ),
-              const SizedBox(height: 50),
-              LoginTextField(controller: emailController, hintText: 'メールアドレス'),
-              const SizedBox(height: 50),
-              LoginTextField(controller: passwordController, hintText: 'パスワード'),
-              const Spacer(),
-              const Spacer(),
-              LoginButton(
-                onPressed: () async {
-                  await EasyLoading.show(status: 'loading....');
-                  var result = await Authentication.signIn(
-                    email: emailController.text,
-                    pass: passwordController.text,
-                  );
-                  if (result is UserCredential) {
-                    var result0 = await UserFireStore.getUser(result.user!.uid);
-                    if (result0 == true) {
-                      store();
-                      Navigator.pushReplacement(
+                  const SizedBox(height: 30),
+                  LoginNewButton(
+                    onPressed: () {
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const TabScreen(),
+                          builder: (context) => const CreateAccountScreen(),
                         ),
                       );
-                    }
-                  } else {
-                    final errorMessage =
-                        FunctionUtils().checkLoginError(result.hashCode);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(errorMessage),
-                        behavior: SnackBarBehavior.fixed,
-                      ),
-                    );
-                  }
-                  await EasyLoading.dismiss();
-                },
+                    },
+                  ),
+                ],
               ),
-              const SizedBox(height: 30),
-              LoginNewButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CreateAccountScreen(),
-                    ),
-                  );
-                },
-              ),
-              const Spacer(),
-            ],
+            ),
           ),
         ),
       ),
