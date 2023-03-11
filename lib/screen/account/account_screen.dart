@@ -30,6 +30,7 @@ class _AccountScreenState extends State<AccountScreen> {
       body: SafeArea(
         child: Column(
           children: [
+            const SizedBox(height: 20),
             AccountHeader(
               account: myAccount,
               onTapEdit: () async {
