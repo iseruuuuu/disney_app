@@ -28,14 +28,27 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF4A67AD),
-        elevation: 0,
-        title: Text(
-          'Create Account',
-          style: GoogleFonts.pattaya(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(70),
+        child: AppBar(
+          backgroundColor: const Color(0xFF4A67AD),
+          elevation: 0,
+          leading: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(Icons.arrow_back_ios_new),
+            ),
+          ),
+          title: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Text(
+              'Create Account',
+              style: GoogleFonts.pattaya(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
       ),
