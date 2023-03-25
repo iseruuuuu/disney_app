@@ -38,7 +38,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
             leading: Padding(
               padding: const EdgeInsets.only(top: 20),
               child: IconButton(
-                onPressed: () => Navigator.pop(context),
+                onPressed: () async {
+                  await EasyLoading.dismiss();
+                  Navigator.pop(context);
+                },
                 icon: const Icon(Icons.arrow_back_ios_new),
               ),
             ),
@@ -108,6 +111,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 padding: const EdgeInsets.all(15),
                 child: CreateAccountButton(
                   onPressed: () async {
+                    FocusScope.of(context).unfocus();
                     await EasyLoading.show(status: 'loading....');
                     if (nameController.text.isNotEmpty &&
                         userIdController.text.isNotEmpty &&
@@ -136,8 +140,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           Navigator.pop(context);
                         }
                       } else {
-                        final errorMessage =
-                            FunctionUtils().checkRegisterError(result.hashCode);
+                        final errorMessage = FunctionUtils()
+                            .checkRegisterError(result.toString());
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(errorMessage),
