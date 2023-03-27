@@ -5,6 +5,7 @@ import 'package:disney_app/utils/function_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DisneyCell extends StatelessWidget {
   const DisneyCell({
@@ -92,7 +93,7 @@ class DisneyCell extends StatelessWidget {
                     ),
                     (post.postAccountId == myAccount) || isMaster
                         ? Padding(
-                            padding: const EdgeInsets.only(top: 15, right: 10),
+                            padding: const EdgeInsets.only(top: 15, right: 20),
                             child: GestureDetector(
                               onTap: () {
                                 FunctionUtils.openDialog(
@@ -111,9 +112,26 @@ class DisneyCell extends StatelessWidget {
                               child: const Icon(Icons.reorder),
                             ),
                           )
-                        : const Padding(
-                            padding: EdgeInsets.only(top: 15, right: 40),
-                            child: SizedBox(),
+                        : Padding(
+                            padding: const EdgeInsets.only(top: 15, right: 20),
+                            child: GestureDetector(
+                              onTap: () {
+                                FunctionUtils.openDialog(
+                                  context: context,
+                                  title: 'お問い合わせ画面に遷移',
+                                  content: '投稿について問い合わせるサイトに\n'
+                                      '遷移します。よろしいですか？',
+                                  onTap: () async {
+                                    final url = Uri.parse(
+                                        'https://forms.gle/Mo71XmZtA74AKBTo9');
+                                    if (!await launchUrl(url)) {
+                                      throw 'Could not launch $url';
+                                    }
+                                  },
+                                );
+                              },
+                              child: const Icon(Icons.reorder),
+                            ),
                           ),
                   ],
                 ),

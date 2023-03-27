@@ -138,6 +138,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         var result0 = await UserFireStore.setUser(newAccount);
                         if (result0 == true) {
                           Navigator.pop(context);
+                          await EasyLoading.dismiss();
                         }
                       } else {
                         final errorMessage = FunctionUtils()
