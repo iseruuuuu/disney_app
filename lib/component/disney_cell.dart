@@ -116,6 +116,7 @@ class DisneyCell extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 15, right: 20),
                             child: GestureDetector(
                               onTap: () {
+                                //TODO ブロック機能を追加する。
                                 FunctionUtils.openDialog(
                                   context: context,
                                   title: 'お問い合わせ画面に遷移',
