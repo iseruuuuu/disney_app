@@ -1,7 +1,7 @@
 import 'package:disney_app/screen/create_account/create_account_screen.dart';
-import 'package:disney_app/screen/login/component/login_button.dart';
-import 'package:disney_app/screen/login/component/login_new_button.dart';
-import 'package:disney_app/screen/login/component/login_text_field.dart';
+import 'package:disney_app/component/login_button.dart';
+import 'package:disney_app/component/login_new_button.dart';
+import 'package:disney_app/component/login_text_field.dart';
 import 'package:disney_app/screen/tab/tab_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';

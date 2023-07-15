@@ -1,7 +1,7 @@
 import 'dart:io';
+import 'package:disney_app/component/create_account_text_field.dart';
 import 'package:disney_app/model/account.dart';
-import 'package:disney_app/screen/create_account/component/create_account_button.dart';
-import 'package:disney_app/screen/create_account/component/create_account_text_field.dart';
+import 'package:disney_app/component/create_account_button.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';

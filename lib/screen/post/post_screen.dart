@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'package:disney_app/component/rank_picker.dart';
 import 'package:disney_app/constants/attraction.dart';
 import 'package:disney_app/model/post.dart';
-import 'package:disney_app/screen/post/component/attraction_picker.dart';
-import 'package:disney_app/screen/post/component/comment_text_field.dart';
-import 'package:disney_app/screen/post/component/rank_picker.dart';
+import 'package:disney_app/component/attraction_picker.dart';
+import 'package:disney_app/component/comment_text_field.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:flutter/material.dart';

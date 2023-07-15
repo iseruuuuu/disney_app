@@ -1,8 +1,8 @@
 import 'dart:io';
+import 'package:disney_app/component/edit_text_field.dart';
+import 'package:disney_app/component/logout_button.dart';
 import 'package:disney_app/model/account.dart';
-import 'package:disney_app/screen/edit/component/delete_button.dart';
-import 'package:disney_app/screen/edit/component/edit_text_field.dart';
-import 'package:disney_app/screen/edit/component/logout_button.dart';
+import 'package:disney_app/component/delete_button.dart';
 import 'package:disney_app/screen/login/login_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
