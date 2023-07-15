@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                       } else {
                         final errorMessage =
-                            FunctionUtils().checkLoginError(result.hashCode);
+                            FunctionUtils().checkLoginError(result.toString());
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(errorMessage),

@@ -106,14 +106,12 @@ class FunctionUtils {
     return '不鮮明のエラーです。運営側にお伝えください。';
   }
 
-  String checkLoginError(int error) {
+  String checkLoginError(String error) {
     switch (error) {
-      case 489289217:
+      case '[firebase_auth/wrong-password] The password is invalid or the user does not have a password.':
         return 'パスワード又はメールアドレスが間違っています';
-      case 536596580:
-        return 'パスワード又はメールアドレスが間違っています';
-      case 498732620:
-        return 'パスワード又はメールアドレスが間違っています';
+      case '[firebase_auth/too-many-requests] Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.':
+        return 'ログイン試行過多により、アカウントが一時ロックされています。';
     }
     return '不鮮明のエラーです。運営側にお伝えください。';
   }
