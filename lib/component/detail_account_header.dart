@@ -13,54 +13,65 @@ class DetailAccountHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 200,
       child: Column(
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: CircleAvatar(
-                  radius: 40,
-                  foregroundImage: NetworkImage(account.imagePath),
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: CircleAvatar(
+                    radius: 40,
+                    foregroundImage: NetworkImage(account.imagePath),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      account.name,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.black,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / 1.7,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        account.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                    Text(
-                      account.userId,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w300,
-                        fontSize: 15,
-                        color: Colors.black,
+                      const SizedBox(height: 5),
+                      Text(
+                        '@${account.userId}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.grey,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              const Spacer(),
-            ],
+              ],
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.all(25),
+            padding: const EdgeInsets.only(
+              top: 30,
+              right: 15,
+              left: 15,
+            ),
             child: SizedBox(
               width: double.infinity,
               child: Text(
                 account.selfIntroduction,
                 style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
                 ),
               ),
             ),
