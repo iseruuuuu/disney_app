@@ -134,11 +134,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         );
                         var result0 = await UserFireStore.setUser(newAccount);
                         if (result0 == true) {
+                          if (!mounted) return;
                           Navigator.pop(context);
                         }
                       } else {
                         final errorMessage = FunctionUtils()
                             .checkRegisterError(result.toString());
+                        if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(errorMessage),

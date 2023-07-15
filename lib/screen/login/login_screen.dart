@@ -113,6 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             await UserFireStore.getUser(result.user!.uid);
                         if (result0 == true) {
                           store();
+                          if (!mounted) return;
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -123,6 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       } else {
                         final errorMessage =
                             FunctionUtils().checkLoginError(result.toString());
+                        if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(errorMessage),
