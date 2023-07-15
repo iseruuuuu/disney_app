@@ -121,13 +121,26 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
           ),
+          actions: [
+            (widget.post.postAccountId == widget.myAccount)
+                ? Padding(
+                    padding: const EdgeInsets.only(right: 20, top: 20),
+                    child: GestureDetector(
+                      onTap: openCheckDialog,
+                      child: const Icon(
+                        Icons.reorder,
+                        color: Colors.black,
+                      ),
+                    ),
+                  )
+                : Container(),
+          ],
           backgroundColor: Colors.white,
           elevation: 0,
         ),
       ),
       body: Column(
         children: [
-          const SizedBox(height: 10),
           Row(
             children: [
               GestureDetector(
@@ -135,7 +148,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(15),
                   child: CircleAvatar(
-                    radius: 25,
+                    radius: 28,
                     foregroundImage: NetworkImage(widget.account.imagePath),
                   ),
                 ),
@@ -143,21 +156,26 @@ class _DetailScreenState extends State<DetailScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Text(
-                      widget.account.name,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 1.5,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Text(
+                        widget.account.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.only(top: 5, right: 10),
                     child: Text(
-                      widget.account.userId,
+                      "@${widget.account.userId}",
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.grey.shade600,
@@ -166,16 +184,6 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                 ],
               ),
-              const Spacer(),
-              (widget.post.postAccountId == widget.myAccount)
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 15, right: 20),
-                      child: GestureDetector(
-                        onTap: openCheckDialog,
-                        child: const Icon(Icons.reorder),
-                      ),
-                    )
-                  : Container(),
             ],
           ),
           Column(
