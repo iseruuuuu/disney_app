@@ -3,13 +3,11 @@ import 'package:disney_app/component/disney_cell.dart';
 import 'package:disney_app/component/empty_screen.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
-import 'package:disney_app/screen/detail/detail_account_screen.dart';
-import 'package:disney_app/screen/detail/detail_screen.dart';
-import 'package:disney_app/screen/post/post_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
+import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
 
 class TimeLineScreen extends StatefulWidget {
@@ -70,27 +68,11 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                                 userSnapshot.data![post.postAccountId]!;
                             return GestureDetector(
                               onTap: () {
-                                Navigator.push(
+                                NavigationUtils.detailScreen(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) => DetailScreen(
-                                      account: postAccount,
-                                      post: post,
-                                      myAccount: myAccount.id,
-                                      onTapImage: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                DetailAccountScreen(
-                                              account: postAccount,
-                                              post: post,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
+                                  postAccount,
+                                  post,
+                                  myAccount.id,
                                 );
                               },
                               child: DisneyCell(
@@ -100,14 +82,10 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                                 myAccount: myAccount.id,
                                 isMaster: isMaster,
                                 onTapImage: () {
-                                  Navigator.push(
+                                  NavigationUtils.detailAccountScreen(
                                     context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DetailAccountScreen(
-                                        account: postAccount,
-                                        post: post,
-                                      ),
-                                    ),
+                                    postAccount,
+                                    post,
                                   );
                                 },
                               ),
@@ -132,12 +110,7 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF4A67AD),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const PostScreen(),
-            ),
-          );
+          NavigationUtils.postScreen(context);
         },
         child: const Icon(Icons.add),
       ),

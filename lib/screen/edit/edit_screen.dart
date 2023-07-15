@@ -3,10 +3,10 @@ import 'package:disney_app/component/edit_text_field.dart';
 import 'package:disney_app/component/logout_button.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/component/delete_button.dart';
-import 'package:disney_app/screen/login/login_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
+import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
 
 class EditScreen extends StatefulWidget {
@@ -81,12 +81,7 @@ class _EditScreenState extends State<EditScreen> {
     while (Navigator.canPop(context)) {
       Navigator.pop(context);
     }
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
-      ),
-    );
+    NavigationUtils.loginScreen(context);
   }
 
   void delete() {
@@ -95,12 +90,7 @@ class _EditScreenState extends State<EditScreen> {
     while (Navigator.canPop(context)) {
       Navigator.pop(context);
     }
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
-      ),
-    );
+    NavigationUtils.loginScreen(context);
   }
 
   @override

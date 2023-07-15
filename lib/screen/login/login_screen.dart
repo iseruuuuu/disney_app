@@ -1,11 +1,10 @@
-import 'package:disney_app/screen/create_account/create_account_screen.dart';
 import 'package:disney_app/component/login_button.dart';
 import 'package:disney_app/component/login_new_button.dart';
 import 'package:disney_app/component/login_text_field.dart';
-import 'package:disney_app/screen/tab/tab_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
+import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -97,10 +96,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 50),
                   LoginTextField(
-                      controller: emailController, hintText: 'メールアドレス'),
+                    controller: emailController,
+                    hintText: 'メールアドレス',
+                  ),
                   const SizedBox(height: 50),
                   LoginTextField(
-                      controller: passwordController, hintText: 'パスワード'),
+                    controller: passwordController,
+                    hintText: 'パスワード',
+                  ),
                   const SizedBox(height: 80),
                   LoginButton(
                     onPressed: () async {
@@ -114,12 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (result0 == true) {
                           store();
                           if (!mounted) return;
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const TabScreen(),
-                            ),
-                          );
+                          NavigationUtils.tabScreen(context);
                         }
                       } else {
                         final errorMessage =
@@ -137,12 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 30),
                   LoginNewButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CreateAccountScreen(),
-                        ),
-                      );
+                      NavigationUtils.createAccountScreen(context);
                     },
                   ),
                 ],

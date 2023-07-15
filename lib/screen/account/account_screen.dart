@@ -12,6 +12,7 @@ import 'package:disney_app/screen/post/post_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
+import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -75,27 +76,11 @@ class _AccountScreenState extends State<AccountScreen> {
                                     Post post = snapshot.data![index];
                                     return GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
+                                        NavigationUtils.detailScreen(
                                           context,
-                                          MaterialPageRoute(
-                                            builder: (context) => DetailScreen(
-                                              account: myAccount,
-                                              post: post,
-                                              myAccount: myAccount.id,
-                                              onTapImage: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        DetailAccountScreen(
-                                                      account: myAccount,
-                                                      post: post,
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          ),
+                                          myAccount,
+                                          post,
+                                          myAccount.id,
                                         );
                                       },
                                       child: DisneyCell(
@@ -105,15 +90,10 @@ class _AccountScreenState extends State<AccountScreen> {
                                         myAccount: myAccount.id,
                                         isMaster: false,
                                         onTapImage: () {
-                                          Navigator.push(
+                                          NavigationUtils.detailAccountScreen(
                                             context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailAccountScreen(
-                                                account: myAccount,
-                                                post: post,
-                                              ),
-                                            ),
+                                            myAccount,
+                                            post,
                                           );
                                         },
                                       ),
@@ -139,12 +119,7 @@ class _AccountScreenState extends State<AccountScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF4A67AD),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const PostScreen(),
-            ),
-          );
+          NavigationUtils.postScreen(context);
         },
         child: const Icon(Icons.add),
       ),

@@ -5,9 +5,9 @@ import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
 import 'package:disney_app/component/detail_account_container.dart';
 import 'package:disney_app/component/detail_account_header.dart';
-import 'package:disney_app/screen/detail/detail_screen.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
+import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
 
 class DetailAccountScreen extends StatelessWidget {
@@ -69,27 +69,11 @@ class DetailAccountScreen extends StatelessWidget {
                                   Post post = snapshot.data![index];
                                   return GestureDetector(
                                     onTap: () {
-                                      Navigator.push(
+                                      NavigationUtils.detailScreen(
                                         context,
-                                        MaterialPageRoute(
-                                          builder: (context) => DetailScreen(
-                                            account: account,
-                                            post: post,
-                                            myAccount: account.id,
-                                            onTapImage: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      DetailAccountScreen(
-                                                    account: account,
-                                                    post: post,
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
+                                        account,
+                                        post,
+                                        account.id,
                                       );
                                     },
                                     child: DisneyCell(
@@ -98,17 +82,11 @@ class DetailAccountScreen extends StatelessWidget {
                                       post: post,
                                       myAccount: account.id,
                                       isMaster: false,
-
                                       onTapImage: () {
-                                        Navigator.push(
+                                        NavigationUtils.detailAccountScreen(
                                           context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                DetailAccountScreen(
-                                              account: account,
-                                              post: post,
-                                            ),
-                                          ),
+                                          account,
+                                          post,
                                         );
                                       },
                                     ),
