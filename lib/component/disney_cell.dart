@@ -54,7 +54,7 @@ class DisneyCell extends StatelessWidget {
               SizedBox(
                 width: 60,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 10, left: 10),
+                  padding: const EdgeInsets.only(top: 15, left: 10),
                   child: GestureDetector(
                     onTap: onTapImage,
                     child: CircleAvatar(
