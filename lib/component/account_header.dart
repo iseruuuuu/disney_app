@@ -43,14 +43,15 @@ class AccountHeader extends StatelessWidget {
                           color: Colors.black,
                         ),
                       ),
+                      const SizedBox(height: 5),
                       Text(
                         '@${account.userId}',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 13,
-                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.grey,
                         ),
                       ),
                     ],
@@ -70,14 +71,19 @@ class AccountHeader extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(25),
+            padding: const EdgeInsets.only(
+              top: 30,
+              right: 15,
+              left: 15,
+            ),
             child: SizedBox(
               width: double.infinity,
               child: Text(
                 account.selfIntroduction,
                 style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
                 ),
               ),
             ),
