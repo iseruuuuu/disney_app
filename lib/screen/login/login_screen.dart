@@ -8,7 +8,6 @@ import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -106,7 +105,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 80),
                   LoginButton(
                     onPressed: () async {
-                      await EasyLoading.show(status: 'loading....');
                       var result = await Authentication.signIn(
                         email: emailController.text,
                         pass: passwordController.text,
@@ -133,7 +131,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         );
                       }
-                      await EasyLoading.dismiss();
                     },
                   ),
                   const SizedBox(height: 30),

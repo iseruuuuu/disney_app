@@ -2,7 +2,6 @@ import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -88,9 +87,7 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   void deletePosts() async {
-    await EasyLoading.show(status: 'loading....');
     PostFirestore.deletePost(widget.post.id, widget.post);
-    await EasyLoading.dismiss();
     Navigator.pop(context);
   }
 

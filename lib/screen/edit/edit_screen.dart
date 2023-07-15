@@ -8,7 +8,6 @@ import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class EditScreen extends StatefulWidget {
   const EditScreen({Key? key}) : super(key: key);
@@ -42,7 +41,6 @@ class _EditScreenState extends State<EditScreen> {
   }
 
   void update() async {
-    await EasyLoading.show(status: 'loading....');
     if (nameController.text.isNotEmpty &&
         userIdController.text.isNotEmpty &&
         selfIntroductionController.text.isNotEmpty) {
@@ -67,7 +65,6 @@ class _EditScreenState extends State<EditScreen> {
         Navigator.pop(context, true);
       }
     }
-    await EasyLoading.dismiss();
   }
 
   void selectImage() async {
@@ -80,7 +77,6 @@ class _EditScreenState extends State<EditScreen> {
   }
 
   void signOut() async {
-    await EasyLoading.show(status: 'loading....');
     Authentication.signOut();
     while (Navigator.canPop(context)) {
       Navigator.pop(context);
@@ -91,7 +87,6 @@ class _EditScreenState extends State<EditScreen> {
         builder: (context) => const LoginScreen(),
       ),
     );
-    await EasyLoading.dismiss();
   }
 
   void delete() {

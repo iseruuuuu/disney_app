@@ -7,7 +7,6 @@ import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CreateAccountScreen extends StatefulWidget {
@@ -39,7 +38,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               padding: const EdgeInsets.only(top: 20),
               child: IconButton(
                 onPressed: () async {
-                  await EasyLoading.dismiss();
                   Navigator.pop(context);
                 },
                 icon: const Icon(Icons.arrow_back_ios_new),
@@ -112,7 +110,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 child: CreateAccountButton(
                   onPressed: () async {
                     FocusScope.of(context).unfocus();
-                    await EasyLoading.show(status: 'loading....');
                     if (nameController.text.isNotEmpty &&
                         userIdController.text.isNotEmpty &&
                         selfIntroductionController.text.isNotEmpty &&
@@ -138,7 +135,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         var result0 = await UserFireStore.setUser(newAccount);
                         if (result0 == true) {
                           Navigator.pop(context);
-                          await EasyLoading.dismiss();
                         }
                       } else {
                         final errorMessage = FunctionUtils()
@@ -158,7 +154,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         ),
                       );
                     }
-                    await EasyLoading.dismiss();
                   },
                 ),
               ),

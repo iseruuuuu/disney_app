@@ -3,7 +3,6 @@ import 'package:disney_app/model/post.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -102,10 +101,7 @@ class DisneyCell extends StatelessWidget {
                                   content: '投稿を削除してもよろしいでしょうか？\n'
                                       '復元はできなくなっております',
                                   onTap: () async {
-                                    await EasyLoading.show(
-                                        status: 'loading....');
                                     PostFirestore.deletePost(post.id, post);
-                                    await EasyLoading.dismiss();
                                   },
                                 );
                               },
