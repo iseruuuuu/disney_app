@@ -66,7 +66,7 @@ class DisneyCell extends StatelessWidget {
                 child: Row(
                   children: [
                     SizedBox(
-                      width: MediaQuery.of(context).size.width / 2.5,
+                      width: MediaQuery.of(context).size.width / 2.8,
                       child: Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: Text(
@@ -74,25 +74,34 @@ class DisneyCell extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
-                            fontSize: 15,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
                         ),
                       ),
                     ),
-                    const Spacer(),
                     Padding(
-                      padding: const EdgeInsets.only(top: 10, right: 10),
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                        right: 10,
+                        left: 10,
+                      ),
                       child: Text(
                         DateFormat('yyyy/MM/dd').format(
                           post.createdTime!.toDate(),
                         ),
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
                       ),
                     ),
+                    const Spacer(),
                     (post.postAccountId == myAccount) || isMaster
                         ? Padding(
-                            padding: const EdgeInsets.only(top: 15, right: 20),
+                            padding: const EdgeInsets.only(top: 10, right: 20),
                             child: GestureDetector(
                               onTap: () {
                                 FunctionUtils.openDialog(
