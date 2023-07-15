@@ -57,7 +57,7 @@ class PostFirestore {
         .collection('my_posts');
 
     var snapshot = await userPosts.get();
-    snapshot.docs.forEach((doc) async {
+    await Future.forEach(snapshot.docs, (doc) async {
       await posts.doc(doc.id).delete();
       userPosts.doc(doc.id).delete();
     });
