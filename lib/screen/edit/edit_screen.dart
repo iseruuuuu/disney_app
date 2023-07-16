@@ -1,8 +1,7 @@
 import 'dart:io';
+import 'package:disney_app/component/app_text_button.dart';
 import 'package:disney_app/component/edit_text_field.dart';
-import 'package:disney_app/component/logout_button.dart';
 import 'package:disney_app/model/account.dart';
-import 'package:disney_app/component/delete_button.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
@@ -148,7 +147,7 @@ class _EditScreenState extends State<EditScreen> {
               maxLine: 3,
             ),
             const Spacer(),
-            LogoutButton(
+            AppTextButton(
               onPressed: () {
                 FunctionUtils.openDialog(
                   context: context,
@@ -158,8 +157,10 @@ class _EditScreenState extends State<EditScreen> {
                   onTap: signOut,
                 );
               },
+              title: 'ログアウト',
+              color: Colors.red,
             ),
-            DeleteButton(
+            AppTextButton(
               onPressed: () {
                 FunctionUtils.openDialog(
                   context: context,
@@ -170,6 +171,8 @@ class _EditScreenState extends State<EditScreen> {
                   onTap: delete,
                 );
               },
+              title: 'アカウントを削除',
+              color: Colors.red,
             ),
             const Spacer(),
           ],

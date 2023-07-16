@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
 
-class LogoutButton extends StatelessWidget {
-  const LogoutButton({
+class AppTextButton extends StatelessWidget {
+  const AppTextButton({
     Key? key,
     required this.onPressed,
+    required this.title,
+    required this.color,
   }) : super(key: key);
 
   final Function() onPressed;
+  final String title;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      child: const Text(
-        'ログアウト',
+      child: Text(
+        title,
         style: TextStyle(
-          color: Colors.red,
+          color: color,
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
         ),
       ),
     );

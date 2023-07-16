@@ -1,5 +1,5 @@
 import 'package:disney_app/component/app_elevated_button.dart';
-import 'package:disney_app/component/login_new_button.dart';
+import 'package:disney_app/component/app_text_button.dart';
 import 'package:disney_app/component/login_text_field.dart';
 import 'package:disney_app/constants/color_constants.dart';
 import 'package:disney_app/utils/authentication.dart';
@@ -131,10 +131,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   const SizedBox(height: 30),
-                  LoginNewButton(
+                  AppTextButton(
                     onPressed: () {
                       NavigationUtils.createAccountScreen(context);
                     },
+                    title: '新規登録はこちら',
+                    color: Colors.lightBlue,
                   ),
                 ],
               ),
