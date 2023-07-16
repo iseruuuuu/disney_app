@@ -1,3 +1,4 @@
+import 'package:disney_app/core/component/app_app_bar.dart';
 import 'package:disney_app/core/component/app_rating.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
@@ -95,52 +96,19 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(70),
-        child: AppBar(
-          title: Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: Text(
+      body: Column(
+        children: [
+          AppAppBar(
+            image: 'assets/header/detail_header.jpg',
+            text: Text(
               'Tweet',
               style: GoogleFonts.pattaya(
                 fontSize: 30,
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          leading: Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios_new,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          actions: [
-            (widget.post.postAccountId == widget.myAccount)
-                ? Padding(
-                    padding: const EdgeInsets.only(right: 20, top: 20),
-                    child: GestureDetector(
-                      onTap: openCheckDialog,
-                      child: const Icon(
-                        Icons.reorder,
-                        color: Colors.black,
-                      ),
-                    ),
-                  )
-                : Container(),
-          ],
-          backgroundColor: Colors.white,
-          elevation: 0,
-        ),
-      ),
-      body: Column(
-        children: [
           Row(
             children: [
               GestureDetector(
@@ -232,21 +200,38 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               ),
               const Divider(color: Colors.grey),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  children: [
-                    Text(
-                      DateFormat('yyyy/MM/dd').format(
-                        widget.post.createdTime!.toDate(),
-                      ),
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.grey.shade600,
+              Row(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        children: [
+                          Text(
+                            DateFormat('yyyy/MM/dd').format(
+                              widget.post.createdTime!.toDate(),
+                            ),
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                          const Spacer(),
+                          (widget.post.postAccountId == widget.myAccount)
+                              ? GestureDetector(
+                                  onTap: openCheckDialog,
+                                  child: const Icon(
+                                    Icons.reorder,
+                                    color: Colors.black,
+                                  ),
+                                )
+                              : Container(),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
