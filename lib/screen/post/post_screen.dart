@@ -6,6 +6,7 @@ import 'package:disney_app/component/attraction_picker.dart';
 import 'package:disney_app/component/comment_text_field.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
+import 'package:disney_app/utils/snack_bar_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/picker.dart';
 
@@ -65,12 +66,7 @@ class _PostScreenState extends State<PostScreen> {
       }
     } else {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('いずれかの値が未記入となっています'),
-          behavior: SnackBarBehavior.fixed,
-        ),
-      );
+      SnackBarUtils.snackBar(context, 'いずれかの値が未記入となっています');
     }
   }
 

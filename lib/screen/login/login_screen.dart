@@ -5,6 +5,7 @@ import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
+import 'package:disney_app/utils/snack_bar_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -123,12 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         final errorMessage =
                             FunctionUtils().checkLoginError(result.toString());
                         if (!mounted) return;
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(errorMessage),
-                            behavior: SnackBarBehavior.fixed,
-                          ),
-                        );
+                        SnackBarUtils.snackBar(context, errorMessage);
                       }
                     },
                   ),

@@ -5,6 +5,7 @@ import 'package:disney_app/component/create_account_button.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
+import 'package:disney_app/utils/snack_bar_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -141,20 +142,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         final errorMessage = FunctionUtils()
                             .checkRegisterError(result.toString());
                         if (!mounted) return;
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(errorMessage),
-                            behavior: SnackBarBehavior.fixed,
-                          ),
-                        );
+                        SnackBarUtils.snackBar(context, errorMessage);
                       }
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('登録してた内容に不備があります'),
-                          behavior: SnackBarBehavior.fixed,
-                        ),
-                      );
+                      SnackBarUtils.snackBar(context, '登録してた内容に不備があります');
                     }
                   },
                 ),
