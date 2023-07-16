@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:disney_app/component/app_elevated_button.dart';
-import 'package:disney_app/component/create_account_text_field.dart';
+import 'package:disney_app/component/app_text_field.dart';
 import 'package:disney_app/constants/color_constants.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/utils/authentication.dart';
@@ -81,27 +81,27 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 ),
               ),
               const SizedBox(height: 10),
-              CreateAccountTextField(
+              AppTextField(
                 controller: nameController,
                 hintText: '名前',
                 maxLines: 1,
               ),
-              CreateAccountTextField(
+              AppTextField(
                 controller: userIdController,
                 hintText: 'ユーザーID',
                 maxLines: 1,
               ),
-              CreateAccountTextField(
+              AppTextField(
                 controller: selfIntroductionController,
                 hintText: '自己紹介',
                 maxLines: 3,
               ),
-              CreateAccountTextField(
+              AppTextField(
                 controller: emailController,
                 hintText: 'メールアドレス',
                 maxLines: 1,
               ),
-              CreateAccountTextField(
+              AppTextField(
                 controller: passwordController,
                 hintText: 'パスワード(６文字以上)',
                 maxLines: 1,

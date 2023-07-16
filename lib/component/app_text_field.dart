@@ -1,8 +1,8 @@
 import 'package:disney_app/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
-class CreateAccountTextField extends StatelessWidget {
-  const CreateAccountTextField({
+class AppTextField extends StatelessWidget {
+  const AppTextField({
     Key? key,
     required this.controller,
     required this.hintText,
@@ -16,15 +16,19 @@ class CreateAccountTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: const EdgeInsets.all(10),
       child: TextField(
         controller: controller,
         maxLines: maxLines,
         autocorrect: false,
+        style: const TextStyle(
+          fontSize: 17,
+          fontWeight: FontWeight.bold,
+        ),
         decoration: InputDecoration(
           hintText: hintText,
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+          hintStyle: const TextStyle(color: ColorConstants.appColor),
+          contentPadding: const EdgeInsets.all(15),
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
               color: ColorConstants.appColor,
@@ -35,7 +39,13 @@ class CreateAccountTextField extends StatelessWidget {
               color: ColorConstants.appColor,
             ),
           ),
+          alignLabelWithHint: true,
           labelText: hintText,
+          labelStyle: const TextStyle(
+            color: Colors.grey,
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          ),
           filled: true,
           fillColor: Colors.white,
           border: InputBorder.none,

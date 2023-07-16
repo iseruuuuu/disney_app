@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:disney_app/component/app_text_button.dart';
-import 'package:disney_app/component/edit_text_field.dart';
+import 'package:disney_app/component/app_text_field.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
@@ -129,22 +129,22 @@ class _EditScreenState extends State<EditScreen> {
               ),
             ),
             const Spacer(),
-            EditTextField(
+            AppTextField(
               controller: nameController,
               hintText: '名前',
-              maxLine: 1,
+              maxLines: 1,
             ),
             const Spacer(),
-            EditTextField(
+            AppTextField(
               controller: userIdController,
               hintText: 'ユーザーID',
-              maxLine: 1,
+              maxLines: 1,
             ),
             const Spacer(),
-            EditTextField(
+            AppTextField(
               controller: selfIntroductionController,
               hintText: '自己紹介',
-              maxLine: 3,
+              maxLines: 3,
             ),
             const Spacer(),
             AppTextButton(

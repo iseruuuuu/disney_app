@@ -1,6 +1,6 @@
 import 'package:disney_app/component/app_elevated_button.dart';
 import 'package:disney_app/component/app_text_button.dart';
-import 'package:disney_app/component/login_text_field.dart';
+import 'package:disney_app/component/app_text_field.dart';
 import 'package:disney_app/constants/color_constants.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
@@ -97,14 +97,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   const SizedBox(height: 50),
-                  LoginTextField(
+                  AppTextField(
                     controller: emailController,
                     hintText: 'メールアドレス',
+                    maxLines: 1,
                   ),
                   const SizedBox(height: 50),
-                  LoginTextField(
+                  AppTextField(
                     controller: passwordController,
                     hintText: 'パスワード',
+                    maxLines: 1,
                   ),
                   const SizedBox(height: 80),
                   AppElevatedButton(
