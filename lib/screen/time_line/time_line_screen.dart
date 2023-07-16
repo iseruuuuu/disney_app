@@ -28,7 +28,13 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 1,
+        elevation: 0,
+        title: Image.asset(
+          'assets/images/empty.png',
+          fit: BoxFit.fill,
+          width: 50,
+          height: 50,
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: PostFirestore.posts
