@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:disney_app/core/component/app_app_bar.dart';
 import 'package:disney_app/core/component/app_disney_cell.dart';
 import 'package:disney_app/core/component/app_empty_screen.dart';
 import 'package:disney_app/core/component/app_header.dart';
@@ -32,56 +33,11 @@ class _DetailAccountScreenState extends State<DetailAccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-      //   elevation: 1,
-      //   leading: IconButton(
-      //     onPressed: () {
-      //       Navigator.pop(context);
-      //     },
-      //     icon: const Icon(
-      //       Icons.arrow_back_ios_new,
-      //       color: Colors.black,
-      //     ),
-      //   ),
-      // ),
       body: Column(
         children: [
-          Stack(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 110,
-                color: Colors.grey.shade300,
-                child: Image.asset(
-                  'assets/header/header.jpg',
-                  fit: BoxFit.cover,
-                ),
-              ),
-              AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                leading: Center(
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(
-                        Icons.arrow_back_ios_new,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+          const AppAppBar(
+            image: 'assets/header/detail_account_header.jpg',
+            text: SizedBox.shrink(),
           ),
           const SizedBox(height: 20),
           AppHeader(
