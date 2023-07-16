@@ -1,8 +1,8 @@
+import 'package:disney_app/component/app_rating.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -193,15 +193,9 @@ class _DetailScreenState extends State<DetailScreen> {
                 padding: const EdgeInsets.all(15),
                 child: Row(
                   children: [
-                    RatingBarIndicator(
-                      direction: Axis.horizontal,
-                      itemCount: 5,
-                      rating: widget.post.rank.toDouble(),
-                      itemSize: 30,
-                      itemBuilder: (context, _) => const Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
+                    AppRating(
+                      rank: widget.post.rank,
+                      isSelect: false,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),

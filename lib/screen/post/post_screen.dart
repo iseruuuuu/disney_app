@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'package:disney_app/component/app_rating.dart';
 import 'package:disney_app/component/app_text_field.dart';
-import 'package:disney_app/component/rank_picker.dart';
 import 'package:disney_app/constants/attraction.dart';
 import 'package:disney_app/model/post.dart';
 import 'package:disney_app/component/attraction_picker.dart';
@@ -100,16 +100,15 @@ class _PostScreenState extends State<PostScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            RankPicker(
+            AppRating(
               onTap: rankPicker,
-              rank: rank.toString(),
+              rank: rank,
+              isSelect: true,
             ),
             AttractionPicker(
               onTap: attractionPicker,
               attractionName: attractionName,
             ),
-            // CommentTextField(controller: controller),
-
             AppTextField(
               controller: controller,
               hintText: '感想',
