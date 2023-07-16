@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/component/app_disney_cell.dart';
+import 'package:disney_app/component/app_empty_screen.dart';
 import 'package:disney_app/component/app_header.dart';
-import 'package:disney_app/component/empty_screen.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
 import 'package:disney_app/screen/edit/edit_screen.dart';
@@ -117,7 +117,7 @@ class _DetailAccountScreenState extends State<DetailAccountScreen> {
                                   );
                                 },
                               )
-                            : const EmptyScreen();
+                            : const AppEmptyScreen();
                       } else {
                         return const Center(child: CircularProgressIndicator());
                       }
