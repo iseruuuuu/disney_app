@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:disney_app/component/app_disney_cell.dart';
 import 'package:disney_app/component/app_header.dart';
-import 'package:disney_app/component/disney_cell.dart';
 import 'package:disney_app/component/empty_screen.dart';
 import 'package:disney_app/constants/color_constants.dart';
 import 'package:disney_app/model/account.dart';
@@ -80,7 +80,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                           myAccount.id,
                                         );
                                       },
-                                      child: DisneyCell(
+                                      child: AppDisneyCell(
                                         index: index,
                                         account: myAccount,
                                         post: post,

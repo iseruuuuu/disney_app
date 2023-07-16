@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DisneyCell extends StatelessWidget {
-  const DisneyCell({
+class AppDisneyCell extends StatelessWidget {
+  const AppDisneyCell({
     Key? key,
     required this.index,
     required this.account,

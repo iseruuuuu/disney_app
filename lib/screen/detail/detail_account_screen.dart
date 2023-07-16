@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:disney_app/component/app_disney_cell.dart';
 import 'package:disney_app/component/app_header.dart';
-import 'package:disney_app/component/disney_cell.dart';
 import 'package:disney_app/component/empty_screen.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
@@ -99,7 +99,7 @@ class _DetailAccountScreenState extends State<DetailAccountScreen> {
                                         myAccount.id,
                                       );
                                     },
-                                    child: DisneyCell(
+                                    child: AppDisneyCell(
                                       index: index,
                                       account: widget.postAccount,
                                       post: post,
