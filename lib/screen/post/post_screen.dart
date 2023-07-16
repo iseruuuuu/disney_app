@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'package:disney_app/component/app_attraction.dart';
 import 'package:disney_app/component/app_rating.dart';
 import 'package:disney_app/component/app_text_field.dart';
 import 'package:disney_app/constants/attraction.dart';
 import 'package:disney_app/model/post.dart';
-import 'package:disney_app/component/attraction_picker.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
@@ -21,6 +21,7 @@ class _PostScreenState extends State<PostScreen> {
   TextEditingController controller = TextEditingController();
   int rank = 0;
   String attractionName = '';
+  bool isSelected = false;
 
   void rankPicker(double rating) {
     rank = rating.round();
@@ -46,6 +47,7 @@ class _PostScreenState extends State<PostScreen> {
           var result3 = result2.replaceAll(' ', '');
           List<String> result4 = result3.split(',');
           attractionName = result4[1];
+          isSelected = true;
         });
       },
     ).showModal(context);
@@ -105,9 +107,10 @@ class _PostScreenState extends State<PostScreen> {
               rank: rank,
               isSelect: true,
             ),
-            AttractionPicker(
+            AppAttraction(
               onTap: attractionPicker,
               attractionName: attractionName,
+              isSelected: isSelected,
             ),
             AppTextField(
               controller: controller,
