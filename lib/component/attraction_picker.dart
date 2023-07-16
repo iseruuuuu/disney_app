@@ -1,3 +1,4 @@
+import 'package:disney_app/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
 class AttractionPicker extends StatelessWidget {
@@ -17,7 +18,7 @@ class AttractionPicker extends StatelessWidget {
       child: ListTile(
         onTap: onTap,
         shape: RoundedRectangleBorder(
-          side: const BorderSide(color: Color(0xFF4A67AD)),
+          side: const BorderSide(color: ColorConstants.appColor),
           borderRadius: BorderRadius.circular(5),
         ),
         tileColor: Colors.white,

@@ -1,3 +1,4 @@
+import 'package:disney_app/constants/color_constants.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:flutter/material.dart';
 
@@ -63,7 +64,7 @@ class AccountHeader extends StatelessWidget {
                   child: const Text(
                     '編集',
                     style: TextStyle(
-                      color: Color(0xFF4A67AD),
+                      color: ColorConstants.appColor,
                     ),
                   ),
                 ),

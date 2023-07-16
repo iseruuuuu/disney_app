@@ -1,3 +1,4 @@
+import 'package:disney_app/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
 class CreateAccountTextField extends StatelessWidget {
@@ -26,12 +27,12 @@ class CreateAccountTextField extends StatelessWidget {
               const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFF4A67AD),
+              color: ColorConstants.appColor,
             ),
           ),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFF4A67AD),
+              color: ColorConstants.appColor,
             ),
           ),
           labelText: hintText,

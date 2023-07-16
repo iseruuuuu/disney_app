@@ -1,6 +1,7 @@
 import 'package:disney_app/component/login_button.dart';
 import 'package:disney_app/component/login_new_button.dart';
 import 'package:disney_app/component/login_text_field.dart';
+import 'package:disney_app/constants/color_constants.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
@@ -56,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(70),
           child: AppBar(
-            backgroundColor: const Color(0xFF4A67AD),
+            backgroundColor: ColorConstants.appColor,
             elevation: 0,
             title: Padding(
               padding: const EdgeInsets.only(top: 20),

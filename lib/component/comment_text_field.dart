@@ -1,3 +1,4 @@
+import 'package:disney_app/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
 class CommentTextField extends StatelessWidget {
@@ -18,12 +19,12 @@ class CommentTextField extends StatelessWidget {
         decoration: const InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFF4A67AD),
+              color: ColorConstants.appColor,
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFF4A67AD),
+              color: ColorConstants.appColor,
             ),
           ),
           labelText: 'コメント',

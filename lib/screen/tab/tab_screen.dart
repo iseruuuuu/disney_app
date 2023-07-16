@@ -1,3 +1,4 @@
+import 'package:disney_app/constants/color_constants.dart';
 import 'package:disney_app/screen/account/account_screen.dart';
 import 'package:disney_app/screen/time_line/time_line_screen.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _TabScreenState extends State<TabScreen> {
         child: BottomNavigationBar(
           elevation: 0,
           backgroundColor: Colors.white,
-          selectedItemColor: const Color(0xFF4A67AD),
+          selectedItemColor: ColorConstants.appColor,
           unselectedItemColor: Colors.black,
           iconSize: 30,
           selectedFontSize: 13,

@@ -1,3 +1,4 @@
+import 'package:disney_app/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
 class LoginButton extends StatelessWidget {
@@ -19,7 +20,7 @@ class LoginButton extends StatelessWidget {
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF4A67AD),
+          backgroundColor: ColorConstants.appColor,
         ),
         onPressed: onPressed,
         child: const Text(

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/component/disney_cell.dart';
 import 'package:disney_app/component/empty_screen.dart';
+import 'package:disney_app/constants/color_constants.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
 import 'package:disney_app/utils/authentication.dart';
@@ -108,7 +109,7 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFF4A67AD),
+        backgroundColor: ColorConstants.appColor,
         onPressed: () {
           NavigationUtils.postScreen(context);
         },

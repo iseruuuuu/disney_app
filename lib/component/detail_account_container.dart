@@ -1,3 +1,4 @@
+import 'package:disney_app/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
 class DetailAccountContainer extends StatelessWidget {
@@ -11,7 +12,7 @@ class DetailAccountContainer extends StatelessWidget {
       decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: Color(0xFF4A67AD),
+            color:ColorConstants.appColor,
             width: 3,
           ),
         ),

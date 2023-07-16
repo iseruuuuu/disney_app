@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:disney_app/component/create_account_text_field.dart';
+import 'package:disney_app/constants/color_constants.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/component/create_account_button.dart';
 import 'package:disney_app/utils/authentication.dart';
@@ -33,7 +34,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(70),
           child: AppBar(
-            backgroundColor: const Color(0xFF4A67AD),
+            backgroundColor: ColorConstants.appColor,
             elevation: 0,
             leading: Padding(
               padding: const EdgeInsets.only(top: 20),
@@ -70,7 +71,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   }
                 },
                 child: CircleAvatar(
-                  backgroundColor: const Color(0xFF4A67AD),
+                  backgroundColor: ColorConstants.appColor,
                   foregroundImage: image == null ? null : FileImage(image!),
                   radius: 45,
                   child: const Icon(
