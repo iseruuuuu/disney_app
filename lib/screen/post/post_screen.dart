@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:disney_app/component/app_attraction.dart';
-import 'package:disney_app/component/app_rating.dart';
-import 'package:disney_app/component/app_text_field.dart';
-import 'package:disney_app/constants/attraction.dart';
-import 'package:disney_app/model/post.dart';
+import 'package:disney_app/core/component/app_attraction.dart';
+import 'package:disney_app/core/component/app_rating.dart';
+import 'package:disney_app/core/component/app_text_field.dart';
+import 'package:disney_app/core/constants/attraction.dart';
+import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';

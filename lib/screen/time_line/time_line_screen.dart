@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:disney_app/component/app_disney_cell.dart';
-import 'package:disney_app/component/app_empty_screen.dart';
-import 'package:disney_app/constants/color_constants.dart';
-import 'package:disney_app/model/account.dart';
-import 'package:disney_app/model/post.dart';
+import 'package:disney_app/core/component/app_disney_cell.dart';
+import 'package:disney_app/core/component/app_empty_screen.dart';
+import 'package:disney_app/core/theme/app_color_style.dart';
+import 'package:disney_app/core/model/account.dart';
+import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
@@ -110,7 +110,7 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: ColorConstants.appColor,
+        backgroundColor: AppColorStyle.appColor,
         onPressed: () {
           NavigationUtils.postScreen(context);
         },

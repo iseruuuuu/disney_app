@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:disney_app/model/post.dart';
+import 'package:disney_app/core/model/post.dart';
 
 class PostFirestore {
   static final firebaseInstance = FirebaseFirestore.instance;

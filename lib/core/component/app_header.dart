@@ -1,5 +1,5 @@
-import 'package:disney_app/constants/color_constants.dart';
-import 'package:disney_app/model/account.dart';
+import 'package:disney_app/core/theme/app_color_style.dart';
+import 'package:disney_app/core/model/account.dart';
 import 'package:flutter/material.dart';
 
 class AppHeader extends StatelessWidget {
@@ -67,7 +67,7 @@ class AppHeader extends StatelessWidget {
                         child: const Text(
                           '編集',
                           style: TextStyle(
-                            color: ColorConstants.appColor,
+                            color: AppColorStyle.appColor,
                           ),
                         ),
                       )
@@ -99,7 +99,7 @@ class AppHeader extends StatelessWidget {
             decoration: const BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                  color: ColorConstants.appColor,
+                  color: AppColorStyle.appColor,
                   width: 3,
                 ),
               ),

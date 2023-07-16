@@ -1,4 +1,4 @@
-import 'package:disney_app/constants/color_constants.dart';
+import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:flutter/material.dart';
 
 class AppElevatedButton extends StatelessWidget {
@@ -22,7 +22,7 @@ class AppElevatedButton extends StatelessWidget {
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: ColorConstants.appColor,
+          backgroundColor: AppColorStyle.appColor,
         ),
         onPressed: onPressed,
         child: Text(

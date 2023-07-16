@@ -1,8 +1,8 @@
 import 'dart:io';
-import 'package:disney_app/component/app_elevated_button.dart';
-import 'package:disney_app/component/app_text_field.dart';
-import 'package:disney_app/constants/color_constants.dart';
-import 'package:disney_app/model/account.dart';
+import 'package:disney_app/core/component/app_elevated_button.dart';
+import 'package:disney_app/core/component/app_text_field.dart';
+import 'package:disney_app/core/theme/app_color_style.dart';
+import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
@@ -34,7 +34,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(70),
           child: AppBar(
-            backgroundColor: ColorConstants.appColor,
+            backgroundColor: AppColorStyle.appColor,
             elevation: 0,
             leading: Padding(
               padding: const EdgeInsets.only(top: 20),
@@ -71,7 +71,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   }
                 },
                 child: CircleAvatar(
-                  backgroundColor: ColorConstants.appColor,
+                  backgroundColor: AppColorStyle.appColor,
                   foregroundImage: image == null ? null : FileImage(image!),
                   radius: 45,
                   child: const Icon(

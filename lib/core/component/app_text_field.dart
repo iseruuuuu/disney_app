@@ -1,4 +1,4 @@
-import 'package:disney_app/constants/color_constants.dart';
+import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:flutter/material.dart';
 
 class AppTextField extends StatelessWidget {
@@ -27,16 +27,16 @@ class AppTextField extends StatelessWidget {
         ),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: const TextStyle(color: ColorConstants.appColor),
+          hintStyle: const TextStyle(color: AppColorStyle.appColor),
           contentPadding: const EdgeInsets.all(15),
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: ColorConstants.appColor,
+              color: AppColorStyle.appColor,
             ),
           ),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: ColorConstants.appColor,
+              color: AppColorStyle.appColor,
             ),
           ),
           alignLabelWithHint: true,

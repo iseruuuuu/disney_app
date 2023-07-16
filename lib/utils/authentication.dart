@@ -1,4 +1,4 @@
-import 'package:disney_app/model/account.dart';
+import 'package:disney_app/core/model/account.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Authentication {
