@@ -87,6 +87,7 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                                     context,
                                     postAccount,
                                     post,
+                                    myAccount.id,
                                   );
                                 },
                               ),

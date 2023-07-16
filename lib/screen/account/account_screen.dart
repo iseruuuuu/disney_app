@@ -1,15 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:disney_app/component/app_header.dart';
 import 'package:disney_app/component/disney_cell.dart';
 import 'package:disney_app/component/empty_screen.dart';
 import 'package:disney_app/constants/color_constants.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
 import 'package:disney_app/component/account_container.dart';
-import 'package:disney_app/component/account_header.dart';
-import 'package:disney_app/screen/detail/detail_account_screen.dart';
-import 'package:disney_app/screen/detail/detail_screen.dart';
 import 'package:disney_app/screen/edit/edit_screen.dart';
-import 'package:disney_app/screen/post/post_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
@@ -33,7 +30,7 @@ class _AccountScreenState extends State<AccountScreen> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            AccountHeader(
+            AppHeader(
               account: myAccount,
               onTapEdit: () async {
                 var result = await Navigator.push(
@@ -48,6 +45,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   });
                 }
               },
+              isMyAccount: true,
             ),
             const AccountContainer(),
             Expanded(
@@ -95,6 +93,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                             context,
                                             myAccount,
                                             post,
+                                            myAccount.id,
                                           );
                                         },
                                       ),

@@ -26,6 +26,7 @@ class NavigationUtils {
               context,
               postAccount,
               post,
+              myAccount,
             );
           },
         ),
@@ -37,11 +38,12 @@ class NavigationUtils {
     BuildContext context,
     Account postAccount,
     Post post,
+    String myAccount,
   ) {
     return Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => DetailAccountScreen(
-          account: postAccount,
+          postAccount: postAccount,
           post: post,
         ),
       ),

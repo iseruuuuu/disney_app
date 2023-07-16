@@ -1,24 +1,33 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:disney_app/component/app_header.dart';
 import 'package:disney_app/component/disney_cell.dart';
 import 'package:disney_app/component/empty_screen.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
 import 'package:disney_app/component/detail_account_container.dart';
-import 'package:disney_app/component/detail_account_header.dart';
+import 'package:disney_app/screen/edit/edit_screen.dart';
+import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
 
-class DetailAccountScreen extends StatelessWidget {
+class DetailAccountScreen extends StatefulWidget {
   const DetailAccountScreen({
     Key? key,
-    required this.account,
+    required this.postAccount,
     required this.post,
   }) : super(key: key);
 
-  final Account account;
+  final Account postAccount;
   final Post post;
+
+  @override
+  State<DetailAccountScreen> createState() => _DetailAccountScreenState();
+}
+
+class _DetailAccountScreenState extends State<DetailAccountScreen> {
+  Account myAccount = Authentication.myAccount!;
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +49,28 @@ class DetailAccountScreen extends StatelessWidget {
       body: Column(
         children: [
           const SizedBox(height: 20),
-          DetailAccountHeader(account: account),
+          AppHeader(
+            account: widget.postAccount,
+            onTapEdit: () async {
+              var result = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const EditScreen(),
+                ),
+              );
+              if (result == true) {
+                setState(() {
+                  myAccount = Authentication.myAccount!;
+                });
+              }
+            },
+            isMyAccount: widget.post.postAccountId == myAccount.id,
+          ),
           const DetailAccountContainer(),
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
               stream: UserFireStore.users
-                  .doc(account.id)
+                  .doc(widget.postAccount.id)
                   .collection('my_posts')
                   .orderBy(
                     'created_time',
@@ -71,22 +96,23 @@ class DetailAccountScreen extends StatelessWidget {
                                     onTap: () {
                                       NavigationUtils.detailScreen(
                                         context,
-                                        account,
+                                        widget.postAccount,
                                         post,
-                                        account.id,
+                                        myAccount.id,
                                       );
                                     },
                                     child: DisneyCell(
                                       index: index,
-                                      account: account,
+                                      account: widget.postAccount,
                                       post: post,
-                                      myAccount: account.id,
+                                      myAccount: myAccount.id,
                                       isMaster: false,
                                       onTapImage: () {
                                         NavigationUtils.detailAccountScreen(
                                           context,
-                                          account,
+                                          widget.postAccount,
                                           post,
+                                          myAccount.id,
                                         );
                                       },
                                     ),

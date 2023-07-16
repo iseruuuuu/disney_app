@@ -1,13 +1,18 @@
+import 'package:disney_app/constants/color_constants.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:flutter/material.dart';
 
-class DetailAccountHeader extends StatelessWidget {
-  const DetailAccountHeader({
+class AppHeader extends StatelessWidget {
+  const AppHeader({
     Key? key,
     required this.account,
+    required this.isMyAccount,
+    this.onTapEdit,
   }) : super(key: key);
 
   final Account account;
+  final Function()? onTapEdit;
+  final bool isMyAccount;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +32,7 @@ class DetailAccountHeader extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width / 1.7,
+                  width: MediaQuery.of(context).size.width / 2,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -55,6 +60,18 @@ class DetailAccountHeader extends StatelessWidget {
                     ],
                   ),
                 ),
+                const Spacer(),
+                isMyAccount
+                    ? OutlinedButton(
+                        onPressed: onTapEdit,
+                        child: const Text(
+                          '編集',
+                          style: TextStyle(
+                            color: ColorConstants.appColor,
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
               ],
             ),
           ),
