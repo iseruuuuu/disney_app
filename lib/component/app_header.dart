@@ -93,6 +93,28 @@ class AppHeader extends StatelessWidget {
               ),
             ),
           ),
+          Container(
+            alignment: Alignment.center,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: ColorConstants.appColor,
+                  width: 3,
+                ),
+              ),
+            ),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Text(
+                '投稿',
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

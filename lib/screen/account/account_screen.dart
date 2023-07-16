@@ -5,7 +5,6 @@ import 'package:disney_app/component/empty_screen.dart';
 import 'package:disney_app/constants/color_constants.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
-import 'package:disney_app/component/account_container.dart';
 import 'package:disney_app/screen/edit/edit_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
@@ -47,7 +46,6 @@ class _AccountScreenState extends State<AccountScreen> {
               },
               isMyAccount: true,
             ),
-            const AccountContainer(),
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
                 stream: UserFireStore.users

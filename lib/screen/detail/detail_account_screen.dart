@@ -4,7 +4,6 @@ import 'package:disney_app/component/disney_cell.dart';
 import 'package:disney_app/component/empty_screen.dart';
 import 'package:disney_app/model/account.dart';
 import 'package:disney_app/model/post.dart';
-import 'package:disney_app/component/detail_account_container.dart';
 import 'package:disney_app/screen/edit/edit_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
@@ -66,7 +65,6 @@ class _DetailAccountScreenState extends State<DetailAccountScreen> {
             },
             isMyAccount: widget.post.postAccountId == myAccount.id,
           ),
-          const DetailAccountContainer(),
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
               stream: UserFireStore.users
