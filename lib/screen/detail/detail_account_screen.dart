@@ -32,21 +32,57 @@ class _DetailAccountScreenState extends State<DetailAccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 1,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.black,
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.white,
+      //   elevation: 1,
+      //   leading: IconButton(
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //     icon: const Icon(
+      //       Icons.arrow_back_ios_new,
+      //       color: Colors.black,
+      //     ),
+      //   ),
+      // ),
       body: Column(
         children: [
+          Stack(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 110,
+                color: Colors.grey.shade300,
+                child: Image.asset(
+                  'assets/header/header.jpg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+              AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                leading: Center(
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 20),
           AppHeader(
             account: widget.postAccount,
