@@ -15,14 +15,13 @@ class RankPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 20, left: 20, top: 50),
-      //TODO ここを整数だけにしたい。
       child: RatingBar.builder(
         initialRating: 1,
         minRating: 1,
         direction: Axis.horizontal,
-        allowHalfRating: true,
+        allowHalfRating: false,
         itemCount: 5,
-        itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+        itemPadding: const EdgeInsets.symmetric(horizontal: 5),
         itemBuilder: (context, _) => const Icon(
           Icons.star,
           color: Colors.amber,
