@@ -108,13 +108,15 @@ class FunctionUtils {
 
   String checkLoginError(String error) {
     switch (error) {
+      case '[firebase_auth/invalid-email] The email address is badly formatted.':
+        return '入力されたメールアドレスの形式が正しくありません。';
       case '[firebase_auth/wrong-password] The password is invalid or the user does not have a password.':
-        return 'パスワード又はメールアドレスが間違っています';
+        return 'パスワード or メールアドレスが間違っています';
       case '[firebase_auth/too-many-requests] Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.':
         return 'ログイン試行過多により、アカウントが一時ロックされています。';
       case '[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.':
-        return 'ユーザーは既に削除されている可能性があります。';
+        return 'アカウントが存在しない or 削除された可能性があります。';
     }
-    return '不鮮明のエラーです。運営側にお伝えください。';
+    return '未確認のエラーです。運営側にお伝えください。';
   }
 }
