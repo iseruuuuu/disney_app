@@ -152,7 +152,7 @@ class AppDisneyCell extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 15, left: 70),
+            padding: const EdgeInsets.only(top: 15, bottom: 15, left: 70),
             child: SizedBox(
               width: MediaQuery.of(context).size.width - 100,
               child: Text(
