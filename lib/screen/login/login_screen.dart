@@ -1,4 +1,4 @@
-import 'package:disney_app/component/login_button.dart';
+import 'package:disney_app/component/app_elevated_button.dart';
 import 'package:disney_app/component/login_new_button.dart';
 import 'package:disney_app/component/login_text_field.dart';
 import 'package:disney_app/constants/color_constants.dart';
@@ -107,7 +107,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: 'パスワード',
                   ),
                   const SizedBox(height: 80),
-                  LoginButton(
+                  AppElevatedButton(
+                    title: 'ログイン',
                     onPressed: () async {
                       var result = await Authentication.signIn(
                         email: emailController.text,

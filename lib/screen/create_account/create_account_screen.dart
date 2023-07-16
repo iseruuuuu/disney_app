@@ -1,8 +1,8 @@
 import 'dart:io';
+import 'package:disney_app/component/app_elevated_button.dart';
 import 'package:disney_app/component/create_account_text_field.dart';
 import 'package:disney_app/constants/color_constants.dart';
 import 'package:disney_app/model/account.dart';
-import 'package:disney_app/component/create_account_button.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
@@ -109,7 +109,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.all(15),
-                child: CreateAccountButton(
+                child: AppElevatedButton(
+                  title: 'アカウント作成',
                   onPressed: () async {
                     FocusScope.of(context).unfocus();
                     if (nameController.text.isNotEmpty &&

@@ -1,13 +1,15 @@
 import 'package:disney_app/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
-class CreateAccountButton extends StatelessWidget {
-  const CreateAccountButton({
+class AppElevatedButton extends StatelessWidget {
+  const AppElevatedButton({
     Key? key,
     required this.onPressed,
+    required this.title,
   }) : super(key: key);
 
   final Function() onPressed;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +25,10 @@ class CreateAccountButton extends StatelessWidget {
           backgroundColor: ColorConstants.appColor,
         ),
         onPressed: onPressed,
-        child: const Text(
-          'アカウント作成',
-          style: TextStyle(
+        child: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 15,
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
