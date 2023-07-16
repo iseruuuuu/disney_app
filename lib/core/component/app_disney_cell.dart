@@ -53,13 +53,13 @@ class AppDisneyCell extends StatelessWidget {
           Row(
             children: [
               SizedBox(
-                width: 60,
+                width: 65,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 15, left: 10),
                   child: GestureDetector(
                     onTap: onTapImage,
                     child: CircleAvatar(
-                      radius: 28,
+                      radius: 30,
                       foregroundImage: NetworkImage(account.imagePath),
                     ),
                   ),
