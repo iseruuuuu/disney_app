@@ -97,11 +97,11 @@ class FunctionUtils {
   String checkRegisterError(String error) {
     switch (error) {
       case '[firebase_auth/invalid-email] The email address is badly formatted.':
-        return 'メールアドレスのフォーマットが間違っています';
+        return 'メールアドレスの形式が不正です。';
       case '[firebase_auth/weak-password] Password should be at least 6 characters':
-        return 'パスワードは６文字以上に設定してください';
+        return 'パスワードは６文字以上に設定してください。';
       case '[firebase_auth/email-already-in-use] The email address is already in use by another account.':
-        return 'このメールアドレスはすでに使用されています';
+        return 'このメールアドレスはすでに使用されています。';
     }
     return '不鮮明のエラーです。運営側にお伝えください。';
   }
