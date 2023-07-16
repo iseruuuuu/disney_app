@@ -1,5 +1,6 @@
 import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:disney_app/core/model/account.dart';
+import 'package:disney_app/core/theme/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class AppHeader extends StatelessWidget {
@@ -40,22 +41,14 @@ class AppHeader extends StatelessWidget {
                         account.name,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.black,
-                        ),
+                        style: AppTextStyle.accountNameTextStyle,
                       ),
                       const SizedBox(height: 5),
                       Text(
                         '@${account.userId}',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.grey,
-                        ),
+                        style: AppTextStyle.accountUserIdTextStyle,
                       ),
                     ],
                   ),
@@ -85,11 +78,7 @@ class AppHeader extends StatelessWidget {
               width: double.infinity,
               child: Text(
                 account.selfIntroduction,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                ),
+                style: AppTextStyle.accountSelfIntroductionTextStyle,
               ),
             ),
           ),
