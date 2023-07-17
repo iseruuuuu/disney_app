@@ -6,6 +6,7 @@ import 'package:disney_app/core/component/app_header.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
+import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
 import 'package:disney_app/gen/assets.gen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
@@ -43,16 +44,8 @@ class DetailAccountScreen extends ConsumerWidget {
           ),
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              //TODO ここをRefに変えた方が良さそう。
-              stream: FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(postAccount.id)
-                  .collection('my_posts')
-                  .orderBy(
-                    'created_time',
-                    descending: true,
-                  )
-                  .snapshots(),
+              stream:
+                  ref.read(userFirestoreUsecaseProvider).stream(postAccount.id),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List<String> myPostIds =

@@ -5,6 +5,13 @@ class PostFirestoreRepository {
   static final firebaseInstance = FirebaseFirestore.instance;
   static final CollectionReference posts = firebaseInstance.collection('post');
 
+  Stream<QuerySnapshot<Map<String, dynamic>>> stream() {
+    return FirebaseFirestore.instance
+        .collection('post')
+        .orderBy('created_time', descending: true)
+        .snapshots();
+  }
+
   Future<dynamic> addPost(Post newPost) async {
     try {
       final CollectionReference userPosts = firebaseInstance

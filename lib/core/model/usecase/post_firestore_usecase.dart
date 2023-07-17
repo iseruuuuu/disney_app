@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/model/repository/post_firestore_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,6 +13,10 @@ class PostFireStoreUsecase {
   final PostFirestoreRepository firestoreRepository;
 
   PostFireStoreUsecase(this.firestoreRepository);
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> stream() {
+    return firestoreRepository.stream();
+  }
 
   Future<dynamic> addPost(Post newPost) async {
     return await firestoreRepository.addPost(newPost);

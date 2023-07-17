@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/component/app_disney_cell.dart';
 import 'package:disney_app/core/component/app_empty_screen.dart';
+import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
 import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:disney_app/core/model/account.dart';
@@ -32,11 +33,7 @@ class TimeLineScreen extends ConsumerWidget {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        //TODO ここをRefに変えた方が良さそう。
-        stream: FirebaseFirestore.instance
-            .collection('post')
-            .orderBy('created_time', descending: true)
-            .snapshots(),
+        stream: ref.read(postUsecaseProvider).stream(),
         builder: (context, postSnapshot) {
           if (postSnapshot.hasData) {
             List<String> postAccountIds = [];
