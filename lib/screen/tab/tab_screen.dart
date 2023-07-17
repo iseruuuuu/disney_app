@@ -1,26 +1,17 @@
 import 'package:disney_app/core/theme/app_color_style.dart';
-import 'package:disney_app/screen/account/account_screen.dart';
-import 'package:disney_app/screen/time_line/time_line_screen.dart';
+import 'package:disney_app/screen/tab/tab_screen_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TabScreen extends StatefulWidget {
+class TabScreen extends ConsumerWidget {
   const TabScreen({Key? key}) : super(key: key);
 
   @override
-  State<TabScreen> createState() => _TabScreenState();
-}
-
-class _TabScreenState extends State<TabScreen> {
-  int selectedIndex = 0;
-  List<Widget> pageList = [
-    const TimeLineScreen(),
-    const AccountScreen(),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(tabScreenViewModelProvider);
+    final controller = ref.watch(tabScreenViewModelProvider.notifier);
     return Scaffold(
-      body: pageList[selectedIndex],
+      body: controller.pageList[state.selectedIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           border: Border(
@@ -34,29 +25,31 @@ class _TabScreenState extends State<TabScreen> {
           elevation: 0,
           backgroundColor: Colors.white,
           selectedItemColor: AppColorStyle.appColor,
-          unselectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
           iconSize: 30,
-          selectedFontSize: 13,
-          unselectedFontSize: 13,
+          selectedFontSize: 0,
+          unselectedFontSize: 0,
           type: BottomNavigationBarType.fixed,
-          currentIndex: selectedIndex,
-          onTap: (index) {
-            setState(() {
-              selectedIndex = index;
-            });
-          },
+          currentIndex: state.selectedIndex,
+          onTap: controller.onTap,
           items: const [
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.only(top: 10),
-                child: Icon(Icons.home, size: 30),
+                child: Icon(
+                  Icons.home,
+                  size: 35,
+                ),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.only(top: 10),
-                child: Icon(Icons.account_box_sharp, size: 30),
+                child: Icon(
+                  Icons.account_circle,
+                  size: 35,
+                ),
               ),
               label: '',
             ),
