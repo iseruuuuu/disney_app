@@ -19,6 +19,7 @@
 - CocoaPods 1.11.3
 
 ### Android
+⚠️　<b>I am currently unable to build due to an unknown error. This will be addressed in the future.</b>
 - Android SDK version 33.0.0
 
 ### Flutter
