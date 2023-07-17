@@ -3,53 +3,36 @@ import 'package:disney_app/core/component/app_disney_cell.dart';
 import 'package:disney_app/core/component/app_empty_screen.dart';
 import 'package:disney_app/core/component/app_header.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
-import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
-import 'package:disney_app/screen/edit/edit_screen.dart';
-import 'package:disney_app/utils/authentication.dart';
+import 'package:disney_app/screen/account/account_screen_view_model.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AccountScreen extends StatefulWidget {
+class AccountScreen extends ConsumerWidget {
   const AccountScreen({Key? key}) : super(key: key);
 
   @override
-  State<AccountScreen> createState() => _AccountScreenState();
-}
-
-class _AccountScreenState extends State<AccountScreen> {
-  Account myAccount = Authentication.myAccount!;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(accountScreenViewModelProvider);
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             const SizedBox(height: 20),
             AppHeader(
-              account: myAccount,
-              onTapEdit: () async {
-                var result = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const EditScreen(),
-                  ),
-                );
-                if (result == true) {
-                  setState(() {
-                    myAccount = Authentication.myAccount!;
-                  });
-                }
-              },
+              account: state.myAccount,
+              onTapEdit: () => ref
+                  .read(accountScreenViewModelProvider.notifier)
+                  .onTapEdit(context),
               isMyAccount: true,
             ),
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
                 stream: UserFireStore.users
-                    .doc(myAccount.id)
+                    .doc(state.myAccount.id)
                     .collection('my_posts')
                     .orderBy(
                       'created_time',
@@ -75,23 +58,23 @@ class _AccountScreenState extends State<AccountScreen> {
                                       onTap: () {
                                         NavigationUtils.detailScreen(
                                           context,
-                                          myAccount,
+                                          state.myAccount,
                                           post,
-                                          myAccount.id,
+                                          state.myAccount.id,
                                         );
                                       },
                                       child: AppDisneyCell(
                                         index: index,
-                                        account: myAccount,
+                                        account: state.myAccount,
                                         post: post,
-                                        myAccount: myAccount.id,
+                                        myAccount: state.myAccount.id,
                                         isMaster: false,
                                         onTapImage: () {
                                           NavigationUtils.detailAccountScreen(
                                             context,
-                                            myAccount,
+                                            state.myAccount,
                                             post,
-                                            myAccount.id,
+                                            state.myAccount.id,
                                           );
                                         },
                                       ),
