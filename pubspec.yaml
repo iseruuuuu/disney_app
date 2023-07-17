@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   cupertino_icons: ^1.0.2
   intl: ^0.18.0
   image_picker: ^0.8.6+1
@@ -24,12 +23,16 @@ dependencies:
   google_fonts: ^4.0.3
   flutter_rating_bar: ^4.0.1
   url_launcher: ^6.1.7
+  flutter_riverpod: ^2.1.1
+  freezed_annotation: ^2.4.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
   flutter_launcher_icons: ^0.11.0
+  freezed: ^2.4.1
+  build_runner: ^2.0.0
 
 flutter_icons:
   android: false
