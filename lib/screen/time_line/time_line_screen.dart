@@ -11,19 +11,13 @@ import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
 
-class TimeLineScreen extends StatefulWidget {
+class TimeLineScreen extends StatelessWidget {
   const TimeLineScreen({Key? key}) : super(key: key);
 
   @override
-  State<TimeLineScreen> createState() => _TimeLineScreenState();
-}
-
-class _TimeLineScreenState extends State<TimeLineScreen> {
-  Account myAccount = Authentication.myAccount!;
-  bool isMaster = false;
-
-  @override
   Widget build(BuildContext context) {
+    Account myAccount = Authentication.myAccount!;
+    bool isMaster = false;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
