@@ -33,12 +33,15 @@ class _DetailAccountScreenState extends State<DetailAccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(110),
+        child: AppAppBar(
+          image: 'assets/header/detail_account_header.jpg',
+          text: SizedBox.shrink(),
+        ),
+      ),
       body: Column(
         children: [
-          const AppAppBar(
-            image: 'assets/header/detail_account_header.jpg',
-            text: SizedBox.shrink(),
-          ),
           const SizedBox(height: 20),
           AppHeader(
             account: widget.postAccount,
@@ -111,12 +114,16 @@ class _DetailAccountScreenState extends State<DetailAccountScreen> {
                               )
                             : const AppEmptyScreen();
                       } else {
-                        return const Center(child: CircularProgressIndicator());
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
                       }
                     },
                   );
                 } else {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }
               },
             ),
