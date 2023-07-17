@@ -2,98 +2,21 @@ import 'dart:io';
 import 'package:disney_app/core/component/app_text_button.dart';
 import 'package:disney_app/core/component/app_text_field.dart';
 import 'package:disney_app/core/model/account.dart';
+import 'package:disney_app/screen/edit/edit_screen_view_model.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class EditScreen extends StatefulWidget {
+class EditScreen extends ConsumerWidget {
   const EditScreen({Key? key}) : super(key: key);
 
   @override
-  State<EditScreen> createState() => _EditScreenState();
-}
-
-class _EditScreenState extends State<EditScreen> {
-  Account myAccount = Authentication.myAccount!;
-  TextEditingController nameController = TextEditingController();
-  TextEditingController userIdController = TextEditingController();
-  TextEditingController selfIntroductionController = TextEditingController();
-  File? image;
-
-  ImageProvider getImage() {
-    if (image == null) {
-      return NetworkImage(myAccount.imagePath);
-    } else {
-      return FileImage(image!);
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    nameController = TextEditingController(text: myAccount.name);
-    userIdController = TextEditingController(text: myAccount.userId);
-    selfIntroductionController =
-        TextEditingController(text: myAccount.selfIntroduction);
-  }
-
-  void update() async {
-    if (nameController.text.isNotEmpty &&
-        userIdController.text.isNotEmpty &&
-        selfIntroductionController.text.isNotEmpty) {
-      String imagePath = '';
-      if (image == null) {
-        imagePath = myAccount.imagePath;
-      } else {
-        var result = await FunctionUtils.uploadImage(myAccount.id, image!);
-        imagePath = result;
-      }
-      Account updateAccount = Account(
-        id: myAccount.id,
-        name: nameController.text,
-        userId: userIdController.text,
-        selfIntroduction: selfIntroductionController.text,
-        imagePath: imagePath,
-      );
-      Authentication.myAccount = updateAccount;
-      var result = await UserFireStore.updateUser(updateAccount);
-      if (result == true) {
-        if (!mounted) return;
-        Navigator.pop(context, true);
-      }
-    }
-  }
-
-  void selectImage() async {
-    var result = await FunctionUtils.getImageFromGallery();
-    if (result != null) {
-      setState(() {
-        image = File(result.path);
-      });
-    }
-  }
-
-  void signOut() async {
-    Authentication.signOut();
-    while (Navigator.canPop(context)) {
-      Navigator.pop(context);
-    }
-    NavigationUtils.loginScreen(context);
-  }
-
-  void delete() {
-    UserFireStore.deleteUser(myAccount.id);
-    Authentication.deleteAuth();
-    while (Navigator.canPop(context)) {
-      Navigator.pop(context);
-    }
-    NavigationUtils.loginScreen(context);
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(editScreenViewModelProvider);
+    final controller = ref.watch(editScreenViewModelProvider.notifier);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -101,7 +24,8 @@ class _EditScreenState extends State<EditScreen> {
         elevation: 0,
         actions: [
           TextButton(
-            onPressed: update,
+            onPressed: () =>
+                ref.read(editScreenViewModelProvider.notifier).update(context),
             child: const Text(
               '更新する',
               style: TextStyle(fontSize: 18),
@@ -121,28 +45,42 @@ class _EditScreenState extends State<EditScreen> {
         child: Column(
           children: [
             GestureDetector(
-              onTap: selectImage,
+              onTap: () =>
+                  ref.read(editScreenViewModelProvider.notifier).selectImage(),
               child: CircleAvatar(
-                foregroundImage: getImage(),
+                // foregroundImage: getImage(),
+                // foregroundImage: state.getImage(),
+                // foregroundImage: (state.image == controller.myAccount.imagePath)
+                //     ? NetworkImage(controller.myAccount.imagePath)
+                //     : FileImage(File(state.image)),
+                // foregroundImage: (state.image == controller.myAccount.imagePath)
+                //     ? NetworkImage(controller.myAccount.imagePath) as ImageProvider<Object>?
+                //     : FileImage(File(state.image)) as ImageProvider<Object>?,
+
+                foregroundImage: controller.getImage(),
+
+
+                // foregroundImage: NetworkImage(controller.myAccount.imagePath),
+                // foregroundImage:  FileImage(File(state.image)),
                 radius: 70,
                 child: const Icon(Icons.add),
               ),
             ),
             const Spacer(),
             AppTextField(
-              controller: nameController,
+              controller: controller.nameController,
               hintText: '名前',
               maxLines: 1,
             ),
             const Spacer(),
             AppTextField(
-              controller: userIdController,
+              controller: controller.userIdController,
               hintText: 'ユーザーID',
               maxLines: 1,
             ),
             const Spacer(),
             AppTextField(
-              controller: selfIntroductionController,
+              controller: controller.selfIntroductionController,
               hintText: '自己紹介',
               maxLines: 3,
             ),
@@ -154,7 +92,9 @@ class _EditScreenState extends State<EditScreen> {
                   title: 'ログアウト確認',
                   content: 'ログアウトします。\n'
                       'よろしいでしょうか？',
-                  onTap: signOut,
+                  onTap: () => ref
+                      .read(editScreenViewModelProvider.notifier)
+                      .signOut(context),
                 );
               },
               title: 'ログアウト',
@@ -168,7 +108,9 @@ class _EditScreenState extends State<EditScreen> {
                   content: 'アカウントの情報を削除します。\n'
                       '投稿内容も全て削除されます。\n'
                       'よろしいでしょうか？',
-                  onTap: delete,
+                  onTap: () => ref
+                      .read(editScreenViewModelProvider.notifier)
+                      .delete(context),
                 );
               },
               title: 'アカウントを削除',
