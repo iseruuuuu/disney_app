@@ -33,61 +33,56 @@ class LoginScreen extends ConsumerWidget {
             ),
           ),
         ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: SizedBox(
-              width: double.infinity,
-              child: Column(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 50),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const SizedBox(height: 50),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Image.asset(
-                        'assets/images/empty.png',
-                        width: 70,
-                        height: 70,
-                      ),
-                      Text(
-                        'TDR APP',
-                        style: GoogleFonts.pattaya(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                  Image.asset(
+                    'assets/images/empty.png',
+                    width: 70,
+                    height: 70,
                   ),
-                  const SizedBox(height: 50),
-                  AppTextField(
-                    controller: state.emailController,
-                    hintText: 'メールアドレス',
-                    maxLines: 1,
-                  ),
-                  const SizedBox(height: 50),
-                  AppTextField(
-                    controller: state.passwordController,
-                    hintText: 'パスワード',
-                    maxLines: 1,
-                  ),
-                  const SizedBox(height: 80),
-                  AppElevatedButton(
-                    title: 'ログイン',
-                    onPressed: () => ref
-                        .read(loginScreenViewModelProvider.notifier)
-                        .login(context),
-                  ),
-                  const SizedBox(height: 30),
-                  AppTextButton(
-                    onPressed: () => ref
-                        .read(loginScreenViewModelProvider.notifier)
-                        .createAccountScreen(context),
-                    title: '新規登録はこちら',
-                    color: Colors.lightBlue,
+                  Text(
+                    'TDR APP',
+                    style: GoogleFonts.pattaya(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
-            ),
+              const SizedBox(height: 50),
+              AppTextField(
+                controller: state.emailController,
+                hintText: 'メールアドレス',
+                maxLines: 1,
+              ),
+              const SizedBox(height: 50),
+              AppTextField(
+                controller: state.passwordController,
+                hintText: 'パスワード',
+                maxLines: 1,
+              ),
+              const SizedBox(height: 80),
+              AppElevatedButton(
+                title: 'ログイン',
+                onPressed: () => ref
+                    .read(loginScreenViewModelProvider.notifier)
+                    .login(context),
+              ),
+              const SizedBox(height: 30),
+              AppTextButton(
+                onPressed: () => ref
+                    .read(loginScreenViewModelProvider.notifier)
+                    .createAccountScreen(context),
+                title: '新規登録はこちら',
+                color: Colors.lightBlue,
+              ),
+            ],
           ),
         ),
       ),
