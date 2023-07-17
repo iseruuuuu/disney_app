@@ -1,12 +1,7 @@
-import 'dart:io';
 import 'package:disney_app/core/component/app_text_button.dart';
 import 'package:disney_app/core/component/app_text_field.dart';
-import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/screen/edit/edit_screen_view_model.dart';
-import 'package:disney_app/utils/authentication.dart';
-import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
-import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,7 +10,6 @@ class EditScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(editScreenViewModelProvider);
     final controller = ref.watch(editScreenViewModelProvider.notifier);
     return Scaffold(
       backgroundColor: Colors.white,
@@ -58,7 +52,6 @@ class EditScreen extends ConsumerWidget {
                 //     : FileImage(File(state.image)) as ImageProvider<Object>?,
 
                 foregroundImage: controller.getImage(),
-
 
                 // foregroundImage: NetworkImage(controller.myAccount.imagePath),
                 // foregroundImage:  FileImage(File(state.image)),
