@@ -58,6 +58,7 @@ We would be happy if you could create a branch with the following rules
 │   ├── constants
 │   ├── model
 │   └── theme
+├── gen
 └── screen
 └── utils
 └── main.dart

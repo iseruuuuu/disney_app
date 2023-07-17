@@ -2,6 +2,7 @@ import 'package:disney_app/core/component/app_elevated_button.dart';
 import 'package:disney_app/core/component/app_text_button.dart';
 import 'package:disney_app/core/component/app_text_field.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
+import 'package:disney_app/gen/assets.gen.dart';
 import 'package:disney_app/screen/login/login_screen_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -42,7 +43,7 @@ class LoginScreen extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Image.asset(
-                    'assets/images/empty.png',
+                    Assets.images.empty.path,
                     width: 70,
                     height: 70,
                   ),

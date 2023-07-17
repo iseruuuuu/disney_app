@@ -5,6 +5,7 @@ import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
+import 'package:disney_app/gen/assets.gen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
@@ -24,13 +25,14 @@ class TimeLineScreen extends ConsumerWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         title: Image.asset(
-          'assets/images/empty.png',
+          Assets.images.empty.path,
           fit: BoxFit.fill,
           width: 50,
           height: 50,
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
+        //TODO ここをRefに変えた方が良さそう。
         stream: FirebaseFirestore.instance
             .collection('post')
             .orderBy('created_time', descending: true)

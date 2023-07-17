@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
+import 'package:disney_app/gen/assets.gen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
@@ -12,7 +13,7 @@ final createAccountScreenViewModelProvider = StateNotifierProvider.autoDispose<
     CreateAccountScreenViewModel, ImageProvider?>(
   (ref) {
     return CreateAccountScreenViewModel(
-      state: const AssetImage('assets/images/image_empty.png'),
+      state: AssetImage(Assets.images.imageEmpty.path),
     );
   },
 );
@@ -29,7 +30,7 @@ class CreateAccountScreenViewModel extends StateNotifier<ImageProvider?> {
 
   ImageProvider getImage() {
     if (image == null) {
-      return const AssetImage('assets/images/image_empty.png');
+      return AssetImage(Assets.images.imageEmpty.path);
     } else {
       return FileImage(image!);
     }

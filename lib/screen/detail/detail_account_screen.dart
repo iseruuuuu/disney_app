@@ -6,6 +6,7 @@ import 'package:disney_app/core/component/app_header.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
+import 'package:disney_app/gen/assets.gen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
@@ -26,11 +27,11 @@ class DetailAccountScreen extends ConsumerWidget {
     Account myAccount = Authentication.myAccount!;
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(110),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(110),
         child: AppAppBar(
-          image: 'assets/header/detail_account_header.jpg',
-          text: SizedBox.shrink(),
+          image: Assets.header.detailAccountHeader.path,
+          text: const SizedBox.shrink(),
         ),
       ),
       body: Column(
@@ -42,6 +43,7 @@ class DetailAccountScreen extends ConsumerWidget {
           ),
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
+              //TODO ここをRefに変えた方が良さそう。
               stream: FirebaseFirestore.instance
                   .collection('users')
                   .doc(postAccount.id)

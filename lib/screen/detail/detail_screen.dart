@@ -2,6 +2,7 @@ import 'package:disney_app/core/component/app_app_bar.dart';
 import 'package:disney_app/core/component/app_rating.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
+import 'package:disney_app/gen/assets.gen.dart';
 import 'package:disney_app/screen/detail/detail_screen_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,7 +30,7 @@ class DetailScreen extends ConsumerWidget {
       body: Column(
         children: [
           AppAppBar(
-            image: 'assets/header/detail_header.jpg',
+            image: Assets.header.detailHeader.path,
             text: Text(
               'Tweet',
               style: GoogleFonts.pattaya(
