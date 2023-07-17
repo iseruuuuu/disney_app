@@ -5,14 +5,14 @@ import 'package:disney_app/core/component/app_empty_screen.dart';
 import 'package:disney_app/core/component/app_header.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
-import 'package:disney_app/screen/edit/edit_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DetailAccountScreen extends StatefulWidget {
+class DetailAccountScreen extends ConsumerWidget {
   const DetailAccountScreen({
     Key? key,
     required this.postAccount,
@@ -23,14 +23,8 @@ class DetailAccountScreen extends StatefulWidget {
   final Post post;
 
   @override
-  State<DetailAccountScreen> createState() => _DetailAccountScreenState();
-}
-
-class _DetailAccountScreenState extends State<DetailAccountScreen> {
-  Account myAccount = Authentication.myAccount!;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    Account myAccount = Authentication.myAccount!;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: const PreferredSize(
@@ -44,26 +38,13 @@ class _DetailAccountScreenState extends State<DetailAccountScreen> {
         children: [
           const SizedBox(height: 20),
           AppHeader(
-            account: widget.postAccount,
-            onTapEdit: () async {
-              var result = await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const EditScreen(),
-                ),
-              );
-              if (result == true) {
-                setState(() {
-                  myAccount = Authentication.myAccount!;
-                });
-              }
-            },
-            isMyAccount: widget.post.postAccountId == myAccount.id,
+            account: postAccount,
+            isMyAccount: false,
           ),
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
               stream: UserFireStore.users
-                  .doc(widget.postAccount.id)
+                  .doc(postAccount.id)
                   .collection('my_posts')
                   .orderBy(
                     'created_time',
@@ -89,21 +70,21 @@ class _DetailAccountScreenState extends State<DetailAccountScreen> {
                                     onTap: () {
                                       NavigationUtils.detailScreen(
                                         context,
-                                        widget.postAccount,
+                                        postAccount,
                                         post,
                                         myAccount.id,
                                       );
                                     },
                                     child: AppDisneyCell(
                                       index: index,
-                                      account: widget.postAccount,
+                                      account: postAccount,
                                       post: post,
                                       myAccount: myAccount.id,
                                       isMaster: false,
                                       onTapImage: () {
                                         NavigationUtils.detailAccountScreen(
                                           context,
-                                          widget.postAccount,
+                                          postAccount,
                                           post,
                                           myAccount.id,
                                         );
