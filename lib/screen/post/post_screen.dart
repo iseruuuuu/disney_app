@@ -1,79 +1,17 @@
-import 'dart:convert';
 import 'package:disney_app/core/component/app_attraction.dart';
 import 'package:disney_app/core/component/app_rating.dart';
 import 'package:disney_app/core/component/app_text_field.dart';
-import 'package:disney_app/core/constants/attraction.dart';
-import 'package:disney_app/core/model/post.dart';
-import 'package:disney_app/utils/authentication.dart';
-import 'package:disney_app/utils/firestore/posts_firestore.dart';
-import 'package:disney_app/utils/snack_bar_utils.dart';
+import 'package:disney_app/screen/post/post_screen_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_picker/picker.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PostScreen extends StatefulWidget {
+class PostScreen extends ConsumerWidget {
   const PostScreen({Key? key}) : super(key: key);
 
   @override
-  State<PostScreen> createState() => _PostScreenState();
-}
-
-class _PostScreenState extends State<PostScreen> {
-  TextEditingController controller = TextEditingController();
-  int rank = 0;
-  String attractionName = '';
-  bool isSelected = false;
-
-  void rankPicker(double rating) {
-    rank = rating.round();
-  }
-
-  void attractionPicker() {
-    Picker(
-      adapter: PickerDataAdapter<String>(
-        pickerData: const JsonDecoder().convert(attraction),
-      ),
-      changeToFirst: true,
-      hideHeader: false,
-      height: 400,
-      textStyle: const TextStyle(
-        fontSize: 15,
-        color: Colors.black,
-        fontWeight: FontWeight.bold,
-      ),
-      onConfirm: (Picker picker, List value) {
-        setState(() {
-          var text1 = picker.adapter.text.replaceAll('[', '');
-          var result2 = text1.replaceAll(']', '');
-          var result3 = result2.replaceAll(' ', '');
-          List<String> result4 = result3.split(',');
-          attractionName = result4[1];
-          isSelected = true;
-        });
-      },
-    ).showModal(context);
-  }
-
-  void post() async {
-    if (controller.text.isNotEmpty && attractionName != '') {
-      Post newPost = Post(
-        content: controller.text,
-        postAccountId: Authentication.myAccount!.id,
-        rank: rank,
-        attractionName: attractionName,
-      );
-      var result = await PostFirestore.addPost(newPost);
-      if (result == true) {
-        if (!mounted) return;
-        Navigator.pop(context);
-      }
-    } else {
-      if (!mounted) return;
-      SnackBarUtils.snackBar(context, 'いずれかの値が未記入となっています');
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.watch(postScreenViewModelProvider.notifier);
+    final state = ref.watch(postScreenViewModelProvider);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -82,17 +20,19 @@ class _PostScreenState extends State<PostScreen> {
         elevation: 0,
         actions: [
           TextButton(
-            onPressed: post,
+            onPressed: () =>
+                ref.read(postScreenViewModelProvider.notifier).post(context),
             child: const Text(
-              '投稿する',
-              style: TextStyle(fontSize: 15),
+              '投稿',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],
         leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
           icon: const Icon(
             Icons.arrow_back_ios_new,
             color: Colors.black,
@@ -103,17 +43,19 @@ class _PostScreenState extends State<PostScreen> {
         child: Column(
           children: [
             AppRating(
-              onTap: rankPicker,
-              rank: rank,
+              onTap: controller.rankPicker,
+              rank: state.rank,
               isSelect: true,
             ),
             AppAttraction(
-              onTap: attractionPicker,
-              attractionName: attractionName,
-              isSelected: isSelected,
+              onTap: () => ref
+                  .read(postScreenViewModelProvider.notifier)
+                  .attractionPicker(context),
+              attractionName: state.attractionName,
+              isSelected: state.isSelected,
             ),
             AppTextField(
-              controller: controller,
+              controller: controller.controller,
               hintText: '感想',
               maxLines: 10,
             )
