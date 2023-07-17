@@ -2,12 +2,13 @@ import 'package:disney_app/core/component/app_app_bar.dart';
 import 'package:disney_app/core/component/app_rating.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
-import 'package:disney_app/utils/firestore/posts_firestore.dart';
+import 'package:disney_app/screen/detail/detail_screen_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-class DetailScreen extends StatefulWidget {
+class DetailScreen extends ConsumerWidget {
   const DetailScreen({
     Key? key,
     required this.account,
@@ -22,78 +23,7 @@ class DetailScreen extends StatefulWidget {
   final Function() onTapImage;
 
   @override
-  State<DetailScreen> createState() => _DetailScreenState();
-}
-
-class _DetailScreenState extends State<DetailScreen> {
-  void openCheckDialog() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text(
-            '削除確認',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 17,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          content: const Text(
-            '投稿を削除してもよろしいでしょうか？\n'
-            '復元はできなくなっております',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 15,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: TextButton(
-                child: const Text(
-                  "Cancel",
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
-                ),
-                onPressed: () => Navigator.pop(context),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  deletePosts();
-                },
-                child: const Text(
-                  "OK",
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void deletePosts() async {
-    PostFirestore.deletePost(widget.post.id, widget.post);
-    Navigator.pop(context);
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -112,12 +42,12 @@ class _DetailScreenState extends State<DetailScreen> {
           Row(
             children: [
               GestureDetector(
-                onTap: widget.onTapImage,
+                onTap: onTapImage,
                 child: Padding(
                   padding: const EdgeInsets.all(15),
                   child: CircleAvatar(
                     radius: 28,
-                    foregroundImage: NetworkImage(widget.account.imagePath),
+                    foregroundImage: NetworkImage(account.imagePath),
                   ),
                 ),
               ),
@@ -129,7 +59,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: Text(
-                        widget.account.name,
+                        account.name,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -143,7 +73,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 5, right: 10),
                     child: Text(
-                      "@${widget.account.userId}",
+                      "@${account.userId}",
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.grey.shade600,
@@ -162,13 +92,13 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: Row(
                   children: [
                     AppRating(
-                      rank: widget.post.rank,
+                      rank: post.rank,
                       isSelect: false,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: Text(
-                        '${widget.post.rank}点',
+                        '${post.rank}点',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -181,7 +111,7 @@ class _DetailScreenState extends State<DetailScreen> {
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: Text(
-                  widget.post.attractionName,
+                  post.attractionName,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -191,7 +121,7 @@ class _DetailScreenState extends State<DetailScreen> {
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: Text(
-                  widget.post.content,
+                  post.content,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -210,7 +140,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         children: [
                           Text(
                             DateFormat('yyyy/MM/dd').format(
-                              widget.post.createdTime!.toDate(),
+                              post.createdTime!.toDate(),
                             ),
                             style: TextStyle(
                               fontSize: 15,
@@ -218,9 +148,11 @@ class _DetailScreenState extends State<DetailScreen> {
                             ),
                           ),
                           const Spacer(),
-                          (widget.post.postAccountId == widget.myAccount)
+                          (post.postAccountId == myAccount)
                               ? GestureDetector(
-                                  onTap: openCheckDialog,
+                                  onTap: () => ref
+                                      .read(detailScreenViewModelProvider)
+                                      .openCheckDialog(context, post.id, post),
                                   child: const Icon(
                                     Icons.reorder,
                                     color: Colors.black,
