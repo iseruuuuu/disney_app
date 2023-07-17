@@ -42,19 +42,7 @@ class EditScreen extends ConsumerWidget {
               onTap: () =>
                   ref.read(editScreenViewModelProvider.notifier).selectImage(),
               child: CircleAvatar(
-                // foregroundImage: getImage(),
-                // foregroundImage: state.getImage(),
-                // foregroundImage: (state.image == controller.myAccount.imagePath)
-                //     ? NetworkImage(controller.myAccount.imagePath)
-                //     : FileImage(File(state.image)),
-                // foregroundImage: (state.image == controller.myAccount.imagePath)
-                //     ? NetworkImage(controller.myAccount.imagePath) as ImageProvider<Object>?
-                //     : FileImage(File(state.image)) as ImageProvider<Object>?,
-
                 foregroundImage: controller.getImage(),
-
-                // foregroundImage: NetworkImage(controller.myAccount.imagePath),
-                // foregroundImage:  FileImage(File(state.image)),
                 radius: 70,
                 child: const Icon(Icons.add),
               ),
