@@ -54,7 +54,7 @@ class LoginScreenViewModel extends ChangeNotifier {
       var result0 = await UserFireStore.getUser(result.user!.uid);
       if (result0 == true) {
         store();
-        Future.delayed(const Duration(seconds: 1)).then((_) {
+        Future.delayed(const Duration(seconds: 0)).then((_) {
           NavigationUtils.tabScreen(context);
         });
       }
