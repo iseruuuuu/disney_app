@@ -1,14 +1,14 @@
 import 'dart:io';
 import 'package:disney_app/core/model/account.dart';
+import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
 import 'package:disney_app/utils/authentication.dart';
-import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final editScreenViewModelProvider =
-    StateNotifierProvider<EditScreenViewModel, ImageProvider?>(
+    StateNotifierProvider.autoDispose<EditScreenViewModel, ImageProvider?>(
   (ref) {
     Account myAccount = Authentication.myAccount!;
     return EditScreenViewModel(
@@ -44,7 +44,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider?> {
         TextEditingController(text: myAccount.selfIntroduction);
   }
 
-  void update(BuildContext context) async {
+  void update(BuildContext context, WidgetRef ref) async {
     if (nameController.text.isNotEmpty &&
         userIdController.text.isNotEmpty &&
         selfIntroductionController.text.isNotEmpty) {
@@ -63,7 +63,9 @@ class EditScreenViewModel extends StateNotifier<ImageProvider?> {
         imagePath: imagePath,
       );
       Authentication.myAccount = updateAccount;
-      var result = await UserFireStore.updateUser(updateAccount);
+      var result = await ref
+          .read(userFirestoreUsecaseProvider)
+          .updateUser(updateAccount);
       if (result == true) {
         if (!mounted) return;
         Navigator.pop(context, true);
@@ -87,8 +89,8 @@ class EditScreenViewModel extends StateNotifier<ImageProvider?> {
     NavigationUtils.loginScreen(context);
   }
 
-  void delete(BuildContext context) {
-    UserFireStore.deleteUser(myAccount.id);
+  void delete(BuildContext context, WidgetRef ref) {
+    ref.read(userFirestoreUsecaseProvider).deleteUser(myAccount.id, ref);
     Authentication.deleteAuth();
     while (Navigator.canPop(context)) {
       Navigator.pop(context);

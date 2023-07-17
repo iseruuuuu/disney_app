@@ -1,15 +1,15 @@
 import 'dart:io';
 import 'package:disney_app/core/model/account.dart';
+import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
 import 'package:disney_app/utils/authentication.dart';
-import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final createAccountScreenViewModelProvider =
-    StateNotifierProvider<CreateAccountScreenViewModel, ImageProvider?>(
+final createAccountScreenViewModelProvider = StateNotifierProvider.autoDispose<
+    CreateAccountScreenViewModel, ImageProvider?>(
   (ref) {
     return CreateAccountScreenViewModel(
       state: const AssetImage('assets/images/image_empty.png'),
@@ -43,7 +43,7 @@ class CreateAccountScreenViewModel extends StateNotifier<ImageProvider?> {
     }
   }
 
-  void createAccount(BuildContext context) async {
+  void createAccount(BuildContext context, WidgetRef ref) async {
     FocusScope.of(context).unfocus();
     if (nameController.text.isNotEmpty &&
         userIdController.text.isNotEmpty &&
@@ -67,7 +67,9 @@ class CreateAccountScreenViewModel extends StateNotifier<ImageProvider?> {
           selfIntroduction: selfIntroductionController.text,
           imagePath: imagePath,
         );
-        var result0 = await UserFireStore.setUser(newAccount);
+
+        var result0 =
+            await ref.read(userFirestoreUsecaseProvider).setUser(newAccount);
         if (result0 == true) {
           if (!mounted) return;
           Navigator.pop(context);

@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/component/app_disney_cell.dart';
 import 'package:disney_app/core/component/app_empty_screen.dart';
 import 'package:disney_app/core/component/app_header.dart';
+import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
+import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/screen/account/account_screen_view_model.dart';
-import 'package:disney_app/utils/firestore/posts_firestore.dart';
-import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,14 +31,9 @@ class AccountScreen extends ConsumerWidget {
             ),
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
-                stream: UserFireStore.users
-                    .doc(state.myAccount.id)
-                    .collection('my_posts')
-                    .orderBy(
-                      'created_time',
-                      descending: true,
-                    )
-                    .snapshots(),
+                stream: ref
+                    .read(userFirestoreUsecaseProvider)
+                    .stream(state.myAccount.id),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     List<String> myPostIds =
@@ -46,7 +41,9 @@ class AccountScreen extends ConsumerWidget {
                       return snapshot.data!.docs[index].id;
                     });
                     return FutureBuilder<List<Post>?>(
-                      future: PostFirestore.getPostsFromIds(myPostIds),
+                      future: ref
+                          .read(postUsecaseProvider)
+                          .getPostsFromIds(myPostIds),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return (snapshot.data!.isNotEmpty)

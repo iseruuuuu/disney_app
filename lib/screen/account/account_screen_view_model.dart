@@ -5,8 +5,8 @@ import 'package:disney_app/utils/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final accountScreenViewModelProvider =
-    StateNotifierProvider<AccountScreenViewModel, AccountScreenState>(
+final accountScreenViewModelProvider = StateNotifierProvider.autoDispose<
+    AccountScreenViewModel, AccountScreenState>(
   (ref) {
     Account myAccount = Authentication.myAccount!;
     return AccountScreenViewModel(
@@ -18,7 +18,14 @@ final accountScreenViewModelProvider =
 );
 
 class AccountScreenViewModel extends StateNotifier<AccountScreenState> {
-  AccountScreenViewModel({required AccountScreenState state}) : super(state);
+  AccountScreenViewModel({required AccountScreenState state}) : super(state) {
+    fetch();
+  }
+
+  void fetch() {
+    Account myAccount = Authentication.myAccount!;
+    state = state.copyWith(myAccount: myAccount);
+  }
 
   void onTapEdit(BuildContext context) async {
     var result = await Navigator.push(

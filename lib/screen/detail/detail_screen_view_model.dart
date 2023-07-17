@@ -1,5 +1,5 @@
 import 'package:disney_app/core/model/post.dart';
-import 'package:disney_app/utils/firestore/posts_firestore.dart';
+import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,7 +13,12 @@ final detailScreenViewModelProvider =
 class DetailScreenViewModel extends ChangeNotifier {
   DetailScreenViewModel();
 
-  void openCheckDialog(BuildContext context, String accountId, Post newPost) {
+  void openCheckDialog(
+    BuildContext context,
+    String accountId,
+    Post newPost,
+    WidgetRef ref,
+  ) {
     showDialog(
       context: context,
       builder: (context) {
@@ -60,6 +65,7 @@ class DetailScreenViewModel extends ChangeNotifier {
                     context,
                     accountId,
                     newPost,
+                    ref,
                   );
                 },
                 child: const Text(
@@ -78,8 +84,9 @@ class DetailScreenViewModel extends ChangeNotifier {
     );
   }
 
-  void deletePosts(BuildContext context, String accountId, Post newPost) async {
-    PostFirestore.deletePost(accountId, newPost);
+  void deletePosts(BuildContext context, String accountId, Post newPost,
+      WidgetRef ref) async {
+    ref.read(postUsecaseProvider).deletePost(accountId, newPost);
     Navigator.pop(context);
   }
 }

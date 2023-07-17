@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/post.dart';
 
-class PostFirestore {
+class PostFirestoreRepository {
   static final firebaseInstance = FirebaseFirestore.instance;
   static final CollectionReference posts = firebaseInstance.collection('post');
 
-  static Future<dynamic> addPost(Post newPost) async {
+  Future<dynamic> addPost(Post newPost) async {
     try {
       final CollectionReference userPosts = firebaseInstance
           .collection('users')
@@ -28,7 +28,7 @@ class PostFirestore {
     }
   }
 
-  static Future<List<Post>?> getPostsFromIds(List<String> ids) async {
+  Future<List<Post>?> getPostsFromIds(List<String> ids) async {
     List<Post> postList = [];
     try {
       await Future.forEach(ids, (String id) async {
@@ -50,7 +50,7 @@ class PostFirestore {
     }
   }
 
-  static Future<dynamic> deleteAllPosts(String accountId) async {
+  Future<dynamic> deleteAllPosts(String accountId) async {
     final CollectionReference userPosts = firebaseInstance
         .collection('users')
         .doc(accountId)
@@ -63,7 +63,7 @@ class PostFirestore {
     });
   }
 
-  static Future<dynamic> deletePost(String accountId, Post newPost) async {
+  Future<dynamic> deletePost(String accountId, Post newPost) async {
     final CollectionReference userPost = firebaseInstance
         .collection('users')
         .doc(newPost.postAccountId)

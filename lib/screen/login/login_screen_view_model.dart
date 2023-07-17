@@ -1,5 +1,5 @@
+import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
 import 'package:disney_app/utils/authentication.dart';
-import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
@@ -45,13 +45,16 @@ class LoginScreenViewModel extends ChangeNotifier {
     await storage.write(key: "KEY_PASSWORD", value: passwordController.text);
   }
 
-  void login(BuildContext context) async {
+  void login(BuildContext context, WidgetRef ref) async {
     var result = await Authentication.signIn(
       email: emailController.text,
       pass: passwordController.text,
     );
     if (result is UserCredential) {
-      var result0 = await UserFireStore.getUser(result.user!.uid);
+      var result0 = await ref
+          .read(userFirestoreUsecaseProvider)
+          .getUser(result.user!.uid);
+
       if (result0 == true) {
         store();
         Future.delayed(const Duration(seconds: 0)).then((_) {

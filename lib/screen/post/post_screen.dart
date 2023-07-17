@@ -20,8 +20,9 @@ class PostScreen extends ConsumerWidget {
         elevation: 0,
         actions: [
           TextButton(
-            onPressed: () =>
-                ref.read(postScreenViewModelProvider.notifier).post(context),
+            onPressed: () => ref
+                .read(postScreenViewModelProvider.notifier)
+                .post(context, ref),
             child: const Text(
               '投稿',
               style: TextStyle(

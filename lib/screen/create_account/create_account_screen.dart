@@ -88,7 +88,7 @@ class CreateAccountScreen extends ConsumerWidget {
                 padding: const EdgeInsets.all(15),
                 child: AppElevatedButton(
                   title: 'アカウント作成',
-                  onPressed: () => controller.createAccount(context),
+                  onPressed: () => controller.createAccount(context, ref),
                 ),
               ),
             ],

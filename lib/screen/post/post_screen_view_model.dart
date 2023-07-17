@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:disney_app/core/constants/attraction.dart';
 import 'package:disney_app/core/model/post.dart';
+import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
 import 'package:disney_app/screen/post/post_screen_state.dart';
 import 'package:disney_app/utils/authentication.dart';
-import 'package:disney_app/utils/firestore/posts_firestore.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/picker.dart';
@@ -58,7 +58,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
     ).showModal(context);
   }
 
-  void post(BuildContext context) async {
+  void post(BuildContext context, WidgetRef ref) async {
     if (controller.text.isNotEmpty && state.attractionName != '') {
       Post newPost = Post(
         content: controller.text,
@@ -66,7 +66,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
         rank: state.rank,
         attractionName: state.attractionName,
       );
-      var result = await PostFirestore.addPost(newPost);
+      var result = await ref.read(postUsecaseProvider).addPost(newPost);
       if (result == true) {
         Future.delayed(const Duration(seconds: 1)).then((_) {
           Navigator.pop(context);

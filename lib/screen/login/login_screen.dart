@@ -72,7 +72,7 @@ class LoginScreen extends ConsumerWidget {
                 title: 'ログイン',
                 onPressed: () => ref
                     .read(loginScreenViewModelProvider.notifier)
-                    .login(context),
+                    .login(context, ref),
               ),
               const SizedBox(height: 30),
               AppTextButton(

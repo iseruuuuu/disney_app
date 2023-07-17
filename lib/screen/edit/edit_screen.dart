@@ -18,8 +18,9 @@ class EditScreen extends ConsumerWidget {
         elevation: 0,
         actions: [
           TextButton(
-            onPressed: () =>
-                ref.read(editScreenViewModelProvider.notifier).update(context),
+            onPressed: () => ref
+                .read(editScreenViewModelProvider.notifier)
+                .update(context, ref),
             child: const Text(
               '更新する',
               style: TextStyle(fontSize: 18),
@@ -91,7 +92,7 @@ class EditScreen extends ConsumerWidget {
                       'よろしいでしょうか？',
                   onTap: () => ref
                       .read(editScreenViewModelProvider.notifier)
-                      .delete(context),
+                      .delete(context, ref),
                 );
               },
               title: 'アカウントを削除',

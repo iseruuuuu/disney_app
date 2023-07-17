@@ -5,9 +5,8 @@ import 'package:disney_app/core/component/app_empty_screen.dart';
 import 'package:disney_app/core/component/app_header.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
+import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
 import 'package:disney_app/utils/authentication.dart';
-import 'package:disney_app/utils/firestore/posts_firestore.dart';
-import 'package:disney_app/utils/firestore/user_firestore.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,7 +42,8 @@ class DetailAccountScreen extends ConsumerWidget {
           ),
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              stream: UserFireStore.users
+              stream: FirebaseFirestore.instance
+                  .collection('users')
                   .doc(postAccount.id)
                   .collection('my_posts')
                   .orderBy(
@@ -58,7 +58,9 @@ class DetailAccountScreen extends ConsumerWidget {
                     return snapshot.data!.docs[index].id;
                   });
                   return FutureBuilder<List<Post>?>(
-                    future: PostFirestore.getPostsFromIds(myPostIds),
+                    future: ref
+                        .read(postUsecaseProvider)
+                        .getPostsFromIds(myPostIds),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return (snapshot.data!.isNotEmpty)

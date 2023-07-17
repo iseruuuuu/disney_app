@@ -152,7 +152,12 @@ class DetailScreen extends ConsumerWidget {
                               ? GestureDetector(
                                   onTap: () => ref
                                       .read(detailScreenViewModelProvider)
-                                      .openCheckDialog(context, post.id, post),
+                                      .openCheckDialog(
+                                        context,
+                                        post.id,
+                                        post,
+                                        ref,
+                                      ),
                                   child: const Icon(
                                     Icons.reorder,
                                     color: Colors.black,

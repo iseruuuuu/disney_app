@@ -1,13 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/account.dart';
+import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
 import 'package:disney_app/utils/authentication.dart';
-import 'package:disney_app/utils/firestore/posts_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserFireStore {
+class UserFirestoreRepository {
   static final firebaseStoreInstance = FirebaseFirestore.instance;
   static CollectionReference users = firebaseStoreInstance.collection('users');
 
-  static Future<dynamic> setUser(Account newAccount) async {
+  Stream<QuerySnapshot<Map<String, dynamic>>> stream(String myAccountId) {
+    return users
+        .doc(myAccountId)
+        .collection('my_posts')
+        .orderBy(
+          'created_time',
+          descending: true,
+        )
+        .snapshots();
+  }
+
+  Future<dynamic> setUser(Account newAccount) async {
     try {
       await users.doc(newAccount.id).set({
         'name': newAccount.name,
@@ -23,7 +35,7 @@ class UserFireStore {
     }
   }
 
-  static Future<dynamic> getUser(String uid) async {
+  Future<dynamic> getUser(String uid) async {
     try {
       DocumentSnapshot documentSnapshot = await users.doc(uid).get();
       Map<String, dynamic> data =
@@ -45,7 +57,7 @@ class UserFireStore {
     }
   }
 
-  static Future<dynamic> updateUser(Account updateAccount) async {
+  Future<dynamic> updateUser(Account updateAccount) async {
     try {
       await users.doc(updateAccount.id).update({
         'name': updateAccount.name,
@@ -60,8 +72,7 @@ class UserFireStore {
     }
   }
 
-  static Future<Map<String, Account>?> getPostUserMap(
-      List<String> accountIds) async {
+  Future<Map<String, Account>?> getPostUserMap(List<String> accountIds) async {
     Map<String, Account> map = {};
     try {
       await Future.forEach(accountIds, (accountId) async {
@@ -84,8 +95,8 @@ class UserFireStore {
     }
   }
 
-  static Future<dynamic> deleteUser(String accountId) async {
+  Future<dynamic> deleteUser(String accountId, WidgetRef ref) async {
     users.doc(accountId).delete();
-    PostFirestore.deleteAllPosts(accountId);
+    ref.read(postUsecaseProvider).deleteAllPosts(accountId);
   }
 }
