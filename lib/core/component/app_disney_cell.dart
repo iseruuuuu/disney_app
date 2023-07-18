@@ -111,9 +111,10 @@ class AppDisneyCell extends ConsumerWidget {
                                 '遷移します。よろしいですか？',
                             onTap: () async {
                               final url = Uri.parse(
-                                  'https://forms.gle/Mo71XmZtA74AKBTo9',);
+                                'https://forms.gle/Mo71XmZtA74AKBTo9',
+                              );
                               if (!await launchUrl(url)) {
-                                throw 'Could not launch $url';
+                                throw Exception('Could not launch $url');
                               }
                             },
                           );
