@@ -81,7 +81,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider?> {
     }
   }
 
-  void signOut(BuildContext context) async {
+  void signOut(BuildContext context) {
     Authentication.signOut();
     while (Navigator.canPop(context)) {
       Navigator.pop(context);

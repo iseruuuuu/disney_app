@@ -25,7 +25,7 @@ class PostFirestoreRepository {
         'rank': newPost.rank,
         'attraction_name': newPost.attractionName,
       });
-      userPosts.doc(result.id).set({
+      await userPosts.doc(result.id).set({
         'post_id': result.id,
         'created_time': Timestamp.now(),
       });
@@ -66,7 +66,7 @@ class PostFirestoreRepository {
     var snapshot = await userPosts.get();
     await Future.forEach(snapshot.docs, (doc) async {
       await posts.doc(doc.id).delete();
-      userPosts.doc(doc.id).delete();
+      await userPosts.doc(doc.id).delete();
     });
   }
 
@@ -76,6 +76,6 @@ class PostFirestoreRepository {
         .doc(newPost.postAccountId)
         .collection('my_posts');
     await posts.doc(accountId).delete();
-    userPost.doc(accountId).delete();
+    await userPost.doc(accountId).delete();
   }
 }

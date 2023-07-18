@@ -64,7 +64,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
       );
       var result = await ref.read(postUsecaseProvider).addPost(newPost);
       if (result == true) {
-        Future.delayed(const Duration(seconds: 1)).then((_) {
+        await Future.delayed(const Duration(seconds: 1)).then((_) {
           Navigator.pop(context);
         });
       }

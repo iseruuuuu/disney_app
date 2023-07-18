@@ -96,7 +96,7 @@ class UserFirestoreRepository {
   }
 
   Future<dynamic> deleteUser(String accountId, WidgetRef ref) async {
-    users.doc(accountId).delete();
-    ref.read(postUsecaseProvider).deleteAllPosts(accountId);
+    await users.doc(accountId).delete();
+    await ref.read(postUsecaseProvider).deleteAllPosts(accountId);
   }
 }

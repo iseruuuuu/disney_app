@@ -91,7 +91,7 @@ class AppDisneyCell extends ConsumerWidget {
                             content: '投稿を削除してもよろしいでしょうか？\n'
                                 '復元はできなくなっております',
                             onTap: () async {
-                              ref
+                              await ref
                                   .read(postUsecaseProvider)
                                   .deletePost(post.id, post);
                             },
