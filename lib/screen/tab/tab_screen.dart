@@ -12,7 +12,7 @@ class TabScreen extends ConsumerWidget {
     final controller = ref.watch(tabScreenViewModelProvider.notifier);
     return Scaffold(
       body: controller.pageList[state.selectedIndex],
-      bottomNavigationBar: Container(
+      bottomNavigationBar: DecoratedBox(
         decoration: BoxDecoration(
           border: Border(
             top: BorderSide(
