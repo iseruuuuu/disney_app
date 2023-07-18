@@ -73,13 +73,17 @@ class CreateAccountScreenViewModel extends StateNotifier<ImageProvider?> {
         var result0 =
             await ref.read(userFirestoreUsecaseProvider).setUser(newAccount);
         if (result0 == true) {
-          if (!mounted) return;
+          if (!mounted) {
+            return;
+          }
           Navigator.pop(context);
         }
       } else {
         final errorMessage =
             FunctionUtils().checkRegisterError(result.toString());
-        if (!mounted) return;
+        if (!mounted) {
+          return;
+        }
         SnackBarUtils.snackBar(context, errorMessage);
       }
     } else {

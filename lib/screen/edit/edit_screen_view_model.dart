@@ -67,7 +67,9 @@ class EditScreenViewModel extends StateNotifier<ImageProvider?> {
           .read(userFirestoreUsecaseProvider)
           .updateUser(updateAccount);
       if (result == true) {
-        if (!mounted) return;
+        if (!mounted) {
+          return;
+        }
         Navigator.pop(context, true);
       }
     }
