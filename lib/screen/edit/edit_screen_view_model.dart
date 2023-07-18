@@ -76,7 +76,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider?> {
   }
 
   Future<void> selectImage() async {
-    final result = await FunctionUtils.getImageFromGallery();
+    final File? result = await FunctionUtils.getImageFromGallery();
     if (result != null) {
       image = File(result.path);
       state = getImage();
