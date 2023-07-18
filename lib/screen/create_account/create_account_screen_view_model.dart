@@ -5,10 +5,12 @@ import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
 import 'package:disney_app/gen/assets.gen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
+import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 final createAccountScreenViewModelProvider = StateNotifierProvider.autoDispose<
     CreateAccountScreenViewModel, ImageProvider?>(
@@ -22,6 +24,7 @@ final createAccountScreenViewModelProvider = StateNotifierProvider.autoDispose<
 class CreateAccountScreenViewModel extends StateNotifier<ImageProvider?> {
   CreateAccountScreenViewModel({required ImageProvider state}) : super(state);
 
+  final storage = const FlutterSecureStorage();
   TextEditingController nameController = TextEditingController();
   TextEditingController userIdController = TextEditingController();
   TextEditingController selfIntroductionController = TextEditingController();
@@ -38,7 +41,7 @@ class CreateAccountScreenViewModel extends StateNotifier<ImageProvider?> {
   }
 
   Future<void> selectImage() async {
-    final File? result = await FunctionUtils.getImageFromGallery();
+    final result = await FunctionUtils.getImageFromGallery();
     if (result != null) {
       image = File(result.path);
       state = getImage();
@@ -69,14 +72,16 @@ class CreateAccountScreenViewModel extends StateNotifier<ImageProvider?> {
           selfIntroduction: selfIntroductionController.text,
           imagePath: imagePath,
         );
-
         final result0 =
             await ref.read(userFirestoreUsecaseProvider).setUser(newAccount);
         if (result0 == true) {
           if (!mounted) {
             return;
           }
-          Navigator.pop(context);
+          await Future<void>.delayed(const Duration(seconds: 1))
+              .then((_) async {
+            return login(context, ref);
+          });
         }
       } else {
         final errorMessage =
@@ -89,5 +94,35 @@ class CreateAccountScreenViewModel extends StateNotifier<ImageProvider?> {
     } else {
       SnackBarUtils.snackBar(context, '登録してた内容に不備があります');
     }
+  }
+
+  Future<void> login(BuildContext context, WidgetRef ref) async {
+    final result = await Authentication.signIn(
+      email: emailController.text,
+      pass: passwordController.text,
+    );
+    if (result is UserCredential) {
+      final result0 = await ref
+          .read(userFirestoreUsecaseProvider)
+          .getUser(result.user!.uid);
+
+      if (result0 == true) {
+        await store();
+        await Future<void>.delayed(Duration.zero).then((_) {
+          Navigator.pop(context);
+          return NavigationUtils.tabScreen(context);
+        });
+      }
+    } else {
+      final errorMessage = FunctionUtils().checkLoginError(result.toString());
+      await Future<void>.delayed(const Duration(seconds: 1)).then((_) {
+        SnackBarUtils.snackBar(context, errorMessage);
+      });
+    }
+  }
+
+  Future<void> store() async {
+    await storage.write(key: 'KEY_USERNAME', value: emailController.text);
+    await storage.write(key: 'KEY_PASSWORD', value: passwordController.text);
   }
 }
