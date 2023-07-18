@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:disney_app/core/component/app_elevated_button.dart';
 import 'package:disney_app/core/component/app_text_button.dart';
 import 'package:disney_app/core/component/app_text_field.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:disney_app/gen/assets.gen.dart';
 import 'package:disney_app/screen/login/login_screen_view_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});

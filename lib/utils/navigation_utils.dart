@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/screen/create_account/create_account_screen.dart';
@@ -7,6 +6,7 @@ import 'package:disney_app/screen/detail/detail_screen.dart';
 import 'package:disney_app/screen/login/login_screen.dart';
 import 'package:disney_app/screen/post/post_screen.dart';
 import 'package:disney_app/screen/tab/tab_screen.dart';
+import 'package:flutter/material.dart';
 
 class NavigationUtils {
   static Future<void> detailScreen(

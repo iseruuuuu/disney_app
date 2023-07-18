@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/model/repository/post_firestore_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final postUsecaseProvider = Provider.autoDispose<PostFireStoreUsecase>(
   (ref) => PostFireStoreUsecase(

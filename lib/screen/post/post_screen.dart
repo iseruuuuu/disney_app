@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:disney_app/core/component/app_attraction.dart';
 import 'package:disney_app/core/component/app_rating.dart';
 import 'package:disney_app/core/component/app_text_field.dart';
 import 'package:disney_app/screen/post/post_screen_view_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PostScreen extends ConsumerWidget {
   const PostScreen({super.key});

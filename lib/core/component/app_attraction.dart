@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
+import 'package:flutter/material.dart';
 
 class AppAttraction extends StatelessWidget {
   const AppAttraction({

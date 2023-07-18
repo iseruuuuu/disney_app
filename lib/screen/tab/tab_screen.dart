@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:disney_app/screen/tab/tab_screen_view_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TabScreen extends ConsumerWidget {
   const TabScreen({super.key});
