@@ -11,7 +11,7 @@ class AppRating extends StatelessWidget {
 
   final int rank;
   final bool isSelect;
-  final Function(double)? onTap;
+  final void Function(double)? onTap;
 
   @override
   Widget build(BuildContext context) {
