@@ -7,7 +7,7 @@ import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:disney_app/screen/create_account/create_account_screen_view_model.dart';
 
 class CreateAccountScreen extends ConsumerWidget {
-  const CreateAccountScreen({Key? key}) : super(key: key);
+  const CreateAccountScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

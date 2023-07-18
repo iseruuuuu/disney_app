@@ -3,10 +3,10 @@ import 'package:disney_app/core/theme/app_color_style.dart';
 
 class AppElevatedButton extends StatelessWidget {
   const AppElevatedButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     required this.title,
-  }) : super(key: key);
+  });
 
   final VoidCallback onPressed;
   final String title;

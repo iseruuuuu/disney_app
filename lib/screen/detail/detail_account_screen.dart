@@ -15,10 +15,10 @@ import 'package:disney_app/utils/navigation_utils.dart';
 
 class DetailAccountScreen extends ConsumerWidget {
   const DetailAccountScreen({
-    Key? key,
+    super.key,
     required this.postAccount,
     required this.post,
-  }) : super(key: key);
+  });
 
   final Account postAccount;
   final Post post;

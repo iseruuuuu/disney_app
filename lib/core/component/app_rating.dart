@@ -3,11 +3,11 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class AppRating extends StatelessWidget {
   const AppRating({
-    Key? key,
+    super.key,
     required this.rank,
     required this.isSelect,
     this.onTap,
-  }) : super(key: key);
+  });
 
   final int rank;
   final bool isSelect;

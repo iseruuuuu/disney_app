@@ -11,7 +11,7 @@ import 'package:disney_app/screen/edit/edit_screen_view_model.dart';
 import 'package:disney_app/utils/function_utils.dart';
 
 class EditScreen extends ConsumerWidget {
-  const EditScreen({Key? key}) : super(key: key);
+  const EditScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

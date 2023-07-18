@@ -6,7 +6,7 @@ import 'package:disney_app/core/component/app_text_field.dart';
 import 'package:disney_app/screen/post/post_screen_view_model.dart';
 
 class PostScreen extends ConsumerWidget {
-  const PostScreen({Key? key}) : super(key: key);
+  const PostScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class AppAppBar extends StatelessWidget {
   const AppAppBar({
-    Key? key,
+    super.key,
     required this.image,
     required this.text,
-  }) : super(key: key);
+  });
 
   final String image;
   final Widget text;

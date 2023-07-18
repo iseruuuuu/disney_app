@@ -3,11 +3,11 @@ import 'package:disney_app/core/theme/app_color_style.dart';
 
 class AppAttraction extends StatelessWidget {
   const AppAttraction({
-    Key? key,
+    super.key,
     required this.onTap,
     required this.attractionName,
     required this.isSelected,
-  }) : super(key: key);
+  });
 
   final VoidCallback onTap;
   final String attractionName;

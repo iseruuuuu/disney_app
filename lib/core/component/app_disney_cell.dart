@@ -12,14 +12,14 @@ import 'package:disney_app/utils/function_utils.dart';
 
 class AppDisneyCell extends ConsumerWidget {
   const AppDisneyCell({
-    Key? key,
+    super.key,
     required this.index,
     required this.account,
     required this.post,
     required this.onTapImage,
     required this.myAccount,
     required this.isMaster,
-  }) : super(key: key);
+  });
 
   final int index;
   final Account account;

@@ -11,12 +11,12 @@ import 'package:disney_app/screen/detail/detail_screen_view_model.dart';
 
 class DetailScreen extends ConsumerWidget {
   const DetailScreen({
-    Key? key,
+    super.key,
     required this.account,
     required this.post,
     required this.myAccount,
     required this.onTapImage,
-  }) : super(key: key);
+  });
 
   final Account account;
   final Post post;

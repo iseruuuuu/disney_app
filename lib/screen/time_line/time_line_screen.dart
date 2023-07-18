@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TimeLineScreen extends ConsumerWidget {
-  const TimeLineScreen({Key? key}) : super(key: key);
+  const TimeLineScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -12,7 +12,7 @@ import 'package:disney_app/screen/account/account_screen_view_model.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 
 class AccountScreen extends ConsumerWidget {
-  const AccountScreen({Key? key}) : super(key: key);
+  const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

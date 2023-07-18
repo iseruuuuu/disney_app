@@ -3,11 +3,11 @@ import 'package:disney_app/core/theme/app_color_style.dart';
 
 class AppTextField extends StatelessWidget {
   const AppTextField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.hintText,
     required this.maxLines,
-  }) : super(key: key);
+  });
 
   final TextEditingController controller;
   final String hintText;

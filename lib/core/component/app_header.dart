@@ -5,11 +5,11 @@ import 'package:disney_app/core/theme/app_text_style.dart';
 
 class AppHeader extends StatelessWidget {
   const AppHeader({
-    Key? key,
+    super.key,
     required this.account,
     required this.isMyAccount,
     this.onTapEdit,
-  }) : super(key: key);
+  });
 
   final Account account;
   final VoidCallback? onTapEdit;

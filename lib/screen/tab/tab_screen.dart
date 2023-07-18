@@ -4,7 +4,7 @@ import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:disney_app/screen/tab/tab_screen_view_model.dart';
 
 class TabScreen extends ConsumerWidget {
-  const TabScreen({Key? key}) : super(key: key);
+  const TabScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
