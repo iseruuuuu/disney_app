@@ -6,6 +6,6 @@ part 'account_screen_state.freezed.dart';
 @freezed
 class AccountScreenState with _$AccountScreenState {
   const factory AccountScreenState({
-    required final Account myAccount,
+    required Account myAccount,
   }) = _AccountScreenState;
 }
