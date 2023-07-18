@@ -18,7 +18,7 @@ class PostFirestoreRepository {
           .collection('users')
           .doc(newPost.postAccountId)
           .collection('my_posts');
-      var result = await posts.add({
+      final result = await posts.add({
         'content': newPost.content,
         'post_account_id': newPost.postAccountId,
         'created_time': Timestamp.now(),
@@ -36,12 +36,12 @@ class PostFirestoreRepository {
   }
 
   Future<List<Post>?> getPostsFromIds(List<String> ids) async {
-    List<Post> postList = [];
+    final postList = <Post>[];
     try {
       await Future.forEach(ids, (String id) async {
-        var doc = await posts.doc(id).get();
-        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-        Post post = Post(
+        final doc = await posts.doc(id).get();
+        final data = doc.data() as Map<String, dynamic>;
+        final post = Post(
           id: doc.id,
           content: data['content'],
           postAccountId: data['post_account_id'],
@@ -63,7 +63,7 @@ class PostFirestoreRepository {
         .doc(accountId)
         .collection('my_posts');
 
-    var snapshot = await userPosts.get();
+    final snapshot = await userPosts.get();
     await Future.forEach(snapshot.docs, (doc) async {
       await posts.doc(doc.id).delete();
       await userPosts.doc(doc.id).delete();

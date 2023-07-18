@@ -18,8 +18,8 @@ class TimeLineScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Account myAccount = Authentication.myAccount!;
-    bool isMaster = false;
+    final myAccount = Authentication.myAccount!;
+    var isMaster = false;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -36,9 +36,9 @@ class TimeLineScreen extends ConsumerWidget {
         stream: ref.read(postUsecaseProvider).stream(),
         builder: (context, postSnapshot) {
           if (postSnapshot.hasData) {
-            List<String> postAccountIds = [];
+            final postAccountIds = <String>[];
             for (var doc in postSnapshot.data!.docs) {
-              Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+              var data = doc.data() as Map<String, dynamic>;
               if (!postAccountIds.contains(data['post_account_id'])) {
                 postAccountIds.add(data['post_account_id']);
               }
@@ -56,10 +56,10 @@ class TimeLineScreen extends ConsumerWidget {
                           itemBuilder: (context, index) {
                             isMaster = FunctionUtils()
                                 .checkMasterAccount(myAccount.id);
-                            Map<String, dynamic> data =
+                            final data =
                                 postSnapshot.data!.docs[index].data()
                                     as Map<String, dynamic>;
-                            Post post = Post(
+                            final post = Post(
                               id: postSnapshot.data!.docs[index].id,
                               content: data['content'],
                               postAccountId: data['post_account_id'],
@@ -67,7 +67,7 @@ class TimeLineScreen extends ConsumerWidget {
                               rank: data['rank'],
                               attractionName: data['attraction_name'],
                             );
-                            Account postAccount =
+                            final postAccount =
                                 userSnapshot.data![post.postAccountId]!;
                             return GestureDetector(
                               onTap: () {

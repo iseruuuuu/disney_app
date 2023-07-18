@@ -25,7 +25,7 @@ class DetailAccountScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Account myAccount = Authentication.myAccount!;
+    var myAccount = Authentication.myAccount!;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -48,8 +48,8 @@ class DetailAccountScreen extends ConsumerWidget {
                   ref.read(userFirestoreUsecaseProvider).stream(postAccount.id),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  List<String> myPostIds =
-                      List.generate(snapshot.data!.docs.length, (index) {
+                  final myPostIds = List<String>.generate(
+                      snapshot.data!.docs.length, (index) {
                     return snapshot.data!.docs[index].id;
                   });
                   return FutureBuilder<List<Post>?>(
@@ -62,7 +62,7 @@ class DetailAccountScreen extends ConsumerWidget {
                             ? ListView.builder(
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (context, index) {
-                                  Post post = snapshot.data![index];
+                                  var post = snapshot.data![index];
                                   return GestureDetector(
                                     onTap: () {
                                       NavigationUtils.detailScreen(

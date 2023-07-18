@@ -36,8 +36,8 @@ class AccountScreen extends ConsumerWidget {
                     .stream(state.myAccount.id),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    List<String> myPostIds =
-                        List.generate(snapshot.data!.docs.length, (index) {
+                    final myPostIds = List<String>.generate(
+                        snapshot.data!.docs.length, (index) {
                       return snapshot.data!.docs[index].id;
                     });
                     return FutureBuilder<List<Post>?>(
@@ -50,7 +50,7 @@ class AccountScreen extends ConsumerWidget {
                               ? ListView.builder(
                                   itemCount: snapshot.data!.length,
                                   itemBuilder: (context, index) {
-                                    Post post = snapshot.data![index];
+                                    var post = snapshot.data![index];
                                     return GestureDetector(
                                       onTap: () {
                                         NavigationUtils.detailScreen(

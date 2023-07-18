@@ -11,7 +11,7 @@ class Authentication {
     required String pass,
   }) async {
     try {
-      UserCredential newAccount =
+      var newAccount =
           await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: pass,
@@ -27,7 +27,7 @@ class Authentication {
     required String pass,
   }) async {
     try {
-      final UserCredential result =
+      final result =
           await firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: pass,

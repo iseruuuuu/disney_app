@@ -58,11 +58,11 @@ class CreateAccountScreenViewModel extends StateNotifier<ImageProvider?> {
         pass: passwordController.text,
       );
       if (result is UserCredential) {
-        String imagePath = await FunctionUtils.uploadImage(
+        final imagePath = await FunctionUtils.uploadImage(
           result.user!.uid,
           image!,
         );
-        Account newAccount = Account(
+        final newAccount = Account(
           id: result.user!.uid,
           name: nameController.text,
           userId: userIdController.text,

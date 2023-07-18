@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final editScreenViewModelProvider =
     StateNotifierProvider.autoDispose<EditScreenViewModel, ImageProvider?>(
   (ref) {
-    Account myAccount = Authentication.myAccount!;
+    final myAccount = Authentication.myAccount!;
     return EditScreenViewModel(
       state: NetworkImage(myAccount.imagePath),
     );
@@ -48,14 +48,14 @@ class EditScreenViewModel extends StateNotifier<ImageProvider?> {
     if (nameController.text.isNotEmpty &&
         userIdController.text.isNotEmpty &&
         selfIntroductionController.text.isNotEmpty) {
-      String imagePath = '';
+      var imagePath = '';
       if (image == null) {
         imagePath = myAccount.imagePath;
       } else {
         var result = await FunctionUtils.uploadImage(myAccount.id, image!);
         imagePath = result;
       }
-      Account updateAccount = Account(
+      var updateAccount = Account(
         id: myAccount.id,
         name: nameController.text,
         userId: userIdController.text,

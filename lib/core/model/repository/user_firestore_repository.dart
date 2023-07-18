@@ -37,10 +37,9 @@ class UserFirestoreRepository {
 
   Future<dynamic> getUser(String uid) async {
     try {
-      DocumentSnapshot documentSnapshot = await users.doc(uid).get();
-      Map<String, dynamic> data =
-          documentSnapshot.data() as Map<String, dynamic>;
-      Account myAccount = Account(
+      final documentSnapshot = await users.doc(uid).get();
+      final data = documentSnapshot.data() as Map<String, dynamic>;
+      final myAccount = Account(
         id: uid,
         name: data['name'],
         userId: data['user_id'],
@@ -73,12 +72,12 @@ class UserFirestoreRepository {
   }
 
   Future<Map<String, Account>?> getPostUserMap(List<String> accountIds) async {
-    Map<String, Account> map = {};
+    final map = <String, Account>{};
     try {
       await Future.forEach(accountIds, (accountId) async {
-        var doc = await users.doc(accountId).get();
-        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-        Account postAccount = Account(
+        final doc = await users.doc(accountId).get();
+        final data = doc.data() as Map<String, dynamic>;
+        final postAccount = Account(
           id: accountId,
           name: data['name'],
           userId: data['user_id'],
