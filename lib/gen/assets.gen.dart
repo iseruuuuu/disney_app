@@ -7,7 +7,6 @@
 // ignore_for_file: type=lint
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
-// Flutter imports:
 import 'package:flutter/widgets.dart';
 
 class $AssetsHeaderGen {
@@ -23,16 +22,6 @@ class $AssetsHeaderGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [detailAccountHeader, detailHeader];
-}
-
-class $AssetsIconGen {
-  const $AssetsIconGen();
-
-  /// File path: assets/icon/icon.png
-  AssetGenImage get icon => const AssetGenImage('assets/icon/icon.png');
-
-  /// List of all assets
-  List<AssetGenImage> get values => [icon];
 }
 
 class $AssetsImagesGen {
@@ -53,7 +42,6 @@ class Assets {
   Assets._();
 
   static const $AssetsHeaderGen header = $AssetsHeaderGen();
-  static const $AssetsIconGen icon = $AssetsIconGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
