@@ -29,8 +29,7 @@
 
 # Setup
 1、`git clone https://github.com/iseruuuuu/disney_app.git`  
-2、`flutter pub get`  
-3、`flutter packages pub run build_runner build`  
+2、`make setup`
 
 
 # Contributing
