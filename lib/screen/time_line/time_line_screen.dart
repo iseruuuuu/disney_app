@@ -37,8 +37,8 @@ class TimeLineScreen extends ConsumerWidget {
         builder: (context, postSnapshot) {
           if (postSnapshot.hasData) {
             final postAccountIds = <String>[];
-            for (var doc in postSnapshot.data!.docs) {
-              var data = doc.data() as Map<String, dynamic>;
+            for (final doc in postSnapshot.data!.docs) {
+              final data = doc.data() as Map<String, dynamic>;
               if (!postAccountIds.contains(data['post_account_id'])) {
                 postAccountIds.add(data['post_account_id']);
               }

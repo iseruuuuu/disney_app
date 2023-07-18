@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final accountScreenViewModelProvider = StateNotifierProvider.autoDispose<
     AccountScreenViewModel, AccountScreenState>(
   (ref) {
-    Account myAccount = Authentication.myAccount!;
+    var myAccount = Authentication.myAccount!;
     return AccountScreenViewModel(
       state: AccountScreenState(
         myAccount: myAccount,
@@ -23,7 +23,7 @@ class AccountScreenViewModel extends StateNotifier<AccountScreenState> {
   }
 
   void fetch() {
-    Account myAccount = Authentication.myAccount!;
+    final Account myAccount = Authentication.myAccount!;
     state = state.copyWith(myAccount: myAccount);
   }
 
