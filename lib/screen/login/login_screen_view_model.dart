@@ -40,7 +40,7 @@ class LoginScreenViewModel extends ChangeNotifier {
     passwordController.text = await storage.read(key: "KEY_PASSWORD") ?? '';
   }
 
-  store() async {
+  Future<void> store() async {
     await storage.write(key: "KEY_USERNAME", value: emailController.text);
     await storage.write(key: "KEY_PASSWORD", value: passwordController.text);
   }
