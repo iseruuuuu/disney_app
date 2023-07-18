@@ -19,7 +19,7 @@ class DetailScreenViewModel extends ChangeNotifier {
     Post newPost,
     WidgetRef ref,
   ) {
-    showDialog(
+    showDialog<void>(
       context: context,
       builder: (context) {
         return AlertDialog(

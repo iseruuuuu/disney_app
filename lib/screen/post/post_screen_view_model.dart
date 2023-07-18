@@ -41,7 +41,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
         color: Colors.black,
         fontWeight: FontWeight.bold,
       ),
-      onConfirm: (Picker picker, List value) {
+      onConfirm: (Picker picker, List<dynamic> value) {
         final text1 = picker.adapter.text.replaceAll('[', '');
         final result2 = text1.replaceAll(']', '');
         final result3 = result2.replaceAll(' ', '');
@@ -51,7 +51,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
           isSelected: true,
         );
       },
-    ).showModal(context);
+    ).showModal<void>(context);
   }
 
   Future<void> post(BuildContext context, WidgetRef ref) async {
