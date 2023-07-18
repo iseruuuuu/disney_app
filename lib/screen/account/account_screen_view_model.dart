@@ -23,12 +23,12 @@ class AccountScreenViewModel extends StateNotifier<AccountScreenState> {
   }
 
   void fetch() {
-    final Account myAccount = Authentication.myAccount!;
+    final myAccount = Authentication.myAccount!;
     state = state.copyWith(myAccount: myAccount);
   }
 
-  void onTapEdit(BuildContext context) async {
-    var result = await Navigator.push(
+  Future<void> onTapEdit(BuildContext context) async {
+    final result = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => const EditScreen(),

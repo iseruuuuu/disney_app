@@ -84,7 +84,7 @@ class DetailScreenViewModel extends ChangeNotifier {
     );
   }
 
-  void deletePosts(BuildContext context, String accountId, Post newPost,
+  Future<void> deletePosts(BuildContext context, String accountId, Post newPost,
       WidgetRef ref) async {
     await ref.read(postUsecaseProvider).deletePost(accountId, newPost);
     Navigator.pop(context);

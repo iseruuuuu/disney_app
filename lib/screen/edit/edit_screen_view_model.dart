@@ -44,7 +44,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider?> {
         TextEditingController(text: myAccount.selfIntroduction);
   }
 
-  void update(BuildContext context, WidgetRef ref) async {
+  Future<void> update(BuildContext context, WidgetRef ref) async {
     if (nameController.text.isNotEmpty &&
         userIdController.text.isNotEmpty &&
         selfIntroductionController.text.isNotEmpty) {
@@ -73,8 +73,8 @@ class EditScreenViewModel extends StateNotifier<ImageProvider?> {
     }
   }
 
-  void selectImage() async {
-    var result = await FunctionUtils.getImageFromGallery();
+  Future<void> selectImage() async {
+    final result = await FunctionUtils.getImageFromGallery();
     if (result != null) {
       image = File(result.path);
       state = getImage();

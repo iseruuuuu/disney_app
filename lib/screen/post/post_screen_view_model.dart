@@ -54,7 +54,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
     ).showModal(context);
   }
 
-  void post(BuildContext context, WidgetRef ref) async {
+  Future<void> post(BuildContext context, WidgetRef ref) async {
     if (controller.text.isNotEmpty && state.attractionName != '') {
       final newPost = Post(
         content: controller.text,

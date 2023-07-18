@@ -37,15 +37,15 @@ class CreateAccountScreenViewModel extends StateNotifier<ImageProvider?> {
     }
   }
 
-  void selectImage() async {
-    var result = await FunctionUtils.getImageFromGallery();
+  Future<void> selectImage() async {
+    final result = await FunctionUtils.getImageFromGallery();
     if (result != null) {
       image = File(result.path);
       state = getImage();
     }
   }
 
-  void createAccount(BuildContext context, WidgetRef ref) async {
+  Future<void> createAccount(BuildContext context, WidgetRef ref) async {
     FocusScope.of(context).unfocus();
     if (nameController.text.isNotEmpty &&
         userIdController.text.isNotEmpty &&
