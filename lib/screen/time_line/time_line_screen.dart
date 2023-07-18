@@ -38,8 +38,9 @@ class TimeLineScreen extends ConsumerWidget {
           if (postSnapshot.hasData) {
             final postAccountIds = <String>[];
             for (final doc in postSnapshot.data!.docs) {
-              final data = doc.data() as Map<String, dynamic>;
-              if (!postAccountIds.contains(data['post_account_id'])) {
+              final data = doc.data() as Map<String, dynamic>?;
+              if (data != null &&
+                  !postAccountIds.contains(data['post_account_id'])) {
                 postAccountIds.add(data['post_account_id']);
               }
             }
@@ -57,42 +58,47 @@ class TimeLineScreen extends ConsumerWidget {
                             isMaster = FunctionUtils()
                                 .checkMasterAccount(myAccount.id);
                             final data = postSnapshot.data!.docs[index].data()
-                                as Map<String, dynamic>;
-                            final post = Post(
-                              id: postSnapshot.data!.docs[index].id,
-                              content: data['content'],
-                              postAccountId: data['post_account_id'],
-                              createdTime: data['created_time'],
-                              rank: data['rank'],
-                              attractionName: data['attraction_name'],
-                            );
-                            final postAccount =
-                                userSnapshot.data![post.postAccountId]!;
-                            return GestureDetector(
-                              onTap: () {
-                                NavigationUtils.detailScreen(
-                                  context,
-                                  postAccount,
-                                  post,
-                                  myAccount.id,
+                                as Map<String, dynamic>?;
+                            if (data != null) {
+                              final post = Post(
+                                id: postSnapshot.data!.docs[index].id,
+                                content: data['content'],
+                                postAccountId: data['post_account_id'],
+                                createdTime: data['created_time'],
+                                rank: data['rank'],
+                                attractionName: data['attraction_name'],
+                              );
+                              final postAccount =
+                                  userSnapshot.data![post.postAccountId];
+                              if (postAccount != null) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    NavigationUtils.detailScreen(
+                                      context,
+                                      postAccount,
+                                      post,
+                                      myAccount.id,
+                                    );
+                                  },
+                                  child: AppDisneyCell(
+                                    index: index,
+                                    account: postAccount,
+                                    post: post,
+                                    myAccount: myAccount.id,
+                                    isMaster: isMaster,
+                                    onTapImage: () {
+                                      NavigationUtils.detailAccountScreen(
+                                        context,
+                                        postAccount,
+                                        post,
+                                        myAccount.id,
+                                      );
+                                    },
+                                  ),
                                 );
-                              },
-                              child: AppDisneyCell(
-                                index: index,
-                                account: postAccount,
-                                post: post,
-                                myAccount: myAccount.id,
-                                isMaster: isMaster,
-                                onTapImage: () {
-                                  NavigationUtils.detailAccountScreen(
-                                    context,
-                                    postAccount,
-                                    post,
-                                    myAccount.id,
-                                  );
-                                },
-                              ),
-                            );
+                              }
+                            }
+                            return Container(); // データがないときのためのプレースホルダ
                           },
                         )
                       : const Center(child: AppEmptyScreen());
