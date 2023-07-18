@@ -10,9 +10,9 @@ final userFirestoreUsecaseProvider = Provider.autoDispose<UserFirestoreUsecase>(
 );
 
 class UserFirestoreUsecase {
-  final UserFirestoreRepository firestoreRepository;
-
   UserFirestoreUsecase(this.firestoreRepository);
+
+  final UserFirestoreRepository firestoreRepository;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> stream(String myAccountId) {
     return firestoreRepository.stream(myAccountId);

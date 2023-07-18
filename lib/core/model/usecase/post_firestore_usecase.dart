@@ -10,9 +10,9 @@ final postUsecaseProvider = Provider.autoDispose<PostFireStoreUsecase>(
 );
 
 class PostFireStoreUsecase {
-  final PostFirestoreRepository firestoreRepository;
-
   PostFireStoreUsecase(this.firestoreRepository);
+
+  final PostFirestoreRepository firestoreRepository;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> stream() {
     return firestoreRepository.stream();

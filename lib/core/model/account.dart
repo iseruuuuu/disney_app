@@ -1,14 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Account {
-  String id;
-  String name;
-  String imagePath;
-  String selfIntroduction;
-  String userId;
-  Timestamp? createdTime;
-  Timestamp? updateTime;
-
   Account({
     this.id = '',
     this.name = '',
@@ -18,4 +10,12 @@ class Account {
     this.createdTime,
     this.updateTime,
   });
+
+  String id;
+  String name;
+  String imagePath;
+  String selfIntroduction;
+  String userId;
+  Timestamp? createdTime;
+  Timestamp? updateTime;
 }
