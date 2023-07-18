@@ -38,19 +38,23 @@ class UserFirestoreRepository {
   Future<dynamic> getUser(String uid) async {
     try {
       final documentSnapshot = await users.doc(uid).get();
-      final data = documentSnapshot.data() as Map<String, dynamic>;
-      final myAccount = Account(
-        id: uid,
-        name: data['name'],
-        userId: data['user_id'],
-        selfIntroduction: data['self_introduction'],
-        imagePath: data['image_path'],
-        createdTime: data['created_time'],
-        updateTime: data['updated_time'],
-      );
+      final data = documentSnapshot.data() as Map<String, dynamic>?;
+      if (data != null) {
+        final myAccount = Account(
+          id: uid,
+          name: data['name'],
+          userId: data['user_id'],
+          selfIntroduction: data['self_introduction'],
+          imagePath: data['image_path'],
+          createdTime: data['created_time'],
+          updateTime: data['updated_time'],
+        );
 
-      Authentication.myAccount = myAccount;
-      return true;
+        Authentication.myAccount = myAccount;
+        return true;
+      } else {
+        throw Exception('Document does not exist.');
+      }
     } on FirebaseException catch (_) {
       return false;
     }
@@ -76,17 +80,19 @@ class UserFirestoreRepository {
     try {
       await Future.forEach(accountIds, (accountId) async {
         final doc = await users.doc(accountId).get();
-        final data = doc.data() as Map<String, dynamic>;
-        final postAccount = Account(
-          id: accountId,
-          name: data['name'],
-          userId: data['user_id'],
-          imagePath: data['image_path'],
-          selfIntroduction: data['self_introduction'],
-          createdTime: data['created_time'],
-          updateTime: data['update_time'],
-        );
-        map[accountId] = postAccount;
+        final data = doc.data() as Map<String, dynamic>?;
+        if (data != null) {
+          final postAccount = Account(
+            id: accountId,
+            name: data['name'],
+            userId: data['user_id'],
+            imagePath: data['image_path'],
+            selfIntroduction: data['self_introduction'],
+            createdTime: data['created_time'],
+            updateTime: data['updated_time'],
+          );
+          map[accountId] = postAccount;
+        }
       });
       return map;
     } on FirebaseException catch (_) {

@@ -56,9 +56,8 @@ class TimeLineScreen extends ConsumerWidget {
                           itemBuilder: (context, index) {
                             isMaster = FunctionUtils()
                                 .checkMasterAccount(myAccount.id);
-                            final data =
-                                postSnapshot.data!.docs[index].data()
-                                    as Map<String, dynamic>;
+                            final data = postSnapshot.data!.docs[index].data()
+                                as Map<String, dynamic>;
                             final post = Post(
                               id: postSnapshot.data!.docs[index].id,
                               content: data['content'],
