@@ -45,7 +45,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
         final text1 = picker.adapter.text.replaceAll('[', '');
         final result2 = text1.replaceAll(']', '');
         final result3 = result2.replaceAll(' ', '');
-        var result4 = result3.split(',');
+        final result4 = result3.split(',');
         state = state.copyWith(
           attractionName: result4[1],
           isSelected: true,

@@ -53,7 +53,7 @@ class CreateAccountScreenViewModel extends StateNotifier<ImageProvider?> {
         emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty &&
         image != null) {
-      var result = await Authentication.signUp(
+      final result = await Authentication.signUp(
         email: emailController.text,
         pass: passwordController.text,
       );
@@ -70,7 +70,7 @@ class CreateAccountScreenViewModel extends StateNotifier<ImageProvider?> {
           imagePath: imagePath,
         );
 
-        var result0 =
+        final result0 =
             await ref.read(userFirestoreUsecaseProvider).setUser(newAccount);
         if (result0 == true) {
           if (!mounted) {

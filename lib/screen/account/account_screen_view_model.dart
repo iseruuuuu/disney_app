@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final accountScreenViewModelProvider = StateNotifierProvider.autoDispose<
     AccountScreenViewModel, AccountScreenState>(
   (ref) {
-    var myAccount = Authentication.myAccount!;
+    final myAccount = Authentication.myAccount!;
     return AccountScreenViewModel(
       state: AccountScreenState(
         myAccount: myAccount,

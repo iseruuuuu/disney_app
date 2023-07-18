@@ -50,7 +50,7 @@ class AccountScreen extends ConsumerWidget {
                               ? ListView.builder(
                                   itemCount: snapshot.data!.length,
                                   itemBuilder: (context, index) {
-                                    var post = snapshot.data![index];
+                                    final post = snapshot.data![index];
                                     return GestureDetector(
                                       onTap: () {
                                         NavigationUtils.detailScreen(

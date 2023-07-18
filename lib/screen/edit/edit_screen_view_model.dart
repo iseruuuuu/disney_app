@@ -52,10 +52,10 @@ class EditScreenViewModel extends StateNotifier<ImageProvider?> {
       if (image == null) {
         imagePath = myAccount.imagePath;
       } else {
-        var result = await FunctionUtils.uploadImage(myAccount.id, image!);
+        final result = await FunctionUtils.uploadImage(myAccount.id, image!);
         imagePath = result;
       }
-      var updateAccount = Account(
+      final updateAccount = Account(
         id: myAccount.id,
         name: nameController.text,
         userId: userIdController.text,
@@ -63,7 +63,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider?> {
         imagePath: imagePath,
       );
       Authentication.myAccount = updateAccount;
-      var result = await ref
+      final result = await ref
           .read(userFirestoreUsecaseProvider)
           .updateUser(updateAccount);
       if (result == true) {
