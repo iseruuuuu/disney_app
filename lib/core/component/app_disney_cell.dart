@@ -24,7 +24,7 @@ class AppDisneyCell extends ConsumerWidget {
   final int index;
   final Account account;
   final Post post;
-  final Function() onTapImage;
+  final VoidCallback onTapImage;
   final String myAccount;
   final bool isMaster;
 

@@ -25,7 +25,7 @@ class FunctionUtils {
     required BuildContext context,
     required String title,
     required String content,
-    required Function() onTap,
+    required VoidCallback onTap,
   }) {
     return showDialog(
       context: context,

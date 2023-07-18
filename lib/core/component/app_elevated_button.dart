@@ -8,7 +8,7 @@ class AppElevatedButton extends StatelessWidget {
     required this.title,
   }) : super(key: key);
 
-  final Function() onPressed;
+  final VoidCallback onPressed;
   final String title;
 
   @override

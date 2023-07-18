@@ -21,7 +21,7 @@ class DetailScreen extends ConsumerWidget {
   final Account account;
   final Post post;
   final String myAccount;
-  final Function() onTapImage;
+  final VoidCallback onTapImage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

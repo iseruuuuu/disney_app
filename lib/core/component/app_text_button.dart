@@ -8,7 +8,7 @@ class AppTextButton extends StatelessWidget {
     required this.color,
   }) : super(key: key);
 
-  final Function() onPressed;
+  final VoidCallback onPressed;
   final String title;
   final Color color;
 

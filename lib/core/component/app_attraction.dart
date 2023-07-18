@@ -9,7 +9,7 @@ class AppAttraction extends StatelessWidget {
     required this.isSelected,
   }) : super(key: key);
 
-  final Function() onTap;
+  final VoidCallback onTap;
   final String attractionName;
   final bool isSelected;
 

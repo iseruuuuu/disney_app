@@ -12,7 +12,7 @@ class AppHeader extends StatelessWidget {
   }) : super(key: key);
 
   final Account account;
-  final Function()? onTapEdit;
+  final VoidCallback? onTapEdit;
   final bool isMyAccount;
 
   @override
