@@ -1,4 +1,3 @@
-import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/screen/account/account_screen_state.dart';
 import 'package:disney_app/screen/edit/edit_screen.dart';
 import 'package:disney_app/utils/authentication.dart';
