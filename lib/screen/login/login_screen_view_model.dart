@@ -57,13 +57,13 @@ class LoginScreenViewModel extends ChangeNotifier {
 
       if (result0 == true) {
         await store();
-        await Future.delayed(const Duration(seconds: 0)).then((_) {
-          NavigationUtils.tabScreen(context);
+        await Future<void>.delayed(Duration.zero).then((_) {
+          return NavigationUtils.tabScreen(context);
         });
       }
     } else {
       final errorMessage = FunctionUtils().checkLoginError(result.toString());
-      Future.delayed(const Duration(seconds: 1)).then((_) {
+      await Future<void>.delayed(const Duration(seconds: 1)).then((_) {
         SnackBarUtils.snackBar(context, errorMessage);
       });
     }
