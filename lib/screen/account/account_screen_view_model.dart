@@ -29,7 +29,7 @@ class AccountScreenViewModel extends StateNotifier<AccountScreenState> {
   Future<void> onTapEdit(BuildContext context) async {
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(
+      MaterialPageRoute<dynamic>(
         builder: (context) => const EditScreen(),
       ),
     );
