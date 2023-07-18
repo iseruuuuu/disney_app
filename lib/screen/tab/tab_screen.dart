@@ -1,10 +1,5 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-// Project imports:
 import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:disney_app/screen/tab/tab_screen_view_model.dart';
 

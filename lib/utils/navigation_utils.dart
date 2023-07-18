@@ -1,7 +1,4 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
-
-// Project imports:
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/screen/create_account/create_account_screen.dart';

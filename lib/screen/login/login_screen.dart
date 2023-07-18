@@ -1,11 +1,6 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-// Project imports:
 import 'package:disney_app/core/component/app_elevated_button.dart';
 import 'package:disney_app/core/component/app_text_button.dart';
 import 'package:disney_app/core/component/app_text_field.dart';

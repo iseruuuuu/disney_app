@@ -1,11 +1,4 @@
-// Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-// Project imports:
 import 'package:disney_app/core/component/app_disney_cell.dart';
 import 'package:disney_app/core/component/app_empty_screen.dart';
 import 'package:disney_app/core/model/account.dart';
@@ -17,6 +10,8 @@ import 'package:disney_app/gen/assets.gen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TimeLineScreen extends ConsumerWidget {
   const TimeLineScreen({Key? key}) : super(key: key);

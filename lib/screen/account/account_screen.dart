@@ -1,11 +1,6 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-// Project imports:
 import 'package:disney_app/core/component/app_disney_cell.dart';
 import 'package:disney_app/core/component/app_empty_screen.dart';
 import 'package:disney_app/core/component/app_header.dart';

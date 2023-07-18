@@ -1,14 +1,7 @@
-// Dart imports:
 import 'dart:io';
-
-// Flutter imports:
 import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-// Project imports:
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
 import 'package:disney_app/gen/assets.gen.dart';

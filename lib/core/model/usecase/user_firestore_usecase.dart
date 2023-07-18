@@ -1,8 +1,5 @@
-// Package imports:
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-// Project imports:
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/repository/user_firestore_repository.dart';
 

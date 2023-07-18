@@ -1,10 +1,5 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-// Project imports:
 import 'package:disney_app/screen/account/account_screen.dart';
 import 'package:disney_app/screen/tab/tab_screen_state.dart';
 import 'package:disney_app/screen/time_line/time_line_screen.dart';

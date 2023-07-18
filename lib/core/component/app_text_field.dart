@@ -1,7 +1,4 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
-
-// Project imports:
 import 'package:disney_app/core/theme/app_color_style.dart';
 
 class AppTextField extends StatelessWidget {
