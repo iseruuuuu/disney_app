@@ -45,13 +45,13 @@ class LoginScreenViewModel extends ChangeNotifier {
     await storage.write(key: 'KEY_PASSWORD', value: passwordController.text);
   }
 
-  void login(BuildContext context, WidgetRef ref) async {
-    var result = await Authentication.signIn(
+  Future<void> login(BuildContext context, WidgetRef ref) async {
+    final result = await Authentication.signIn(
       email: emailController.text,
       pass: passwordController.text,
     );
     if (result is UserCredential) {
-      var result0 = await ref
+      final result0 = await ref
           .read(userFirestoreUsecaseProvider)
           .getUser(result.user!.uid);
 
@@ -63,7 +63,7 @@ class LoginScreenViewModel extends ChangeNotifier {
       }
     } else {
       final errorMessage = FunctionUtils().checkLoginError(result.toString());
-      await Future.delayed(const Duration(seconds: 1)).then((_) {
+      Future.delayed(const Duration(seconds: 1)).then((_) {
         SnackBarUtils.snackBar(context, errorMessage);
       });
     }
