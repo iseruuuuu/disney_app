@@ -2,6 +2,8 @@ import 'package:disney_app/core/model/account.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Authentication {
+  Authentication();
+
   static final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   static User? currentFirebaseUser;
   static Account? myAccount;

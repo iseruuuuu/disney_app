@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SnackBarUtils {
+  SnackBarUtils();
+
   static ScaffoldFeatureController<SnackBar, SnackBarClosedReason> snackBar(
     BuildContext context,
     String message,

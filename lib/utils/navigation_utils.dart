@@ -9,6 +9,8 @@ import 'package:disney_app/screen/tab/tab_screen.dart';
 import 'package:flutter/material.dart';
 
 class NavigationUtils {
+  NavigationUtils();
+
   static Future<void> detailScreen(
     BuildContext context,
     Account postAccount,
