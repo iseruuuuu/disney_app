@@ -46,7 +46,7 @@ class DetailScreenViewModel extends ChangeNotifier {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: TextButton(
                 child: const Text(
-                  "Cancel",
+                  'Cancel',
                   style: TextStyle(
                     color: Colors.blue,
                     fontWeight: FontWeight.bold,
@@ -69,7 +69,7 @@ class DetailScreenViewModel extends ChangeNotifier {
                   );
                 },
                 child: const Text(
-                  "OK",
+                  'OK',
                   style: TextStyle(
                     color: Colors.red,
                     fontWeight: FontWeight.bold,

@@ -6,7 +6,7 @@ part 'post_screen_state.freezed.dart';
 class PostScreenState with _$PostScreenState {
   const factory PostScreenState({
     @Default(0) int rank,
-    @Default("") String attractionName,
+    @Default('') String attractionName,
     @Default(false) bool isSelected,
   }) = _PostScreenState;
 }

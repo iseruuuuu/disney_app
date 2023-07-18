@@ -53,7 +53,7 @@ class FunctionUtils {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: TextButton(
                 child: const Text(
-                  "Cancel",
+                  'Cancel',
                   style: TextStyle(
                     color: Colors.blue,
                     fontWeight: FontWeight.bold,
@@ -71,7 +71,7 @@ class FunctionUtils {
                   onTap();
                 },
                 child: const Text(
-                  "OK",
+                  'OK',
                   style: TextStyle(
                     color: Colors.red,
                     fontWeight: FontWeight.bold,

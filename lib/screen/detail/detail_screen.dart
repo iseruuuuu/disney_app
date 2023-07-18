@@ -74,7 +74,7 @@ class DetailScreen extends ConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 5, right: 10),
                     child: Text(
-                      "@${account.userId}",
+                      '@${account.userId}',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.grey.shade600,
