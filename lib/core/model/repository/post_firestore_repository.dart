@@ -40,16 +40,18 @@ class PostFirestoreRepository {
     try {
       await Future.forEach(ids, (String id) async {
         final doc = await posts.doc(id).get();
-        final data = doc.data() as Map<String, dynamic>;
-        final post = Post(
-          id: doc.id,
-          content: data['content'],
-          postAccountId: data['post_account_id'],
-          createdTime: data['created_time'],
-          rank: data['rank'],
-          attractionName: data['attraction_name'],
-        );
-        postList.add(post);
+        final data = doc.data() as Map<String, dynamic>?;
+        if (data != null) {
+          final post = Post(
+            id: doc.id,
+            content: data['content'],
+            postAccountId: data['post_account_id'],
+            createdTime: data['created_time'],
+            rank: data['rank'],
+            attractionName: data['attraction_name'],
+          );
+          postList.add(post);
+        }
       });
       return postList;
     } on FirebaseException catch (_) {
