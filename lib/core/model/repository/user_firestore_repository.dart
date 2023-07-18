@@ -1,8 +1,11 @@
+// Package imports:
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+// Project imports:
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
 import 'package:disney_app/utils/authentication.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserFirestoreRepository {
   static final firebaseStoreInstance = FirebaseFirestore.instance;

@@ -1,13 +1,20 @@
+// Dart imports:
 import 'dart:convert';
+
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_picker/picker.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+// Project imports:
 import 'package:disney_app/core/constants/attraction.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
 import 'package:disney_app/screen/post/post_screen_state.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_picker/picker.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final postScreenViewModelProvider =
     StateNotifierProvider.autoDispose<PostScreenViewModel, PostScreenState>(
