@@ -8,9 +8,7 @@ final tabScreenViewModelProvider =
     StateNotifierProvider<TabScreenViewModel, TabScreenState>(
   (ref) {
     return TabScreenViewModel(
-      state: const TabScreenState(
-        selectedIndex: 0,
-      ),
+      state: const TabScreenState(),
     );
   },
 );

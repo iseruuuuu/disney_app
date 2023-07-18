@@ -21,9 +21,6 @@ class AppRating extends StatelessWidget {
             child: RatingBar.builder(
               initialRating: 1,
               minRating: 1,
-              direction: Axis.horizontal,
-              allowHalfRating: false,
-              itemCount: 5,
               itemBuilder: (context, _) => const Icon(
                 Icons.star,
                 color: Colors.amber,
@@ -32,8 +29,6 @@ class AppRating extends StatelessWidget {
             ),
           )
         : RatingBarIndicator(
-            direction: Axis.horizontal,
-            itemCount: 5,
             rating: rank.toDouble(),
             itemSize: 30,
             itemBuilder: (context, _) => const Icon(

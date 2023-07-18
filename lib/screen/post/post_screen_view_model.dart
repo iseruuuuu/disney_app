@@ -13,11 +13,7 @@ final postScreenViewModelProvider =
     StateNotifierProvider.autoDispose<PostScreenViewModel, PostScreenState>(
   (ref) {
     return PostScreenViewModel(
-      state: const PostScreenState(
-        rank: 0,
-        attractionName: '',
-        isSelected: false,
-      ),
+      state: const PostScreenState(),
     );
   },
 );
@@ -38,7 +34,6 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
         pickerData: const JsonDecoder().convert(attraction),
       ),
       changeToFirst: true,
-      hideHeader: false,
       height: 400,
       textStyle: const TextStyle(
         fontSize: 15,

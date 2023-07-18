@@ -15,10 +15,7 @@ class TabScreen extends ConsumerWidget {
       bottomNavigationBar: DecoratedBox(
         decoration: BoxDecoration(
           border: Border(
-            top: BorderSide(
-              color: Colors.grey.shade400,
-              width: 1,
-            ),
+            top: BorderSide(color: Colors.grey.shade400),
           ),
         ),
         child: BottomNavigationBar(

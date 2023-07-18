@@ -34,20 +34,11 @@ class AppDisneyCell extends ConsumerWidget {
       decoration: BoxDecoration(
         border: index == 0
             ? const Border(
-                top: BorderSide(
-                  color: Colors.grey,
-                  width: 1,
-                ),
-                bottom: BorderSide(
-                  color: Colors.grey,
-                  width: 1,
-                ),
+                top: BorderSide(color: Colors.grey),
+                bottom: BorderSide(color: Colors.grey),
               )
             : const Border(
-                bottom: BorderSide(
-                  color: Colors.grey,
-                  width: 1,
-                ),
+                bottom: BorderSide(color: Colors.grey),
               ),
       ),
       child: Column(
