@@ -19,22 +19,22 @@ class UserFirestoreUsecase {
   }
 
   Future<dynamic> setUser(Account newAccount) async {
-    return await firestoreRepository.setUser(newAccount);
+    return firestoreRepository.setUser(newAccount);
   }
 
   Future<dynamic> getUser(String uid) async {
-    return await firestoreRepository.getUser(uid);
+    return firestoreRepository.getUser(uid);
   }
 
   Future<dynamic> updateUser(Account updateAccount) async {
-    return await firestoreRepository.updateUser(updateAccount);
+    return firestoreRepository.updateUser(updateAccount);
   }
 
   Future<Map<String, Account>?> getPostUserMap(List<String> accountIds) async {
-    return await firestoreRepository.getPostUserMap(accountIds);
+    return firestoreRepository.getPostUserMap(accountIds);
   }
 
   Future<dynamic> deleteUser(String accountId, WidgetRef ref) async {
-    return await firestoreRepository.deleteUser(accountId, ref);
+    return firestoreRepository.deleteUser(accountId, ref);
   }
 }

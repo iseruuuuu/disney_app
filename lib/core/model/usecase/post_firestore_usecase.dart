@@ -19,22 +19,22 @@ class PostFireStoreUsecase {
   }
 
   Future<dynamic> addPost(Post newPost) async {
-    return await firestoreRepository.addPost(newPost);
+    return firestoreRepository.addPost(newPost);
   }
 
   Future<List<Post>?> getPostsFromIds(List<String> ids) async {
-    return await firestoreRepository.getPostsFromIds(ids);
+    return firestoreRepository.getPostsFromIds(ids);
   }
 
   Future<List<Post>?> getPosts(List<String> ids) async {
-    return await firestoreRepository.getPostsFromIds(ids);
+    return firestoreRepository.getPostsFromIds(ids);
   }
 
   Future<dynamic> deleteAllPosts(String accountId) async {
-    return await firestoreRepository.deleteAllPosts(accountId);
+    return firestoreRepository.deleteAllPosts(accountId);
   }
 
   Future<dynamic> deletePost(String accountId, Post newPost) async {
-    return await firestoreRepository.deletePost(accountId, newPost);
+    return firestoreRepository.deletePost(accountId, newPost);
   }
 }
