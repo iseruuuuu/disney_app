@@ -11,6 +11,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:image_picker/image_picker.dart';
 
 final createAccountScreenViewModelProvider = StateNotifierProvider.autoDispose<
     CreateAccountScreenViewModel, ImageProvider?>(
@@ -41,7 +42,7 @@ class CreateAccountScreenViewModel extends StateNotifier<ImageProvider?> {
   }
 
   Future<void> selectImage() async {
-    final result = await FunctionUtils.getImageFromGallery();
+    final XFile? result = await FunctionUtils.getImageFromGallery();
     if (result != null) {
       image = File(result.path);
       state = getImage();

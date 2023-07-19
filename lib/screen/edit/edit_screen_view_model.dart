@@ -6,6 +6,7 @@ import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 final editScreenViewModelProvider =
     StateNotifierProvider.autoDispose<EditScreenViewModel, ImageProvider?>(
@@ -76,7 +77,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider?> {
   }
 
   Future<void> selectImage() async {
-    final result = await FunctionUtils.getImageFromGallery();
+    final XFile? result = await FunctionUtils.getImageFromGallery();
     if (result != null) {
       image = File(result.path);
       state = getImage();
