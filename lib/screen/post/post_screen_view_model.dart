@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:disney_app/core/constants/attraction.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
+import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/screen/post/post_screen_state.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
@@ -14,14 +15,23 @@ final postScreenViewModelProvider =
     StateNotifierProvider.autoDispose<PostScreenViewModel, PostScreenState>(
   (ref) {
     return PostScreenViewModel(
-      state: const PostScreenState(),
+      const PostScreenState(),
+      ref,
     );
   },
 );
 
 class PostScreenViewModel extends StateNotifier<PostScreenState> {
-  PostScreenViewModel({required PostScreenState state}) : super(state);
+  PostScreenViewModel(
+    super._state,
+    this.ref,
+  );
+
   TextEditingController controller = TextEditingController();
+  final AutoDisposeStateNotifierProviderRef<PostScreenViewModel,
+      PostScreenState> ref;
+
+  Loading get loading => ref.read(loadingProvider.notifier);
 
   void rankPicker(double rating) {
     state = state.copyWith(
@@ -55,6 +65,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
   }
 
   Future<void> post(BuildContext context, WidgetRef ref) async {
+    loading.isLoading = true;
     if (controller.text.isNotEmpty && state.attractionName != '') {
       final newPost = Post(
         content: controller.text,
@@ -65,6 +76,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
       final result = await ref.read(postUsecaseProvider).addPost(newPost);
       if (result == true) {
         await Future<void>.delayed(const Duration(seconds: 1)).then((_) {
+          loading.isLoading = false;
           Navigator.pop(context);
         });
       }
