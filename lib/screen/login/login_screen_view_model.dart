@@ -50,7 +50,7 @@ class LoginScreenViewModel extends ChangeNotifier {
   }
 
   Future<void> login(BuildContext context, WidgetRef ref) async {
-    loading.ChangeLoading(true);
+    loading.isLoading = true;
     final result = await Authentication.signIn(
       email: emailController.text,
       pass: passwordController.text,
@@ -61,14 +61,14 @@ class LoginScreenViewModel extends ChangeNotifier {
           .getUser(result.user!.uid);
 
       if (result0 == true) {
-        loading.ChangeLoading(false);
+        loading.isLoading = false;
         await store();
         await Future<void>.delayed(Duration.zero).then((_) {
           return NavigationUtils.tabScreen(context);
         });
       }
     } else {
-      loading.ChangeLoading(false);
+      loading.isLoading = false;
       final errorMessage = FunctionUtils().checkLoginError(result.toString());
       await Future<void>.delayed(const Duration(seconds: 1)).then((_) {
         SnackBarUtils.snackBar(context, errorMessage);
