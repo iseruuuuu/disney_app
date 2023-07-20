@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
-import 'package:disney_app/gen/assets.gen.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
@@ -13,17 +12,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
-final createAccountScreenViewModelProvider = StateNotifierProvider.autoDispose<
-    CreateAccountScreenViewModel, ImageProvider?>(
+final createAccountScreenViewModelProvider =
+    StateNotifierProvider.autoDispose<CreateAccountScreenViewModel, File?>(
   (ref) {
-    return CreateAccountScreenViewModel(
-      state: AssetImage(Assets.images.imageEmpty.path),
-    );
+    return CreateAccountScreenViewModel(null);
   },
 );
 
-class CreateAccountScreenViewModel extends StateNotifier<ImageProvider?> {
-  CreateAccountScreenViewModel({required ImageProvider state}) : super(state);
+class CreateAccountScreenViewModel extends StateNotifier<File?> {
+  CreateAccountScreenViewModel(super._state);
 
   final storage = const FlutterSecureStorage();
   TextEditingController nameController = TextEditingController();
@@ -33,19 +30,11 @@ class CreateAccountScreenViewModel extends StateNotifier<ImageProvider?> {
   TextEditingController passwordController = TextEditingController();
   File? image;
 
-  ImageProvider getImage() {
-    if (image == null) {
-      return AssetImage(Assets.images.imageEmpty.path);
-    } else {
-      return FileImage(image!);
-    }
-  }
-
   Future<void> selectImage() async {
     final XFile? result = await FunctionUtils.getImageFromGallery();
     if (result != null) {
       image = File(result.path);
-      state = getImage();
+      state = File(result.path);
     }
   }
 

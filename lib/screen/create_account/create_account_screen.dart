@@ -12,6 +12,7 @@ class CreateAccountScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(createAccountScreenViewModelProvider.notifier);
+    final state = ref.watch(createAccountScreenViewModelProvider);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -49,7 +50,7 @@ class CreateAccountScreen extends ConsumerWidget {
                     .selectImage(),
                 child: CircleAvatar(
                   backgroundColor: AppColorStyle.appColor,
-                  foregroundImage: controller.getImage(),
+                  foregroundImage: state != null ? FileImage(state) : null,
                   radius: 45,
                   child: const Icon(
                     Icons.add,
