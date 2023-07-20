@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
 final editScreenViewModelProvider =
-    StateNotifierProvider.autoDispose<EditScreenViewModel, ImageProvider?>(
+    StateNotifierProvider.autoDispose<EditScreenViewModel, ImageProvider>(
   (ref) {
     final myAccount = Authentication.myAccount!;
     return EditScreenViewModel(
@@ -18,7 +18,7 @@ final editScreenViewModelProvider =
   },
 );
 
-class EditScreenViewModel extends StateNotifier<ImageProvider?> {
+class EditScreenViewModel extends StateNotifier<ImageProvider> {
   EditScreenViewModel({required ImageProvider state}) : super(state) {
     fetch();
   }
@@ -30,19 +30,12 @@ class EditScreenViewModel extends StateNotifier<ImageProvider?> {
   TextEditingController selfIntroductionController = TextEditingController();
   File? image;
 
-  ImageProvider getImage() {
-    if (image == null) {
-      return NetworkImage(myAccount.imagePath);
-    } else {
-      return FileImage(image!);
-    }
-  }
-
   void fetch() {
     nameController = TextEditingController(text: myAccount.name);
     userIdController = TextEditingController(text: myAccount.userId);
     selfIntroductionController =
         TextEditingController(text: myAccount.selfIntroduction);
+    state = NetworkImage(myAccount.imagePath);
   }
 
   Future<void> update(BuildContext context, WidgetRef ref) async {
@@ -80,7 +73,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider?> {
     final XFile? result = await FunctionUtils.getImageFromGallery();
     if (result != null) {
       image = File(result.path);
-      state = getImage();
+      state = FileImage(File(result.path));
     }
   }
 

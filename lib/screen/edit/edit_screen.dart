@@ -11,6 +11,7 @@ class EditScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(editScreenViewModelProvider.notifier);
+    final image = ref.watch(editScreenViewModelProvider);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -43,7 +44,7 @@ class EditScreen extends ConsumerWidget {
               onTap: () =>
                   ref.read(editScreenViewModelProvider.notifier).selectImage(),
               child: CircleAvatar(
-                foregroundImage: controller.getImage(),
+                foregroundImage: image,
                 radius: 70,
                 child: const Icon(Icons.add),
               ),
