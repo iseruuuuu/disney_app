@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
+import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
@@ -15,20 +16,28 @@ import 'package:image_picker/image_picker.dart';
 final createAccountScreenViewModelProvider =
     StateNotifierProvider.autoDispose<CreateAccountScreenViewModel, File?>(
   (ref) {
-    return CreateAccountScreenViewModel(null);
+    return CreateAccountScreenViewModel(
+      null,
+      ref,
+    );
   },
 );
 
 class CreateAccountScreenViewModel extends StateNotifier<File?> {
-  CreateAccountScreenViewModel(super._state);
+  CreateAccountScreenViewModel(super._state, this.ref);
 
   final storage = const FlutterSecureStorage();
+  final AutoDisposeStateNotifierProviderRef<CreateAccountScreenViewModel, File?>
+      ref;
+
   TextEditingController nameController = TextEditingController();
   TextEditingController userIdController = TextEditingController();
   TextEditingController selfIntroductionController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   File? image;
+
+  Loading get loading => ref.read(loadingProvider.notifier);
 
   Future<void> selectImage() async {
     final XFile? result = await FunctionUtils.getImageFromGallery();
@@ -39,6 +48,7 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
   }
 
   Future<void> createAccount(BuildContext context, WidgetRef ref) async {
+    loading.isLoading = true;
     FocusScope.of(context).unfocus();
     if (nameController.text.isNotEmpty &&
         userIdController.text.isNotEmpty &&
@@ -65,6 +75,7 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
         final result0 =
             await ref.read(userFirestoreUsecaseProvider).setUser(newAccount);
         if (result0 == true) {
+          loading.isLoading = false;
           if (!mounted) {
             return;
           }
@@ -74,6 +85,7 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
           });
         }
       } else {
+        loading.isLoading = false;
         final errorMessage =
             FunctionUtils().checkRegisterError(result.toString());
         if (!mounted) {
@@ -82,6 +94,7 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
         SnackBarUtils.snackBar(context, errorMessage);
       }
     } else {
+      loading.isLoading = false;
       SnackBarUtils.snackBar(context, '登録してた内容に不備があります');
     }
   }
