@@ -1,7 +1,7 @@
 import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
-import 'package:disney_app/utils/loading_provider.dart';
+import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
