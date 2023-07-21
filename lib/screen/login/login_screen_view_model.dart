@@ -1,4 +1,5 @@
 import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
+import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
@@ -11,18 +12,21 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final loginScreenViewModelProvider =
     ChangeNotifierProvider.autoDispose<LoginScreenViewModel>(
   (ref) {
-    return LoginScreenViewModel();
+    return LoginScreenViewModel(ref);
   },
 );
 
 class LoginScreenViewModel extends ChangeNotifier {
-  LoginScreenViewModel() {
+  LoginScreenViewModel(this.ref) {
     fetch();
   }
 
   final storage = const FlutterSecureStorage();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final AutoDisposeChangeNotifierProviderRef ref;
+
+  Loading get loading => ref.read(loadingProvider.notifier);
 
   void fetch() {
     readFromStorage();
@@ -46,6 +50,7 @@ class LoginScreenViewModel extends ChangeNotifier {
   }
 
   Future<void> login(BuildContext context, WidgetRef ref) async {
+    loading.isLoading = true;
     final result = await Authentication.signIn(
       email: emailController.text,
       pass: passwordController.text,
@@ -57,13 +62,15 @@ class LoginScreenViewModel extends ChangeNotifier {
 
       if (result0 == true) {
         await store();
-        await Future<void>.delayed(Duration.zero).then((_) {
+        await Future<void>.delayed(const Duration(seconds: 2)).then((_) {
+          loading.isLoading = false;
           return NavigationUtils.tabScreen(context);
         });
       }
     } else {
       final errorMessage = FunctionUtils().checkLoginError(result.toString());
-      await Future<void>.delayed(const Duration(seconds: 1)).then((_) {
+      await Future<void>.delayed(const Duration(seconds: 2)).then((_) {
+        loading.isLoading = false;
         SnackBarUtils.snackBar(context, errorMessage);
       });
     }

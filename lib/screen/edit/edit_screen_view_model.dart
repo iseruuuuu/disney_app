@@ -1,27 +1,36 @@
 import 'dart:io';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
+import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
+import 'package:disney_app/utils/snack_bar_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 final editScreenViewModelProvider =
-    StateNotifierProvider.autoDispose<EditScreenViewModel, ImageProvider?>(
+    StateNotifierProvider.autoDispose<EditScreenViewModel, ImageProvider>(
   (ref) {
     final myAccount = Authentication.myAccount!;
     return EditScreenViewModel(
       state: NetworkImage(myAccount.imagePath),
+      ref: ref,
     );
   },
 );
 
-class EditScreenViewModel extends StateNotifier<ImageProvider?> {
-  EditScreenViewModel({required ImageProvider state}) : super(state) {
+class EditScreenViewModel extends StateNotifier<ImageProvider> {
+  EditScreenViewModel({
+    required ImageProvider state,
+    required this.ref,
+  }) : super(state) {
     fetch();
   }
 
+  final AutoDisposeStateNotifierProviderRef<EditScreenViewModel,
+      ImageProvider<Object>> ref;
   TextEditingController controller = TextEditingController();
   Account myAccount = Authentication.myAccount!;
   TextEditingController nameController = TextEditingController();
@@ -29,22 +38,18 @@ class EditScreenViewModel extends StateNotifier<ImageProvider?> {
   TextEditingController selfIntroductionController = TextEditingController();
   File? image;
 
-  ImageProvider getImage() {
-    if (image == null) {
-      return NetworkImage(myAccount.imagePath);
-    } else {
-      return FileImage(image!);
-    }
-  }
+  Loading get loading => ref.read(loadingProvider.notifier);
 
   void fetch() {
     nameController = TextEditingController(text: myAccount.name);
     userIdController = TextEditingController(text: myAccount.userId);
     selfIntroductionController =
         TextEditingController(text: myAccount.selfIntroduction);
+    state = NetworkImage(myAccount.imagePath);
   }
 
   Future<void> update(BuildContext context, WidgetRef ref) async {
+    loading.isLoading = true;
     if (nameController.text.isNotEmpty &&
         userIdController.text.isNotEmpty &&
         selfIntroductionController.text.isNotEmpty) {
@@ -70,16 +75,21 @@ class EditScreenViewModel extends StateNotifier<ImageProvider?> {
         if (!mounted) {
           return;
         }
+        loading.isLoading = false;
         Navigator.pop(context, true);
       }
     }
+    loading.isLoading = false;
+    await Future<void>.delayed(const Duration(seconds: 2)).then((_) {
+      SnackBarUtils.snackBar(context, 'いずれかの値が空になっています。');
+    });
   }
 
   Future<void> selectImage() async {
-    final File? result = await FunctionUtils.getImageFromGallery();
+    final XFile? result = await FunctionUtils.getImageFromGallery();
     if (result != null) {
       image = File(result.path);
-      state = getImage();
+      state = FileImage(File(result.path));
     }
   }
 
