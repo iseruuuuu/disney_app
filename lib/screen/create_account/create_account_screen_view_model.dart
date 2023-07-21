@@ -75,7 +75,6 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
         final result0 =
             await ref.read(userFirestoreUsecaseProvider).setUser(newAccount);
         if (result0 == true) {
-          loading.isLoading = false;
           if (!mounted) {
             return;
           }
@@ -111,14 +110,15 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
 
       if (result0 == true) {
         await store();
-        await Future<void>.delayed(Duration.zero).then((_) {
+        await Future<void>.delayed(const Duration(seconds: 1)).then((_) {
+          loading.isLoading = false;
           Navigator.pop(context);
           return NavigationUtils.tabScreen(context);
         });
       }
     } else {
       final errorMessage = FunctionUtils().checkLoginError(result.toString());
-      await Future<void>.delayed(const Duration(seconds: 1)).then((_) {
+      await Future<void>.delayed(Duration.zero).then((_) {
         SnackBarUtils.snackBar(context, errorMessage);
       });
     }
