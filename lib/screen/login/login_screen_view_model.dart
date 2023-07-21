@@ -25,11 +25,38 @@ class LoginScreenViewModel extends ChangeNotifier {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final AutoDisposeChangeNotifierProviderRef ref;
+  bool isAutoLogin = true;
 
   Loading get loading => ref.read(loadingProvider.notifier);
 
   void fetch() {
     readFromStorage();
+  }
+
+  Future<void> checkLogin(BuildContext context) async {
+    if (isAutoLogin) {
+      loading.isLoading = true;
+      final email = await storage.read(key: 'KEY_USERNAME') ?? '';
+      final password = await storage.read(key: 'KEY_PASSWORD') ?? '';
+      if (email != '' && password != '') {
+        final result = await Authentication.signIn(
+          email: email,
+          pass: password,
+        );
+        if (result is UserCredential) {
+          final result0 = await ref
+              .read(userFirestoreUsecaseProvider)
+              .getUser(result.user!.uid);
+          if (result0 == true) {
+            await Future<void>.delayed(Duration.zero).then((_) {
+              loading.isLoading = false;
+              return NavigationUtils.tabScreen(context);
+            });
+          }
+        }
+      }
+    }
+    loading.isLoading = false;
   }
 
   @override

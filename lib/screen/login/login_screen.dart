@@ -16,7 +16,9 @@ class LoginScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(loginScreenViewModelProvider.notifier);
+    final viewModel = ref.read(loginScreenViewModelProvider);
     final loading = ref.watch(loadingProvider);
+    viewModel.checkLogin(context);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
