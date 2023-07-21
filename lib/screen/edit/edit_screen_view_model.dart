@@ -80,7 +80,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
       }
     }
     loading.isLoading = false;
-    await Future<void>.delayed(const Duration(seconds: 1)).then((_) {
+    await Future<void>.delayed(const Duration(seconds: 2)).then((_) {
       SnackBarUtils.snackBar(context, 'いずれかの値が空になっています。');
     });
   }
