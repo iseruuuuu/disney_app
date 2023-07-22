@@ -110,7 +110,11 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
   Future<void> delete(BuildContext context, WidgetRef ref) async {
     final prefs = await _prefs;
     await prefs.setBool('IS_AUTO_LOGIN', false);
-    await ref.read(userFirestoreUsecaseProvider).deleteUser(myAccount.id, ref);
+    await ref.read(userFirestoreUsecaseProvider).deleteUser(
+          myAccount.id,
+          myAccount.imagePath,
+          ref,
+        );
     await Future<void>.delayed(Duration.zero).then((_) {
       Authentication.deleteAuth();
       while (Navigator.canPop(context)) {

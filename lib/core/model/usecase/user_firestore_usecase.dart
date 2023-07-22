@@ -34,7 +34,11 @@ class UserFirestoreUsecase {
     return firestoreRepository.getPostUserMap(accountIds);
   }
 
-  Future<dynamic> deleteUser(String accountId, WidgetRef ref) async {
-    return firestoreRepository.deleteUser(accountId, ref);
+  Future<dynamic> deleteUser(
+    String accountId,
+    String filePath,
+    WidgetRef ref,
+  ) async {
+    return firestoreRepository.deleteUser(accountId, filePath, ref);
   }
 }
