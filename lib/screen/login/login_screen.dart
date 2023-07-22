@@ -6,18 +6,27 @@ import 'package:disney_app/gen/assets.gen.dart';
 import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/screen/login/login_screen_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-class LoginScreen extends ConsumerWidget {
+class LoginScreen extends HookConsumerWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(loginScreenViewModelProvider.notifier);
     final loading = ref.watch(loadingProvider);
-    ref.read(loginScreenViewModelProvider).checkLogin(context);
+    useEffect(
+      () {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          ref.read(loginScreenViewModelProvider).checkLogin(context);
+        });
+        return null;
+      },
+      const [],
+    );
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
