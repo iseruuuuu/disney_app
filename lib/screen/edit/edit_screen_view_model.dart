@@ -9,6 +9,7 @@ import 'package:disney_app/utils/snack_bar_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final editScreenViewModelProvider =
     StateNotifierProvider.autoDispose<EditScreenViewModel, ImageProvider>(
@@ -36,6 +37,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
   TextEditingController nameController = TextEditingController();
   TextEditingController userIdController = TextEditingController();
   TextEditingController selfIntroductionController = TextEditingController();
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   File? image;
 
   Loading get loading => ref.read(loadingProvider.notifier);
@@ -93,20 +95,28 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
     }
   }
 
-  void signOut(BuildContext context) {
-    Authentication.signOut();
-    while (Navigator.canPop(context)) {
-      Navigator.pop(context);
-    }
-    NavigationUtils.loginScreen(context);
+  Future<void> signOut(BuildContext context) async {
+    final prefs = await _prefs;
+    await prefs.setBool('IS_AUTO_LOGIN', false);
+    await Authentication.signOut();
+    await Future<void>.delayed(Duration.zero).then((_) {
+      while (Navigator.canPop(context)) {
+        Navigator.pop(context);
+      }
+      NavigationUtils.loginScreen(context);
+    });
   }
 
-  void delete(BuildContext context, WidgetRef ref) {
-    ref.read(userFirestoreUsecaseProvider).deleteUser(myAccount.id, ref);
-    Authentication.deleteAuth();
-    while (Navigator.canPop(context)) {
-      Navigator.pop(context);
-    }
-    NavigationUtils.loginScreen(context);
+  Future<void> delete(BuildContext context, WidgetRef ref) async {
+    final prefs = await _prefs;
+    await prefs.setBool('IS_AUTO_LOGIN', false);
+    await ref.read(userFirestoreUsecaseProvider).deleteUser(myAccount.id, ref);
+    await Future<void>.delayed(Duration.zero).then((_) {
+      Authentication.deleteAuth();
+      while (Navigator.canPop(context)) {
+        Navigator.pop(context);
+      }
+      NavigationUtils.loginScreen(context);
+    });
   }
 }

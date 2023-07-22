@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final loginScreenViewModelProvider =
     ChangeNotifierProvider.autoDispose<LoginScreenViewModel>(
@@ -25,11 +26,43 @@ class LoginScreenViewModel extends ChangeNotifier {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final AutoDisposeChangeNotifierProviderRef ref;
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  bool isAutoLogin = false;
 
   Loading get loading => ref.read(loadingProvider.notifier);
 
   void fetch() {
     readFromStorage();
+  }
+
+  Future<void> checkLogin(BuildContext context) async {
+    final prefs = await _prefs;
+    isAutoLogin = prefs.getBool('IS_AUTO_LOGIN') ?? false;
+    if (isAutoLogin) {
+      loading.isLoading = true;
+      final email = await storage.read(key: 'KEY_USERNAME') ?? '';
+      final password = await storage.read(key: 'KEY_PASSWORD') ?? '';
+      if (email != '' && password != '') {
+        final result = await Authentication.signIn(
+          email: email,
+          pass: password,
+        );
+        if (result is UserCredential) {
+          final result0 = await ref
+              .read(userFirestoreUsecaseProvider)
+              .getUser(result.user!.uid);
+          if (result0 == true) {
+            await Future<void>.delayed(const Duration(seconds: 1)).then((_) {
+              loading.isLoading = false;
+              return NavigationUtils.tabScreen(context);
+            });
+          }
+          return;
+        }
+      }
+    }
+    loading.isLoading = false;
+    return;
   }
 
   @override
@@ -45,8 +78,10 @@ class LoginScreenViewModel extends ChangeNotifier {
   }
 
   Future<void> store() async {
+    final prefs = await _prefs;
     await storage.write(key: 'KEY_USERNAME', value: emailController.text);
     await storage.write(key: 'KEY_PASSWORD', value: passwordController.text);
+    await prefs.setBool('IS_AUTO_LOGIN', true);
   }
 
   Future<void> login(BuildContext context, WidgetRef ref) async {
