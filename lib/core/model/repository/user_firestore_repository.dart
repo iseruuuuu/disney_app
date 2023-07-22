@@ -2,10 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
 import 'package:disney_app/utils/authentication.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserFirestoreRepository {
   static final firebaseStoreInstance = FirebaseFirestore.instance;
+  static final FirebaseStorage storage = FirebaseStorage.instance;
   static CollectionReference users = firebaseStoreInstance.collection('users');
 
   Stream<QuerySnapshot<Map<String, dynamic>>> stream(String myAccountId) {
@@ -100,8 +102,14 @@ class UserFirestoreRepository {
     }
   }
 
-  Future<dynamic> deleteUser(String accountId, WidgetRef ref) async {
+  Future<dynamic> deleteUser(
+    String accountId,
+    String filePath,
+    WidgetRef ref,
+  ) async {
     await users.doc(accountId).delete();
     await ref.read(postUsecaseProvider).deleteAllPosts(accountId);
+    final storageReference = FirebaseStorage.instance.refFromURL(filePath);
+    await storageReference.delete();
   }
 }
