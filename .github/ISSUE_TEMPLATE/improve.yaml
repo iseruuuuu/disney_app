@@ -4,40 +4,24 @@ title: "[Improve]: "
 labels: [ "improve", "triage" ]
 
 body:
-  - type: textarea
-    id: describe
+  - type: markdown
     attributes:
-      label: Describe
-      description: A clear and concise description.
-    validations:
-      required: true
-  - type: textarea
-    id: screenshots
-    attributes:
-      label: Screenshots
-      description: If applicable, add screenshots to help explain your problem.
       value: |
-        <img src="" width="320" />
-        <video src="" width="320" />
+        Thanks for taking the time to fill out this improve !
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
     validations:
       required: false
   - type: textarea
-    id: env
+    id: what-happened
     attributes:
-      label: Environment
-      description: Please provide details about your environment.
-      value: |
-        - Device: [e.g. iPhone6]
-        - OS: [e.g. iOS 8.1]
-        - Browser: [e.g. Chrome, Safari]
-        - Version: [e.g. 1.0.0+1]
-        - Commit SHA: [e.g. 486ba7defaf1bd6b0deb87db2118c328e5baf529]
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+      value: "A improve !"
     validations:
       required: true
-  - type: textarea
-    id: additional
-    attributes:
-      label: Additional context
-      description: Add any other context about the problem here.
-    validations:
-      required: false
