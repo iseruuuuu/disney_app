@@ -17,6 +17,7 @@ class Authentication {
         email: email,
         password: pass,
       );
+      await firebaseAuth.currentUser?.sendEmailVerification();
       return newAccount;
     } on FirebaseException catch (error) {
       return error;
@@ -32,6 +33,11 @@ class Authentication {
         email: email,
         password: pass,
       );
+      final isVerified = firebaseAuth.currentUser?.emailVerified;
+      if (!isVerified!) {
+        await firebaseAuth.currentUser?.sendEmailVerification();
+        return;
+      }
       currentFirebaseUser = result.user;
       return result;
     } on FirebaseException catch (error) {

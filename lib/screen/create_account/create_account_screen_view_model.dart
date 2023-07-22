@@ -5,13 +5,12 @@ import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
 import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
-import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final createAccountScreenViewModelProvider =
     StateNotifierProvider.autoDispose<CreateAccountScreenViewModel, File?>(
@@ -26,7 +25,6 @@ final createAccountScreenViewModelProvider =
 class CreateAccountScreenViewModel extends StateNotifier<File?> {
   CreateAccountScreenViewModel(super._state, this.ref);
 
-  final storage = const FlutterSecureStorage();
   final AutoDisposeStateNotifierProviderRef<CreateAccountScreenViewModel, File?>
       ref;
 
@@ -36,6 +34,7 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   File? image;
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   Loading get loading => ref.read(loadingProvider.notifier);
 
@@ -80,7 +79,17 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
           }
           await Future<void>.delayed(const Duration(seconds: 1))
               .then((_) async {
-            return login(context, ref);
+            loading.isLoading = false;
+            await FunctionUtils().createAccountDialog(
+              context: context,
+              onTap: () async {
+                loading.isLoading = false;
+                Navigator.pop(context);
+                Navigator.pop(context);
+                final prefs = await _prefs;
+                await prefs.setBool('IS_AUTO_LOGIN', true);
+              },
+            );
           });
         }
       } else {
@@ -96,36 +105,5 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
       loading.isLoading = false;
       SnackBarUtils.snackBar(context, '登録してた内容に不備があります');
     }
-  }
-
-  Future<void> login(BuildContext context, WidgetRef ref) async {
-    final result = await Authentication.signIn(
-      email: emailController.text,
-      pass: passwordController.text,
-    );
-    if (result is UserCredential) {
-      final result0 = await ref
-          .read(userFirestoreUsecaseProvider)
-          .getUser(result.user!.uid);
-
-      if (result0 == true) {
-        await store();
-        await Future<void>.delayed(const Duration(seconds: 1)).then((_) {
-          loading.isLoading = false;
-          Navigator.pop(context);
-          return NavigationUtils.tabScreen(context);
-        });
-      }
-    } else {
-      final errorMessage = FunctionUtils().checkLoginError(result.toString());
-      await Future<void>.delayed(Duration.zero).then((_) {
-        SnackBarUtils.snackBar(context, errorMessage);
-      });
-    }
-  }
-
-  Future<void> store() async {
-    await storage.write(key: 'KEY_USERNAME', value: emailController.text);
-    await storage.write(key: 'KEY_PASSWORD', value: passwordController.text);
   }
 }

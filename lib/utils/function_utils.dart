@@ -118,6 +118,60 @@ class FunctionUtils {
       case '[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.':
         return 'アカウントが存在しない or 削除された可能性があります。';
     }
-    return '未確認のエラーです。運営側にお伝えください。';
+    return 'メールアドレスの認証が完了していません。';
+  }
+
+  Future<void> createAccountDialog({
+    required BuildContext context,
+    required VoidCallback onTap,
+  }) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            'アカウント登録完了',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'アカウントの登録が完了しました。\n'
+                '確認用のメールをお送りしました。\n'
+                'メール内のリンクをクリックし、\n'
+                '認証を行ってください。',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: TextButton(
+                  onPressed: onTap,
+                  child: const Text(
+                    'OK',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
