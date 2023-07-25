@@ -98,6 +98,13 @@ class LoginScreen extends HookConsumerWidget {
                     title: '新規登録はこちら',
                     color: Colors.lightBlue,
                   ),
+                  AppTextButton(
+                    onPressed: () => ref
+                        .read(loginScreenViewModelProvider.notifier)
+                        .passwordResetScreen(context),
+                    title: 'パスワードを忘れた場合',
+                    color: Colors.lightBlue,
+                  ),
                 ],
               ),
             ),

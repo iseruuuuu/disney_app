@@ -52,4 +52,8 @@ class Authentication {
   static Future<void> deleteAuth() async {
     await currentFirebaseUser!.delete();
   }
+
+  static Future<void> resetPassword(String email) async {
+    return firebaseAuth.sendPasswordResetEmail(email: email);
+  }
 }
