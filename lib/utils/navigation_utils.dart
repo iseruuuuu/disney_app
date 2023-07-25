@@ -4,6 +4,7 @@ import 'package:disney_app/screen/create_account/create_account_screen.dart';
 import 'package:disney_app/screen/detail/detail_account_screen.dart';
 import 'package:disney_app/screen/detail/detail_screen.dart';
 import 'package:disney_app/screen/login/login_screen.dart';
+import 'package:disney_app/screen/login/password_reset_screen.dart';
 import 'package:disney_app/screen/post/post_screen.dart';
 import 'package:disney_app/screen/tab/tab_screen.dart';
 import 'package:flutter/material.dart';
@@ -80,6 +81,14 @@ class NavigationUtils {
     return Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (context) => const LoginScreen(),
+      ),
+    );
+  }
+
+  static Future<void> passwordResetScreen(BuildContext context) {
+    return Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const PasswordResetScreen(),
       ),
     );
   }

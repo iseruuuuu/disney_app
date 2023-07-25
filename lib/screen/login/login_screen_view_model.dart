@@ -114,4 +114,8 @@ class LoginScreenViewModel extends ChangeNotifier {
   void createAccountScreen(BuildContext context) {
     NavigationUtils.createAccountScreen(context);
   }
+
+  void passwordResetScreen(BuildContext context) {
+    NavigationUtils.passwordResetScreen(context);
+  }
 }
