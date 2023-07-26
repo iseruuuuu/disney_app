@@ -65,7 +65,30 @@ class PostScreen extends ConsumerWidget {
                   controller: controller.controller,
                   hintText: '感想',
                   maxLines: 10,
-                )
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      state.isSpoiler ? 'ネタバレあり!' : 'ネタバレなし!',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Transform.scale(
+                      scale: 1.5,
+                      child: Checkbox(
+                        activeColor: AppColorStyle.appColor,
+                        value: state.isSpoiler,
+                        onChanged: (value) => ref
+                            .read(postScreenViewModelProvider.notifier)
+                            .onChanged(value: value!),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

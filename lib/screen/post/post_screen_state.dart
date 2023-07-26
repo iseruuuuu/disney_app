@@ -8,5 +8,6 @@ class PostScreenState with _$PostScreenState {
     @Default(0) int rank,
     @Default('') String attractionName,
     @Default(false) bool isSelected,
+    @Default(false) bool isSpoiler,
   }) = _PostScreenState;
 }

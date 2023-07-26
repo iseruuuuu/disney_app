@@ -27,6 +27,12 @@ class AppTextStyle {
     color: Colors.black,
   );
 
+  static const cellSpoilerDescriptionTextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 15,
+    color: Colors.red,
+  );
+
   static const accountNameTextStyle = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 20,

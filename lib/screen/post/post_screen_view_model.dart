@@ -72,6 +72,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
         postAccountId: Authentication.myAccount!.id,
         rank: state.rank,
         attractionName: state.attractionName,
+        isSpoiler: state.isSpoiler,
       );
       final result = await ref.read(postUsecaseProvider).addPost(newPost);
       if (result == true) {
@@ -83,5 +84,11 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
     } else {
       SnackBarUtils.snackBar(context, 'いずれかの値が未記入となっています');
     }
+  }
+
+  void onChanged({required bool value}) {
+    state = state.copyWith(
+      isSpoiler: value,
+    );
   }
 }
