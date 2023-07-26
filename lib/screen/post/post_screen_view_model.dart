@@ -84,4 +84,10 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
       SnackBarUtils.snackBar(context, 'いずれかの値が未記入となっています');
     }
   }
+
+  void onChanged({required bool value}) {
+    state = state.copyWith(
+      isSpoiler: value,
+    );
+  }
 }
