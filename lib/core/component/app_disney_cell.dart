@@ -139,7 +139,7 @@ class AppDisneyCell extends ConsumerWidget {
             padding: const EdgeInsets.only(top: 15, bottom: 15, left: 70),
             child: SizedBox(
               width: MediaQuery.of(context).size.width - 100,
-              child: post.isSpoiler
+              child: !post.isSpoiler
                   ? Text(
                       post.content,
                       style: AppTextStyle.cellDescriptionTextStyle,
