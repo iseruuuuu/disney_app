@@ -24,6 +24,7 @@ class PostFirestoreRepository {
         'created_time': Timestamp.now(),
         'rank': newPost.rank,
         'attraction_name': newPost.attractionName,
+        'is_spoiler': newPost.isSpoiler,
       });
       await userPosts.doc(result.id).set({
         'post_id': result.id,
@@ -49,6 +50,7 @@ class PostFirestoreRepository {
             createdTime: data['created_time'],
             rank: data['rank'],
             attractionName: data['attraction_name'],
+            isSpoiler: data['is_spoiler'],
           );
           postList.add(post);
         }

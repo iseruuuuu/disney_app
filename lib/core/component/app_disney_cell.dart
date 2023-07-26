@@ -139,11 +139,28 @@ class AppDisneyCell extends ConsumerWidget {
             padding: const EdgeInsets.only(top: 15, bottom: 15, left: 70),
             child: SizedBox(
               width: MediaQuery.of(context).size.width - 100,
-              child: Text(
-                post.content,
-                style: AppTextStyle.cellDescriptionTextStyle,
-                overflow: TextOverflow.visible,
-              ),
+              child: post.isSpoiler
+                  ? Text(
+                      post.content,
+                      style: AppTextStyle.cellDescriptionTextStyle,
+                      overflow: TextOverflow.visible,
+                    )
+                  : const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'ネタバレがあります!!!\n'
+                          '遷移して確認ください🙇‍',
+                          style: AppTextStyle.cellSpoilerDescriptionTextStyle,
+                          overflow: TextOverflow.visible,
+                        ),
+                        Icon(
+                          Icons.arrow_forward,
+                          color: Colors.red,
+                          size: 40,
+                        ),
+                      ],
+                    ),
             ),
           ),
         ],

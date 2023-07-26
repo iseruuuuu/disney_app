@@ -72,6 +72,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
         postAccountId: Authentication.myAccount!.id,
         rank: state.rank,
         attractionName: state.attractionName,
+        isSpoiler: state.isSpoiler,
       );
       final result = await ref.read(postUsecaseProvider).addPost(newPost);
       if (result == true) {

@@ -8,13 +8,14 @@ class Post {
     this.createdTime,
     this.rank = 0,
     this.attractionName = '',
+    this.isSpoiler = false,
   });
 
   String id;
   String content;
   String postAccountId;
   Timestamp? createdTime;
-
+  bool isSpoiler;
   int rank;
   String attractionName;
 }
