@@ -29,7 +29,7 @@ class DetailAccountScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(110),
+        preferredSize: const Size.fromHeight(80),
         child: AppAppBar(
           image: Assets.header.detailAccountHeader.path,
           text: const SizedBox.shrink(),
@@ -37,7 +37,6 @@ class DetailAccountScreen extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          const SizedBox(height: 20),
           AppHeader(
             account: postAccount,
             isMyAccount: false,
