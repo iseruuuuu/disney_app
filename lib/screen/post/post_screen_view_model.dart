@@ -82,6 +82,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
         });
       }
     } else {
+      loading.isLoading = false;
       SnackBarUtils.snackBar(context, 'いずれかの値が未記入となっています');
     }
   }
