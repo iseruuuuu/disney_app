@@ -18,35 +18,6 @@ class FakeUser {
 
   List<String> mockIds = ['1', '2', '3'];
 
-  final List<Account> _mockUsers = [
-    Account(
-      name: '1',
-      userId: 'test',
-      selfIntroduction: 'test',
-      imagePath: 'test.png',
-      createdTime: Timestamp.now(),
-      updateTime: Timestamp.now(),
-    ),
-    Account(
-      name: '2',
-      userId: 'test',
-      selfIntroduction: 'test',
-      imagePath: 'test.png',
-      createdTime: Timestamp.now(),
-      updateTime: Timestamp.now(),
-    ),
-    Account(
-      name: '3',
-      userId: 'test',
-      selfIntroduction: 'test',
-      imagePath: 'test.png',
-      createdTime: Timestamp.now(),
-      updateTime: Timestamp.now(),
-    ),
-  ];
-
-  List<Account> get mockUsers => _mockUsers;
-
   String mockAccountId = 'test';
 
   Account account1 = Account(

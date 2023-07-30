@@ -4,32 +4,35 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/repository/user_firestore_repository.dart';
 import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import '../fake/fake_user.dart';
 import 'user_firestore_usecase_test.mocks.dart';
 
-@GenerateMocks([UserFirestoreRepository])
+@GenerateMocks([
+  UserFirestoreRepository,
+  WidgetRef,
+])
 void main() {
   group('User FireStore Usecase Test', () {
     late MockUserFirestoreRepository mockUserFirestoreRepository;
     late UserFirestoreUsecase userFireStoreUsecase;
+    late MockWidgetRef mockWidgetRef;
 
     setUp(() {
       mockUserFirestoreRepository = MockUserFirestoreRepository();
       userFireStoreUsecase = UserFirestoreUsecase(mockUserFirestoreRepository);
+      mockWidgetRef = MockWidgetRef();
     });
 
     final fakeUser = FakeUser().mockAccount();
     final fakeMockIds = FakeUser().mockIds;
-    final fakeMockUsers = FakeUser().mockUsers;
     final fakeMockAccountId = FakeUser().mockAccountId;
     final fakeMockImage = FakeUser().mockImage;
-
     final account1 = FakeUser().account1;
     final account2 = FakeUser().account2;
-
     final accountMap = <String, Account>{
       account1.id: FakeUser().account1,
       account2.id: FakeUser().account2,
@@ -90,6 +93,32 @@ void main() {
       final result = await userFireStoreUsecase.getPostUserMap(fakeMockIds);
 
       expect(result, accountMap);
+    });
+
+    test('Delete User', () async {
+      when(mockUserFirestoreRepository.deleteUser(
+        fakeMockAccountId,
+        fakeMockImage,
+        mockWidgetRef,
+      )).thenAnswer(
+        (_) async => 'Success',
+      );
+
+      final result = await userFireStoreUsecase.deleteUser(
+        fakeMockAccountId,
+        fakeMockImage,
+        mockWidgetRef,
+      );
+
+      verify(
+        mockUserFirestoreRepository.deleteUser(
+          fakeMockAccountId,
+          fakeMockImage,
+          mockWidgetRef,
+        ),
+      ).called(1);
+
+      expect(result, 'Success');
     });
   });
 }
