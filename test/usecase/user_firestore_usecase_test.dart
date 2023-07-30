@@ -53,29 +53,62 @@ void main() {
     });
 
     test('Set User', () async {
+      when(mockUserFirestoreRepository.setUser(fakeUser)).thenAnswer(
+        (_) => Future.error(
+          FirebaseException(message: 'Error occurred', plugin: 'plugin'),
+        ),
+      );
+
+      expect(
+        userFireStoreUsecase.setUser(fakeUser),
+        throwsA(isA<FirebaseException>()),
+      );
+
       when(mockUserFirestoreRepository.setUser(fakeUser))
           .thenAnswer((_) async => 'Success');
 
       final result = await userFireStoreUsecase.setUser(fakeUser);
 
-      verify(mockUserFirestoreRepository.setUser(fakeUser)).called(1);
+      verify(mockUserFirestoreRepository.setUser(fakeUser)).called(2);
 
       expect(result, 'Success');
     });
 
     test('Get User', () async {
       when(mockUserFirestoreRepository.getUser(fakeMockAccountId)).thenAnswer(
+        (_) => Future.error(
+          FirebaseException(message: 'Error occurred', plugin: 'plugin'),
+        ),
+      );
+
+      expect(
+        userFireStoreUsecase.getUser(fakeMockAccountId),
+        throwsA(isA<FirebaseException>()),
+      );
+
+      when(mockUserFirestoreRepository.getUser(fakeMockAccountId)).thenAnswer(
         (_) async => 'Success',
       );
 
       final result = await userFireStoreUsecase.getUser(fakeMockAccountId);
 
-      verify(mockUserFirestoreRepository.getUser(fakeMockAccountId)).called(1);
+      verify(mockUserFirestoreRepository.getUser(fakeMockAccountId)).called(2);
 
       expect(result, 'Success');
     });
 
     test('Update User', () async {
+      when(mockUserFirestoreRepository.updateUser(fakeUser)).thenAnswer(
+        (_) => Future.error(
+          FirebaseException(message: 'Error occurred', plugin: 'plugin'),
+        ),
+      );
+
+      expect(
+        userFireStoreUsecase.updateUser(fakeUser),
+        throwsA(isA<FirebaseException>()),
+      );
+
       when(mockUserFirestoreRepository.updateUser(fakeUser)).thenAnswer(
         (_) async => 'Success',
       );
