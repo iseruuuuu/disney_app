@@ -37,6 +37,7 @@ migrate_working_dir/
 # freezed
 *.freezed.dart
 *.g.dart
+*.mocks.dart
 
 # account
 lib/core/constants/account.dart
