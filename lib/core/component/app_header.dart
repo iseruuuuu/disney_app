@@ -1,6 +1,8 @@
+import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:disney_app/core/theme/app_text_style.dart';
+import 'package:disney_app/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class AppHeader extends StatelessWidget {
@@ -33,7 +35,7 @@ class AppHeader extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width / 2,
+                  width: MediaQuery.of(context).size.width / 2.5,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -54,6 +56,13 @@ class AppHeader extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
+                (account.id == MasterAccount.masterAccount)
+                    ? Image.asset(
+                        Assets.images.badge.path,
+                        fit: BoxFit.fill,
+                        width: 35,
+                      )
+                    : const SizedBox.shrink(),
                 isMyAccount
                     ? OutlinedButton(
                         onPressed: onTapEdit,

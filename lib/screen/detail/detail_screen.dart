@@ -1,5 +1,6 @@
 import 'package:disney_app/core/component/app_app_bar.dart';
 import 'package:disney_app/core/component/app_rating.dart';
+import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/gen/assets.gen.dart';
@@ -83,6 +84,13 @@ class DetailScreen extends ConsumerWidget {
                   ),
                 ],
               ),
+              (account.id == MasterAccount.masterAccount)
+                  ? Image.asset(
+                      Assets.images.badge.path,
+                      fit: BoxFit.fill,
+                      width: 35,
+                    )
+                  : const SizedBox.shrink(),
             ],
           ),
           Column(
