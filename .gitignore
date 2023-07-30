@@ -38,6 +38,9 @@ migrate_working_dir/
 *.freezed.dart
 *.g.dart
 
+# account
+lib/core/constants/account.dart
+
 # Symbolication related
 app.*.symbols
 

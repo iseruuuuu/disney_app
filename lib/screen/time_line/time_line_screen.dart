@@ -61,13 +61,14 @@ class TimeLineScreen extends ConsumerWidget {
                                 as Map<String, dynamic>?;
                             if (data != null) {
                               final post = Post(
-                                  id: postSnapshot.data!.docs[index].id,
-                                  content: data['content'],
-                                  postAccountId: data['post_account_id'],
-                                  createdTime: data['created_time'],
-                                  rank: data['rank'],
-                                  attractionName: data['attraction_name'],
-                                  isSpoiler: data['is_spoiler']);
+                                id: postSnapshot.data!.docs[index].id,
+                                content: data['content'],
+                                postAccountId: data['post_account_id'],
+                                createdTime: data['created_time'],
+                                rank: data['rank'],
+                                attractionName: data['attraction_name'],
+                                isSpoiler: data['is_spoiler'],
+                              );
                               final postAccount =
                                   userSnapshot.data![post.postAccountId];
                               if (postAccount != null) {
