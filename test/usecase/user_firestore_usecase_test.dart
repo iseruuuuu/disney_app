@@ -15,40 +15,34 @@ import 'user_firestore_usecase_test.mocks.dart';
   UserFirestoreRepository,
   WidgetRef,
 ])
+//TODO やること
+// ・モックの呼び出しの検証
+
 void main() {
   group('User FireStore Usecase Test', () {
     late MockUserFirestoreRepository mockUserFirestoreRepository;
     late UserFirestoreUsecase userFireStoreUsecase;
     late MockWidgetRef mockWidgetRef;
-
     setUp(() {
       mockUserFirestoreRepository = MockUserFirestoreRepository();
       userFireStoreUsecase = UserFirestoreUsecase(mockUserFirestoreRepository);
       mockWidgetRef = MockWidgetRef();
     });
-
     final fakeUser = FakeUser().mockAccount();
     final fakeMockIds = FakeUser().mockIds;
     final fakeMockAccountId = FakeUser().mockAccountId;
     final fakeMockImage = FakeUser().mockImage;
-    final account1 = FakeUser().account1;
-    final account2 = FakeUser().account2;
     final accountMap = <String, Account>{
-      account1.id: FakeUser().account1,
-      account2.id: FakeUser().account2,
+      FakeUser().account1.id: FakeUser().account1,
+      FakeUser().account2.id: FakeUser().account2,
     };
-
     test('stream', () {
       final controller =
           StreamController<QuerySnapshot<Map<String, dynamic>>>();
-
       when(mockUserFirestoreRepository.stream(fakeMockAccountId))
           .thenAnswer((_) => controller.stream);
-
       final result = userFireStoreUsecase.stream(fakeMockAccountId);
-
       expect(result, isA<Stream<QuerySnapshot<Map<String, dynamic>>>>());
-
       controller.close();
     });
 
@@ -58,19 +52,14 @@ void main() {
           FirebaseException(message: 'Error occurred', plugin: 'plugin'),
         ),
       );
-
       expect(
         userFireStoreUsecase.setUser(fakeUser),
         throwsA(isA<FirebaseException>()),
       );
-
       when(mockUserFirestoreRepository.setUser(fakeUser))
           .thenAnswer((_) async => 'Success');
-
       final result = await userFireStoreUsecase.setUser(fakeUser);
-
       verify(mockUserFirestoreRepository.setUser(fakeUser)).called(2);
-
       expect(result, 'Success');
     });
 
@@ -80,20 +69,15 @@ void main() {
           FirebaseException(message: 'Error occurred', plugin: 'plugin'),
         ),
       );
-
       expect(
         userFireStoreUsecase.getUser(fakeMockAccountId),
         throwsA(isA<FirebaseException>()),
       );
-
       when(mockUserFirestoreRepository.getUser(fakeMockAccountId)).thenAnswer(
         (_) async => 'Success',
       );
-
       final result = await userFireStoreUsecase.getUser(fakeMockAccountId);
-
       verify(mockUserFirestoreRepository.getUser(fakeMockAccountId)).called(2);
-
       expect(result, 'Success');
     });
 
@@ -103,28 +87,31 @@ void main() {
           FirebaseException(message: 'Error occurred', plugin: 'plugin'),
         ),
       );
-
       expect(
         userFireStoreUsecase.updateUser(fakeUser),
         throwsA(isA<FirebaseException>()),
       );
-
       when(mockUserFirestoreRepository.updateUser(fakeUser)).thenAnswer(
         (_) async => 'Success',
       );
-
       final result = await userFireStoreUsecase.updateUser(fakeUser);
-
       expect(result, 'Success');
     });
 
     test('GetPostUserMap', () async {
       when(mockUserFirestoreRepository.getPostUserMap(fakeMockIds)).thenAnswer(
+        (_) => Future.error(
+          FirebaseException(message: 'Error occurred', plugin: 'plugin'),
+        ),
+      );
+      expect(
+        userFireStoreUsecase.getPostUserMap(fakeMockIds),
+        throwsA(isA<FirebaseException>()),
+      );
+      when(mockUserFirestoreRepository.getPostUserMap(fakeMockIds)).thenAnswer(
         (_) async => accountMap,
       );
-
       final result = await userFireStoreUsecase.getPostUserMap(fakeMockIds);
-
       expect(result, accountMap);
     });
 
@@ -134,23 +121,37 @@ void main() {
         fakeMockImage,
         mockWidgetRef,
       )).thenAnswer(
+        (_) => Future.error(
+          FirebaseException(message: 'Error occurred', plugin: 'plugin'),
+        ),
+      );
+      expect(
+        userFireStoreUsecase.deleteUser(
+          fakeMockAccountId,
+          fakeMockImage,
+          mockWidgetRef,
+        ),
+        throwsA(isA<FirebaseException>()),
+      );
+      when(mockUserFirestoreRepository.deleteUser(
+        fakeMockAccountId,
+        fakeMockImage,
+        mockWidgetRef,
+      )).thenAnswer(
         (_) async => 'Success',
       );
-
       final result = await userFireStoreUsecase.deleteUser(
         fakeMockAccountId,
         fakeMockImage,
         mockWidgetRef,
       );
-
       verify(
         mockUserFirestoreRepository.deleteUser(
           fakeMockAccountId,
           fakeMockImage,
           mockWidgetRef,
         ),
-      ).called(1);
-
+      ).called(2);
       expect(result, 'Success');
     });
   });
