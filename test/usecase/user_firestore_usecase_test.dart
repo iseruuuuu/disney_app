@@ -16,7 +16,7 @@ import 'user_firestore_usecase_test.mocks.dart';
   WidgetRef,
 ])
 //TODO やること
-// ・モックの呼び出しの検証
+// モックの呼び出しの検証
 
 void main() {
   group('User FireStore Usecase Test', () {
@@ -42,6 +42,7 @@ void main() {
       when(mockUserFirestoreRepository.stream(fakeMockAccountId))
           .thenAnswer((_) => controller.stream);
       final result = userFireStoreUsecase.stream(fakeMockAccountId);
+      verify(mockUserFirestoreRepository.stream(fakeMockAccountId)).called(1);
       expect(result, isA<Stream<QuerySnapshot<Map<String, dynamic>>>>());
       controller.close();
     });
@@ -95,6 +96,7 @@ void main() {
         (_) async => 'Success',
       );
       final result = await userFireStoreUsecase.updateUser(fakeUser);
+      verify(mockUserFirestoreRepository.updateUser(fakeUser)).called(2);
       expect(result, 'Success');
     });
 
@@ -112,6 +114,7 @@ void main() {
         (_) async => accountMap,
       );
       final result = await userFireStoreUsecase.getPostUserMap(fakeMockIds);
+      verify(mockUserFirestoreRepository.getPostUserMap(fakeMockIds)).called(2);
       expect(result, accountMap);
     });
 
