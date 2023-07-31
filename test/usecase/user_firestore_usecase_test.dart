@@ -15,9 +15,6 @@ import 'user_firestore_usecase_test.mocks.dart';
   UserFirestoreRepository,
   WidgetRef,
 ])
-//TODO やること
-// モックの呼び出しの検証
-
 void main() {
   group('User FireStore Usecase Test', () {
     late MockUserFirestoreRepository mockUserFirestoreRepository;
