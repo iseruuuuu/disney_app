@@ -31,6 +31,10 @@
 1、`git clone https://github.com/iseruuuuu/disney_app.git`  
 2、`make setup`
 
+if you fix my app, please send DM (Twitter). I gave firebase file to need to build.  
+https://twitter.com/isekiryu
+
+
 
 # Contributing
 We always welcome all contributions! See CONTRIBUTING.md for more information.
