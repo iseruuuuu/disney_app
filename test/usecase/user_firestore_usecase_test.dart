@@ -116,11 +116,13 @@ void main() {
     });
 
     test('Delete User', () async {
-      when(mockUserFirestoreRepository.deleteUser(
-        fakeMockAccountId,
-        fakeMockImage,
-        mockWidgetRef,
-      )).thenAnswer(
+      when(
+        mockUserFirestoreRepository.deleteUser(
+          fakeMockAccountId,
+          fakeMockImage,
+          mockWidgetRef,
+        ),
+      ).thenAnswer(
         (_) => Future.error(
           FirebaseException(message: 'Error occurred', plugin: 'plugin'),
         ),
@@ -133,11 +135,13 @@ void main() {
         ),
         throwsA(isA<FirebaseException>()),
       );
-      when(mockUserFirestoreRepository.deleteUser(
-        fakeMockAccountId,
-        fakeMockImage,
-        mockWidgetRef,
-      )).thenAnswer(
+      when(
+        mockUserFirestoreRepository.deleteUser(
+          fakeMockAccountId,
+          fakeMockImage,
+          mockWidgetRef,
+        ),
+      ).thenAnswer(
         (_) async => 'Success',
       );
       final result = await userFireStoreUsecase.deleteUser(
