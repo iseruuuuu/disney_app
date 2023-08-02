@@ -21,6 +21,8 @@ class AccountScreenViewModel extends StateNotifier<AccountScreenState> {
     fetch();
   }
 
+  AccountScreenState get currentState => state;
+
   void fetch() {
     final myAccount = Authentication.myAccount!;
     state = state.copyWith(myAccount: myAccount);
