@@ -12,7 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final editScreenViewModelProvider =
-    StateNotifierProvider.autoDispose<EditScreenViewModel, ImageProvider>(
+    StateNotifierProvider<EditScreenViewModel, ImageProvider>(
   (ref) {
     final myAccount = Authentication.myAccount!;
     return EditScreenViewModel(
@@ -30,8 +30,8 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
     fetch();
   }
 
-  final AutoDisposeStateNotifierProviderRef<EditScreenViewModel,
-      ImageProvider<Object>> ref;
+  final StateNotifierProviderRef<EditScreenViewModel, ImageProvider<Object>>
+      ref;
   TextEditingController controller = TextEditingController();
   Account myAccount = Authentication.myAccount!;
   TextEditingController nameController = TextEditingController();
@@ -88,7 +88,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
   }
 
   Future<void> selectImage() async {
-    final XFile? result = await FunctionUtils.getImageFromGallery();
+    final XFile? result = await FunctionUtils().getImageFromGallery();
     if (result != null) {
       image = File(result.path);
       state = FileImage(File(result.path));
