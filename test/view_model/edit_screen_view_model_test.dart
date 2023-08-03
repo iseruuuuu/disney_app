@@ -36,7 +36,6 @@ void main() {
           ),
         ],
       );
-      // viewModel = container.read(editScreenViewModelProvider.notifier);
       Authentication.myAccount = mockAccount;
       viewModel = EditScreenViewModel(
         state: NetworkImage(mockAccount.imagePath),
