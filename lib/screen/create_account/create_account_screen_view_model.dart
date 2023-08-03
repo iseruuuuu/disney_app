@@ -13,9 +13,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final createAccountScreenViewModelProvider =
-    StateNotifierProvider.autoDispose<CreateAccountScreenViewModel, File?>(
+    StateNotifierProvider<CreateAccountScreenViewModel, File?>(
   (ref) {
     return CreateAccountScreenViewModel(
+      FunctionUtils(),
       null,
       ref,
     );
@@ -23,11 +24,11 @@ final createAccountScreenViewModelProvider =
 );
 
 class CreateAccountScreenViewModel extends StateNotifier<File?> {
-  CreateAccountScreenViewModel(super._state, this.ref);
+  CreateAccountScreenViewModel(this._functionUtils, super._state, this.ref);
 
-  final AutoDisposeStateNotifierProviderRef<CreateAccountScreenViewModel, File?>
-      ref;
+  final StateNotifierProviderRef<CreateAccountScreenViewModel, File?> ref;
 
+  final FunctionUtils _functionUtils;
   TextEditingController nameController = TextEditingController();
   TextEditingController userIdController = TextEditingController();
   TextEditingController selfIntroductionController = TextEditingController();
@@ -39,7 +40,7 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
   Loading get loading => ref.read(loadingProvider.notifier);
 
   Future<void> selectImage() async {
-    final XFile? result = await FunctionUtils.getImageFromGallery();
+    final XFile? result = await _functionUtils.getImageFromGallery();
     if (result != null) {
       image = File(result.path);
       state = File(result.path);
