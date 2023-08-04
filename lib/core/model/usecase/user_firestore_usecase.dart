@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/account.dart';
+import 'package:disney_app/core/model/api/user_firestore_api.dart';
 import 'package:disney_app/core/model/repository/user_firestore_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userFirestoreUsecaseProvider = Provider.autoDispose<UserFirestoreUsecase>(
   (ref) => UserFirestoreUsecase(
-    UserFirestoreRepository(),
+    UserFirestoreRepository(FirestoreAPI()),
   ),
 );
 
