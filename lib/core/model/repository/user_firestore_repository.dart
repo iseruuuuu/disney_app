@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class UserFirestoreRepository {
   UserFirestoreRepository(this.firestoreAPI);
 
-  final FirestoreAPI firestoreAPI;
+  final UserFirestoreAPI firestoreAPI;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> stream(String myAccountId) {
     return firestoreAPI.streamUserPosts(myAccountId);

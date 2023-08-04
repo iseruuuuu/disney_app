@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userFirestoreUsecaseProvider = Provider.autoDispose<UserFirestoreUsecase>(
   (ref) => UserFirestoreUsecase(
-    UserFirestoreRepository(FirestoreAPI()),
+    UserFirestoreRepository(UserFirestoreAPI()),
   ),
 );
 
