@@ -29,7 +29,7 @@ class UserFirestoreAPI {
     return users.doc(id).delete();
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> streamUserPosts(String uid) {
+  Stream<QuerySnapshot<Map<String, dynamic>>> stream(String uid) {
     return users
         .doc(uid)
         .collection('my_posts')

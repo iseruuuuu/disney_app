@@ -11,7 +11,7 @@ class UserFirestoreRepository {
   final UserFirestoreAPI firestoreAPI;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> stream(String myAccountId) {
-    return firestoreAPI.streamUserPosts(myAccountId);
+    return firestoreAPI.stream(myAccountId);
   }
 
   Future<dynamic> setUser(Account newAccount) async {
