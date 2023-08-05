@@ -28,7 +28,6 @@ void main() {
     final fakeUser = FakeUser().mockAccount();
     final fakeMockIds = FakeUser().mockIds;
     final fakeMockAccountId = FakeUser().mockAccountId;
-    final fakeMockImage = FakeUser().mockImage;
     final accountMap = <String, Account>{
       FakeUser().account1.id: FakeUser().account1,
       FakeUser().account2.id: FakeUser().account2,
