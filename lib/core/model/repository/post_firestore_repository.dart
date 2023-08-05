@@ -27,7 +27,10 @@ class PostFirestoreRepository {
         'created_time': Timestamp.now(),
       };
       await postFirestoreAPI.addUserPost(
-          newPost.postAccountId, result.id, userPostData);
+        newPost.postAccountId,
+        result.id,
+        userPostData,
+      );
       return true;
     } on FirebaseException catch (_) {
       return false;

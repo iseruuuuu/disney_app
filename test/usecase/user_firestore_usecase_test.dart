@@ -118,8 +118,7 @@ void main() {
     test('Delete User', () async {
       when(
         mockUserFirestoreRepository.deleteUser(
-          fakeMockAccountId,
-          fakeMockImage,
+          fakeUser,
           mockWidgetRef,
         ),
       ).thenAnswer(
@@ -129,30 +128,26 @@ void main() {
       );
       expect(
         userFireStoreUsecase.deleteUser(
-          fakeMockAccountId,
-          fakeMockImage,
+          fakeUser,
           mockWidgetRef,
         ),
         throwsA(isA<FirebaseException>()),
       );
       when(
         mockUserFirestoreRepository.deleteUser(
-          fakeMockAccountId,
-          fakeMockImage,
+          fakeUser,
           mockWidgetRef,
         ),
       ).thenAnswer(
         (_) async => 'Success',
       );
       final result = await userFireStoreUsecase.deleteUser(
-        fakeMockAccountId,
-        fakeMockImage,
+        fakeUser,
         mockWidgetRef,
       );
       verify(
         mockUserFirestoreRepository.deleteUser(
-          fakeMockAccountId,
-          fakeMockImage,
+          fakeUser,
           mockWidgetRef,
         ),
       ).called(2);

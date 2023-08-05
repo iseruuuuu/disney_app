@@ -100,14 +100,13 @@ class UserFirestoreRepository {
   }
 
   Future<dynamic> deleteUser(
-    String accountId,
-    String filePath,
+    Account myAccount,
     WidgetRef ref,
   ) async {
     try {
-      await firestoreAPI.deleteUserDocument(accountId);
-      await firestoreRepository.deleteAllPosts(accountId);
-      final storageReference = firestoreAPI.refFromURL(filePath);
+      await firestoreAPI.deleteUserDocument(myAccount.id);
+      await firestoreRepository.deleteAllPosts(myAccount.id);
+      final storageReference = firestoreAPI.refFromURL(myAccount.imagePath);
       await storageReference.delete();
       return true;
     } on FirebaseException catch (_) {
