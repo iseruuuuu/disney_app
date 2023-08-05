@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/api/user_firestore_api.dart';
 import 'package:disney_app/core/model/repository/user_firestore_repository.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -16,18 +17,21 @@ import 'user_firestore_repository_test.mocks.dart';
   UserFirestoreAPI,
   DocumentSnapshot,
   WidgetRef,
+  Reference,
 ])
 void main() {
   late UserFirestoreRepository userFirestoreRepository;
   late MockUserFirestoreAPI mockUserFirestoreAPI;
   late MockDocumentSnapshot mockDocumentSnapshot;
   late MockWidgetRef mockWidgetRef;
+  late MockReference mockReference;
 
   setUp(() {
     mockUserFirestoreAPI = MockUserFirestoreAPI();
     userFirestoreRepository = UserFirestoreRepository(mockUserFirestoreAPI);
     mockDocumentSnapshot = MockDocumentSnapshot();
     mockWidgetRef = MockWidgetRef();
+    mockReference = MockReference();
   });
   final fakeUser = FakeUser().mockAccount();
   final fakeMockAccountId = FakeUser().mockAccountId;
@@ -63,6 +67,22 @@ void main() {
       when(mockUserFirestoreAPI.getUserDocument(any))
           .thenAnswer((_) async => mockDocumentSnapshot);
       final result = await userFirestoreRepository.getUser(fakeMockAccountId);
+      expect(result, true);
+    });
+
+    test('update user', () async {
+      when(mockUserFirestoreAPI.updateUserDocument(fakeUser.id, any))
+          .thenAnswer((_) async {});
+      final result = await userFirestoreRepository.updateUser(fakeUser);
+      verify(
+        mockUserFirestoreAPI.updateUserDocument(fakeUser.id, {
+          'name': fakeUser.name,
+          'image_path': fakeUser.imagePath,
+          'user_id': fakeUser.userId,
+          'self_introduction': fakeUser.selfIntroduction,
+          'updated_time': isA<Timestamp>(),
+        }),
+      ).called(1);
       expect(result, true);
     });
 
