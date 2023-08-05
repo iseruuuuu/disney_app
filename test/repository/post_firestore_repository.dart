@@ -35,10 +35,7 @@ void main() {
     mockQueryDocumentSnapshot = MockQueryDocumentSnapshot();
   });
 
-  //TODO できるだけこの値を使えるようにしたい！！
   final fakePost = FakePost().post();
-  final fakeMockIds = FakePost().mockIds;
-  final fakeMockPosts = FakePost().mockPosts;
   final fakeMockAccountId = FakePost().mockAccountId;
   final fakeMockGetPostsFromIds = FakePost().mockGetPostsFromIds;
 
