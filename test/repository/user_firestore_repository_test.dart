@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/api/user_firestore_api.dart';
+import 'package:disney_app/core/model/repository/post_firestore_repository.dart';
 import 'package:disney_app/core/model/repository/user_firestore_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,6 +19,7 @@ import 'user_firestore_repository_test.mocks.dart';
   DocumentSnapshot,
   WidgetRef,
   Reference,
+  PostFirestoreRepository,
 ])
 void main() {
   late UserFirestoreRepository userFirestoreRepository;
@@ -25,21 +27,21 @@ void main() {
   late MockDocumentSnapshot mockDocumentSnapshot;
   late MockWidgetRef mockWidgetRef;
   late MockReference mockReference;
+  late MockPostFirestoreRepository mockPostFirestoreRepository;
 
   setUp(() {
     mockUserFirestoreAPI = MockUserFirestoreAPI();
-    userFirestoreRepository = UserFirestoreRepository(mockUserFirestoreAPI);
+    mockPostFirestoreRepository = MockPostFirestoreRepository();
+    userFirestoreRepository = UserFirestoreRepository(
+      mockUserFirestoreAPI,
+      mockPostFirestoreRepository,
+    );
     mockDocumentSnapshot = MockDocumentSnapshot();
     mockWidgetRef = MockWidgetRef();
     mockReference = MockReference();
   });
   final fakeUser = FakeUser().mockAccount();
   final fakeMockAccountId = FakeUser().mockAccountId;
-  final fakeMockImage = FakeUser().mockImage;
-  final accountMap = <String, Account>{
-    FakeUser().account1.id: FakeUser().account1,
-    FakeUser().account2.id: FakeUser().account2,
-  };
   final fakeMockIds = FakeUser().fakeMockIds;
   final fakeMockData = FakeUser().mockData;
 
@@ -94,6 +96,29 @@ void main() {
       }
       final result = await userFirestoreRepository.getPostUserMap(fakeMockIds);
       expect(result, isA<Map<String, Account>>());
+    });
+
+    test('delete user', () async {
+      // Arrange
+      when(mockUserFirestoreAPI.deleteUserDocument(fakeUser.id))
+          .thenAnswer((_) async {});
+      when(mockPostFirestoreRepository.deleteAllPosts(fakeUser.id))
+          .thenAnswer((_) async {});
+      when(mockUserFirestoreAPI.refFromURL(fakeUser.imagePath))
+          .thenReturn(mockReference);
+      when(mockReference.delete()).thenAnswer((_) async {});
+
+      // Act
+      final result = await userFirestoreRepository.deleteUser(
+        fakeUser,
+        mockWidgetRef,
+      );
+      // Assert
+      verify(mockUserFirestoreAPI.deleteUserDocument(fakeUser.id)).called(1);
+      verify(mockPostFirestoreRepository.deleteAllPosts(fakeUser.id)).called(1);
+      verify(mockUserFirestoreAPI.refFromURL(fakeUser.imagePath)).called(1);
+      verify(mockReference.delete()).called(1);
+      expect(result, true);
     });
   });
 }
