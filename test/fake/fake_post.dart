@@ -51,4 +51,6 @@ class FakePost {
   List<Post> get mockPosts => _mockPosts;
 
   String mockAccountId = 'test';
+
+  List<String> mockGetPostsFromIds = ['id1', 'id2'];
 }
