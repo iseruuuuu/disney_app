@@ -3,12 +3,9 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/api/post_firestore_api.dart';
 import 'package:disney_app/core/model/repository/post_firestore_repository.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-
 import '../fake/fake_post.dart';
 import 'post_firestore_repository.mocks.dart';
 
@@ -58,14 +55,15 @@ void main() {
     test('add post', () async {
       when(mockPostFirestoreAPI.addPost(any))
           .thenAnswer((_) async => mockDocumentReference);
-      when(mockDocumentReference.id).thenReturn('testPostId');
+      when(mockDocumentReference.id).thenReturn(fakeMockAccountId);
       when(mockPostFirestoreAPI.addUserPost(any, any, any))
           .thenAnswer((_) async {});
       final result = await postFirestoreRepository.addPost(fakePost);
       verify(mockPostFirestoreAPI.addPost(any)).called(1);
       verify(
-        mockPostFirestoreAPI.addUserPost(fakePost.postAccountId, 'testPostId', {
-          'post_id': 'testPostId',
+        mockPostFirestoreAPI
+            .addUserPost(fakePost.postAccountId, fakeMockAccountId, {
+          'post_id': fakeMockAccountId,
           'created_time': isA<Timestamp>(),
         }),
       ).called(1);
