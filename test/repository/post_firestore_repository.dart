@@ -14,10 +14,7 @@ import 'post_firestore_repository.mocks.dart';
 
 @GenerateMocks([
   PostFirestoreAPI,
-  PostFirestoreRepository,
   DocumentSnapshot,
-  WidgetRef,
-  Reference,
   DocumentReference,
   QuerySnapshot,
   QueryDocumentSnapshot,
@@ -26,27 +23,22 @@ void main() {
   late PostFirestoreRepository postFirestoreRepository;
   late MockPostFirestoreAPI mockPostFirestoreAPI;
   late MockDocumentSnapshot mockDocumentSnapshot;
-  late MockWidgetRef mockWidgetRef;
-  late MockReference mockReference;
-  late MockPostFirestoreRepository mockPostFirestoreRepository;
   late MockDocumentReference mockDocumentReference;
   late MockQuerySnapshot mockQuerySnapshot;
   late MockQueryDocumentSnapshot mockQueryDocumentSnapshot;
 
   setUp(() {
     mockPostFirestoreAPI = MockPostFirestoreAPI();
-    mockPostFirestoreRepository = MockPostFirestoreRepository();
     postFirestoreRepository = PostFirestoreRepository(
       mockPostFirestoreAPI,
     );
     mockDocumentSnapshot = MockDocumentSnapshot();
-    mockWidgetRef = MockWidgetRef();
-    mockReference = MockReference();
     mockDocumentReference = MockDocumentReference();
     mockQuerySnapshot = MockQuerySnapshot();
     mockQueryDocumentSnapshot = MockQueryDocumentSnapshot();
   });
 
+  //TODO できるだけこの値を使えるようにしたい！！
   final fakePost = FakePost().post();
   final fakeMockIds = FakePost().mockIds;
   final fakeMockPosts = FakePost().mockPosts;
@@ -127,10 +119,8 @@ void main() {
         .thenAnswer((_) async => mockQuerySnapshot);
     when(mockQuerySnapshot.docs).thenReturn([mockQueryDocumentSnapshot]);
     when(mockQueryDocumentSnapshot.id).thenReturn('testPostId');
-
     final result =
         await postFirestoreRepository.deleteAllPosts('testAccountId');
-
     verify(mockPostFirestoreAPI.getUserPosts('testAccountId')).called(1);
     verify(mockPostFirestoreAPI.deletePost('testPostId')).called(1);
     verify(mockPostFirestoreAPI.deleteUserPost('testAccountId', 'testPostId'))
@@ -142,13 +132,34 @@ void main() {
     when(mockPostFirestoreAPI.getUserPosts(any)).thenThrow(
       FirebaseException(plugin: 'test', message: 'test exception'),
     );
-
     final result =
         await postFirestoreRepository.deleteAllPosts('testAccountId');
-
     verify(mockPostFirestoreAPI.getUserPosts('testAccountId')).called(1);
     verifyNever(mockPostFirestoreAPI.deletePost(any));
     verifyNever(mockPostFirestoreAPI.deleteUserPost(any, any));
+    expect(result, false);
+  });
+
+  test('delete post', () async {
+    when(mockPostFirestoreAPI.deletePost(any))
+        .thenAnswer((_) async => mockQuerySnapshot);
+    when(mockQuerySnapshot.docs).thenReturn([mockQueryDocumentSnapshot]);
+    when(mockQueryDocumentSnapshot.id).thenReturn('testPostId');
+    final result =
+        await postFirestoreRepository.deletePost('accountId', fakePost);
+    verify(mockPostFirestoreAPI.deletePost(any)).called(1);
+    verifyNever(mockPostFirestoreAPI.deletePost(any));
+    expect(result, true);
+  });
+
+  test('delete post throws FirebaseException', () async {
+    when(mockPostFirestoreAPI.deletePost(any)).thenThrow(
+      FirebaseException(plugin: 'test', message: 'test exception'),
+    );
+    final result =
+        await postFirestoreRepository.deletePost('accountId', fakePost);
+    verify(mockPostFirestoreAPI.deletePost(any)).called(1);
+    verifyNever(mockPostFirestoreAPI.deletePost(any));
     expect(result, false);
   });
 }
