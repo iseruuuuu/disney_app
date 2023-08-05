@@ -63,9 +63,7 @@ void main() {
       when(mockDocumentReference.id).thenReturn('testPostId');
       when(mockPostFirestoreAPI.addUserPost(any, any, any))
           .thenAnswer((_) async {});
-
       final result = await postFirestoreRepository.addPost(fakePost);
-
       verify(mockPostFirestoreAPI.addPost(any)).called(1);
       verify(
         mockPostFirestoreAPI.addUserPost(fakePost.postAccountId, 'testPostId', {
@@ -80,11 +78,41 @@ void main() {
       when(mockPostFirestoreAPI.addPost(any)).thenThrow(
         FirebaseException(plugin: 'test', message: 'test exception'),
       );
-
       final result = await postFirestoreRepository.addPost(fakePost);
-
       verifyNever(mockPostFirestoreAPI.addUserPost(any, any, any));
       expect(result, false);
+    });
+
+    test('get posts from ids', () async {
+      when(mockPostFirestoreAPI.getPost(any))
+          .thenAnswer((_) async => mockDocumentSnapshot);
+      when(mockDocumentSnapshot.data()).thenReturn({
+        'content': 'test content',
+        'post_account_id': 'testAccountId',
+        'created_time': Timestamp.now(),
+        'rank': 5,
+        'attraction_name': 'test attraction',
+        'is_spoiler': false,
+      });
+      when(mockDocumentSnapshot.id).thenReturn('testPostId');
+      final result =
+          await postFirestoreRepository.getPostsFromIds(['id1', 'id2']);
+      verify(mockPostFirestoreAPI.getPost('id1')).called(1);
+      verify(mockPostFirestoreAPI.getPost('id2')).called(1);
+      expect(result!.length, 2);
+      expect(result[0].id, 'testPostId');
+      expect(result[1].id, 'testPostId');
+    });
+
+    test('get posts from ids FirebaseException', () async {
+      when(mockPostFirestoreAPI.getPost(any)).thenThrow(
+        FirebaseException(plugin: 'test', message: 'test exception'),
+      );
+      final result =
+          await postFirestoreRepository.getPostsFromIds(['id1', 'id2']);
+      verify(mockPostFirestoreAPI.getPost('id1')).called(1);
+      verifyNever(mockPostFirestoreAPI.getPost('id2'));
+      expect(result, null);
     });
   });
 }
