@@ -1,29 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/account.dart';
-import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
+import 'package:disney_app/core/model/api/user_firestore_api.dart';
+import 'package:disney_app/core/model/repository/post_firestore_repository.dart';
 import 'package:disney_app/utils/authentication.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserFirestoreRepository {
-  static final firebaseStoreInstance = FirebaseFirestore.instance;
-  static final FirebaseStorage storage = FirebaseStorage.instance;
-  static CollectionReference users = firebaseStoreInstance.collection('users');
+  UserFirestoreRepository(
+    this.firestoreAPI,
+    this.firestoreRepository,
+  );
+
+  final UserFirestoreAPI firestoreAPI;
+  final PostFirestoreRepository firestoreRepository;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> stream(String myAccountId) {
-    return users
-        .doc(myAccountId)
-        .collection('my_posts')
-        .orderBy(
-          'created_time',
-          descending: true,
-        )
-        .snapshots();
+    return firestoreAPI.stream(myAccountId);
   }
 
   Future<dynamic> setUser(Account newAccount) async {
     try {
-      await users.doc(newAccount.id).set({
+      await firestoreAPI.setUserDocument(newAccount.id, {
         'name': newAccount.name,
         'user_id': newAccount.userId,
         'self_introduction': newAccount.selfIntroduction,
@@ -39,7 +36,7 @@ class UserFirestoreRepository {
 
   Future<dynamic> getUser(String uid) async {
     try {
-      final documentSnapshot = await users.doc(uid).get();
+      final documentSnapshot = await firestoreAPI.getUserDocument(uid);
       final data = documentSnapshot.data() as Map<String, dynamic>?;
       if (data != null) {
         final myAccount = Account(
@@ -64,7 +61,7 @@ class UserFirestoreRepository {
 
   Future<dynamic> updateUser(Account updateAccount) async {
     try {
-      await users.doc(updateAccount.id).update({
+      await firestoreAPI.updateUserDocument(updateAccount.id, {
         'name': updateAccount.name,
         'image_path': updateAccount.imagePath,
         'user_id': updateAccount.userId,
@@ -80,8 +77,8 @@ class UserFirestoreRepository {
   Future<Map<String, Account>?> getPostUserMap(List<String> accountIds) async {
     final map = <String, Account>{};
     try {
-      await Future.forEach(accountIds, (accountId) async {
-        final doc = await users.doc(accountId).get();
+      for (final accountId in accountIds) {
+        final doc = await firestoreAPI.getUserDocument(accountId);
         final data = doc.data() as Map<String, dynamic>?;
         if (data != null) {
           final postAccount = Account(
@@ -95,7 +92,7 @@ class UserFirestoreRepository {
           );
           map[accountId] = postAccount;
         }
-      });
+      }
       return map;
     } on FirebaseException catch (_) {
       return null;
@@ -103,13 +100,17 @@ class UserFirestoreRepository {
   }
 
   Future<dynamic> deleteUser(
-    String accountId,
-    String filePath,
+    Account myAccount,
     WidgetRef ref,
   ) async {
-    await users.doc(accountId).delete();
-    await ref.read(postUsecaseProvider).deleteAllPosts(accountId);
-    final storageReference = FirebaseStorage.instance.refFromURL(filePath);
-    await storageReference.delete();
+    try {
+      await firestoreAPI.deleteUserDocument(myAccount.id);
+      await firestoreRepository.deleteAllPosts(myAccount.id);
+      final storageReference = firestoreAPI.refFromURL(myAccount.imagePath);
+      await storageReference.delete();
+      return true;
+    } on FirebaseException catch (_) {
+      return false;
+    }
   }
 }
