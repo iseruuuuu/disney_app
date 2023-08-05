@@ -22,32 +22,32 @@ void main() {
     api = UserFirestoreAPI();
   });
 
-  test('getUserDocument', () async {
+  test('get user document', () async {
     await api.getUserDocument(uid);
     verify(firestore.collection('users').doc(uid).get()).called(1);
   });
 
-  test('setUserDocument', () async {
+  test('set user document', () async {
     await api.setUserDocument(uid, docData);
     verify(firestore.collection('users').doc(uid).set(docData)).called(1);
   });
 
-  test('updateUserDocument', () async {
+  test('update user document', () async {
     await api.updateUserDocument(uid, docData);
     verify(firestore.collection('users').doc(uid).update(docData)).called(1);
   });
 
-  test('deleteUserDocument', () async {
+  test('delete user document', () async {
     await api.deleteUserDocument(uid);
     verify(firestore.collection('users').doc(uid).delete()).called(1);
   });
 
-  test('getStorageReference', () {
+  test('get storage reference', () {
     api.getStorageReference(filePath);
     verify(storage.ref(filePath)).called(1);
   });
 
-  test('refFromURL', () {
+  test('ref from URL', () {
     api.refFromURL(filePath);
     verify(storage.refFromURL(filePath)).called(1);
   });
