@@ -52,4 +52,8 @@ class FakeUser {
     'created_time': Timestamp.now(),
     'updated_time': Timestamp.now(),
   };
+
+  final uid = 'test_id';
+  final filePath = 'path/to/file';
+  final docData = {'field': 'value'};
 }
