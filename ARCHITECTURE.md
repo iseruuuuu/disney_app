@@ -1,16 +1,15 @@
 
-# TDL_APP Architecture
+# TDL APP Architecture
 
-<img width="100%" src="https://github.com/iseruuuuu/disney_app/assets/67954894/bd91ee86-12d4-456b-9a95-ea846e4148eb">
+## Bird's-eye view
+<img width="100%" src="https://github.com/iseruuuuu/disney_app/assets/67954894/1f80810d-6d5a-46fd-9760-b26a31151474">
 
+### Screen
 
+### ViewModel
 
-## Screen
+### Usecase
 
-## ViewModel
+### Repository
 
-## Usecase
-
-## Repository
-
-## API
+### API
