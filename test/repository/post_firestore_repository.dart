@@ -19,6 +19,8 @@ import 'post_firestore_repository.mocks.dart';
   WidgetRef,
   Reference,
   DocumentReference,
+  QuerySnapshot,
+  QueryDocumentSnapshot,
 ])
 void main() {
   late PostFirestoreRepository postFirestoreRepository;
@@ -28,6 +30,8 @@ void main() {
   late MockReference mockReference;
   late MockPostFirestoreRepository mockPostFirestoreRepository;
   late MockDocumentReference mockDocumentReference;
+  late MockQuerySnapshot mockQuerySnapshot;
+  late MockQueryDocumentSnapshot mockQueryDocumentSnapshot;
 
   setUp(() {
     mockPostFirestoreAPI = MockPostFirestoreAPI();
@@ -39,6 +43,8 @@ void main() {
     mockWidgetRef = MockWidgetRef();
     mockReference = MockReference();
     mockDocumentReference = MockDocumentReference();
+    mockQuerySnapshot = MockQuerySnapshot();
+    mockQueryDocumentSnapshot = MockQueryDocumentSnapshot();
   });
 
   final fakePost = FakePost().post();
@@ -114,5 +120,35 @@ void main() {
       verifyNever(mockPostFirestoreAPI.getPost('id2'));
       expect(result, null);
     });
+  });
+
+  test('delete all posts', () async {
+    when(mockPostFirestoreAPI.getUserPosts(any))
+        .thenAnswer((_) async => mockQuerySnapshot);
+    when(mockQuerySnapshot.docs).thenReturn([mockQueryDocumentSnapshot]);
+    when(mockQueryDocumentSnapshot.id).thenReturn('testPostId');
+
+    final result =
+        await postFirestoreRepository.deleteAllPosts('testAccountId');
+
+    verify(mockPostFirestoreAPI.getUserPosts('testAccountId')).called(1);
+    verify(mockPostFirestoreAPI.deletePost('testPostId')).called(1);
+    verify(mockPostFirestoreAPI.deleteUserPost('testAccountId', 'testPostId'))
+        .called(1);
+    expect(result, true);
+  });
+
+  test('deleteAllPosts throws FirebaseException', () async {
+    when(mockPostFirestoreAPI.getUserPosts(any)).thenThrow(
+      FirebaseException(plugin: 'test', message: 'test exception'),
+    );
+
+    final result =
+        await postFirestoreRepository.deleteAllPosts('testAccountId');
+
+    verify(mockPostFirestoreAPI.getUserPosts('testAccountId')).called(1);
+    verifyNever(mockPostFirestoreAPI.deletePost(any));
+    verifyNever(mockPostFirestoreAPI.deleteUserPost(any, any));
+    expect(result, false);
   });
 }
