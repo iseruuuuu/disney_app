@@ -42,4 +42,14 @@ class FakeUser {
 
   String mockImage =
       'https://quality-start.in/wp-content/uploads/2021/07/flutter-logo-sharing.png';
+
+  final fakeMockIds = <String>['1', '2', '3'];
+  final mockData = {
+    'name': 'Test Name',
+    'user_id': 'Test User Id',
+    'self_introduction': 'Hello, this is test.',
+    'image_path': '/path/to/image',
+    'created_time': Timestamp.now(),
+    'updated_time': Timestamp.now(),
+  };
 }

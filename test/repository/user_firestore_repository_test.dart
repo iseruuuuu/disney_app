@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/api/user_firestore_api.dart';
 import 'package:disney_app/core/model/repository/user_firestore_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -11,23 +12,32 @@ import 'package:mockito/mockito.dart';
 import '../fake/fake_user.dart';
 import 'user_firestore_repository_test.mocks.dart';
 
-@GenerateMocks([UserFirestoreAPI])
+@GenerateMocks([
+  UserFirestoreAPI,
+  DocumentSnapshot,
+  WidgetRef,
+])
 void main() {
   late UserFirestoreRepository userFirestoreRepository;
   late MockUserFirestoreAPI mockUserFirestoreAPI;
+  late MockDocumentSnapshot mockDocumentSnapshot;
+  late MockWidgetRef mockWidgetRef;
 
   setUp(() {
     mockUserFirestoreAPI = MockUserFirestoreAPI();
     userFirestoreRepository = UserFirestoreRepository(mockUserFirestoreAPI);
+    mockDocumentSnapshot = MockDocumentSnapshot();
+    mockWidgetRef = MockWidgetRef();
   });
   final fakeUser = FakeUser().mockAccount();
-  final fakeMockIds = FakeUser().mockIds;
   final fakeMockAccountId = FakeUser().mockAccountId;
   final fakeMockImage = FakeUser().mockImage;
   final accountMap = <String, Account>{
     FakeUser().account1.id: FakeUser().account1,
     FakeUser().account2.id: FakeUser().account2,
   };
+  final fakeMockIds = FakeUser().fakeMockIds;
+  final fakeMockData = FakeUser().mockData;
 
   group('user firestore repository', () {
     test('stream', () {
@@ -42,22 +52,20 @@ void main() {
     });
 
     test('set user', () async {
-      final mockAccount = Account(
-        id: 'testID',
-        name: 'testName',
-        userId: 'testUserId',
-        selfIntroduction: 'testIntroduction',
-        imagePath: 'testImagePath',
-        createdTime: Timestamp.now(),
-        updateTime: Timestamp.now(),
-      );
-
       when(mockUserFirestoreAPI.setUserDocument(any, any))
           .thenAnswer((_) async => true);
-
-      final result = await userFirestoreRepository.setUser(mockAccount);
-
+      final result = await userFirestoreRepository.setUser(fakeUser);
       expect(result, true);
+    });
+
+    test('get post user map', () async {
+      when(mockDocumentSnapshot.data()).thenReturn(fakeMockData);
+      for (final id in fakeMockIds) {
+        when(mockUserFirestoreAPI.getUserDocument(id))
+            .thenAnswer((_) async => mockDocumentSnapshot);
+      }
+      final result = await userFirestoreRepository.getPostUserMap(fakeMockIds);
+      expect(result, isA<Map<String, Account>>());
     });
   });
 }
