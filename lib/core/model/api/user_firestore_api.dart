@@ -40,4 +40,8 @@ class UserFirestoreAPI {
   Reference getStorageReference(String filePath) {
     return storage.ref(filePath);
   }
+
+  Reference refFromURL(String filePath) {
+    return FirebaseStorage.instance.refFromURL(filePath);
+  }
 }

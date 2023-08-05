@@ -1,14 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/api/user_firestore_api.dart';
-import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
+import 'package:disney_app/core/model/repository/post_firestore_repository.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserFirestoreRepository {
-  UserFirestoreRepository(this.firestoreAPI);
+  UserFirestoreRepository(
+    this.firestoreAPI,
+    this.firestoreRepository,
+  );
 
   final UserFirestoreAPI firestoreAPI;
+  final PostFirestoreRepository firestoreRepository;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> stream(String myAccountId) {
     return firestoreAPI.stream(myAccountId);
@@ -102,8 +106,8 @@ class UserFirestoreRepository {
   ) async {
     try {
       await firestoreAPI.deleteUserDocument(accountId);
-      await ref.read(postUsecaseProvider).deleteAllPosts(accountId);
-      final storageReference = firestoreAPI.getStorageReference(filePath);
+      await firestoreRepository.deleteAllPosts(accountId);
+      final storageReference = firestoreAPI.refFromURL(filePath);
       await storageReference.delete();
       return true;
     } on FirebaseException catch (_) {
