@@ -40,6 +40,7 @@ void main() {
   final fakeMockIds = FakePost().mockIds;
   final fakeMockPosts = FakePost().mockPosts;
   final fakeMockAccountId = FakePost().mockAccountId;
+  final fakeMockGetPostsFromIds = FakePost().mockGetPostsFromIds;
 
   group('post firestore repository', () {
     test('stream', () {
@@ -83,31 +84,34 @@ void main() {
       when(mockPostFirestoreAPI.getPost(any))
           .thenAnswer((_) async => mockDocumentSnapshot);
       when(mockDocumentSnapshot.data()).thenReturn({
-        'content': 'test content',
-        'post_account_id': 'testAccountId',
+        'content': fakePost.content,
+        'post_account_id': fakePost.postAccountId,
         'created_time': Timestamp.now(),
         'rank': 5,
-        'attraction_name': 'test attraction',
+        'attraction_name': fakePost.attractionName,
         'is_spoiler': false,
       });
-      when(mockDocumentSnapshot.id).thenReturn('testPostId');
-      final result =
-          await postFirestoreRepository.getPostsFromIds(['id1', 'id2']);
-      verify(mockPostFirestoreAPI.getPost('id1')).called(1);
-      verify(mockPostFirestoreAPI.getPost('id2')).called(1);
+      when(mockDocumentSnapshot.id).thenReturn(fakeMockAccountId);
+      final result = await postFirestoreRepository
+          .getPostsFromIds(fakeMockGetPostsFromIds);
+      verify(mockPostFirestoreAPI.getPost(fakeMockGetPostsFromIds[0]))
+          .called(1);
+      verify(mockPostFirestoreAPI.getPost(fakeMockGetPostsFromIds[1]))
+          .called(1);
       expect(result!.length, 2);
-      expect(result[0].id, 'testPostId');
-      expect(result[1].id, 'testPostId');
+      expect(result[0].id, fakeMockAccountId);
+      expect(result[1].id, fakeMockAccountId);
     });
 
     test('get posts from ids FirebaseException', () async {
       when(mockPostFirestoreAPI.getPost(any)).thenThrow(
         FirebaseException(plugin: 'test', message: 'test exception'),
       );
-      final result =
-          await postFirestoreRepository.getPostsFromIds(['id1', 'id2']);
-      verify(mockPostFirestoreAPI.getPost('id1')).called(1);
-      verifyNever(mockPostFirestoreAPI.getPost('id2'));
+      final result = await postFirestoreRepository
+          .getPostsFromIds(fakeMockGetPostsFromIds);
+      verify(mockPostFirestoreAPI.getPost(fakeMockGetPostsFromIds[0]))
+          .called(1);
+      verifyNever(mockPostFirestoreAPI.getPost(fakeMockGetPostsFromIds[1]));
       expect(result, null);
     });
   });
