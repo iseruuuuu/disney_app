@@ -58,6 +58,14 @@ void main() {
       expect(result, true);
     });
 
+    test('get user', () async {
+      when(mockDocumentSnapshot.data()).thenReturn(fakeMockData);
+      when(mockUserFirestoreAPI.getUserDocument(any))
+          .thenAnswer((_) async => mockDocumentSnapshot);
+      final result = await userFirestoreRepository.getUser(fakeMockAccountId);
+      expect(result, true);
+    });
+
     test('get post user map', () async {
       when(mockDocumentSnapshot.data()).thenReturn(fakeMockData);
       for (final id in fakeMockIds) {
