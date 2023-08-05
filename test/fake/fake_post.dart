@@ -53,4 +53,6 @@ class FakePost {
   String mockAccountId = 'test';
 
   List<String> mockGetPostsFromIds = ['id1', 'id2'];
+
+  final userPostData = {'title': 'User Post'};
 }
