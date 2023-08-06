@@ -9,7 +9,6 @@ import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/screen/login/login_screen_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
