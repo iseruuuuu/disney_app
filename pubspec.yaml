@@ -17,6 +17,8 @@ dependencies:
     sdk: flutter
   flutter_gen: ^5.3.1
   flutter_hooks: ^0.18.3
+  flutter_localizations:
+    sdk: flutter
   flutter_native_splash: ^2.1.3+1
   flutter_picker: ^2.1.0
   flutter_rating_bar: ^4.0.1
@@ -68,3 +70,9 @@ flutter:
   assets:
     - assets/header/
     - assets/images/
+
+flutter_gen:
+  output: lib/gen/
+  lineLength: 80
+  integrations:
+    flutter_svg: true
