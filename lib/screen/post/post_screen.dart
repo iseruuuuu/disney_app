@@ -2,6 +2,8 @@ import 'package:disney_app/core/component/app_attraction.dart';
 import 'package:disney_app/core/component/app_rating.dart';
 import 'package:disney_app/core/component/app_text_field.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
+import 'package:disney_app/core/theme/app_text_style.dart';
+import 'package:disney_app/l10n/l10n.dart';
 import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/screen/post/post_screen_view_model.dart';
 import 'package:flutter/material.dart';
@@ -16,23 +18,20 @@ class PostScreen extends ConsumerWidget {
     final controller = ref.watch(postScreenViewModelProvider.notifier);
     final state = ref.watch(postScreenViewModelProvider);
     final loading = ref.watch(loadingProvider);
+    final l10n = L10n.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Text('投稿'),
         elevation: 0,
         actions: [
           TextButton(
             onPressed: () => ref
                 .read(postScreenViewModelProvider.notifier)
                 .post(context, ref),
-            child: const Text(
-              '投稿',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+            child: Text(
+              l10n.post,
+              style: AppTextStyle.appBoldBlue18TextStyle,
             ),
           ),
         ],
@@ -63,19 +62,17 @@ class PostScreen extends ConsumerWidget {
                 ),
                 AppTextField(
                   controller: controller.controller,
-                  hintText: '感想',
+                  hintText: l10n.impressions,
                   maxLines: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      state.isSpoiler ? 'ネタバレあり!' : 'ネタバレなし!',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.black,
-                      ),
+                      state.isSpoiler
+                          ? l10n.is_spoiler_true
+                          : l10n.is_spoiler_false,
+                      style: AppTextStyle.appBold20TextStyle,
                     ),
                     Transform.scale(
                       scale: 1.5,

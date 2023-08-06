@@ -1,6 +1,8 @@
 import 'package:disney_app/screen/login/login_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'l10n/l10n.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -10,6 +12,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(brightness: Brightness.light),
       darkTheme: ThemeData(brightness: Brightness.light),
+      localizationsDelegates: L10n.localizationsDelegates,
+      supportedLocales: const [
+        Locale('ja'),
+      ],
       home: const LoginScreen(),
     );
   }

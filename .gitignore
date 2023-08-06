@@ -39,6 +39,12 @@ migrate_working_dir/
 *.g.dart
 *.mocks.dart
 
+# FlutterGen
+lib/gen/
+
+# L10n
+lib/l10n/*.dart
+
 # account
 lib/core/constants/account.dart
 

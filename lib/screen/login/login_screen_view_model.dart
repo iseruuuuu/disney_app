@@ -103,8 +103,11 @@ class LoginScreenViewModel extends ChangeNotifier {
         });
       }
     } else {
-      final errorMessage = FunctionUtils().checkLoginError(result.toString());
       await Future<void>.delayed(const Duration(seconds: 2)).then((_) {
+        final errorMessage = FunctionUtils().checkLoginError(
+          result.toString(),
+          context,
+        );
         loading.isLoading = false;
         SnackBarUtils.snackBar(context, errorMessage);
       });

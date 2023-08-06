@@ -1,3 +1,5 @@
+import 'package:disney_app/core/theme/app_text_style.dart';
+import 'package:disney_app/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class AppEmptyScreen extends StatelessWidget {
@@ -5,16 +7,13 @@ class AppEmptyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context)!;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text(
-          '投稿がまだありません',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-          ),
+        Text(
+          l10n.no_post,
+          style: AppTextStyle.noPostTextStyle,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 30),

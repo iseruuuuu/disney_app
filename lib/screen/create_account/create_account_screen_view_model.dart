@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
+import 'package:disney_app/l10n/l10n.dart';
 import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
@@ -48,6 +49,7 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
   }
 
   Future<void> createAccount(BuildContext context, WidgetRef ref) async {
+    final l10n = L10n.of(context)!;
     loading.isLoading = true;
     FocusScope.of(context).unfocus();
     if (nameController.text.isNotEmpty &&
@@ -95,16 +97,18 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
         }
       } else {
         loading.isLoading = false;
-        final errorMessage =
-            FunctionUtils().checkRegisterError(result.toString());
         if (!mounted) {
           return;
         }
+        final errorMessage = FunctionUtils().checkRegisterError(
+          result.toString(),
+          context,
+        );
         SnackBarUtils.snackBar(context, errorMessage);
       }
     } else {
       loading.isLoading = false;
-      SnackBarUtils.snackBar(context, '登録してた内容に不備があります');
+      SnackBarUtils.snackBar(context, l10n.error_empty_register);
     }
   }
 }

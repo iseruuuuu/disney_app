@@ -3,9 +3,9 @@ analyzer:
   errors:
     missing_required_param: warning
     missing_return: warning
+  exclude:
+    - '**/l10n/*.dart'
   language:
-#    一度、コメントアウトしておく
-#    strict-casts: true
     strict-inference: true
     strict-raw-types: true
 linter:
