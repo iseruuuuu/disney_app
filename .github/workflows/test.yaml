@@ -18,8 +18,8 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'stable'
-      - run: flutter pub get
-      - run: flutter test --no-test-assets --coverage --coverage-path=~/coverage/lcov.info
+      - run: fvm flutter pub get
+      - run: fvm flutter test --no-test-assets --coverage --coverage-path=~/coverage/lcov.info
       - uses: codecov/codecov-action@v1
         with:
           token: ${{secrets.CODECOV_TOKEN}}
