@@ -21,8 +21,10 @@
 "reset_password": "パスワードの再設定",
 "send_reset_message": "メールアドレスにパスワード再設定のメールを送信します。",
 "send_email": "メールを送る",
+
 "is_spoiler_true": "ネタバレあり!",
 "is_spoiler_false": "ネタバレなし!",
+
 "completed_to_create_account": "アカウント登録完了",
 "completed_to_create_account_content": "アカウントの登録が完了しました。\n確認用のメールをお送りしました。\nメール内のリンクをクリックし、\n認証を行ってください。",
 
@@ -47,5 +49,6 @@
 "app_bar_create_account": "Create Account",
 "app_bar_login" : "Login",
 
-"score": "点"
+"score": "点",
+"impressions": "感想"
 }

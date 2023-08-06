@@ -128,6 +128,7 @@ class AppTextStyle {
     fontSize: 17,
   );
 
+  //TODO 共通にする。
   static const updateTextStyle = TextStyle(
     color: Colors.blue,
     fontWeight: FontWeight.bold,
@@ -140,6 +141,7 @@ class AppTextStyle {
     fontWeight: FontWeight.bold,
   );
 
+  //TODO 共通のStyleにする。
   static TextStyle tDRTextStyle = GoogleFonts.pattaya(
     color: Colors.black,
     fontSize: 20,

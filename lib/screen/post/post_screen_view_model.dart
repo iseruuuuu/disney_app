@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:disney_app/core/constants/attraction.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
+import 'package:disney_app/l10n/l10n.dart';
 import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/screen/post/post_screen_state.dart';
 import 'package:disney_app/utils/authentication.dart';
@@ -65,6 +66,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
   }
 
   Future<void> post(BuildContext context, WidgetRef ref) async {
+    final l10n = L10n.of(context)!;
     loading.isLoading = true;
     if (controller.text.isNotEmpty && state.attractionName != '') {
       final newPost = Post(
@@ -83,7 +85,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
       }
     } else {
       loading.isLoading = false;
-      SnackBarUtils.snackBar(context, 'いずれかの値が未記入となっています');
+      SnackBarUtils.snackBar(context, l10n.error_empty_post);
     }
   }
 
