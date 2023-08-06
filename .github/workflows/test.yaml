@@ -33,17 +33,17 @@ jobs:
 
       - name: Install dependencies
         run: |
-          flutter pub get
+         fvm flutter pub get
 
       - name: Test
         run: |
-          flutter test --machine > test_report.log
+         fvm flutter test --machine > test_report.log
 
       - name: Test Report
         uses: dorny/test-reporter@v1
         if: always()
         with:
-          name: 'flutter test'
+          name: 'fvm flutter test'
           path: 'test_report.log'
           reporter: 'flutter-json'
           fail-on-error: 'false'
