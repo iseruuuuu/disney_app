@@ -1,5 +1,7 @@
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
+import 'package:disney_app/core/theme/app_text_style.dart';
+import 'package:disney_app/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -19,39 +21,28 @@ class DetailScreenViewModel extends ChangeNotifier {
     Post newPost,
     WidgetRef ref,
   ) {
+    final l10n = L10n.of(context)!;
     showDialog<void>(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text(
-            '削除確認',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 17,
-            ),
+          title: Text(
+            l10n.dialog_delete_check_title,
+            style: AppTextStyle.postTextStyle,
             textAlign: TextAlign.center,
           ),
-          content: const Text(
-            '投稿を削除してもよろしいでしょうか？\n'
-            '復元はできなくなっております',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 15,
-            ),
+          content: Text(
+            l10n.dialog_contact_contents,
+            style: AppTextStyle.cellDescriptionTextStyle,
             textAlign: TextAlign.center,
           ),
           actions: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: TextButton(
-                child: const Text(
-                  'Cancel',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
+                child: Text(
+                  l10n.dialog_cancel,
+                  style: AppTextStyle.cancelTextStyle,
                 ),
                 onPressed: () => Navigator.pop(context),
               ),
@@ -68,13 +59,9 @@ class DetailScreenViewModel extends ChangeNotifier {
                     ref,
                   );
                 },
-                child: const Text(
-                  'OK',
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
+                child: Text(
+                  l10n.dialog_ok,
+                  style: AppTextStyle.okTextStyle,
                 ),
               ),
             ),

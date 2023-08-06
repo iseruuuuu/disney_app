@@ -106,8 +106,8 @@ class AppDisneyCell extends ConsumerWidget {
                         onTap: () {
                           FunctionUtils.openDialog(
                             context: context,
-                            title: l10n.delete_check_title,
-                            content: l10n.delete_check_content,
+                            title: l10n.dialog_delete_check_title,
+                            content: l10n.dialog_delete_check_content,
                             onTap: () async {
                               await ref
                                   .read(postUsecaseProvider)

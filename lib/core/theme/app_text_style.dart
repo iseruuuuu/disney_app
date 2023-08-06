@@ -16,12 +16,14 @@ class AppTextStyle {
     color: Colors.grey,
   );
 
+  //TODO 共通のStyleにする。
   static const cellAttractionTextStyle = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 15,
     color: Colors.black,
   );
 
+  //TODO 共通のStyleにする。
   static const cellDescriptionTextStyle = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 15,
@@ -90,6 +92,7 @@ class AppTextStyle {
     fontWeight: FontWeight.bold,
   );
 
+  //TODO 共通のStyleにする。
   static const postTextStyle = TextStyle(
     color: Colors.black,
     fontSize: 17,
@@ -110,5 +113,17 @@ class AppTextStyle {
   static TextStyle appBarCreateAccountTextStyle = GoogleFonts.pattaya(
     fontSize: 30,
     fontWeight: FontWeight.bold,
+  );
+
+  static const cancelTextStyle = TextStyle(
+    color: Colors.blue,
+    fontWeight: FontWeight.bold,
+    fontSize: 17,
+  );
+
+  static const okTextStyle = TextStyle(
+    color: Colors.red,
+    fontWeight: FontWeight.bold,
+    fontSize: 17,
   );
 }

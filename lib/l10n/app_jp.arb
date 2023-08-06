@@ -10,10 +10,6 @@
 "email": "メールアドレス",
 "password": "パスワード(６文字以上)",
 "create_account": "アカウント作成",
-"delete_check_title": "削除確認",
-"delete_check_content": "投稿を削除してもよろしいでしょうか？\n復元はできなくなっております。",
-"cancel":"キャンセル",
-"ok": "OK",
 "tweet": "tweet",
 "update": "更新する",
 "log_out_check_title": "ログアウト確認",
@@ -37,9 +33,16 @@
 "error_empty_email": "メールアドレスを入力してください",
 "error_empty_post": "いずれかの値が未記入となっています",
 "send_message": "メールを送信しました。",
+
 "dialog_spoiler_cell_text": "ネタバレがあります!!!\n遷移して確認ください🙇‍",
 "dialog_contact_title": "お問い合わせ画面に遷移",
 "dialog_contact_contents": "投稿について問い合わせるサイトに\n遷移します。よろしいですか？",
+"dialog_delete_check_title": "削除確認",
+"dialog_delete_check_content": "投稿を削除してもよろしいでしょうか？\n復元はできなくなっております。",
+"dialog_cancel":"キャンセル",
+"dialog_ok": "OK",
 
-"app_bar_create_account": "Create Account"
+"app_bar_create_account": "Create Account",
+
+"score": "点"
 }
