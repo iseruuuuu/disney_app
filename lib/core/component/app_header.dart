@@ -60,9 +60,10 @@ class AppHeader extends StatelessWidget {
                     ? Image.asset(
                         Assets.images.badge.path,
                         fit: BoxFit.fill,
-                        width: 35,
+                        width: 40,
                       )
                     : const SizedBox.shrink(),
+                const SizedBox(width: 10),
                 isMyAccount
                     ? OutlinedButton(
                         onPressed: onTapEdit,

@@ -3,11 +3,11 @@ import 'package:disney_app/core/component/app_rating.dart';
 import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
+import 'package:disney_app/core/theme/app_text_style.dart';
 import 'package:disney_app/gen/assets.gen.dart';
 import 'package:disney_app/screen/detail/detail_screen_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class DetailScreen extends ConsumerWidget {
@@ -34,11 +34,7 @@ class DetailScreen extends ConsumerWidget {
             image: Assets.header.detailHeader.path,
             text: Text(
               'Tweet',
-              style: GoogleFonts.pattaya(
-                fontSize: 30,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+              style: AppTextStyle.tweetTextStyle,
             ),
           ),
           Row(
@@ -57,18 +53,14 @@ class DetailScreen extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width / 1.5,
+                    width: MediaQuery.of(context).size.width / 1.6,
                     child: Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: Text(
                         account.name,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
+                        style: AppTextStyle.detailAccountNameTextStyle,
                       ),
                     ),
                   ),
@@ -88,7 +80,7 @@ class DetailScreen extends ConsumerWidget {
                   ? Image.asset(
                       Assets.images.badge.path,
                       fit: BoxFit.fill,
-                      width: 35,
+                      width: 45,
                     )
                   : const SizedBox.shrink(),
             ],
@@ -97,7 +89,8 @@ class DetailScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Row(
                   children: [
                     AppRating(
@@ -108,34 +101,26 @@ class DetailScreen extends ConsumerWidget {
                       padding: const EdgeInsets.only(left: 20),
                       child: Text(
                         '${post.rank}点',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
+                        style: AppTextStyle.detailRankTextStyle,
                       ),
                     ),
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Text(
                   post.attractionName,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
+                  style: AppTextStyle.detailAttractionNameTextStyle,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Text(
                   post.content,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.black,
-                  ),
+                  style: AppTextStyle.detailContentTextStyle,
                 ),
               ),
               const Divider(color: Colors.grey),
@@ -151,10 +136,7 @@ class DetailScreen extends ConsumerWidget {
                             DateFormat('yyyy/MM/dd').format(
                               post.createdTime!.toDate(),
                             ),
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.grey.shade600,
-                            ),
+                            style: AppTextStyle.detailCreatedTimeTextStyle,
                           ),
                           const Spacer(),
                           (post.postAccountId == myAccount)
@@ -168,7 +150,7 @@ class DetailScreen extends ConsumerWidget {
                                         ref,
                                       ),
                                   child: const Icon(
-                                    Icons.reorder,
+                                    Icons.more_horiz,
                                     color: Colors.black,
                                   ),
                                 )
