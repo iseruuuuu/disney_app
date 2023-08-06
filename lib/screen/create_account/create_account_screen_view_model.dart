@@ -97,13 +97,13 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
         }
       } else {
         loading.isLoading = false;
+        if (!mounted) {
+          return;
+        }
         final errorMessage = FunctionUtils().checkRegisterError(
           result.toString(),
           context,
         );
-        if (!mounted) {
-          return;
-        }
         SnackBarUtils.snackBar(context, errorMessage);
       }
     } else {
