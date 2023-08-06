@@ -54,6 +54,7 @@ class AppTextStyle {
     fontSize: 16,
   );
 
+  //TODO 共通で使えるようにする。
   static const detailAccountNameTextStyle = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.bold,
@@ -117,13 +118,13 @@ class AppTextStyle {
   );
 
   static const cancelTextStyle = TextStyle(
-    color: Colors.blue,
+    color: Colors.red,
     fontWeight: FontWeight.bold,
     fontSize: 17,
   );
 
   static const okTextStyle = TextStyle(
-    color: Colors.red,
+    color: Colors.blue,
     fontWeight: FontWeight.bold,
     fontSize: 17,
   );

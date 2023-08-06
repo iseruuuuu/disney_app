@@ -31,6 +31,17 @@
 "error_empty_register": "登録してた内容に不備があります",
 "error_empty_email": "メールアドレスを入力してください",
 "error_empty_post": "いずれかの値が未記入となっています",
+
+"error_badly_formatted": "メールアドレスの形式が不正です。",
+"error_6_characters": "パスワードは６文字以上に設定してください。",
+"error_already": "このメールアドレスはすでに使用されています。",
+"error_other": "不鮮明のエラーです。運営側にお伝えください。",
+
+"error_password": "パスワード or メールアドレスが間違っています",
+"error_disabled": "ログイン試行過多により、アカウントが一時ロックされています。",
+"error_no_user": "アカウントが存在しない or 削除された可能性があります。",
+"error_no_mail": "メールアドレスの認証が完了していません。",
+
 "send_message": "メールを送信しました。",
 
 "dialog_spoiler_cell_text": "ネタバレがあります!!!\n遷移して確認ください🙇‍",
@@ -45,6 +56,8 @@
 "dialog_delete_account_title": "アカウント削除確認",
 "dialog_delete_account_content": "アカウントの情報を削除します。\n投稿内容も全て削除されます。\nよろしいでしょうか？",
 "dialog_delete_account": "アカウントを削除",
+"dialog_register_account_title": "アカウント登録完了",
+"dialog_register_account_content": "アカウントの登録が完了しました。\n確認用のメールをお送りしました。\nメール内のリンクをクリックし、\n認証を行ってください。",
 
 "app_bar_create_account": "Create Account",
 "app_bar_login" : "Login",

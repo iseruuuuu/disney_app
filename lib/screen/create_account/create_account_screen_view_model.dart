@@ -97,8 +97,10 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
         }
       } else {
         loading.isLoading = false;
-        final errorMessage =
-            FunctionUtils().checkRegisterError(result.toString());
+        final errorMessage = FunctionUtils().checkRegisterError(
+          result.toString(),
+          context,
+        );
         if (!mounted) {
           return;
         }
