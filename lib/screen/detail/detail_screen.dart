@@ -168,7 +168,7 @@ class DetailScreen extends ConsumerWidget {
                                         ref,
                                       ),
                                   child: const Icon(
-                                    Icons.reorder,
+                                    Icons.more_horiz,
                                     color: Colors.black,
                                   ),
                                 )
