@@ -12,12 +12,7 @@
 "create_account": "アカウント作成",
 "tweet": "tweet",
 "update": "更新する",
-"log_out_check_title": "ログアウト確認",
-"log_out_check_content": "ログアウトします。\nよろしいでしょうか？",
 "log_out": "ログアウト",
-"delete_account_title": "アカウント削除確認",
-"delete_account_content": "アカウントの情報を削除します。\n投稿内容も全て削除されます。\nよろしいでしょうか？",
-"delete_account": "アカウントを削除",
 "log_in": "ログイン",
 "app_title": "TDR APP",
 "register_screen": "新規登録はこちら",
@@ -29,6 +24,7 @@
 "is_spoiler_false": "ネタバレなし!",
 "completed_to_create_account": "アカウント登録完了",
 "completed_to_create_account_content": "アカウントの登録が完了しました。\n確認用のメールをお送りしました。\nメール内のリンクをクリックし、\n認証を行ってください。",
+
 "error_empty_register": "登録してた内容に不備があります",
 "error_empty_email": "メールアドレスを入力してください",
 "error_empty_post": "いずれかの値が未記入となっています",
@@ -41,6 +37,11 @@
 "dialog_delete_check_content": "投稿を削除してもよろしいでしょうか？\n復元はできなくなっております。",
 "dialog_cancel":"キャンセル",
 "dialog_ok": "OK",
+"dialog_log_out_check_title": "ログアウト確認",
+"dialog_log_out_check_content": "ログアウトします。\nよろしいでしょうか？",
+"dialog_delete_account_title": "アカウント削除確認",
+"dialog_delete_account_content": "アカウントの情報を削除します。\n投稿内容も全て削除されます。\nよろしいでしょうか？",
+"dialog_delete_account": "アカウントを削除",
 
 "app_bar_create_account": "Create Account",
 

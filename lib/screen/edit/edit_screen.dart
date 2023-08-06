@@ -1,6 +1,8 @@
 import 'package:disney_app/core/component/app_text_button.dart';
 import 'package:disney_app/core/component/app_text_field.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
+import 'package:disney_app/core/theme/app_text_style.dart';
+import 'package:disney_app/l10n/l10n.dart';
 import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/screen/edit/edit_screen_view_model.dart';
 import 'package:disney_app/utils/function_utils.dart';
@@ -16,6 +18,7 @@ class EditScreen extends ConsumerWidget {
     final controller = ref.watch(editScreenViewModelProvider.notifier);
     final image = ref.watch(editScreenViewModelProvider);
     final loading = ref.watch(loadingProvider);
+    final l10n = L10n.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -26,9 +29,9 @@ class EditScreen extends ConsumerWidget {
             onPressed: () => ref
                 .read(editScreenViewModelProvider.notifier)
                 .update(context, ref),
-            child: const Text(
-              '更新する',
-              style: TextStyle(fontSize: 18),
+            child: Text(
+              l10n.update,
+              style: AppTextStyle.updateTextStyle,
             ),
           ),
         ],
@@ -59,19 +62,19 @@ class EditScreen extends ConsumerWidget {
                 const Spacer(),
                 AppTextField(
                   controller: controller.nameController,
-                  hintText: '名前',
+                  hintText: l10n.name,
                   maxLines: 1,
                 ),
                 const Spacer(),
                 AppTextField(
                   controller: controller.userIdController,
-                  hintText: 'ユーザーID',
+                  hintText: l10n.user_id,
                   maxLines: 1,
                 ),
                 const Spacer(),
                 AppTextField(
                   controller: controller.selfIntroductionController,
-                  hintText: '自己紹介',
+                  hintText: l10n.self_introduction,
                   maxLines: 3,
                 ),
                 const Spacer(),
@@ -79,31 +82,28 @@ class EditScreen extends ConsumerWidget {
                   onPressed: () {
                     FunctionUtils.openDialog(
                       context: context,
-                      title: 'ログアウト確認',
-                      content: 'ログアウトします。\n'
-                          'よろしいでしょうか？',
+                      title: l10n.dialog_log_out_check_title,
+                      content: l10n.dialog_log_out_check_content,
                       onTap: () => ref
                           .read(editScreenViewModelProvider.notifier)
                           .signOut(context),
                     );
                   },
-                  title: 'ログアウト',
+                  title: l10n.log_out,
                   color: Colors.red,
                 ),
                 AppTextButton(
                   onPressed: () {
                     FunctionUtils.openDialog(
                       context: context,
-                      title: 'アカウント削除確認',
-                      content: 'アカウントの情報を削除します。\n'
-                          '投稿内容も全て削除されます。\n'
-                          'よろしいでしょうか？',
+                      title: l10n.dialog_delete_account_title,
+                      content: l10n.dialog_delete_account_content,
                       onTap: () => ref
                           .read(editScreenViewModelProvider.notifier)
                           .delete(context, ref),
                     );
                   },
-                  title: 'アカウントを削除',
+                  title: l10n.dialog_delete_account,
                   color: Colors.red,
                 ),
                 const Spacer(),

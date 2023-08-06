@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
+import 'package:disney_app/l10n/l10n.dart';
 import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
@@ -51,6 +52,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
   }
 
   Future<void> update(BuildContext context, WidgetRef ref) async {
+    final l10n = L10n.of(context)!;
     loading.isLoading = true;
     if (nameController.text.isNotEmpty &&
         userIdController.text.isNotEmpty &&
@@ -83,7 +85,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
     }
     loading.isLoading = false;
     await Future<void>.delayed(const Duration(seconds: 2)).then((_) {
-      SnackBarUtils.snackBar(context, 'いずれかの値が空になっています。');
+      SnackBarUtils.snackBar(context, l10n.error_empty_post);
     });
   }
 

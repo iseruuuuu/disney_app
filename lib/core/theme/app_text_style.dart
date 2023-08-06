@@ -126,4 +126,10 @@ class AppTextStyle {
     fontWeight: FontWeight.bold,
     fontSize: 17,
   );
+
+  static const updateTextStyle = TextStyle(
+    color: Colors.blue,
+    fontWeight: FontWeight.bold,
+    fontSize: 18,
+  );
 }
