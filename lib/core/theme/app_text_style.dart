@@ -9,7 +9,7 @@ class AppTextStyle {
     color: Colors.black,
   );
 
-  static const cellDateTextStyle = TextStyle(
+  static const cellUserIdTextStyle = TextStyle(
     fontSize: 15,
     fontWeight: FontWeight.bold,
     color: Colors.grey,

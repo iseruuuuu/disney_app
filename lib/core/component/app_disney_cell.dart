@@ -65,22 +65,33 @@ class AppDisneyCell extends ConsumerWidget {
                     top: 10,
                     left: 10,
                   ),
-                  child: Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Row(
+                        children: [
+                          Text(
+                            account.name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: AppTextStyle.cellNameTextStyle,
+                          ),
+                          const SizedBox(width: 5),
+                          (post.postAccountId == MasterAccount.masterAccount)
+                              ? Image.asset(
+                                  Assets.images.badge.path,
+                                  fit: BoxFit.fill,
+                                  width: 25,
+                                )
+                              : const SizedBox.shrink(),
+                        ],
+                      ),
                       Text(
-                        account.name,
+                        '@${account.userId}',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: AppTextStyle.cellNameTextStyle,
+                        style: AppTextStyle.cellUserIdTextStyle,
                       ),
-                      const SizedBox(width: 10),
-                      (post.postAccountId == MasterAccount.masterAccount)
-                          ? Image.asset(
-                              Assets.images.badge.path,
-                              fit: BoxFit.fill,
-                              width: 35,
-                            )
-                          : const SizedBox.shrink(),
                     ],
                   ),
                 ),
@@ -103,7 +114,7 @@ class AppDisneyCell extends ConsumerWidget {
                             },
                           );
                         },
-                        child: const Icon(Icons.reorder),
+                        child: const Icon(Icons.more_horiz),
                       ),
                     )
                   : Padding(
