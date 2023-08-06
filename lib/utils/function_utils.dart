@@ -38,12 +38,12 @@ class FunctionUtils {
         return AlertDialog(
           title: Text(
             title,
-            style: AppTextStyle.postTextStyle,
+            style: AppTextStyle.appBold17TextStyle,
             textAlign: TextAlign.center,
           ),
           content: Text(
             content,
-            style: AppTextStyle.cellAttractionTextStyle,
+            style: AppTextStyle.appBold15TextStyle,
             textAlign: TextAlign.center,
           ),
           actions: [
@@ -124,7 +124,7 @@ class FunctionUtils {
         return AlertDialog(
           title: Text(
             l10n.dialog_register_account_title,
-            style: AppTextStyle.detailAccountNameTextStyle,
+            style: AppTextStyle.appBold18TextStyle,
             textAlign: TextAlign.center,
           ),
           content: Column(
@@ -132,7 +132,7 @@ class FunctionUtils {
             children: [
               Text(
                 l10n.dialog_register_account_content,
-                style: AppTextStyle.cellAttractionTextStyle,
+                style: AppTextStyle.appBold15TextStyle,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),

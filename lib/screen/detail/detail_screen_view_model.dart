@@ -28,12 +28,12 @@ class DetailScreenViewModel extends ChangeNotifier {
         return AlertDialog(
           title: Text(
             l10n.dialog_delete_check_title,
-            style: AppTextStyle.postTextStyle,
+            style: AppTextStyle.appBold17TextStyle,
             textAlign: TextAlign.center,
           ),
           content: Text(
             l10n.dialog_contact_contents,
-            style: AppTextStyle.cellDescriptionTextStyle,
+            style: AppTextStyle.app15TextStyle,
             textAlign: TextAlign.center,
           ),
           actions: [

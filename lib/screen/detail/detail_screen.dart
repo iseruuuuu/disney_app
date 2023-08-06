@@ -62,7 +62,7 @@ class DetailScreen extends ConsumerWidget {
                         account.name,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: AppTextStyle.detailAccountNameTextStyle,
+                        style: AppTextStyle.appBold18TextStyle,
                       ),
                     ),
                   ),

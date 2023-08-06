@@ -31,7 +31,7 @@ class PostScreen extends ConsumerWidget {
                 .post(context, ref),
             child: Text(
               l10n.post,
-              style: AppTextStyle.updateTextStyle,
+              style: AppTextStyle.appBoldBlue18TextStyle,
             ),
           ),
         ],
@@ -72,7 +72,7 @@ class PostScreen extends ConsumerWidget {
                       state.isSpoiler
                           ? l10n.is_spoiler_true
                           : l10n.is_spoiler_false,
-                      style: AppTextStyle.tDRTextStyle,
+                      style: AppTextStyle.appBold20TextStyle,
                     ),
                     Transform.scale(
                       scale: 1.5,

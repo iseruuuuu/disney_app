@@ -31,7 +31,7 @@ class EditScreen extends ConsumerWidget {
                 .update(context, ref),
             child: Text(
               l10n.update,
-              style: AppTextStyle.updateTextStyle,
+              style: AppTextStyle.appBoldBlue18TextStyle,
             ),
           ),
         ],

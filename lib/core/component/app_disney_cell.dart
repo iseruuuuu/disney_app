@@ -147,7 +147,7 @@ class AppDisneyCell extends ConsumerWidget {
               width: MediaQuery.of(context).size.width - 80,
               child: Text(
                 post.attractionName,
-                style: AppTextStyle.cellAttractionTextStyle,
+                style: AppTextStyle.appBold15TextStyle,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -159,7 +159,7 @@ class AppDisneyCell extends ConsumerWidget {
               child: !post.isSpoiler
                   ? Text(
                       post.content,
-                      style: AppTextStyle.cellDescriptionTextStyle,
+                      style: AppTextStyle.app15TextStyle,
                       overflow: TextOverflow.visible,
                     )
                   : Row(

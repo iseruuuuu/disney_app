@@ -5,6 +5,42 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTextStyle {
   AppTextStyle._();
 
+  static const app15TextStyle = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 15,
+    color: Colors.black,
+  );
+
+  static const appBold15TextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 15,
+    color: Colors.black,
+  );
+
+  static const appBold17TextStyle = TextStyle(
+    color: Colors.black,
+    fontSize: 17,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const appBold18TextStyle = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+  );
+
+  static const appBoldBlue18TextStyle = TextStyle(
+    color: Colors.blue,
+    fontWeight: FontWeight.bold,
+    fontSize: 18,
+  );
+
+  static TextStyle appBold20TextStyle = GoogleFonts.pattaya(
+    color: Colors.black,
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+  );
+
   static const cellNameTextStyle = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.bold,
@@ -15,20 +51,6 @@ class AppTextStyle {
     fontSize: 15,
     fontWeight: FontWeight.bold,
     color: Colors.grey,
-  );
-
-  //TODO 共通のStyleにする。
-  static const cellAttractionTextStyle = TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 15,
-    color: Colors.black,
-  );
-
-  //TODO 共通のStyleにする。
-  static const cellDescriptionTextStyle = TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 15,
-    color: Colors.black,
   );
 
   static const cellSpoilerDescriptionTextStyle = TextStyle(
@@ -52,13 +74,6 @@ class AppTextStyle {
     color: Colors.black,
     fontWeight: FontWeight.w500,
     fontSize: 16,
-  );
-
-  //TODO 共通で使えるようにする。
-  static const detailAccountNameTextStyle = TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.bold,
-    color: Colors.black,
   );
 
   static TextStyle tweetTextStyle = GoogleFonts.pattaya(
@@ -94,13 +109,6 @@ class AppTextStyle {
     fontWeight: FontWeight.bold,
   );
 
-  //TODO 共通のStyleにする。
-  static const postTextStyle = TextStyle(
-    color: Colors.black,
-    fontSize: 17,
-    fontWeight: FontWeight.bold,
-  );
-
   static const labelTextStyle = TextStyle(
     color: Colors.grey,
     fontWeight: FontWeight.bold,
@@ -129,23 +137,9 @@ class AppTextStyle {
     fontSize: 17,
   );
 
-  //TODO 共通にする。
-  static const updateTextStyle = TextStyle(
-    color: Colors.blue,
-    fontWeight: FontWeight.bold,
-    fontSize: 18,
-  );
-
   static TextStyle appBarLoginTextStyle = GoogleFonts.pattaya(
     color: Colors.white,
     fontSize: 30,
-    fontWeight: FontWeight.bold,
-  );
-
-  //TODO 共通のStyleにする。
-  static TextStyle tDRTextStyle = GoogleFonts.pattaya(
-    color: Colors.black,
-    fontSize: 20,
     fontWeight: FontWeight.bold,
   );
 

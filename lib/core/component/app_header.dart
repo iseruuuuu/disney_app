@@ -109,7 +109,7 @@ class AppHeader extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Text(
                 l10n.post,
-                style: AppTextStyle.postTextStyle,
+                style: AppTextStyle.appBold17TextStyle,
               ),
             ),
           ),
