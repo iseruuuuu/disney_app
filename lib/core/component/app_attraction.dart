@@ -1,4 +1,6 @@
 import 'package:disney_app/core/theme/app_color_style.dart';
+import 'package:disney_app/core/theme/app_text_style.dart';
+import 'package:disney_app/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class AppAttraction extends StatelessWidget {
@@ -15,6 +17,7 @@ class AppAttraction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 10),
       child: ListTile(
@@ -25,23 +28,15 @@ class AppAttraction extends StatelessWidget {
         ),
         tileColor: Colors.white,
         title: !isSelected
-            ? const Text(
-                'アトラクション',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Colors.black,
-                ),
+            ? Text(
+                l10n.attraction,
+                style: AppTextStyle.cellAttractionTextStyle,
               )
             : SizedBox(
                 width: MediaQuery.of(context).size.width - 20,
                 child: Text(
                   attractionName,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    color: Colors.black,
-                  ),
+                  style: AppTextStyle.cellAttractionTextStyle,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),

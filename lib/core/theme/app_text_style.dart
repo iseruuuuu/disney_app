@@ -83,4 +83,27 @@ class AppTextStyle {
     fontSize: 15,
     color: Colors.grey.shade600,
   );
+
+  static const noPostTextStyle = TextStyle(
+    color: Colors.black,
+    fontSize: 25,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const postTextStyle = TextStyle(
+    color: Colors.black,
+    fontSize: 17,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const labelTextStyle = TextStyle(
+    color: Colors.grey,
+    fontWeight: FontWeight.bold,
+    fontSize: 17,
+  );
+  static const textFieldTextStyle = TextStyle(
+    color: Colors.black,
+    fontSize: 17,
+    fontWeight: FontWeight.bold,
+  );
 }
