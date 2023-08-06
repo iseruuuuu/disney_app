@@ -16,14 +16,17 @@
 "log_out": "ログアウト",
 "log_in": "ログイン",
 "app_title": "TDR APP",
+"score": "点",
+"impressions": "感想",
+"is_spoiler_true": "ネタバレあり!",
+"is_spoiler_false": "ネタバレなし!",
+
 "register_screen": "新規登録はこちら",
 "login_screen": "パスワードを忘れた場合",
 "reset_password": "パスワードの再設定",
 "send_reset_message": "メールアドレスにパスワード再設定のメールを送信します。",
 "send_email": "メールを送る",
-
-"is_spoiler_true": "ネタバレあり!",
-"is_spoiler_false": "ネタバレなし!",
+"send_message": "メールを送信しました。",
 
 "completed_to_create_account": "アカウント登録完了",
 "completed_to_create_account_content": "アカウントの登録が完了しました。\n確認用のメールをお送りしました。\nメール内のリンクをクリックし、\n認証を行ってください。",
@@ -31,18 +34,14 @@
 "error_empty_register": "登録してた内容に不備があります",
 "error_empty_email": "メールアドレスを入力してください",
 "error_empty_post": "いずれかの値が未記入となっています",
-
 "error_badly_formatted": "メールアドレスの形式が不正です。",
 "error_6_characters": "パスワードは６文字以上に設定してください。",
 "error_already": "このメールアドレスはすでに使用されています。",
 "error_other": "不鮮明のエラーです。運営側にお伝えください。",
-
 "error_password": "パスワード or メールアドレスが間違っています",
 "error_disabled": "ログイン試行過多により、アカウントが一時ロックされています。",
 "error_no_user": "アカウントが存在しない or 削除された可能性があります。",
 "error_no_mail": "メールアドレスの認証が完了していません。",
-
-"send_message": "メールを送信しました。",
 
 "dialog_spoiler_cell_text": "ネタバレがあります!!!\n遷移して確認ください🙇‍",
 "dialog_contact_title": "お問い合わせ画面に遷移",
@@ -60,8 +59,5 @@
 "dialog_register_account_content": "アカウントの登録が完了しました。\n確認用のメールをお送りしました。\nメール内のリンクをクリックし、\n認証を行ってください。",
 
 "app_bar_create_account": "Create Account",
-"app_bar_login" : "Login",
-
-"score": "点",
-"impressions": "感想"
+"app_bar_login" : "Login"
 }
