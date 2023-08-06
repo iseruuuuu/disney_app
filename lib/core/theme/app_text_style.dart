@@ -1,3 +1,4 @@
+import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -143,5 +144,16 @@ class AppTextStyle {
     color: Colors.black,
     fontSize: 20,
     fontWeight: FontWeight.bold,
+  );
+
+  static const resetPasswordTextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 23,
+    color: AppColorStyle.appColor,
+  );
+
+  static const sendResetMessageTextStyle = TextStyle(
+    fontSize: 13,
+    color: Colors.black,
   );
 }

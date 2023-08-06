@@ -19,7 +19,7 @@
 "register_screen": "新規登録はこちら",
 "login_screen": "パスワードを忘れた場合",
 "reset_password": "パスワードの再設定",
-"send_message": "メールアドレスにパスワード再設定のメールを送信します。",
+"send_reset_message": "メールアドレスにパスワード再設定のメールを送信します。",
 "send_email": "メールを送る",
 "is_spoiler_true": "ネタバレあり!",
 "is_spoiler_false": "ネタバレなし!",

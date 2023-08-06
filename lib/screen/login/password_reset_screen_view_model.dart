@@ -1,3 +1,4 @@
+import 'package:disney_app/l10n/l10n.dart';
 import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
@@ -24,12 +25,13 @@ class PasswordResetScreenViewModel extends ChangeNotifier {
   Loading get loading => ref.read(loadingProvider.notifier);
 
   Future<void> sendEmail(BuildContext context) async {
+    final l10n = L10n.of(context)!;
     if (emailController.text.isNotEmpty) {
       loading.isLoading = true;
       try {
         await Authentication.resetPassword(emailController.text);
         await Future<void>.delayed(Duration.zero).then((_) {
-          SnackBarUtils.snackBar(context, 'メールを送信しました。');
+          SnackBarUtils.snackBar(context, l10n.send_message);
         });
         await Future<void>.delayed(const Duration(seconds: 2)).then((_) {
           loading.isLoading = false;
@@ -42,7 +44,7 @@ class PasswordResetScreenViewModel extends ChangeNotifier {
       }
     } else {
       await Future<void>.delayed(Duration.zero).then((_) {
-        SnackBarUtils.snackBar(context, 'メールアドレスを入力してください');
+        SnackBarUtils.snackBar(context, l10n.error_empty_email);
       });
     }
   }
