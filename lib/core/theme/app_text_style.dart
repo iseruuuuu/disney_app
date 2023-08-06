@@ -106,4 +106,9 @@ class AppTextStyle {
     fontSize: 17,
     fontWeight: FontWeight.bold,
   );
+
+  static TextStyle appBarCreateAccountTextStyle = GoogleFonts.pattaya(
+    fontSize: 30,
+    fontWeight: FontWeight.bold,
+  );
 }

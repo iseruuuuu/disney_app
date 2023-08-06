@@ -1,11 +1,12 @@
 import 'package:disney_app/core/component/app_elevated_button.dart';
 import 'package:disney_app/core/component/app_text_field.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
+import 'package:disney_app/core/theme/app_text_style.dart';
+import 'package:disney_app/l10n/l10n.dart';
 import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/screen/create_account/create_account_screen_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class CreateAccountScreen extends ConsumerWidget {
@@ -16,6 +17,7 @@ class CreateAccountScreen extends ConsumerWidget {
     final controller = ref.watch(createAccountScreenViewModelProvider.notifier);
     final state = ref.watch(createAccountScreenViewModelProvider);
     final loading = ref.watch(loadingProvider);
+    final l10n = L10n.of(context)!;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -34,11 +36,8 @@ class CreateAccountScreen extends ConsumerWidget {
             title: Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Text(
-                'Create Account',
-                style: GoogleFonts.pattaya(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
+                l10n.app_bar_create_account,
+                style: AppTextStyle.appBarCreateAccountTextStyle,
               ),
             ),
           ),
@@ -66,34 +65,34 @@ class CreateAccountScreen extends ConsumerWidget {
                   const SizedBox(height: 10),
                   AppTextField(
                     controller: controller.nameController,
-                    hintText: '名前',
+                    hintText: l10n.name,
                     maxLines: 1,
                   ),
                   AppTextField(
                     controller: controller.userIdController,
-                    hintText: 'ユーザーID',
+                    hintText: l10n.user_id,
                     maxLines: 1,
                   ),
                   AppTextField(
                     controller: controller.selfIntroductionController,
-                    hintText: '自己紹介',
+                    hintText: l10n.self_introduction,
                     maxLines: 3,
                   ),
                   AppTextField(
                     controller: controller.emailController,
-                    hintText: 'メールアドレス',
+                    hintText: l10n.email,
                     maxLines: 1,
                   ),
                   AppTextField(
                     controller: controller.passwordController,
-                    hintText: 'パスワード(６文字以上)',
+                    hintText: l10n.password,
                     maxLines: 1,
                   ),
                   const SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.all(15),
                     child: AppElevatedButton(
-                      title: 'アカウント作成',
+                      title: l10n.create_account,
                       onPressed: () => controller.createAccount(context, ref),
                     ),
                   ),
