@@ -1,5 +1,6 @@
 {
 "@@locale": "ja",
+"app_name": "TDR APP",
 "attraction": "アトラクション",
 "no_post": "投稿がまだありません",
 "edit": "編集",
@@ -44,6 +45,7 @@
 "dialog_delete_account": "アカウントを削除",
 
 "app_bar_create_account": "Create Account",
+"app_bar_login" : "Login",
 
 "score": "点"
 }

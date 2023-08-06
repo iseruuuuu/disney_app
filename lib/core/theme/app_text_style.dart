@@ -132,4 +132,16 @@ class AppTextStyle {
     fontWeight: FontWeight.bold,
     fontSize: 18,
   );
+
+  static TextStyle appBarLoginTextStyle = GoogleFonts.pattaya(
+    color: Colors.white,
+    fontSize: 30,
+    fontWeight: FontWeight.bold,
+  );
+
+  static TextStyle tDRTextStyle = GoogleFonts.pattaya(
+    color: Colors.black,
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+  );
 }
