@@ -2,13 +2,11 @@ name: Flutter Test CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
     paths:
     - '**.dart'
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
     paths:
     - '**.dart'
 
