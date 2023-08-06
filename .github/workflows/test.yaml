@@ -1,49 +1,26 @@
-name: test
+name: Flutter_Test
 
 on:
-  workflow_dispatch:
   pull_request:
     types: [opened, synchronize]
   push:
     branches:
       - main
 
-env:
-  FLUTTER_VERSION: '2.5.3'
-
 jobs:
-  test:
+  flutter_test:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-
-      - name: Cache Flutter dependencies
-        uses: actions/cache@v2
+      - uses: actions/checkout@v2
         with:
-          path: /opt/hostedtoolcache/flutter
-          key: ${{ runner.OS }}-flutter-install-cache-${{ env.FLUTTER_VERSION }}
-
-      - name: Install Flutter
-        uses: subosito/flutter-action@v1
+          fetch-depth: 1
+      - uses: subosito/flutter-action@v1
         with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-
-      - name: Install dependencies
-        run: |
-         fvm flutter pub get
-
-      - name: Test
-        run: |
-         fvm flutter test --machine > test_report.log
-
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: always()
+          channel: 'stable'
+      - run: flutter pub get
+      - run: flutter test --no-test-assets --coverage --coverage-path=~/coverage/lcov.info
+      - uses: codecov/codecov-action@v1
         with:
-          name: 'fvm flutter test'
-          path: 'test_report.log'
-          reporter: 'flutter-json'
-          fail-on-error: 'false'
+          token: ${{secrets.CODECOV_TOKEN}}
+          file: ~/coverage/lcov.info
