@@ -1,49 +1,35 @@
-name: test
+name: Flutter Test CI
 
 on:
-  workflow_dispatch:
-  pull_request:
-    types: [opened, synchronize]
   push:
     branches:
       - main
-
-env:
-  FLUTTER_VERSION: '2.5.3'
+    paths:
+    - '**.dart'
+  pull_request:
+    branches:
+      - main
+    paths:
+    - '**.dart'
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
+    name: Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-
-      - name: Cache Flutter dependencies
-        uses: actions/cache@v2
-        with:
-          path: /opt/hostedtoolcache/flutter
-          key: ${{ runner.OS }}-flutter-install-cache-${{ env.FLUTTER_VERSION }}
-
-      - name: Install Flutter
-        uses: subosito/flutter-action@v1
-        with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-
-      - name: Install dependencies
-        run: |
-          flutter pub get
-
-      - name: Test
-        run: |
-          flutter test --machine > test_report.log
-
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: always()
-        with:
-          name: 'flutter test'
-          path: 'test_report.log'
-          reporter: 'flutter-json'
-          fail-on-error: 'false'
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v1
+      with:
+        flutter-version: 'latest'  # You can specify a version if needed
+      
+    - name: Install dependencies
+      run: flutter pub get
+      
+    - name: Run Flutter Test
+      run: flutter test
