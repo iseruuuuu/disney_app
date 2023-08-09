@@ -18,7 +18,6 @@ class TimeLineScreen extends ConsumerWidget {
     final myAccount = Authentication.myAccount!;
     final isMaster = FunctionUtils().checkMasterAccount(myAccount.id);
     final posts = ref.watch(postsProvider);
-    print(posts);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
