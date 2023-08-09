@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/api/post_firestore_api.dart';
-import 'package:disney_app/core/model/repository/post_firestore_repository.dart';
+import 'package:disney_app/core/model/repository/post_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -17,7 +17,7 @@ import 'post_firestore_repository.mocks.dart';
   QueryDocumentSnapshot,
 ])
 void main() {
-  late PostFirestoreRepository postFirestoreRepository;
+  late PostRepository postFirestoreRepository;
   late MockPostFirestoreAPI mockPostFirestoreAPI;
   late MockDocumentSnapshot mockDocumentSnapshot;
   late MockDocumentReference mockDocumentReference;
@@ -26,7 +26,7 @@ void main() {
 
   setUp(() {
     mockPostFirestoreAPI = MockPostFirestoreAPI();
-    postFirestoreRepository = PostFirestoreRepository(mockPostFirestoreAPI);
+    postFirestoreRepository = PostRepository(mockPostFirestoreAPI);
     mockDocumentSnapshot = MockDocumentSnapshot();
     mockDocumentReference = MockDocumentReference();
     mockQuerySnapshot = MockQuerySnapshot();

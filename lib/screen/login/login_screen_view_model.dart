@@ -1,4 +1,6 @@
-import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
+import 'package:disney_app/core/model/api/user_firestore_api.dart';
+import 'package:disney_app/core/model/repository/user_repository.dart';
+import 'package:disney_app/core/model/usecase/user_usecase.dart';
 import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
@@ -48,9 +50,9 @@ class LoginScreenViewModel extends ChangeNotifier {
           pass: password,
         );
         if (result is UserCredential) {
-          final result0 = await ref
-              .read(userFirestoreUsecaseProvider)
-              .getUser(result.user!.uid);
+          final result0 =
+              await ref.read(userUsecaseProvider).getUser(result.user!.uid);
+
           if (result0 == true) {
             await Future<void>.delayed(const Duration(seconds: 1)).then((_) {
               loading.isLoading = false;
@@ -91,10 +93,8 @@ class LoginScreenViewModel extends ChangeNotifier {
       pass: passwordController.text,
     );
     if (result is UserCredential) {
-      final result0 = await ref
-          .read(userFirestoreUsecaseProvider)
-          .getUser(result.user!.uid);
-
+      final result0 =
+          await ref.read(userUsecaseProvider).getUser(result.user!.uid);
       if (result0 == true) {
         await store();
         await Future<void>.delayed(const Duration(seconds: 2)).then((_) {

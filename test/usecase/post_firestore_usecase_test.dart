@@ -1,22 +1,22 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:disney_app/core/model/repository/post_firestore_repository.dart';
-import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
+import 'package:disney_app/core/model/repository/post_repository.dart';
+import 'package:disney_app/core/model/usecase/post_usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import '../fake/fake_post.dart';
 import 'post_firestore_usecase_test.mocks.dart';
 
-@GenerateMocks([PostFirestoreRepository])
+@GenerateMocks([PostRepository])
 void main() {
   group('Post FireStore Usecase Test', () {
     late MockPostFirestoreRepository mockPostFirestoreRepository;
-    late PostFireStoreUsecase postFireStoreUsecase;
+    late PostUsecase postFireStoreUsecase;
 
     setUp(() {
       mockPostFirestoreRepository = MockPostFirestoreRepository();
-      postFireStoreUsecase = PostFireStoreUsecase(mockPostFirestoreRepository);
+      postFireStoreUsecase = PostUsecase(mockPostFirestoreRepository);
     });
 
     final fakePost = FakePost().post();

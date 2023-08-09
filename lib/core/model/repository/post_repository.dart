@@ -1,15 +1,33 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/api/post_firestore_api.dart';
 import 'package:disney_app/core/model/post.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PostFirestoreRepository {
-  PostFirestoreRepository(this.postFirestoreAPI);
+final postsProvider = StreamProvider.autoDispose<List<Post>>((ref) {
+  return ref.watch(postSnapshotsProvider.stream).map((event) {
+    return event.docs.map((doc) {
+      final dataMap = doc.data();
+      final data = dataMap! as Map<String, dynamic>;
+      return Post.fromMap(data);
+    }).toList();
+  });
+});
+
+final postsWithAccountIdFamily =
+    FutureProvider.autoDispose.family<List<Post>, String>((ref, id) {
+  return ref.watch(postSnapshotWithAccountIdFamily(id).future).then((event) {
+    return event.docs.map((doc) {
+      final dataMap = doc.data();
+      final data = dataMap! as Map<String, dynamic>;
+      return Post.fromMap(data);
+    }).toList();
+  });
+});
+
+class PostRepository {
+  PostRepository(this.postFirestoreAPI);
 
   final PostFirestoreAPI postFirestoreAPI;
-
-  Stream<QuerySnapshot<Object?>> stream() {
-    return postFirestoreAPI.streamPosts();
-  }
 
   Future<dynamic> addPost(Post newPost) async {
     try {
@@ -34,31 +52,6 @@ class PostFirestoreRepository {
       return true;
     } on FirebaseException catch (_) {
       return false;
-    }
-  }
-
-  Future<List<Post>?> getPostsFromIds(List<String> ids) async {
-    final postList = <Post>[];
-    try {
-      await Future.forEach(ids, (String id) async {
-        final doc = await postFirestoreAPI.getPost(id);
-        final data = doc.data() as Map<String, dynamic>?;
-        if (data != null) {
-          final post = Post(
-            id: doc.id,
-            content: data['content'],
-            postAccountId: data['post_account_id'],
-            createdTime: data['created_time'],
-            rank: data['rank'],
-            attractionName: data['attraction_name'],
-            isSpoiler: data['is_spoiler'],
-          );
-          postList.add(post);
-        }
-      });
-      return postList;
-    } on FirebaseException catch (_) {
-      return null;
     }
   }
 

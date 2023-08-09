@@ -42,6 +42,9 @@
 "error_disabled": "ログイン試行過多により、アカウントが一時ロックされています。",
 "error_no_user": "アカウントが存在しない or 削除された可能性があります。",
 "error_no_mail": "メールアドレスの認証が完了していません。",
+"error_screen": "アプリに問題が発生しました。",
+
+"retry": "リトライ",
 
 "dialog_spoiler_cell_text": "ネタバレがあります!!!\n遷移して確認ください🙇‍",
 "dialog_contact_title": "お問い合わせ画面に遷移",
