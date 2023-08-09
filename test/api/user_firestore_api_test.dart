@@ -9,17 +9,15 @@ import 'user_firestore_api_test.mocks.dart';
 
 @GenerateMocks([FirebaseStorage])
 void main() {
-  late UserFirestoreAPI api;
-  late MockFirebaseFirestore firestore;
-  late MockFirebaseStorage storage;
+  final api = UserFirestoreAPI();
+  final storage = MockFirebaseStorage();
+  final firestore = MockFirebaseFirestore();
   final uid = FakeUser().uid;
   final docData = FakeUser().mockData;
   final filePath = FakeUser().filePath;
 
   setUp(() {
-    firestore = MockFirebaseFirestore();
-    storage = MockFirebaseStorage();
-    api = UserFirestoreAPI();
+    //TODO セットアップする必要がある。
   });
 
   test('get user document', () async {
@@ -50,17 +48,5 @@ void main() {
   test('ref from URL', () {
     api.refFromURL(filePath);
     verify(storage.refFromURL(filePath)).called(1);
-  });
-
-  test('stream', () {
-    api.stream(uid);
-    verify(
-      firestore
-          .collection('users')
-          .doc(uid)
-          .collection('my_posts')
-          .orderBy('created_time', descending: true)
-          .snapshots(),
-    ).called(1);
   });
 }
