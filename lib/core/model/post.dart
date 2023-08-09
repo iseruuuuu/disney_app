@@ -11,6 +11,18 @@ class Post {
     this.isSpoiler = false,
   });
 
+  factory Post.fromMap(Map<String, dynamic> map) {
+    return Post(
+      id: map['id'] ?? '',
+      content: map['content'],
+      postAccountId: map['post_account_id'],
+      createdTime: map['created_time'],
+      rank: map['rank'],
+      attractionName: map['attraction_name'],
+      isSpoiler: map['is_spoiler'],
+    );
+  }
+
   String id;
   String content;
   String postAccountId;
@@ -44,4 +56,16 @@ class Post {
       isSpoiler.hashCode ^
       rank.hashCode ^
       attractionName.hashCode;
+
+  Post fromMap(Map<String, dynamic> map) {
+    return Post(
+      id: map['id'] ?? '',
+      content: map['content'],
+      postAccountId: map['post_account_id'],
+      createdTime: map['created_time'],
+      rank: map['rank'],
+      attractionName: map['attraction_name'],
+      isSpoiler: map['is_spoiler'],
+    );
+  }
 }
