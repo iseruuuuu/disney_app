@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import '../fake/fake_user.dart';
-import 'user_firestore_usecase_test.mocks.dart';
+import 'user_usecase_test.mocks.dart';
 
 @GenerateMocks([
   UserRepository,
