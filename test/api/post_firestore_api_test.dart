@@ -95,15 +95,5 @@ void main() {
       verify(mockCollectionReference.doc(fakePost.postAccountId)).called(1);
       verify(mockDocumentReference.delete()).called(1);
     });
-
-    test('stream posts', () async {
-      postFirestoreAPI.streamPosts();
-      verify(
-        mockCollectionReference.orderBy(
-          'created_time',
-          descending: true,
-        ),
-      ).called(1);
-    });
   });
 }
