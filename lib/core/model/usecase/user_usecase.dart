@@ -34,10 +34,6 @@ class UserUsecase {
     return userRepository.updateUser(updateAccount);
   }
 
-  Future<Map<String, Account>?> getPostUserMap(List<String> accountIds) async {
-    return userRepository.getPostUserMap(accountIds);
-  }
-
   Future<dynamic> deleteUser(
     Account myAccount,
     WidgetRef ref,

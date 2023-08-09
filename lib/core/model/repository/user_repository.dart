@@ -90,31 +90,6 @@ class UserRepository {
     }
   }
 
-  Future<Map<String, Account>?> getPostUserMap(List<String> accountIds) async {
-    final map = <String, Account>{};
-    try {
-      for (final accountId in accountIds) {
-        final doc = await firestoreAPI.getUserDocument(accountId);
-        final data = doc.data() as Map<String, dynamic>?;
-        if (data != null) {
-          final postAccount = Account(
-            id: accountId,
-            name: data['name'],
-            userId: data['user_id'],
-            imagePath: data['image_path'],
-            selfIntroduction: data['self_introduction'],
-            createdTime: data['created_time'],
-            updateTime: data['updated_time'],
-          );
-          map[accountId] = postAccount;
-        }
-      }
-      return map;
-    } on FirebaseException catch (_) {
-      return null;
-    }
-  }
-
   Future<dynamic> deleteUser(
     Account myAccount,
     WidgetRef ref,
