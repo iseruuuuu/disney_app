@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:disney_app/core/model/repository/user_repository.dart';
-import 'package:disney_app/core/model/usecase/user_usecase.dart';
+import 'package:disney_app/core/repository/user_repository.dart';
+import 'package:disney_app/core/usecase/user_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

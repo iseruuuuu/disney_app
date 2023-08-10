@@ -1,5 +1,5 @@
-import 'package:disney_app/core/model/repository/post_repository.dart';
-import 'package:disney_app/core/model/usecase/post_usecase.dart';
+import 'package:disney_app/core/repository/post_repository.dart';
+import 'package:disney_app/core/usecase/post_usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

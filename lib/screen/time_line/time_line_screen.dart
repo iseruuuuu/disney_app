@@ -1,7 +1,7 @@
 import 'package:disney_app/core/component/app_disney_cell.dart';
 import 'package:disney_app/core/component/app_error_screen.dart';
-import 'package:disney_app/core/model/repository/post_repository.dart';
-import 'package:disney_app/core/model/repository/user_repository.dart';
+import 'package:disney_app/core/repository/post_repository.dart';
+import 'package:disney_app/core/repository/user_repository.dart';
 import 'package:disney_app/core/services/authentication.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:disney_app/gen/assets.gen.dart';

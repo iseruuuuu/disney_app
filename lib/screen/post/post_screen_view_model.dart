@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:disney_app/core/constants/attraction.dart';
 import 'package:disney_app/core/model/post.dart';
-import 'package:disney_app/core/model/usecase/post_usecase.dart';
+import 'package:disney_app/core/usecase/post_usecase.dart';
 import 'package:disney_app/core/services/authentication.dart';
 import 'package:disney_app/l10n/l10n.dart';
 import 'package:disney_app/provider/loading_provider.dart';
