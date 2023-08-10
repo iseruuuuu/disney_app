@@ -1,8 +1,6 @@
-import 'package:disney_app/core/model/api/user_firestore_api.dart';
-import 'package:disney_app/core/model/repository/user_repository.dart';
 import 'package:disney_app/core/model/usecase/user_usecase.dart';
+import 'package:disney_app/core/services/authentication.dart';
 import 'package:disney_app/provider/loading_provider.dart';
-import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
