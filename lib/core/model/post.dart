@@ -11,9 +11,9 @@ class Post {
     this.isSpoiler = false,
   });
 
-  factory Post.fromMap(Map<String, dynamic> map) {
+  factory Post.fromMap(Map<String, dynamic> map, String id) {
     return Post(
-      id: map['id'] ?? '',
+      id: id,
       content: map['content'],
       postAccountId: map['post_account_id'],
       createdTime: map['created_time'],
@@ -59,7 +59,7 @@ class Post {
 
   Post fromMap(Map<String, dynamic> map) {
     return Post(
-      id: map['id'] ?? '',
+      id: map['id'],
       content: map['content'],
       postAccountId: map['post_account_id'],
       createdTime: map['created_time'],

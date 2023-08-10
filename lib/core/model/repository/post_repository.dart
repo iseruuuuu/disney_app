@@ -8,7 +8,7 @@ final postsProvider = StreamProvider.autoDispose<List<Post>>((ref) {
     return event.docs.map((doc) {
       final dataMap = doc.data();
       final data = dataMap! as Map<String, dynamic>;
-      return Post.fromMap(data);
+      return Post.fromMap(data, doc.id);
     }).toList();
   });
 });
@@ -19,7 +19,7 @@ final postsWithAccountIdFamily =
     return event.docs.map((doc) {
       final dataMap = doc.data();
       final data = dataMap! as Map<String, dynamic>;
-      return Post.fromMap(data);
+      return Post.fromMap(data, id);
     }).toList();
   });
 });
