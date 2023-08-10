@@ -59,9 +59,15 @@ We would be happy if you could create a branch with the following rules
 ├── core
 │   ├── components
 │   ├── constants
-│   ├── model
+│   ├── model ├── api
+│   ├──       ├── firebase
+│   ├──       ├── repository
+│   ├──       ├── usecase
+│   ├── services
 │   └── theme
 ├── gen
+├── l10n
+├── provider
 └── screen
 └── utils
 └── main.dart
