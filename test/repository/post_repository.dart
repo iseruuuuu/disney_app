@@ -101,7 +101,9 @@ void main() {
         when(mockQuerySnapshot.docs).thenReturn([mockQueryDocumentSnapshot]);
         when(mockQueryDocumentSnapshot.id).thenReturn(fakePost.postAccountId);
         final result = await postFirestoreRepository.deletePost(
-            fakeMockAccountId, fakePost);
+          fakeMockAccountId,
+          fakePost,
+        );
         verify(mockPostFirestoreAPI.deletePost(any)).called(1);
         verifyNever(mockPostFirestoreAPI.deletePost(any));
         expect(result, true);
@@ -112,7 +114,9 @@ void main() {
           FirebaseException(plugin: 'test', message: 'test exception'),
         );
         final result = await postFirestoreRepository.deletePost(
-            fakeMockAccountId, fakePost);
+          fakeMockAccountId,
+          fakePost,
+        );
         verify(mockPostFirestoreAPI.deletePost(any)).called(1);
         verifyNever(mockPostFirestoreAPI.deletePost(any));
         expect(result, false);

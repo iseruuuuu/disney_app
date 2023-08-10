@@ -1,7 +1,7 @@
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/usecase/user_usecase.dart';
-import 'package:disney_app/screen/edit/edit_screen_view_model.dart';
 import 'package:disney_app/core/services/authentication.dart';
+import 'package:disney_app/screen/edit/edit_screen_view_model.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
