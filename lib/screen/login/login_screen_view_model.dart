@@ -1,5 +1,5 @@
-import 'package:disney_app/core/usecase/user_usecase.dart';
 import 'package:disney_app/core/services/authentication.dart';
+import 'package:disney_app/core/usecase/user_usecase.dart';
 import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
