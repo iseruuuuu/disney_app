@@ -30,58 +30,63 @@ class TimeLineScreen extends ConsumerWidget {
           height: 50,
         ),
       ),
-      body: posts.when(
-        data: (data) {
-          return ListView.builder(
-            itemCount: data.length,
-            itemBuilder: (context, index) {
-              final post = data[index];
-              final users = ref.watch(usersFamily(post.postAccountId));
-              return users.when(
-                data: (data) {
-                  final postAccount = data;
-                  return GestureDetector(
-                    onTap: () {
-                      NavigationUtils.detailScreen(
-                        context,
-                        postAccount,
-                        post,
-                        myAccount.id,
-                      );
-                    },
-                    child: AppDisneyCell(
-                      index: index,
-                      account: postAccount,
-                      post: post,
-                      myAccount: myAccount.id,
-                      isMaster: isMaster,
-                      onTapImage: () {
-                        NavigationUtils.detailAccountScreen(
+      body: RefreshIndicator(
+        onRefresh: () async {
+          ref.read(postsProvider);
+        },
+        child: posts.when(
+          data: (data) {
+            return ListView.builder(
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                final post = data[index];
+                final users = ref.watch(usersFamily(post.postAccountId));
+                return users.when(
+                  data: (data) {
+                    final postAccount = data;
+                    return GestureDetector(
+                      onTap: () {
+                        NavigationUtils.detailScreen(
                           context,
                           postAccount,
                           post,
                           myAccount.id,
                         );
                       },
-                    ),
-                  );
-                },
-                error: (error, track) => const SizedBox(),
-                loading: SizedBox.new,
-              );
+                      child: AppDisneyCell(
+                        index: index,
+                        account: postAccount,
+                        post: post,
+                        myAccount: myAccount.id,
+                        isMaster: isMaster,
+                        onTapImage: () {
+                          NavigationUtils.detailAccountScreen(
+                            context,
+                            postAccount,
+                            post,
+                            myAccount.id,
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  error: (error, track) => const SizedBox(),
+                  loading: SizedBox.new,
+                );
+              },
+            );
+          },
+          error: (error, track) => AppErrorScreen(
+            onPressed: () {
+              //TODO リロードできるようにする。
             },
-          );
-        },
-        error: (error, track) => AppErrorScreen(
-          onPressed: () {
-            //TODO リロードできるようにする。
+          ),
+          loading: () {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           },
         ),
-        loading: () {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColorStyle.appColor,

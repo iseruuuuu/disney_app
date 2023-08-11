@@ -3,7 +3,7 @@ import 'package:disney_app/core/model/api/post_firestore_api.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final postsProvider = StreamProvider.autoDispose<List<Post>>((ref) {
+final postsProvider = StreamProvider<List<Post>>((ref) {
   return ref.watch(postSnapshotsProvider.stream).map((event) {
     return event.docs.map((doc) {
       final dataMap = doc.data();
