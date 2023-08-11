@@ -4,20 +4,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final postSnapshotsProvider = StreamProvider<QuerySnapshot<Object?>>((ref) {
   final posts = ref.watch(firebaseFirestoreProvider).collection('post');
-  //TODO あとで
   return posts.orderBy('created_time', descending: true).limit(100).snapshots();
 });
 
 final postSnapshotWithAccountIdFamily = FutureProvider.autoDispose
     .family<QuerySnapshot<Object?>, String>((ref, id) {
-  //TODO ここの並び替えがダメかも？
-
-  final data = FirebaseFirestore.instance
-      .collection('post')
+  final posts = ref.watch(firebaseFirestoreProvider).collection('post');
+  final data = posts
       .where('post_account_id', isEqualTo: id)
-      // .orderBy('created_time', descending: true)
-      .get();
-  return data;
+      .orderBy('created_time', descending: true)
+      .snapshots();
+  return data.first;
 });
 
 class PostFirestoreAPI {
