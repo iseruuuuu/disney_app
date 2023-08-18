@@ -1,6 +1,8 @@
 import 'package:disney_app/core/component/app_disney_cell.dart';
+import 'package:disney_app/core/component/app_error_screen.dart';
 import 'package:disney_app/core/component/app_header.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
+import 'package:disney_app/core/repository/user_repository.dart';
 import 'package:disney_app/core/services/authentication.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:disney_app/screen/account/account_screen_view_model.dart';
@@ -39,43 +41,47 @@ class AccountScreen extends ConsumerWidget {
                       itemCount: data.length,
                       itemBuilder: (context, index) {
                         final post = data[index];
-                        return GestureDetector(
-                          onTap: () {
-                            NavigationUtils.detailScreen(
-                              context,
-                              myAccount,
-                              post,
-                              myAccount.id,
+                        final users =
+                            ref.watch(usersFamily(post.postAccountId));
+                        return users.when(
+                          data: (data) {
+                            return GestureDetector(
+                              onTap: () {
+                                NavigationUtils.detailScreen(
+                                  context,
+                                  myAccount,
+                                  post,
+                                  myAccount.id,
+                                );
+                              },
+                              child: AppDisneyCell(
+                                index: index,
+                                account: myAccount,
+                                post: post,
+                                myAccount: myAccount.id,
+                                isMaster: false,
+                                onTapImage: () {
+                                  NavigationUtils.detailAccountScreen(
+                                    context,
+                                    myAccount,
+                                    post,
+                                    myAccount.id,
+                                  );
+                                },
+                              ),
                             );
                           },
-                          child: AppDisneyCell(
-                            index: index,
-                            account: myAccount,
-                            post: post,
-                            myAccount: myAccount.id,
-                            isMaster: false,
-                            onTapImage: () {
-                              NavigationUtils.detailAccountScreen(
-                                context,
-                                myAccount,
-                                post,
-                                myAccount.id,
-                              );
-                            },
-                          ),
+                          error: (error, track) => const SizedBox(),
+                          loading: SizedBox.new,
                         );
                       },
                     );
                   },
-                  error: (error, track) {
-                    return GestureDetector(
-                      onTap: () {
-                        print(error);
-                        print(track);
-                      },
-                      child: Text(error.toString()),
-                    );
-                  },
+                  error: (error, track) => AppErrorScreen(
+                    onPressed: () {
+                      //TODO リロードできるようにする。
+                    },
+                  ),
                   loading: () {
                     return const Center(
                       child: CircularProgressIndicator(),

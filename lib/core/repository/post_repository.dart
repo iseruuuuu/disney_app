@@ -34,15 +34,22 @@ class PostRepository {
       final postData = {
         'content': newPost.content,
         'post_account_id': newPost.postAccountId,
+        'post_id': 'post_id',
         'created_time': Timestamp.now(),
         'rank': newPost.rank,
         'attraction_name': newPost.attractionName,
         'is_spoiler': newPost.isSpoiler,
       };
       final result = await postFirestoreAPI.addPost(postData);
+      await updatePosts(result.id, {'post_id': result.id});
       final userPostData = {
+        'content': newPost.content,
+        'post_account_id': newPost.postAccountId,
         'post_id': result.id,
         'created_time': Timestamp.now(),
+        'rank': newPost.rank,
+        'attraction_name': newPost.attractionName,
+        'is_spoiler': newPost.isSpoiler,
       };
       await postFirestoreAPI.addUserPost(
         newPost.postAccountId,
@@ -53,6 +60,10 @@ class PostRepository {
     } on FirebaseException catch (_) {
       return false;
     }
+  }
+
+  Future<void> updatePosts(String postId, Map<String, dynamic> data) async {
+    return postFirestoreAPI.posts.doc(postId).update(data);
   }
 
   Future<dynamic> deleteAllPosts(String accountId) async {
@@ -70,8 +81,8 @@ class PostRepository {
 
   Future<dynamic> deletePost(String accountId, Post post) async {
     try {
-      await postFirestoreAPI.deletePost(post.id);
-      await postFirestoreAPI.deleteUserPost(accountId, post.id);
+      await postFirestoreAPI.deletePost(post.postId);
+      await postFirestoreAPI.deleteUserPost(accountId, post.postId);
       return true;
     } on FirebaseException catch (_) {
       return false;
