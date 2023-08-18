@@ -941,14 +941,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
-  riverpod_generator:
-    dependency: "direct dev"
-    description:
-      name: riverpod_generator
-      sha256: e87363e27dd8bce40a194c2ba6a7630ee343826d7a4500d70f7f729ea8e27d50
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.1"
   shared_preferences:
     dependency: "direct main"
     description:
