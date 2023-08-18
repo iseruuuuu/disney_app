@@ -30,7 +30,7 @@ class AppErrorScreen extends StatelessWidget {
             style: AppTextStyle.appBold17TextStyle,
           ),
           AppTextButton(
-            onPressed: () {},
+            onPressed: onPressed,
             title: l10n.retry,
             color: AppColorStyle.appColor,
           ),

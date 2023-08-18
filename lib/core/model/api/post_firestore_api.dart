@@ -15,7 +15,7 @@ final postSnapshotWithAccountIdFamily =
   final posts = ref.watch(firebaseFirestoreProvider).collection('post');
   final data = posts
       .where('post_account_id', isEqualTo: id)
-      // .orderBy('created_time', descending: true)
+      .orderBy('created_time', descending: true)
       .snapshots();
   return data;
 });
