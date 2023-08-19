@@ -32,8 +32,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
     fetch();
   }
 
-  final StateNotifierProviderRef<EditScreenViewModel, ImageProvider<Object>>
-      ref;
+  final Ref ref;
   TextEditingController controller = TextEditingController();
   Account myAccount = Authentication.myAccount!;
   TextEditingController nameController = TextEditingController();
@@ -73,9 +72,8 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
         imagePath: imagePath,
       );
       Authentication.myAccount = updateAccount;
-      final result = await ref
-          .read(userUsecaseProvider)
-          .updateUser(updateAccount);
+      final result =
+          await ref.read(userUsecaseProvider).updateUser(updateAccount);
       if (result == true) {
         if (!mounted) {
           return;

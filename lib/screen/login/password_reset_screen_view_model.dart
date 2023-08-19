@@ -20,7 +20,7 @@ class PasswordResetScreenViewModel extends ChangeNotifier {
 
   final storage = const FlutterSecureStorage();
   final TextEditingController emailController = TextEditingController();
-  AutoDisposeChangeNotifierProviderRef<PasswordResetScreenViewModel> ref;
+  final Ref ref;
 
   Loading get loading => ref.read(loadingProvider.notifier);
 

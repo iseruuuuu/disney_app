@@ -27,7 +27,7 @@ final createAccountScreenViewModelProvider =
 class CreateAccountScreenViewModel extends StateNotifier<File?> {
   CreateAccountScreenViewModel(this._functionUtils, super._state, this.ref);
 
-  final StateNotifierProviderRef<CreateAccountScreenViewModel, File?> ref;
+  final Ref ref;
 
   final FunctionUtils _functionUtils;
   TextEditingController nameController = TextEditingController();
@@ -74,8 +74,7 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
           selfIntroduction: selfIntroductionController.text,
           imagePath: imagePath,
         );
-        final result0 =
-            await ref.read(userUsecaseProvider).setUser(newAccount);
+        final result0 = await ref.read(userUsecaseProvider).setUser(newAccount);
         if (result0 == true) {
           if (!mounted) {
             return;

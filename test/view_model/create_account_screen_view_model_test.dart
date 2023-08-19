@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:disney_app/screen/create_account/create_account_screen_view_model.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,12 +8,7 @@ import 'package:mockito/mockito.dart';
 
 import 'create_account_screen_view_model_test.mocks.dart';
 
-class MockRef extends Mock
-    implements StateNotifierProviderRef<CreateAccountScreenViewModel, File?> {}
-
-@GenerateMocks([
-  FunctionUtils,
-])
+@GenerateMocks([FunctionUtils, Ref])
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   group('create account screen view model test', () {
