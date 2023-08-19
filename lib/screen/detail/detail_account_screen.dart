@@ -42,51 +42,56 @@ class DetailAccountScreen extends ConsumerWidget {
             isMyAccount: false,
           ),
           Expanded(
-            child: posts.when(
-              data: (data) {
-                return data.isNotEmpty
-                    ? ListView.builder(
-                        itemCount: data.length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              NavigationUtils.detailScreen(
-                                context,
-                                postAccount,
-                                data[index],
-                                myAccountId,
-                              );
-                            },
-                            child: AppDisneyCell(
-                              index: index,
-                              account: postAccount,
-                              post: data[index],
-                              myAccount: myAccountId,
-                              isMaster: false,
-                              onTapImage: () {
-                                NavigationUtils.detailAccountScreen(
+            child: RefreshIndicator(
+              onRefresh: () async => ref.read(
+                postsWithAccountIdFamily(postAccount.id),
+              ),
+              child: posts.when(
+                data: (data) {
+                  return data.isNotEmpty
+                      ? ListView.builder(
+                          itemCount: data.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                NavigationUtils.detailScreen(
                                   context,
                                   postAccount,
                                   data[index],
                                   myAccountId,
                                 );
                               },
-                            ),
-                          );
-                        },
-                      )
-                    : const AppEmptyScreen();
-              },
-              error: (error, track) => AppErrorScreen(
-                onPressed: () {
-                  //TODO リロードできるようにする。
+                              child: AppDisneyCell(
+                                index: index,
+                                account: postAccount,
+                                post: data[index],
+                                myAccount: myAccountId,
+                                isMaster: false,
+                                onTapImage: () {
+                                  NavigationUtils.detailAccountScreen(
+                                    context,
+                                    postAccount,
+                                    data[index],
+                                    myAccountId,
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        )
+                      : const AppEmptyScreen();
+                },
+                error: (error, track) => AppErrorScreen(
+                  onPressed: () => ref.read(
+                    postsWithAccountIdFamily(postAccount.id),
+                  ),
+                ),
+                loading: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
                 },
               ),
-              loading: () {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
             ),
           ),
         ],
