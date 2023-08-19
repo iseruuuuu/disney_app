@@ -29,8 +29,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
   );
 
   TextEditingController controller = TextEditingController();
-  final AutoDisposeStateNotifierProviderRef<PostScreenViewModel,
-      PostScreenState> ref;
+  final Ref ref;
 
   Loading get loading => ref.read(loadingProvider.notifier);
 

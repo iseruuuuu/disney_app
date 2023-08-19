@@ -25,7 +25,7 @@ class LoginScreenViewModel extends ChangeNotifier {
   final storage = const FlutterSecureStorage();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final AutoDisposeChangeNotifierProviderRef ref;
+  final Ref ref;
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   bool isAutoLogin = false;
 
