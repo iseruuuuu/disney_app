@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:disney_app/core/model/api/post_firestore_api.dart';
+import 'package:disney_app/core/services/post_firestore_service.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import '../fake/fake_post.dart';
-import 'post_api_test.mocks.dart';
+import 'post_service_test.mocks.dart';
 
 @GenerateMocks([
   FirebaseFirestore,
@@ -13,9 +14,12 @@ import 'post_api_test.mocks.dart';
   Query<Map<String, dynamic>>,
   QuerySnapshot<Map<String, dynamic>>,
   DocumentSnapshot<Map<String, dynamic>>,
+  ProviderRef<PostFirestoreService>,
 ])
 void main() {
   group('PostFirestoreAPI', () {
+    final ref = MockProviderRef<PostFirestoreService>();
+    final api = PostFirestoreService(ref);
     final mockFirestore = MockFirebaseFirestore();
     final mockCollectionReference =
         MockCollectionReference<Map<String, dynamic>>();
@@ -23,7 +27,6 @@ void main() {
     final mockQuery = MockQuery<Map<String, dynamic>>();
     final mockQuerySnapshot = MockQuerySnapshot<Map<String, dynamic>>();
     final mockDocumentSnapshot = MockDocumentSnapshot<Map<String, dynamic>>();
-    final postFirestoreAPI = PostFirestoreAPI(firebaseInstance: mockFirestore);
     final fakePost = FakePost().post();
     final fakeMockAccountId = FakePost().mockAccountId;
     final fakeMockUserPostData = FakePost().userPostData;
@@ -52,12 +55,12 @@ void main() {
     });
 
     test('addPost calls Firestore with correct path and data', () async {
-      await postFirestoreAPI.addPost(fakeMockUserPostData);
+      await api.addPost(fakeMockUserPostData);
       verify(mockCollectionReference.add(fakeMockUserPostData)).called(1);
     });
 
     test('add user post', () async {
-      await postFirestoreAPI.addUserPost(
+      await api.addUserPost(
         fakeMockAccountId,
         fakePost.postAccountId,
         fakeMockUserPostData,
@@ -69,24 +72,24 @@ void main() {
     });
 
     test('get user posts', () async {
-      await postFirestoreAPI.getUserPosts(fakeMockAccountId);
+      await api.getUserPosts(fakeMockAccountId);
       verify(mockCollectionReference.doc(fakeMockAccountId)).called(1);
       verify(mockDocumentReference.collection('my_posts')).called(1);
     });
 
     test('get post', () async {
-      await postFirestoreAPI.getPost(fakePost.postAccountId);
+      await api.getPost(fakePost.postAccountId);
       verify(mockCollectionReference.doc(fakePost.postAccountId)).called(1);
     });
 
     test('delete post', () async {
-      await postFirestoreAPI.deletePost(fakePost.postAccountId);
+      await api.deletePost(fakePost.postAccountId);
       verify(mockCollectionReference.doc(fakePost.postAccountId)).called(1);
       verify(mockDocumentReference.delete()).called(1);
     });
 
     test('delete user post', () async {
-      await postFirestoreAPI.deleteUserPost(
+      await api.deleteUserPost(
         fakeMockAccountId,
         fakePost.postAccountId,
       );

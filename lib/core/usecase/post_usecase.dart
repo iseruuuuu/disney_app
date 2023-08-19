@@ -1,23 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:disney_app/core/model/api/post_firestore_api.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final postUsecaseProvider = Provider.autoDispose<PostUsecase>(
-  (ref) => PostUsecase(
-    PostRepository(
-      PostFirestoreAPI(
-        firebaseInstance: FirebaseFirestore.instance,
-      ),
-    ),
-  ),
-);
+final postUsecaseProvider = Provider<PostUsecase>((ref) {
+  return PostUsecase(ref);
+});
 
 class PostUsecase {
-  PostUsecase(this.postRepository);
+  PostUsecase(ProviderRef<PostUsecase> ref) {
+    postRepository = ref.read(postRepositoryProvider);
+  }
 
-  final PostRepository postRepository;
+  late final PostRepository postRepository;
 
   Future<dynamic> addPost(Post newPost) async {
     return postRepository.addPost(newPost);

@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/account.dart';
-import 'package:disney_app/core/model/api/user_firestore_api.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/core/services/authentication.dart';
+import 'package:disney_app/core/services/user_firestore_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final usersFamily =
@@ -25,14 +25,18 @@ final postUsersFamily =
   });
 });
 
-class UserRepository {
-  UserRepository(
-    this.firestoreAPI,
-    this.firestoreRepository,
-  );
+final userRepositoryProvider = Provider<UserRepository>((ref) {
+  return UserRepository(ref);
+});
 
-  final UserFirestoreAPI firestoreAPI;
-  final PostRepository firestoreRepository;
+class UserRepository {
+  UserRepository(ProviderRef<UserRepository> ref) {
+    firestoreAPI = ref.read(userFirestoreServiceProvider);
+    firestoreRepository = ref.read(postRepositoryProvider);
+  }
+
+  late final UserFirestoreService firestoreAPI;
+  late final PostRepository firestoreRepository;
 
   Future<dynamic> setUser(Account newAccount) async {
     try {

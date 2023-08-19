@@ -11,15 +11,19 @@ import 'user_usecase_test.mocks.dart';
 @GenerateMocks([
   UserRepository,
   WidgetRef,
+  ProviderRef<UserUsecase>,
 ])
 void main() {
   group('User FireStore Usecase Test', () {
     late MockUserRepository mockUserRepository;
     late UserUsecase userFireStoreUsecase;
     late MockWidgetRef mockWidgetRef;
+    late MockProviderRef<UserUsecase> ref;
+
     setUp(() {
       mockUserRepository = MockUserRepository();
-      userFireStoreUsecase = UserUsecase(mockUserRepository);
+      ref = MockProviderRef<UserUsecase>();
+      userFireStoreUsecase = UserUsecase(ref);
       mockWidgetRef = MockWidgetRef();
     });
     final fakeUser = FakeUser().mockAccount();

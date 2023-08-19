@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:disney_app/core/model/api/post_firestore_api.dart';
 import 'package:disney_app/core/model/post.dart';
+import 'package:disney_app/core/services/post_firestore_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final postsProvider = StreamProvider<List<Post>>((ref) {
@@ -24,10 +24,16 @@ final postsWithAccountIdFamily =
   });
 });
 
-class PostRepository {
-  PostRepository(this.postFirestoreAPI);
+final postRepositoryProvider = Provider<PostRepository>((ref) {
+  return PostRepository(ref);
+});
 
-  final PostFirestoreAPI postFirestoreAPI;
+class PostRepository {
+  PostRepository(ProviderRef<PostRepository> ref) {
+    postFirestoreService = ref.read(postFirestoreServiceProvider);
+  }
+
+  late final PostFirestoreService postFirestoreService;
 
   Future<dynamic> addPost(Post newPost) async {
     try {
@@ -40,7 +46,7 @@ class PostRepository {
         'attraction_name': newPost.attractionName,
         'is_spoiler': newPost.isSpoiler,
       };
-      final result = await postFirestoreAPI.addPost(postData);
+      final result = await postFirestoreService.addPost(postData);
       await updatePosts(result.id, {'post_id': result.id});
       final userPostData = {
         'content': newPost.content,
@@ -51,7 +57,7 @@ class PostRepository {
         'attraction_name': newPost.attractionName,
         'is_spoiler': newPost.isSpoiler,
       };
-      await postFirestoreAPI.addUserPost(
+      await postFirestoreService.addUserPost(
         newPost.postAccountId,
         result.id,
         userPostData,
@@ -63,15 +69,15 @@ class PostRepository {
   }
 
   Future<void> updatePosts(String postId, Map<String, dynamic> data) async {
-    return postFirestoreAPI.posts.doc(postId).update(data);
+    return postFirestoreService.posts.doc(postId).update(data);
   }
 
   Future<dynamic> deleteAllPosts(String accountId) async {
     try {
-      final snapshot = await postFirestoreAPI.getUserPosts(accountId);
+      final snapshot = await postFirestoreService.getUserPosts(accountId);
       await Future.forEach(snapshot.docs, (doc) async {
-        await postFirestoreAPI.deletePost(doc.id);
-        await postFirestoreAPI.deleteUserPost(accountId, doc.id);
+        await postFirestoreService.deletePost(doc.id);
+        await postFirestoreService.deleteUserPost(accountId, doc.id);
       });
       return true;
     } on FirebaseException catch (_) {
@@ -81,8 +87,8 @@ class PostRepository {
 
   Future<dynamic> deletePost(String accountId, Post post) async {
     try {
-      await postFirestoreAPI.deletePost(post.postId);
-      await postFirestoreAPI.deleteUserPost(accountId, post.postId);
+      await postFirestoreService.deletePost(post.postId);
+      await postFirestoreService.deleteUserPost(accountId, post.postId);
       return true;
     } on FirebaseException catch (_) {
       return false;

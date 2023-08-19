@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:disney_app/core/model/firebase/firebase.dart';
+import 'package:disney_app/core/firebase/firebase.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -12,16 +12,19 @@ final userSnapShotsFamily =
   },
 );
 
-class UserFirestoreAPI {
-  UserFirestoreAPI()
-      : firebaseStoreInstance = FirebaseFirestore.instance,
-        storage = FirebaseStorage.instance {
-    users = firebaseStoreInstance.collection('users');
+final userFirestoreServiceProvider = Provider<UserFirestoreService>((ref) {
+  return UserFirestoreService(ref);
+});
+
+class UserFirestoreService {
+  UserFirestoreService(ProviderRef<UserFirestoreService> ref) {
+    firebaseStore = ref.read(firebaseFirestoreProvider);
+    firebaseStorage = ref.read(firebaseStorageProvider);
+    users = firebaseStore.collection('users');
   }
 
-  final FirebaseFirestore firebaseStoreInstance;
-  final FirebaseStorage storage;
-
+  late final FirebaseFirestore firebaseStore;
+  late final FirebaseStorage firebaseStorage;
   late final CollectionReference users;
 
   Future<DocumentSnapshot<Object?>> getUserDocument(String uid) {
@@ -41,7 +44,7 @@ class UserFirestoreAPI {
   }
 
   Reference getStorageReference(String filePath) {
-    return storage.ref(filePath);
+    return firebaseStorage.ref(filePath);
   }
 
   Reference refFromURL(String filePath) {
