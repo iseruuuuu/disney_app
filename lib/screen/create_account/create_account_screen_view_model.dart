@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:disney_app/core/model/account.dart';
-import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
+import 'package:disney_app/core/services/authentication.dart';
+import 'package:disney_app/core/usecase/user_usecase.dart';
 import 'package:disney_app/l10n/l10n.dart';
 import 'package:disney_app/provider/loading_provider.dart';
-import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -75,7 +75,7 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
           imagePath: imagePath,
         );
         final result0 =
-            await ref.read(userFirestoreUsecaseProvider).setUser(newAccount);
+            await ref.read(userUsecaseProvider).setUser(newAccount);
         if (result0 == true) {
           if (!mounted) {
             return;

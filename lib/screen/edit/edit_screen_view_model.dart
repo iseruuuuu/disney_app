@@ -1,9 +1,10 @@
 import 'dart:io';
+
 import 'package:disney_app/core/model/account.dart';
-import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
+import 'package:disney_app/core/services/authentication.dart';
+import 'package:disney_app/core/usecase/user_usecase.dart';
 import 'package:disney_app/l10n/l10n.dart';
 import 'package:disney_app/provider/loading_provider.dart';
-import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
@@ -73,7 +74,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
       );
       Authentication.myAccount = updateAccount;
       final result = await ref
-          .read(userFirestoreUsecaseProvider)
+          .read(userUsecaseProvider)
           .updateUser(updateAccount);
       if (result == true) {
         if (!mounted) {
@@ -112,7 +113,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
   Future<void> delete(BuildContext context, WidgetRef ref) async {
     final prefs = await _prefs;
     await prefs.setBool('IS_AUTO_LOGIN', false);
-    await ref.read(userFirestoreUsecaseProvider).deleteUser(myAccount, ref);
+    await ref.read(userUsecaseProvider).deleteUser(myAccount, ref);
     await Future<void>.delayed(Duration.zero).then((_) {
       Authentication.deleteAuth();
       while (Navigator.canPop(context)) {

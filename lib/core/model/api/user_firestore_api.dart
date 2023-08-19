@@ -1,5 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:disney_app/core/model/firebase/firebase.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+final userSnapShotsFamily =
+    FutureProvider.autoDispose.family<DocumentSnapshot<Object?>, String>(
+  (ref, uid) {
+    final users = ref.watch(firebaseFirestoreProvider).collection('users');
+    return users.doc(uid).get();
+  },
+);
 
 class UserFirestoreAPI {
   UserFirestoreAPI()
@@ -27,14 +38,6 @@ class UserFirestoreAPI {
 
   Future<void> deleteUserDocument(String id) {
     return users.doc(id).delete();
-  }
-
-  Stream<QuerySnapshot<Map<String, dynamic>>> stream(String uid) {
-    return users
-        .doc(uid)
-        .collection('my_posts')
-        .orderBy('created_time', descending: true)
-        .snapshots();
   }
 
   Reference getStorageReference(String filePath) {

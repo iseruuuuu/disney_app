@@ -1,22 +1,38 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/api/user_firestore_api.dart';
-import 'package:disney_app/core/model/repository/post_firestore_repository.dart';
-import 'package:disney_app/utils/authentication.dart';
+import 'package:disney_app/core/repository/post_repository.dart';
+import 'package:disney_app/core/services/authentication.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserFirestoreRepository {
-  UserFirestoreRepository(
+final usersFamily =
+    FutureProvider.autoDispose.family<Account, String>((ref, uid) {
+  return ref.watch(userSnapShotsFamily(uid).future).then((event) {
+    final dataMap = event.data();
+    final data = dataMap! as Map<String, dynamic>;
+    final myAccount = Account.fromMap(data, uid);
+    return myAccount;
+  });
+});
+
+final postUsersFamily =
+    FutureProvider.autoDispose.family<Account, String>((ref, accountId) {
+  return ref.watch(userSnapShotsFamily(accountId).future).then((event) {
+    final dataMap = event.data();
+    final data = dataMap! as Map<String, dynamic>;
+    final myAccount = Account.fromMap(data, accountId);
+    return myAccount;
+  });
+});
+
+class UserRepository {
+  UserRepository(
     this.firestoreAPI,
     this.firestoreRepository,
   );
 
   final UserFirestoreAPI firestoreAPI;
-  final PostFirestoreRepository firestoreRepository;
-
-  Stream<QuerySnapshot<Map<String, dynamic>>> stream(String myAccountId) {
-    return firestoreAPI.stream(myAccountId);
-  }
+  final PostRepository firestoreRepository;
 
   Future<dynamic> setUser(Account newAccount) async {
     try {
@@ -71,31 +87,6 @@ class UserFirestoreRepository {
       return true;
     } on FirebaseException catch (_) {
       return false;
-    }
-  }
-
-  Future<Map<String, Account>?> getPostUserMap(List<String> accountIds) async {
-    final map = <String, Account>{};
-    try {
-      for (final accountId in accountIds) {
-        final doc = await firestoreAPI.getUserDocument(accountId);
-        final data = doc.data() as Map<String, dynamic>?;
-        if (data != null) {
-          final postAccount = Account(
-            id: accountId,
-            name: data['name'],
-            userId: data['user_id'],
-            imagePath: data['image_path'],
-            selfIntroduction: data['self_introduction'],
-            createdTime: data['created_time'],
-            updateTime: data['updated_time'],
-          );
-          map[accountId] = postAccount;
-        }
-      }
-      return map;
-    } on FirebaseException catch (_) {
-      return null;
     }
   }
 

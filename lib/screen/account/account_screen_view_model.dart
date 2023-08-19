@@ -1,6 +1,6 @@
+import 'package:disney_app/core/services/authentication.dart';
 import 'package:disney_app/screen/account/account_screen_state.dart';
 import 'package:disney_app/screen/edit/edit_screen.dart';
-import 'package:disney_app/utils/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

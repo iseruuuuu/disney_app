@@ -1,30 +1,55 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/api/post_firestore_api.dart';
 import 'package:disney_app/core/model/post.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PostFirestoreRepository {
-  PostFirestoreRepository(this.postFirestoreAPI);
+final postsProvider = StreamProvider<List<Post>>((ref) {
+  return ref.watch(postSnapshotsProvider.stream).map((event) {
+    return event.docs.map((doc) {
+      final dataMap = doc.data();
+      final data = dataMap! as Map<String, dynamic>;
+      return Post.fromMap(data, doc.id);
+    }).toList();
+  });
+});
+
+final postsWithAccountIdFamily =
+    FutureProvider.family<List<Post>, String>((ref, id) {
+  return ref.watch(postSnapshotWithAccountIdFamily(id).future).then((event) {
+    return event.docs.map((doc) {
+      final dataMap = doc.data();
+      final data = dataMap! as Map<String, dynamic>;
+      return Post.fromMap(data, id);
+    }).toList();
+  });
+});
+
+class PostRepository {
+  PostRepository(this.postFirestoreAPI);
 
   final PostFirestoreAPI postFirestoreAPI;
-
-  Stream<QuerySnapshot<Object?>> stream() {
-    return postFirestoreAPI.streamPosts();
-  }
 
   Future<dynamic> addPost(Post newPost) async {
     try {
       final postData = {
         'content': newPost.content,
         'post_account_id': newPost.postAccountId,
+        'post_id': 'post_id',
         'created_time': Timestamp.now(),
         'rank': newPost.rank,
         'attraction_name': newPost.attractionName,
         'is_spoiler': newPost.isSpoiler,
       };
       final result = await postFirestoreAPI.addPost(postData);
+      await updatePosts(result.id, {'post_id': result.id});
       final userPostData = {
+        'content': newPost.content,
+        'post_account_id': newPost.postAccountId,
         'post_id': result.id,
         'created_time': Timestamp.now(),
+        'rank': newPost.rank,
+        'attraction_name': newPost.attractionName,
+        'is_spoiler': newPost.isSpoiler,
       };
       await postFirestoreAPI.addUserPost(
         newPost.postAccountId,
@@ -37,29 +62,8 @@ class PostFirestoreRepository {
     }
   }
 
-  Future<List<Post>?> getPostsFromIds(List<String> ids) async {
-    final postList = <Post>[];
-    try {
-      await Future.forEach(ids, (String id) async {
-        final doc = await postFirestoreAPI.getPost(id);
-        final data = doc.data() as Map<String, dynamic>?;
-        if (data != null) {
-          final post = Post(
-            id: doc.id,
-            content: data['content'],
-            postAccountId: data['post_account_id'],
-            createdTime: data['created_time'],
-            rank: data['rank'],
-            attractionName: data['attraction_name'],
-            isSpoiler: data['is_spoiler'],
-          );
-          postList.add(post);
-        }
-      });
-      return postList;
-    } on FirebaseException catch (_) {
-      return null;
-    }
+  Future<void> updatePosts(String postId, Map<String, dynamic> data) async {
+    return postFirestoreAPI.posts.doc(postId).update(data);
   }
 
   Future<dynamic> deleteAllPosts(String accountId) async {
@@ -77,8 +81,8 @@ class PostFirestoreRepository {
 
   Future<dynamic> deletePost(String accountId, Post post) async {
     try {
-      await postFirestoreAPI.deletePost(post.id);
-      await postFirestoreAPI.deleteUserPost(accountId, post.id);
+      await postFirestoreAPI.deletePost(post.postId);
+      await postFirestoreAPI.deleteUserPost(accountId, post.postId);
       return true;
     } on FirebaseException catch (_) {
       return false;

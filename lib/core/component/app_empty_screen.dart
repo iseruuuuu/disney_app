@@ -8,24 +8,26 @@ class AppEmptyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context)!;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          l10n.no_post,
-          style: AppTextStyle.noPostTextStyle,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30),
-          child: SizedBox(
-            width: 100,
-            height: 100,
-            child: Image.asset(
-              'assets/images/empty.png',
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            l10n.no_post,
+            style: AppTextStyle.noPostTextStyle,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 30),
+            child: SizedBox(
+              width: 100,
+              height: 100,
+              child: Image.asset(
+                'assets/images/empty.png',
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

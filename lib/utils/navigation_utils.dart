@@ -41,13 +41,14 @@ class NavigationUtils {
     BuildContext context,
     Account postAccount,
     Post post,
-    String myAccount,
+    String myAccountId,
   ) {
     return Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => DetailAccountScreen(
           postAccount: postAccount,
           post: post,
+          myAccountId: myAccountId,
         ),
       ),
     );

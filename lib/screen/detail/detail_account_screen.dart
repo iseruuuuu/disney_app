@@ -1,14 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/component/app_app_bar.dart';
 import 'package:disney_app/core/component/app_disney_cell.dart';
 import 'package:disney_app/core/component/app_empty_screen.dart';
+import 'package:disney_app/core/component/app_error_screen.dart';
 import 'package:disney_app/core/component/app_header.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
-import 'package:disney_app/core/model/usecase/post_firestore_usecase.dart';
-import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
+import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/gen/assets.gen.dart';
-import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,14 +16,16 @@ class DetailAccountScreen extends ConsumerWidget {
     super.key,
     required this.postAccount,
     required this.post,
+    required this.myAccountId,
   });
 
   final Account postAccount;
   final Post post;
+  final String myAccountId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final myAccount = Authentication.myAccount!;
+    final posts = ref.watch(postsWithAccountIdFamily(postAccount.id));
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -42,66 +42,50 @@ class DetailAccountScreen extends ConsumerWidget {
             isMyAccount: false,
           ),
           Expanded(
-            child: StreamBuilder<QuerySnapshot>(
-              stream:
-                  ref.read(userFirestoreUsecaseProvider).stream(postAccount.id),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final myPostIds = List<String>.generate(
-                      snapshot.data!.docs.length, (index) {
-                    return snapshot.data!.docs[index].id;
-                  });
-                  return FutureBuilder<List<Post>?>(
-                    future: ref
-                        .read(postUsecaseProvider)
-                        .getPostsFromIds(myPostIds),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return (snapshot.data!.isNotEmpty)
-                            ? ListView.builder(
-                                itemCount: snapshot.data!.length,
-                                itemBuilder: (context, index) {
-                                  final post = snapshot.data![index];
-                                  return GestureDetector(
-                                    onTap: () {
-                                      NavigationUtils.detailScreen(
-                                        context,
-                                        postAccount,
-                                        post,
-                                        myAccount.id,
-                                      );
-                                    },
-                                    child: AppDisneyCell(
-                                      index: index,
-                                      account: postAccount,
-                                      post: post,
-                                      myAccount: myAccount.id,
-                                      isMaster: false,
-                                      onTapImage: () {
-                                        NavigationUtils.detailAccountScreen(
-                                          context,
-                                          postAccount,
-                                          post,
-                                          myAccount.id,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                              )
-                            : const AppEmptyScreen();
-                      } else {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                    },
-                  );
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+            child: posts.when(
+              data: (data) {
+                return data.isNotEmpty
+                    ? ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              NavigationUtils.detailScreen(
+                                context,
+                                postAccount,
+                                data[index],
+                                myAccountId,
+                              );
+                            },
+                            child: AppDisneyCell(
+                              index: index,
+                              account: postAccount,
+                              post: data[index],
+                              myAccount: myAccountId,
+                              isMaster: false,
+                              onTapImage: () {
+                                NavigationUtils.detailAccountScreen(
+                                  context,
+                                  postAccount,
+                                  data[index],
+                                  myAccountId,
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      )
+                    : const AppEmptyScreen();
+              },
+              error: (error, track) => AppErrorScreen(
+                onPressed: () {
+                  //TODO リロードできるようにする。
+                },
+              ),
+              loading: () {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
               },
             ),
           ),

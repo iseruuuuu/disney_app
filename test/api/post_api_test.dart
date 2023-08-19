@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import '../fake/fake_post.dart';
-import 'post_firestore_api_test.mocks.dart';
+import 'post_api_test.mocks.dart';
 
 @GenerateMocks([
   FirebaseFirestore,
@@ -94,16 +94,6 @@ void main() {
       verify(mockDocumentReference.collection('my_posts')).called(1);
       verify(mockCollectionReference.doc(fakePost.postAccountId)).called(1);
       verify(mockDocumentReference.delete()).called(1);
-    });
-
-    test('stream posts', () async {
-      postFirestoreAPI.streamPosts();
-      verify(
-        mockCollectionReference.orderBy(
-          'created_time',
-          descending: true,
-        ),
-      ).called(1);
     });
   });
 }

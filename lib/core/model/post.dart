@@ -5,15 +5,30 @@ class Post {
     this.id = '',
     this.content = '',
     this.postAccountId = '',
+    this.postId = '',
     this.createdTime,
     this.rank = 0,
     this.attractionName = '',
     this.isSpoiler = false,
   });
 
+  factory Post.fromMap(Map<String, dynamic> map, String id) {
+    return Post(
+      id: id,
+      content: map['content'],
+      postAccountId: map['post_account_id'],
+      postId: map['post_id'],
+      createdTime: map['created_time'],
+      rank: map['rank'],
+      attractionName: map['attraction_name'],
+      isSpoiler: map['is_spoiler'],
+    );
+  }
+
   String id;
   String content;
   String postAccountId;
+  String postId;
   Timestamp? createdTime;
   bool isSpoiler;
   int rank;
@@ -29,6 +44,7 @@ class Post {
         other.id == id &&
         other.content == content &&
         other.postAccountId == postAccountId &&
+        other.postId == postId &&
         other.createdTime == createdTime &&
         other.isSpoiler == isSpoiler &&
         other.rank == rank &&
@@ -40,8 +56,22 @@ class Post {
       id.hashCode ^
       content.hashCode ^
       postAccountId.hashCode ^
+      postId.hashCode ^
       (createdTime?.hashCode ?? 0) ^
       isSpoiler.hashCode ^
       rank.hashCode ^
       attractionName.hashCode;
+
+  Post fromMap(Map<String, dynamic> map) {
+    return Post(
+      id: map['id'],
+      content: map['content'],
+      postAccountId: map['post_account_id'],
+      postId: map['post_id'],
+      createdTime: map['created_time'],
+      rank: map['rank'],
+      attractionName: map['attraction_name'],
+      isSpoiler: map['is_spoiler'],
+    );
+  }
 }

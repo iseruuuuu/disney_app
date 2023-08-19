@@ -1,7 +1,7 @@
 import 'package:disney_app/core/model/account.dart';
-import 'package:disney_app/core/model/usecase/user_firestore_usecase.dart';
+import 'package:disney_app/core/services/authentication.dart';
+import 'package:disney_app/core/usecase/user_usecase.dart';
 import 'package:disney_app/screen/edit/edit_screen_view_model.dart';
-import 'package:disney_app/utils/authentication.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +17,7 @@ import 'edit_screen_view_model_test.mocks.dart';
   Account,
   BuildContext,
   WidgetRef,
-  UserFirestoreUsecase,
+  UserUsecase,
   FunctionUtils,
 ])
 void main() {
