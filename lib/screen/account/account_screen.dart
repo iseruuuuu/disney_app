@@ -33,9 +33,9 @@ class AccountScreen extends ConsumerWidget {
             ),
             Expanded(
               child: RefreshIndicator(
-                onRefresh: () async {
-                  ref.read(postsWithAccountIdFamily(state.myAccount.id));
-                },
+                onRefresh: () async => ref.read(
+                  postsWithAccountIdFamily(state.myAccount.id),
+                ),
                 child: posts.when(
                   data: (data) {
                     return data.isNotEmpty
@@ -81,9 +81,9 @@ class AccountScreen extends ConsumerWidget {
                         : const AppEmptyScreen();
                   },
                   error: (error, track) => AppErrorScreen(
-                    onPressed: () {
-                      //TODO リロードできるようにする。
-                    },
+                    onPressed: () => ref.read(
+                      postsWithAccountIdFamily(state.myAccount.id),
+                    ),
                   ),
                   loading: () {
                     return const Center(

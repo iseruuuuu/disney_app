@@ -32,9 +32,7 @@ class TimeLineScreen extends ConsumerWidget {
         ),
       ),
       body: RefreshIndicator(
-        onRefresh: () async {
-          ref.read(postsProvider);
-        },
+        onRefresh: () async => ref.read(postsProvider),
         child: posts.when(
           data: (data) {
             return data.isNotEmpty
@@ -80,9 +78,7 @@ class TimeLineScreen extends ConsumerWidget {
                 : const AppEmptyScreen();
           },
           error: (error, track) => AppErrorScreen(
-            onPressed: () {
-              //TODO リロードできるようにする。
-            },
+            onPressed: () => ref.read(postsProvider),
           ),
           loading: () {
             return const Center(
