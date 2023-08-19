@@ -1,4 +1,5 @@
 import 'package:disney_app/core/component/app_disney_cell.dart';
+import 'package:disney_app/core/component/app_empty_screen.dart';
 import 'package:disney_app/core/component/app_error_screen.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/core/repository/user_repository.dart';
@@ -36,45 +37,47 @@ class TimeLineScreen extends ConsumerWidget {
         },
         child: posts.when(
           data: (data) {
-            return ListView.builder(
-              itemCount: data.length,
-              itemBuilder: (context, index) {
-                final post = data[index];
-                final users = ref.watch(usersFamily(post.postAccountId));
-                return users.when(
-                  data: (data) {
-                    final postAccount = data;
-                    return GestureDetector(
-                      onTap: () {
-                        NavigationUtils.detailScreen(
-                          context,
-                          postAccount,
-                          post,
-                          myAccount.id,
-                        );
-                      },
-                      child: AppDisneyCell(
-                        index: index,
-                        account: postAccount,
-                        post: post,
-                        myAccount: myAccount.id,
-                        isMaster: isMaster,
-                        onTapImage: () {
-                          NavigationUtils.detailAccountScreen(
-                            context,
-                            postAccount,
-                            post,
-                            myAccount.id,
+            return data.isNotEmpty
+                ? ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      final post = data[index];
+                      final users = ref.watch(usersFamily(post.postAccountId));
+                      return users.when(
+                        data: (data) {
+                          final postAccount = data;
+                          return GestureDetector(
+                            onTap: () {
+                              NavigationUtils.detailScreen(
+                                context,
+                                postAccount,
+                                post,
+                                myAccount.id,
+                              );
+                            },
+                            child: AppDisneyCell(
+                              index: index,
+                              account: postAccount,
+                              post: post,
+                              myAccount: myAccount.id,
+                              isMaster: isMaster,
+                              onTapImage: () {
+                                NavigationUtils.detailAccountScreen(
+                                  context,
+                                  postAccount,
+                                  post,
+                                  myAccount.id,
+                                );
+                              },
+                            ),
                           );
                         },
-                      ),
-                    );
-                  },
-                  error: (error, track) => const SizedBox(),
-                  loading: SizedBox.new,
-                );
-              },
-            );
+                        error: (error, track) => const SizedBox(),
+                        loading: SizedBox.new,
+                      );
+                    },
+                  )
+                : const AppEmptyScreen();
           },
           error: (error, track) => AppErrorScreen(
             onPressed: () {

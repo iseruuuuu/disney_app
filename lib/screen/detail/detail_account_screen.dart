@@ -1,5 +1,6 @@
 import 'package:disney_app/core/component/app_app_bar.dart';
 import 'package:disney_app/core/component/app_disney_cell.dart';
+import 'package:disney_app/core/component/app_empty_screen.dart';
 import 'package:disney_app/core/component/app_error_screen.dart';
 import 'package:disney_app/core/component/app_header.dart';
 import 'package:disney_app/core/model/account.dart';
@@ -43,36 +44,38 @@ class DetailAccountScreen extends ConsumerWidget {
           Expanded(
             child: posts.when(
               data: (data) {
-                return ListView.builder(
-                  itemCount: data.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        NavigationUtils.detailScreen(
-                          context,
-                          postAccount,
-                          data[index],
-                          myAccountId,
-                        );
-                      },
-                      child: AppDisneyCell(
-                        index: index,
-                        account: postAccount,
-                        post: data[index],
-                        myAccount: myAccountId,
-                        isMaster: false,
-                        onTapImage: () {
-                          NavigationUtils.detailAccountScreen(
-                            context,
-                            postAccount,
-                            data[index],
-                            myAccountId,
+                return data.isNotEmpty
+                    ? ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              NavigationUtils.detailScreen(
+                                context,
+                                postAccount,
+                                data[index],
+                                myAccountId,
+                              );
+                            },
+                            child: AppDisneyCell(
+                              index: index,
+                              account: postAccount,
+                              post: data[index],
+                              myAccount: myAccountId,
+                              isMaster: false,
+                              onTapImage: () {
+                                NavigationUtils.detailAccountScreen(
+                                  context,
+                                  postAccount,
+                                  data[index],
+                                  myAccountId,
+                                );
+                              },
+                            ),
                           );
                         },
-                      ),
-                    );
-                  },
-                );
+                      )
+                    : const AppEmptyScreen();
               },
               error: (error, track) => AppErrorScreen(
                 onPressed: () {
