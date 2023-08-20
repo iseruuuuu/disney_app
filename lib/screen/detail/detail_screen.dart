@@ -1,5 +1,4 @@
-import 'package:disney_app/core/component/app_app_bar.dart';
-import 'package:disney_app/core/component/app_rating.dart';
+import 'package:disney_app/core/component/component.dart';
 import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';

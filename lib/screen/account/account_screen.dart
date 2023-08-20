@@ -1,7 +1,4 @@
-import 'package:disney_app/core/component/app_disney_cell.dart';
-import 'package:disney_app/core/component/app_empty_screen.dart';
-import 'package:disney_app/core/component/app_error_screen.dart';
-import 'package:disney_app/core/component/app_header.dart';
+import 'package:disney_app/core/component/component.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/core/repository/user_repository.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
