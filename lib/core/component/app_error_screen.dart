@@ -1,7 +1,6 @@
-import 'package:disney_app/core/component/app_text_button.dart';
-import 'package:disney_app/core/theme/app_color_style.dart';
-import 'package:disney_app/core/theme/app_text_style.dart';
-import 'package:disney_app/l10n/l10n.dart';
+import 'package:disney_app/core/component/component.dart';
+import 'package:disney_app/core/theme/theme.dart';
+import 'package:disney_app/gen/gen.dart';
 import 'package:flutter/material.dart';
 
 class AppErrorScreen extends StatelessWidget {

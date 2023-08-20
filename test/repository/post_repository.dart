@@ -17,14 +17,14 @@ import 'post_repository.mocks.dart';
 ])
 void main() {
   late PostRepository postFirestoreRepository;
-  late MockPostFirestoreService mockPostFirestoreService;
+  late MockPostService mockPostFirestoreService;
   late MockDocumentReference mockDocumentReference;
   late MockQuerySnapshot mockQuerySnapshot;
   late MockQueryDocumentSnapshot mockQueryDocumentSnapshot;
   late MockProviderRef<PostRepository> ref;
 
   setUp(() {
-    mockPostFirestoreService = MockPostFirestoreService();
+    mockPostFirestoreService = MockPostService();
     ref = MockProviderRef<PostRepository>();
     postFirestoreRepository = PostRepository(ref);
     mockDocumentReference = MockDocumentReference();

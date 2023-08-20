@@ -22,7 +22,7 @@ import 'user_repository_test.mocks.dart';
 ])
 void main() {
   late UserRepository userFirestoreRepository;
-  late MockUserFirestoreService mockUserFirestoreService;
+  late MockUserService mockUserFirestoreService;
   late MockDocumentSnapshot mockDocumentSnapshot;
   late MockWidgetRef mockWidgetRef;
   late MockReference mockReference;
@@ -30,7 +30,7 @@ void main() {
   late MockProviderRef<UserRepository> ref;
 
   setUp(() {
-    mockUserFirestoreService = MockUserFirestoreService();
+    mockUserFirestoreService = MockUserService();
     ref = MockProviderRef<UserRepository>();
     mockPostRepository = MockPostRepository();
     userFirestoreRepository = UserRepository(ref);

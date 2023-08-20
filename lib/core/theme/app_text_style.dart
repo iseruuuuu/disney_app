@@ -1,6 +1,6 @@
-import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'theme.dart';
 
 class AppTextStyle {
   AppTextStyle._();
