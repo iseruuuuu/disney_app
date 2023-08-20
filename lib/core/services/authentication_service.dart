@@ -1,14 +1,22 @@
+import 'package:disney_app/core/firebase/firebase.dart';
+import 'package:disney_app/core/firebase/firebase_provider.dart';
 import 'package:disney_app/core/model/account.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Authentication {
-  Authentication();
+final authenticationServiceProvider = Provider<AuthenticationService>((ref) {
+  return AuthenticationService(ref);
+});
 
-  static final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+class AuthenticationService {
+  AuthenticationService(ProviderRef<AuthenticationService> ref) {
+    firebaseAuth = ref.read(firebaseAuthProvider);
+  }
+
+  late final FirebaseAuth firebaseAuth;
   static User? currentFirebaseUser;
   static Account? myAccount;
 
-  static Future<dynamic> signUp({
+  Future<dynamic> signUp({
     required String email,
     required String pass,
   }) async {
@@ -24,7 +32,7 @@ class Authentication {
     }
   }
 
-  static Future<dynamic> signIn({
+  Future<dynamic> signIn({
     required String email,
     required String pass,
   }) async {
@@ -45,15 +53,15 @@ class Authentication {
     }
   }
 
-  static Future<void> signOut() async {
+  Future<void> signOut() async {
     await firebaseAuth.signOut();
   }
 
-  static Future<void> deleteAuth() async {
+  Future<void> deleteAuth() async {
     await currentFirebaseUser!.delete();
   }
 
-  static Future<void> resetPassword(String email) async {
+  Future<void> resetPassword(String email) async {
     return firebaseAuth.sendPasswordResetEmail(email: email);
   }
 }

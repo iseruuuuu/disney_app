@@ -3,7 +3,7 @@ import 'package:disney_app/core/component/app_empty_screen.dart';
 import 'package:disney_app/core/component/app_error_screen.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/core/repository/user_repository.dart';
-import 'package:disney_app/core/services/authentication.dart';
+import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:disney_app/gen/assets.gen.dart';
 import 'package:disney_app/utils/function_utils.dart';
@@ -16,7 +16,7 @@ class TimeLineScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final myAccount = Authentication.myAccount!;
+    final myAccount = AuthenticationService.myAccount!;
     final isMaster = FunctionUtils().checkMasterAccount(myAccount.id);
     final posts = ref.watch(postsProvider);
     return Scaffold(

@@ -1,26 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/account.dart';
-import 'package:disney_app/core/model/api/post_firestore_api.dart';
-import 'package:disney_app/core/model/api/user_firestore_api.dart';
-import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/core/repository/user_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final userUsecaseProvider = Provider.autoDispose<UserUsecase>(
-  (ref) => UserUsecase(
-    UserRepository(
-      UserFirestoreAPI(),
-      PostRepository(
-        PostFirestoreAPI(firebaseInstance: FirebaseFirestore.instance),
-      ),
-    ),
-  ),
-);
+final userUsecaseProvider = Provider<UserUsecase>((ref) {
+  return UserUsecase(ref);
+});
 
 class UserUsecase {
-  UserUsecase(this.userRepository);
+  UserUsecase(ProviderRef<UserUsecase> ref) {
+    userRepository = ref.read(userRepositoryProvider);
+  }
 
-  final UserRepository userRepository;
+  late final UserRepository userRepository;
 
   Future<dynamic> setUser(Account newAccount) async {
     return userRepository.setUser(newAccount);

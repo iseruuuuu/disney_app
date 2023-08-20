@@ -1,5 +1,5 @@
 import 'package:disney_app/core/model/account.dart';
-import 'package:disney_app/core/services/authentication.dart';
+import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/usecase/user_usecase.dart';
 import 'package:disney_app/screen/edit/edit_screen_view_model.dart';
 import 'package:disney_app/utils/function_utils.dart';
@@ -68,7 +68,7 @@ void main() {
           ),
         ],
       );
-      Authentication.myAccount = mockAccount;
+      AuthenticationService.myAccount = mockAccount;
       viewModel = EditScreenViewModel(
         state: NetworkImage(mockAccount.imagePath),
         ref: container.read(editScreenViewModelProvider.notifier).ref,

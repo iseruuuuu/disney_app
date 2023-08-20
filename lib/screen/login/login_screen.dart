@@ -23,7 +23,7 @@ class LoginScreen extends HookConsumerWidget {
     useEffect(
       () {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          ref.read(loginScreenViewModelProvider).checkLogin(context);
+          ref.read(loginScreenViewModelProvider).checkLogin(context, ref);
         });
         return null;
       },

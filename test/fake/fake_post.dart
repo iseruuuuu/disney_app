@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:disney_app/core/firebase/firebase.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:mockito/annotations.dart';
 

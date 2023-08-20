@@ -86,7 +86,7 @@ class EditScreen extends ConsumerWidget {
                       content: l10n.dialog_log_out_check_content,
                       onTap: () => ref
                           .read(editScreenViewModelProvider.notifier)
-                          .signOut(context),
+                          .signOut(context, ref),
                     );
                   },
                   title: l10n.log_out,

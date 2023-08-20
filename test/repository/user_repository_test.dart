@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:disney_app/core/model/api/user_firestore_api.dart';
+
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/core/repository/user_repository.dart';
+import 'package:disney_app/core/services/user_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,27 +13,27 @@ import '../fake/fake_user.dart';
 import 'user_repository_test.mocks.dart';
 
 @GenerateMocks([
-  UserFirestoreAPI,
+  UserService,
   DocumentSnapshot,
   WidgetRef,
   Reference,
   PostRepository,
+  ProviderRef<UserRepository>,
 ])
 void main() {
   late UserRepository userFirestoreRepository;
-  late MockUserFirestoreAPI mockUserFirestoreAPI;
+  late MockUserFirestoreService mockUserFirestoreService;
   late MockDocumentSnapshot mockDocumentSnapshot;
   late MockWidgetRef mockWidgetRef;
   late MockReference mockReference;
   late MockPostRepository mockPostRepository;
+  late MockProviderRef<UserRepository> ref;
 
   setUp(() {
-    mockUserFirestoreAPI = MockUserFirestoreAPI();
+    mockUserFirestoreService = MockUserFirestoreService();
+    ref = MockProviderRef<UserRepository>();
     mockPostRepository = MockPostRepository();
-    userFirestoreRepository = UserRepository(
-      mockUserFirestoreAPI,
-      mockPostRepository,
-    );
+    userFirestoreRepository = UserRepository(ref);
     mockDocumentSnapshot = MockDocumentSnapshot();
     mockWidgetRef = MockWidgetRef();
     mockReference = MockReference();
@@ -43,7 +44,7 @@ void main() {
 
   group('user firestore repository', () {
     test('set user', () async {
-      when(mockUserFirestoreAPI.setUserDocument(any, any))
+      when(mockUserFirestoreService.setUserDocument(any, any))
           .thenAnswer((_) async => true);
       final result = await userFirestoreRepository.setUser(fakeUser);
       expect(result, true);
@@ -51,18 +52,18 @@ void main() {
 
     test('get user', () async {
       when(mockDocumentSnapshot.data()).thenReturn(fakeMockData);
-      when(mockUserFirestoreAPI.getUserDocument(any))
+      when(mockUserFirestoreService.getUserDocument(any))
           .thenAnswer((_) async => mockDocumentSnapshot);
       final result = await userFirestoreRepository.getUser(fakeMockAccountId);
       expect(result, true);
     });
 
     test('update user', () async {
-      when(mockUserFirestoreAPI.updateUserDocument(fakeUser.id, any))
+      when(mockUserFirestoreService.updateUserDocument(fakeUser.id, any))
           .thenAnswer((_) async {});
       final result = await userFirestoreRepository.updateUser(fakeUser);
       verify(
-        mockUserFirestoreAPI.updateUserDocument(fakeUser.id, {
+        mockUserFirestoreService.updateUserDocument(fakeUser.id, {
           'name': fakeUser.name,
           'image_path': fakeUser.imagePath,
           'user_id': fakeUser.userId,
@@ -75,11 +76,11 @@ void main() {
 
     test('delete user', () async {
       // Arrange
-      when(mockUserFirestoreAPI.deleteUserDocument(fakeUser.id))
+      when(mockUserFirestoreService.deleteUserDocument(fakeUser.id))
           .thenAnswer((_) async {});
       when(mockPostRepository.deleteAllPosts(fakeUser.id))
           .thenAnswer((_) async {});
-      when(mockUserFirestoreAPI.refFromURL(fakeUser.imagePath))
+      when(mockUserFirestoreService.refFromURL(fakeUser.imagePath))
           .thenReturn(mockReference);
       when(mockReference.delete()).thenAnswer((_) async {});
 
@@ -89,9 +90,10 @@ void main() {
         mockWidgetRef,
       );
       // Assert
-      verify(mockUserFirestoreAPI.deleteUserDocument(fakeUser.id)).called(1);
+      verify(mockUserFirestoreService.deleteUserDocument(fakeUser.id))
+          .called(1);
       verify(mockPostRepository.deleteAllPosts(fakeUser.id)).called(1);
-      verify(mockUserFirestoreAPI.refFromURL(fakeUser.imagePath)).called(1);
+      verify(mockUserFirestoreService.refFromURL(fakeUser.imagePath)).called(1);
       verify(mockReference.delete()).called(1);
       expect(result, true);
     });

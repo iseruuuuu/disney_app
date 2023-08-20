@@ -1,9 +1,9 @@
-import 'package:disney_app/core/services/authentication.dart';
+import 'package:disney_app/core/firebase/firebase.dart';
+import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/l10n/l10n.dart';
 import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -24,12 +24,14 @@ class PasswordResetScreenViewModel extends ChangeNotifier {
 
   Loading get loading => ref.read(loadingProvider.notifier);
 
-  Future<void> sendEmail(BuildContext context) async {
+  Future<void> sendEmail(BuildContext context, WidgetRef ref) async {
     final l10n = L10n.of(context)!;
     if (emailController.text.isNotEmpty) {
       loading.isLoading = true;
       try {
-        await Authentication.resetPassword(emailController.text);
+        await ref
+            .read(authenticationServiceProvider)
+            .resetPassword(emailController.text);
         await Future<void>.delayed(Duration.zero).then((_) {
           SnackBarUtils.snackBar(context, l10n.send_message);
         });

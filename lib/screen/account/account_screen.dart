@@ -4,7 +4,7 @@ import 'package:disney_app/core/component/app_error_screen.dart';
 import 'package:disney_app/core/component/app_header.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/core/repository/user_repository.dart';
-import 'package:disney_app/core/services/authentication.dart';
+import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:disney_app/screen/account/account_screen_view_model.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
@@ -16,7 +16,7 @@ class AccountScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final myAccount = Authentication.myAccount!;
+    final myAccount = AuthenticationService.myAccount!;
     final state = ref.watch(accountScreenViewModelProvider);
     final posts = ref.watch(postsWithAccountIdFamily(state.myAccount.id));
     return Scaffold(

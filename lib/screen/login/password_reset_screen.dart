@@ -61,7 +61,7 @@ class PasswordResetScreen extends ConsumerWidget {
                 AppElevatedButton(
                   onPressed: () => ref
                       .read(passwordResetScreenViewModelProvider)
-                      .sendEmail(context),
+                      .sendEmail(context, ref),
                   title: l10n.send_email,
                 ),
                 const Spacer(),

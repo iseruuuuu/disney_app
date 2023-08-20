@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:disney_app/core/model/api/post_firestore_api.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
+import 'package:disney_app/core/services/post_service.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -8,21 +9,24 @@ import '../fake/fake_post.dart';
 import 'post_repository.mocks.dart';
 
 @GenerateMocks([
-  PostFirestoreAPI,
+  PostService,
   DocumentReference,
   QuerySnapshot,
   QueryDocumentSnapshot,
+  ProviderRef<PostRepository>,
 ])
 void main() {
   late PostRepository postFirestoreRepository;
-  late MockPostFirestoreAPI mockPostFirestoreAPI;
+  late MockPostFirestoreService mockPostFirestoreService;
   late MockDocumentReference mockDocumentReference;
   late MockQuerySnapshot mockQuerySnapshot;
   late MockQueryDocumentSnapshot mockQueryDocumentSnapshot;
+  late MockProviderRef<PostRepository> ref;
 
   setUp(() {
-    mockPostFirestoreAPI = MockPostFirestoreAPI();
-    postFirestoreRepository = PostRepository(mockPostFirestoreAPI);
+    mockPostFirestoreService = MockPostFirestoreService();
+    ref = MockProviderRef<PostRepository>();
+    postFirestoreRepository = PostRepository(ref);
     mockDocumentReference = MockDocumentReference();
     mockQuerySnapshot = MockQuerySnapshot();
     mockQueryDocumentSnapshot = MockQueryDocumentSnapshot();
@@ -34,15 +38,15 @@ void main() {
   group('post firestore repository', () {
     group('Add Post', () {
       test('add post', () async {
-        when(mockPostFirestoreAPI.addPost(any))
+        when(mockPostFirestoreService.addPost(any))
             .thenAnswer((_) async => mockDocumentReference);
         when(mockDocumentReference.id).thenReturn(fakeMockAccountId);
-        when(mockPostFirestoreAPI.addUserPost(any, any, any))
+        when(mockPostFirestoreService.addUserPost(any, any, any))
             .thenAnswer((_) async {});
         final result = await postFirestoreRepository.addPost(fakePost);
-        verify(mockPostFirestoreAPI.addPost(any)).called(1);
+        verify(mockPostFirestoreService.addPost(any)).called(1);
         verify(
-          mockPostFirestoreAPI
+          mockPostFirestoreService
               .addUserPost(fakePost.postAccountId, fakeMockAccountId, {
             'post_id': fakeMockAccountId,
             'created_time': isA<Timestamp>(),
@@ -52,28 +56,29 @@ void main() {
       });
 
       test('addPost throws FirebaseException', () async {
-        when(mockPostFirestoreAPI.addPost(any)).thenThrow(
+        when(mockPostFirestoreService.addPost(any)).thenThrow(
           FirebaseException(plugin: 'test', message: 'test exception'),
         );
         final result = await postFirestoreRepository.addPost(fakePost);
-        verifyNever(mockPostFirestoreAPI.addUserPost(any, any, any));
+        verifyNever(mockPostFirestoreService.addUserPost(any, any, any));
         expect(result, false);
       });
     });
 
     group('Delete all posts', () {
       test('delete all posts', () async {
-        when(mockPostFirestoreAPI.getUserPosts(any))
+        when(mockPostFirestoreService.getUserPosts(any))
             .thenAnswer((_) async => mockQuerySnapshot);
         when(mockQuerySnapshot.docs).thenReturn([mockQueryDocumentSnapshot]);
         when(mockQueryDocumentSnapshot.id).thenReturn(fakePost.postAccountId);
         final result =
             await postFirestoreRepository.deleteAllPosts(fakeMockAccountId);
-        verify(mockPostFirestoreAPI.getUserPosts(fakeMockAccountId)).called(1);
-        verify(mockPostFirestoreAPI.deletePost(fakePost.postAccountId))
+        verify(mockPostFirestoreService.getUserPosts(fakeMockAccountId))
+            .called(1);
+        verify(mockPostFirestoreService.deletePost(fakePost.postAccountId))
             .called(1);
         verify(
-          mockPostFirestoreAPI.deleteUserPost(
+          mockPostFirestoreService.deleteUserPost(
             fakeMockAccountId,
             fakePost.postAccountId,
           ),
@@ -82,21 +87,22 @@ void main() {
       });
 
       test('delete all posts throws FirebaseException', () async {
-        when(mockPostFirestoreAPI.getUserPosts(any)).thenThrow(
+        when(mockPostFirestoreService.getUserPosts(any)).thenThrow(
           FirebaseException(plugin: 'test', message: 'test exception'),
         );
         final result =
             await postFirestoreRepository.deleteAllPosts(fakeMockAccountId);
-        verify(mockPostFirestoreAPI.getUserPosts(fakeMockAccountId)).called(1);
-        verifyNever(mockPostFirestoreAPI.deletePost(any));
-        verifyNever(mockPostFirestoreAPI.deleteUserPost(any, any));
+        verify(mockPostFirestoreService.getUserPosts(fakeMockAccountId))
+            .called(1);
+        verifyNever(mockPostFirestoreService.deletePost(any));
+        verifyNever(mockPostFirestoreService.deleteUserPost(any, any));
         expect(result, false);
       });
     });
 
     group('Delete post', () {
       test('delete post', () async {
-        when(mockPostFirestoreAPI.deletePost(any))
+        when(mockPostFirestoreService.deletePost(any))
             .thenAnswer((_) async => mockQuerySnapshot);
         when(mockQuerySnapshot.docs).thenReturn([mockQueryDocumentSnapshot]);
         when(mockQueryDocumentSnapshot.id).thenReturn(fakePost.postAccountId);
@@ -104,21 +110,21 @@ void main() {
           fakeMockAccountId,
           fakePost,
         );
-        verify(mockPostFirestoreAPI.deletePost(any)).called(1);
-        verifyNever(mockPostFirestoreAPI.deletePost(any));
+        verify(mockPostFirestoreService.deletePost(any)).called(1);
+        verifyNever(mockPostFirestoreService.deletePost(any));
         expect(result, true);
       });
 
       test('delete post throws FirebaseException', () async {
-        when(mockPostFirestoreAPI.deletePost(any)).thenThrow(
+        when(mockPostFirestoreService.deletePost(any)).thenThrow(
           FirebaseException(plugin: 'test', message: 'test exception'),
         );
         final result = await postFirestoreRepository.deletePost(
           fakeMockAccountId,
           fakePost,
         );
-        verify(mockPostFirestoreAPI.deletePost(any)).called(1);
-        verifyNever(mockPostFirestoreAPI.deletePost(any));
+        verify(mockPostFirestoreService.deletePost(any)).called(1);
+        verifyNever(mockPostFirestoreService.deletePost(any));
         expect(result, false);
       });
     });
