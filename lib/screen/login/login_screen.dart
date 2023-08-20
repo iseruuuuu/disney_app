@@ -16,15 +16,6 @@ class LoginScreen extends HookConsumerWidget {
     final state = ref.watch(loginScreenViewModelProvider.notifier);
     final loading = ref.watch(loadingProvider);
     final l10n = L10n.of(context)!;
-    useEffect(
-      () {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          ref.read(loginScreenViewModelProvider).checkLogin(context, ref);
-        });
-        return null;
-      },
-      const [],
-    );
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -109,6 +100,33 @@ class LoginScreen extends HookConsumerWidget {
                   )
                 : const SizedBox(),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class LoginCheckScreen extends HookConsumerWidget {
+  const LoginCheckScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    useEffect(
+      () {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          ref.read(loginScreenViewModelProvider).checkLogin(context, ref);
+        });
+        return null;
+      },
+      const [],
+    );
+    return Scaffold(
+      backgroundColor: AppColorStyle.backgroundColor,
+      body: Center(
+        child: Image.asset(
+          Assets.images.empty.path,
+          width: 85,
+          height: 85,
         ),
       ),
     );

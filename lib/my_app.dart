@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [
         Locale('ja'),
       ],
-      home: const LoginScreen(),
+      home: const LoginCheckScreen(),
     );
   }
 }
