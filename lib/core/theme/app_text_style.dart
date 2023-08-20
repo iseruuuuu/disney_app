@@ -113,6 +113,10 @@ class AppTextStyle {
     fontSize: 100,
   );
 
+  static const iconAppBarStyle = TextStyle(
+    fontSize: 50,
+  );
+
   static const labelTextStyle = TextStyle(
     color: Colors.grey,
     fontWeight: FontWeight.bold,

@@ -3,7 +3,7 @@ import 'package:disney_app/core/component/component.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/core/repository/user_repository.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
-import 'package:disney_app/gen/gen.dart';
+import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/screen/search/search_screen_view_model.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
@@ -22,11 +22,9 @@ class SearchScreen extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Image.asset(
-          Assets.images.empty.path,
-          fit: BoxFit.fill,
-          width: 50,
-          height: 50,
+        title: const Text(
+          '🎢',
+          style: AppTextStyle.iconAppBarStyle,
         ),
       ),
       body: Column(
