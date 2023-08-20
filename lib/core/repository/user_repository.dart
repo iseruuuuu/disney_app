@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
-import 'package:disney_app/core/services/authentication.dart';
+import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/services/user_firestore_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -69,7 +69,7 @@ class UserRepository {
           updateTime: data['updated_time'],
         );
 
-        Authentication.myAccount = myAccount;
+        AuthenticationService.myAccount = myAccount;
         return true;
       } else {
         throw Exception('Document does not exist.');

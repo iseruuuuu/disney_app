@@ -1,6 +1,5 @@
 import 'package:disney_app/core/services/user_firestore_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -19,9 +18,7 @@ void main() {
     final docData = FakeUser().mockData;
     final filePath = FakeUser().filePath;
 
-    setUp(() {
-      //TODO セットアップする必要がある。
-    });
+    setUp(() {});
 
     test('get user document', () async {
       await api.getUserDocument(uid);

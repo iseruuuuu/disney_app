@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:disney_app/core/model/account.dart';
-import 'package:disney_app/core/services/authentication.dart';
+import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/usecase/user_usecase.dart';
 import 'package:disney_app/l10n/l10n.dart';
 import 'package:disney_app/provider/loading_provider.dart';
@@ -16,7 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 final editScreenViewModelProvider =
     StateNotifierProvider<EditScreenViewModel, ImageProvider>(
   (ref) {
-    final myAccount = Authentication.myAccount!;
+    final myAccount = AuthenticationService.myAccount!;
     return EditScreenViewModel(
       state: NetworkImage(myAccount.imagePath),
       ref: ref,
@@ -34,7 +34,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
 
   final Ref ref;
   TextEditingController controller = TextEditingController();
-  Account myAccount = Authentication.myAccount!;
+  Account myAccount = AuthenticationService.myAccount!;
   TextEditingController nameController = TextEditingController();
   TextEditingController userIdController = TextEditingController();
   TextEditingController selfIntroductionController = TextEditingController();
@@ -71,7 +71,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
         selfIntroduction: selfIntroductionController.text,
         imagePath: imagePath,
       );
-      Authentication.myAccount = updateAccount;
+      AuthenticationService.myAccount = updateAccount;
       final result =
           await ref.read(userUsecaseProvider).updateUser(updateAccount);
       if (result == true) {
@@ -96,10 +96,11 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
     }
   }
 
-  Future<void> signOut(BuildContext context) async {
+  Future<void> signOut(BuildContext context, WidgetRef ref) async {
     final prefs = await _prefs;
     await prefs.setBool('IS_AUTO_LOGIN', false);
-    await Authentication.signOut();
+    await ref.read(authenticationServiceProvider).signOut();
+
     await Future<void>.delayed(Duration.zero).then((_) {
       while (Navigator.canPop(context)) {
         Navigator.pop(context);
@@ -113,7 +114,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
     await prefs.setBool('IS_AUTO_LOGIN', false);
     await ref.read(userUsecaseProvider).deleteUser(myAccount, ref);
     await Future<void>.delayed(Duration.zero).then((_) {
-      Authentication.deleteAuth();
+      ref.read(authenticationServiceProvider).deleteAuth();
       while (Navigator.canPop(context)) {
         Navigator.pop(context);
       }

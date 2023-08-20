@@ -1,13 +1,14 @@
 import 'dart:io';
 
 import 'package:disney_app/core/model/account.dart';
-import 'package:disney_app/core/services/authentication.dart';
+import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/usecase/user_usecase.dart';
 import 'package:disney_app/l10n/l10n.dart';
 import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -48,7 +49,10 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
     }
   }
 
-  Future<void> createAccount(BuildContext context, WidgetRef ref) async {
+  Future<void> createAccount(
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
     final l10n = L10n.of(context)!;
     loading.isLoading = true;
     FocusScope.of(context).unfocus();
@@ -58,10 +62,10 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
         emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty &&
         image != null) {
-      final result = await Authentication.signUp(
-        email: emailController.text,
-        pass: passwordController.text,
-      );
+      final result = await ref.read(authenticationServiceProvider).signIn(
+            email: emailController.text,
+            pass: passwordController.text,
+          );
       if (result is UserCredential) {
         final imagePath = await FunctionUtils.uploadImage(
           result.user!.uid,
