@@ -1,4 +1,5 @@
 import 'package:disney_app/screen/account/account_screen.dart';
+import 'package:disney_app/screen/search/search_screen.dart';
 import 'package:disney_app/screen/tab/tab_screen_state.dart';
 import 'package:disney_app/screen/time_line/time_line_screen.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class TabScreenViewModel extends StateNotifier<TabScreenState> {
 
   List<Widget> pageList = [
     const TimeLineScreen(),
+    const SearchScreen(),
     const AccountScreen(),
   ];
 

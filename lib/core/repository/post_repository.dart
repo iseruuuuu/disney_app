@@ -1,5 +1,6 @@
 import 'package:disney_app/core/firebase/firebase.dart';
 import 'package:disney_app/core/model/post.dart';
+import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/services/post_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,6 +21,20 @@ final postsWithAccountIdFamily =
       final dataMap = doc.data();
       final data = dataMap! as Map<String, dynamic>;
       return Post.fromMap(data, id);
+    }).toList();
+  });
+});
+
+final postWithAttractionNameFamily =
+    FutureProvider.family<List<Post>, String>((ref, attractionName) {
+  return ref
+      .watch(postSnapshotWithAttractionNameFamily(attractionName).future)
+      .then((event) {
+    return event.docs.map((doc) {
+      final dataMap = doc.data();
+      final data = dataMap! as Map<String, dynamic>;
+      final myAccount = AuthenticationService.myAccount!;
+      return Post.fromMap(data, myAccount.id);
     }).toList();
   });
 });

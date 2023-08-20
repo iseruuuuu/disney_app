@@ -50,12 +50,18 @@ class PostScreen extends ConsumerWidget {
                   rank: state.rank,
                   isSelect: true,
                 ),
-                AppAttraction(
-                  onTap: () => ref
-                      .read(postScreenViewModelProvider.notifier)
-                      .attractionPicker(context),
-                  attractionName: state.attractionName,
-                  isSelected: state.isSelected,
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 50,
+                    horizontal: 10,
+                  ),
+                  child: AppAttraction(
+                    onTap: () => ref
+                        .read(postScreenViewModelProvider.notifier)
+                        .attractionPicker(context),
+                    attractionName: state.attractionName,
+                    isSelected: state.isSelected,
+                  ),
                 ),
                 AppTextField(
                   controller: controller.controller,
