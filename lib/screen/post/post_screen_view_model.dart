@@ -4,7 +4,7 @@ import 'package:disney_app/core/constants/attraction.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/usecase/post_usecase.dart';
-import 'package:disney_app/l10n/l10n.dart';
+import 'package:disney_app/gen/gen.dart';
 import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/screen/post/post_screen_state.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';

@@ -1,6 +1,6 @@
 import 'package:disney_app/core/firebase/firebase.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
-import 'package:disney_app/l10n/l10n.dart';
+import 'package:disney_app/gen/gen.dart';
 import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';

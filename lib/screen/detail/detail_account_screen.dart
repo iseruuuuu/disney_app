@@ -6,7 +6,7 @@ import 'package:disney_app/core/component/app_header.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
-import 'package:disney_app/gen/assets.gen.dart';
+import 'package:disney_app/gen/gen.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

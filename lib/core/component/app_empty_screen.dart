@@ -1,5 +1,5 @@
 import 'package:disney_app/core/theme/theme.dart';
-import 'package:disney_app/l10n/l10n.dart';
+import 'package:disney_app/gen/gen.dart';
 import 'package:flutter/material.dart';
 
 class AppEmptyScreen extends StatelessWidget {

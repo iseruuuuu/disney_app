@@ -1,6 +1,6 @@
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/usecase/post_usecase.dart';
-import 'package:disney_app/l10n/l10n.dart';
+import 'package:disney_app/gen/gen.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

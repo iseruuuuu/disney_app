@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/theme/app_text_style.dart';
-import 'package:disney_app/l10n/l10n.dart';
+import 'package:disney_app/gen/gen.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
