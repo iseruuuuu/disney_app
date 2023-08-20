@@ -1,7 +1,6 @@
 import 'package:disney_app/core/firebase/firebase.dart';
 import 'package:disney_app/core/firebase/firebase_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 final userSnapShotsFamily =
     FutureProvider.autoDispose.family<DocumentSnapshot<Object?>, String>(
