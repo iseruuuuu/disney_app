@@ -19,6 +19,17 @@ final postSnapshotWithAccountIdFamily =
   return data;
 });
 
+final postSnapshotWithAttractionNameFamily =
+    StreamProvider.family<QuerySnapshot<Object?>, String>(
+        (ref, attractionName) {
+  final posts = ref.watch(firebaseFirestoreProvider).collection('post');
+  final data = posts
+      .where('attraction_name', isEqualTo: attractionName)
+      .orderBy('created_time', descending: true)
+      .snapshots();
+  return data;
+});
+
 final postServiceProvider = Provider<PostService>((ref) {
   return PostService(ref);
 });

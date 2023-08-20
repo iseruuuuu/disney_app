@@ -44,6 +44,16 @@ class TabScreen extends ConsumerWidget {
               icon: Padding(
                 padding: EdgeInsets.only(top: 10),
                 child: Icon(
+                  Icons.search,
+                  size: 35,
+                ),
+              ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Icon(
                   Icons.account_circle,
                   size: 35,
                 ),
