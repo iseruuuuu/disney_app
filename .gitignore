@@ -40,7 +40,9 @@ migrate_working_dir/
 *.mocks.dart
 
 # FlutterGen
-lib/gen/
+lib/gen/app_jp.arb
+lib/gen/l10n.dart
+lib/gen/l10n_ja.dart
 
 # L10n
 lib/l10n/*.dart
