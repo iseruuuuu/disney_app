@@ -5,7 +5,7 @@ import 'package:disney_app/core/component/app_header.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/core/repository/user_repository.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
-import 'package:disney_app/core/theme/app_color_style.dart';
+import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/screen/account/account_screen_view_model.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';

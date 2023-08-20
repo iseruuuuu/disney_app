@@ -1,5 +1,4 @@
-import 'package:disney_app/core/theme/app_color_style.dart';
-import 'package:disney_app/core/theme/app_text_style.dart';
+import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 

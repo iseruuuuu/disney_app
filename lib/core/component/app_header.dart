@@ -1,7 +1,6 @@
 import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/model/account.dart';
-import 'package:disney_app/core/theme/app_color_style.dart';
-import 'package:disney_app/core/theme/app_text_style.dart';
+import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/gen/assets.gen.dart';
 import 'package:disney_app/l10n/l10n.dart';
 import 'package:flutter/material.dart';
