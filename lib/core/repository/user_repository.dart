@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:disney_app/core/firebase/firebase.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
