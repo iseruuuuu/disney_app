@@ -12,12 +12,12 @@ final userSnapShotsFamily =
   },
 );
 
-final userFirestoreServiceProvider = Provider<UserFirestoreService>((ref) {
-  return UserFirestoreService(ref);
+final userServiceProvider = Provider<UserService>((ref) {
+  return UserService(ref);
 });
 
-class UserFirestoreService {
-  UserFirestoreService(ProviderRef<UserFirestoreService> ref) {
+class UserService {
+  UserService(ProviderRef<UserService> ref) {
     firebaseStore = ref.read(firebaseFirestoreProvider);
     firebaseStorage = ref.read(firebaseStorageProvider);
     users = firebaseStore.collection('users');

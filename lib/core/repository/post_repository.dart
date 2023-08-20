@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/model/post.dart';
-import 'package:disney_app/core/services/post_firestore_service.dart';
+import 'package:disney_app/core/services/post_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final postsProvider = StreamProvider<List<Post>>((ref) {
@@ -30,10 +30,10 @@ final postRepositoryProvider = Provider<PostRepository>((ref) {
 
 class PostRepository {
   PostRepository(ProviderRef<PostRepository> ref) {
-    postFirestoreService = ref.read(postFirestoreServiceProvider);
+    postFirestoreService = ref.read(postServiceProvider);
   }
 
-  late final PostFirestoreService postFirestoreService;
+  late final PostService postFirestoreService;
 
   Future<dynamic> addPost(Post newPost) async {
     try {

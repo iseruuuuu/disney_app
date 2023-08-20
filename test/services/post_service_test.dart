@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:disney_app/core/services/post_firestore_service.dart';
+import 'package:disney_app/core/services/post_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -14,12 +14,12 @@ import 'post_service_test.mocks.dart';
   Query<Map<String, dynamic>>,
   QuerySnapshot<Map<String, dynamic>>,
   DocumentSnapshot<Map<String, dynamic>>,
-  ProviderRef<PostFirestoreService>,
+  ProviderRef<PostService>,
 ])
 void main() {
   group('PostFirestoreAPI', () {
-    final ref = MockProviderRef<PostFirestoreService>();
-    final api = PostFirestoreService(ref);
+    final ref = MockProviderRef<PostService>();
+    final api = PostService(ref);
     final mockFirestore = MockFirebaseFirestore();
     final mockCollectionReference =
         MockCollectionReference<Map<String, dynamic>>();

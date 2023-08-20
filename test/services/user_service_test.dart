@@ -1,4 +1,4 @@
-import 'package:disney_app/core/services/user_firestore_service.dart';
+import 'package:disney_app/core/services/user_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -10,8 +10,8 @@ import 'user_service_test.mocks.dart';
 @GenerateMocks([FirebaseStorage])
 void main() {
   group('UserServiceTest', () {
-    final ref = MockProviderRef<UserFirestoreService>();
-    final api = UserFirestoreService(ref);
+    final ref = MockProviderRef<UserService>();
+    final api = UserService(ref);
     final storage = MockFirebaseStorage();
     final firestore = MockFirebaseFirestore();
     final uid = FakeUser().uid;

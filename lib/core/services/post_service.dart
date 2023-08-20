@@ -19,12 +19,12 @@ final postSnapshotWithAccountIdFamily =
   return data;
 });
 
-final postFirestoreServiceProvider = Provider<PostFirestoreService>((ref) {
-  return PostFirestoreService(ref);
+final postServiceProvider = Provider<PostService>((ref) {
+  return PostService(ref);
 });
 
-class PostFirestoreService {
-  PostFirestoreService(ProviderRef<PostFirestoreService> ref) {
+class PostService {
+  PostService(ProviderRef<PostService> ref) {
     firebaseInstance = ref.read(firebaseFirestoreProvider);
   }
 

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
-import 'package:disney_app/core/services/post_firestore_service.dart';
+import 'package:disney_app/core/services/post_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -9,7 +9,7 @@ import '../fake/fake_post.dart';
 import 'post_repository.mocks.dart';
 
 @GenerateMocks([
-  PostFirestoreService,
+  PostService,
   DocumentReference,
   QuerySnapshot,
   QueryDocumentSnapshot,

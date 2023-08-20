@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/core/repository/user_repository.dart';
-import 'package:disney_app/core/services/user_firestore_service.dart';
+import 'package:disney_app/core/services/user_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,7 +13,7 @@ import '../fake/fake_user.dart';
 import 'user_repository_test.mocks.dart';
 
 @GenerateMocks([
-  UserFirestoreService,
+  UserService,
   DocumentSnapshot,
   WidgetRef,
   Reference,
