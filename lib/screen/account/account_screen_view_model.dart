@@ -1,6 +1,6 @@
 import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/screen/account/account_screen_state.dart';
-import 'package:disney_app/screen/edit/edit_screen.dart';
+import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -29,12 +29,7 @@ class AccountScreenViewModel extends StateNotifier<AccountScreenState> {
   }
 
   Future<void> onTapEdit(BuildContext context) async {
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute<dynamic>(
-        builder: (context) => const EditScreen(),
-      ),
-    );
+    final result = await NavigationUtils.editScreen(context);
     if (result == true) {
       state = state.copyWith(
         myAccount: AuthenticationService.myAccount!,

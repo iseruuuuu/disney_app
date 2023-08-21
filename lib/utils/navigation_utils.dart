@@ -1,8 +1,10 @@
+import 'package:disney_app/core/component/app_animation.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/screen/create_account/create_account_screen.dart';
 import 'package:disney_app/screen/detail/detail_account_screen.dart';
 import 'package:disney_app/screen/detail/detail_screen.dart';
+import 'package:disney_app/screen/edit/edit_screen.dart';
 import 'package:disney_app/screen/login/login_screen.dart';
 import 'package:disney_app/screen/login/password_reset_screen.dart';
 import 'package:disney_app/screen/post/post_screen.dart';
@@ -56,17 +58,13 @@ class NavigationUtils {
 
   static Future<void> postScreen(BuildContext context) {
     return Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const PostScreen(),
-      ),
+      whiteOut(const PostScreen()),
     );
   }
 
   static Future<void> tabScreen(BuildContext context) {
     return Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const TabScreen(),
-      ),
+      blackOut(const TabScreen()),
     );
   }
 
@@ -91,6 +89,13 @@ class NavigationUtils {
       MaterialPageRoute(
         builder: (context) => const PasswordResetScreen(),
       ),
+    );
+  }
+
+  static dynamic editScreen(BuildContext context) {
+    return Navigator.push(
+      context,
+      slideIn(const EditScreen()),
     );
   }
 }
