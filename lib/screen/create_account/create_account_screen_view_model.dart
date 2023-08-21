@@ -61,7 +61,7 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
         emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty &&
         image != null) {
-      final result = await ref.read(authenticationServiceProvider).signIn(
+      final result = await ref.read(authenticationServiceProvider).signUp(
             email: emailController.text,
             pass: passwordController.text,
           );
@@ -79,11 +79,7 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
         );
         final result0 = await ref.read(userUsecaseProvider).setUser(newAccount);
         if (result0 == true) {
-          if (!mounted) {
-            return;
-          }
-          await Future<void>.delayed(const Duration(seconds: 1))
-              .then((_) async {
+          await Future<void>.delayed(Duration.zero).then((_) async {
             loading.isLoading = false;
             await FunctionUtils().createAccountDialog(
               context: context,

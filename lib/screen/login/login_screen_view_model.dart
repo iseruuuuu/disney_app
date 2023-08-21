@@ -34,37 +34,6 @@ class LoginScreenViewModel extends ChangeNotifier {
     readFromStorage();
   }
 
-  //TODO あとで戻すor削除
-  // Future<void> checkLogin(BuildContext context, WidgetRef ref) async {
-  //   final prefs = await _prefs;
-  //   isAutoLogin = prefs.getBool('IS_AUTO_LOGIN') ?? false;
-  //   if (isAutoLogin) {
-  //     loading.isLoading = true;
-  //     final email = await storage.read(key: 'KEY_USERNAME') ?? '';
-  //     final password = await storage.read(key: 'KEY_PASSWORD') ?? '';
-  //     if (email != '' && password != '') {
-  //       final result = await ref.read(authenticationServiceProvider).signIn(
-  //             email: email,
-  //             pass: password,
-  //           );
-  //       if (result is UserCredential) {
-  //         final result0 =
-  //             await ref.read(userUsecaseProvider).getUser(result.user!.uid);
-  //
-  //         if (result0 == true) {
-  //           await Future<void>.delayed(const Duration(seconds: 1)).then((_) {
-  //             loading.isLoading = false;
-  //             return NavigationUtils.tabScreen(context);
-  //           });
-  //         }
-  //         return;
-  //       }
-  //     }
-  //   }
-  //   loading.isLoading = false;
-  //   return;
-  // }
-
   @override
   void dispose() {
     super.dispose();
@@ -128,11 +97,22 @@ class LoginScreenViewModel extends ChangeNotifier {
       await Future<void>.delayed(Duration.zero).then((_) {
         return NavigationUtils.loginScreen(context);
       });
-    } else {
-      await ref.read(userUsecaseProvider).getUser(currentUser.uid);
+    } else if (!currentUser.emailVerified) {
       await Future<void>.delayed(Duration.zero).then((_) {
-        return NavigationUtils.tabScreen(context);
+        return NavigationUtils.loginScreen(context);
       });
+    } else {
+      final result =
+          await ref.read(userUsecaseProvider).getUser(currentUser.uid);
+      if (result == false) {
+        await Future<void>.delayed(Duration.zero).then((_) {
+          return NavigationUtils.loginScreen(context);
+        });
+      } else {
+        await Future<void>.delayed(Duration.zero).then((_) {
+          return NavigationUtils.tabScreen(context);
+        });
+      }
     }
   }
 }

@@ -72,7 +72,7 @@ class UserRepository {
         AuthenticationService.myAccount = myAccount;
         return true;
       } else {
-        throw Exception('Document does not exist.');
+        return false;
       }
     } on FirebaseException catch (_) {
       return false;
@@ -99,10 +99,10 @@ class UserRepository {
     WidgetRef ref,
   ) async {
     try {
-      await firestoreAPI.deleteUserDocument(myAccount.id);
       await firestoreRepository.deleteAllPosts(myAccount.id);
       final storageReference = firestoreAPI.refFromURL(myAccount.imagePath);
       await storageReference.delete();
+      await firestoreAPI.deleteUserDocument(myAccount.id);
       return true;
     } on FirebaseException catch (_) {
       return false;
