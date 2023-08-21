@@ -76,9 +76,7 @@ class TimeLineScreen extends ConsumerWidget {
                 : const AppEmptyScreen();
           },
           error: (error, track) => AppErrorScreen(
-            onPressed: () {
-              ref.read(postsProvider);
-            },
+            onPressed: () => ref.read(postsProvider),
           ),
           loading: () {
             return const Center(
