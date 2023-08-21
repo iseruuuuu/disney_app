@@ -78,9 +78,7 @@ class NavigationUtils {
 
   static Future<void> loginScreen(BuildContext context) {
     return Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
-      ),
+      blackOut(const LoginScreen()),
     );
   }
 
