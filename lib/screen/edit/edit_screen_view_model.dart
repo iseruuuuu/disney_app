@@ -38,6 +38,8 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
   TextEditingController nameController = TextEditingController();
   TextEditingController userIdController = TextEditingController();
   TextEditingController selfIntroductionController = TextEditingController();
+  TextEditingController twitterController = TextEditingController();
+  TextEditingController instagramController = TextEditingController();
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   File? image;
 
@@ -49,6 +51,8 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
     selfIntroductionController =
         TextEditingController(text: myAccount.selfIntroduction);
     state = NetworkImage(myAccount.imagePath);
+    twitterController = TextEditingController(text: myAccount.twitter);
+    instagramController = TextEditingController(text: myAccount.instagram);
   }
 
   Future<void> update(BuildContext context, WidgetRef ref) async {
@@ -120,5 +124,34 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
       }
       NavigationUtils.loginScreen(context);
     });
+  }
+
+  Future<void> updateSNS(BuildContext context) async {
+    final l10n = L10n.of(context)!;
+    loading.isLoading = true;
+    final updateAccount = Account(
+      id: myAccount.id,
+      name: nameController.text,
+      userId: userIdController.text,
+      selfIntroduction: selfIntroductionController.text,
+      imagePath: myAccount.imagePath,
+      twitter: twitterController.text,
+      instagram: instagramController.text,
+    );
+    AuthenticationService.myAccount = updateAccount;
+    final result =
+        await ref.read(userUsecaseProvider).updateUser(updateAccount);
+    if (result == true) {
+      if (!mounted) {
+        return;
+      }
+      loading.isLoading = false;
+      Navigator.pop(context, true);
+    } else {
+      loading.isLoading = false;
+      await Future<void>.delayed(const Duration(seconds: 2)).then((_) {
+        SnackBarUtils.snackBar(context, l10n.error_empty_post);
+      });
+    }
   }
 }

@@ -60,7 +60,7 @@ class AppDisneyCell extends ConsumerWidget {
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 2.4,
+                width: MediaQuery.of(context).size.width / 1.5,
                 child: Padding(
                   padding: const EdgeInsets.only(
                     top: 10,
@@ -71,27 +71,32 @@ class AppDisneyCell extends ConsumerWidget {
                     children: [
                       Row(
                         children: [
-                          Text(
-                            account.name,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: AppTextStyle.cellNameTextStyle,
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 2,
+                            child: Text(
+                              account.name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: AppTextStyle.cellNameTextStyle,
+                            ),
                           ),
-                          const SizedBox(width: 5),
                           (post.postAccountId == MasterAccount.masterAccount)
                               ? Image.asset(
                                   Assets.images.badge.path,
                                   fit: BoxFit.fill,
-                                  width: 25,
+                                  width: 30,
                                 )
                               : const SizedBox.shrink(),
                         ],
                       ),
-                      Text(
-                        '@${account.userId}',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTextStyle.cellUserIdTextStyle,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 2,
+                        child: Text(
+                          '@${account.userId}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTextStyle.cellUserIdTextStyle,
+                        ),
                       ),
                     ],
                   ),

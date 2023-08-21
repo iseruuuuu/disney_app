@@ -23,9 +23,18 @@ class AccountScreen extends ConsumerWidget {
             const SizedBox(height: 20),
             AppHeader(
               account: myAccount,
-              onTapEdit: () => ref
+              onTapEditProfile: () => ref
                   .read(accountScreenViewModelProvider.notifier)
                   .onTapEdit(context),
+              onTapEditSNS: () => ref
+                  .read(accountScreenViewModelProvider.notifier)
+                  .onTapSNS(context),
+              onTapTwitter: () => ref
+                  .read(accountScreenViewModelProvider.notifier)
+                  .openTwitter(context),
+              onTapInstagram: () => ref
+                  .read(accountScreenViewModelProvider.notifier)
+                  .openInstagram(context),
               isMyAccount: true,
             ),
             Expanded(

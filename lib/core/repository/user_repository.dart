@@ -47,6 +47,8 @@ class UserRepository {
         'image_path': newAccount.imagePath,
         'created_time': Timestamp.now(),
         'update_time': Timestamp.now(),
+        'twitter': newAccount.twitter,
+        'instagram': newAccount.instagram,
       });
       return true;
     } on FirebaseException catch (_) {
@@ -67,6 +69,8 @@ class UserRepository {
           imagePath: data['image_path'],
           createdTime: data['created_time'],
           updateTime: data['updated_time'],
+          twitter: data['twitter'],
+          instagram: data['instagram'],
         );
 
         AuthenticationService.myAccount = myAccount;
@@ -87,6 +91,8 @@ class UserRepository {
         'user_id': updateAccount.userId,
         'self_introduction': updateAccount.selfIntroduction,
         'updated_time': Timestamp.now(),
+        'twitter': updateAccount.twitter,
+        'instagram': updateAccount.instagram,
       });
       return true;
     } on FirebaseException catch (_) {
