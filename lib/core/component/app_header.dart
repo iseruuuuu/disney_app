@@ -81,13 +81,16 @@ class AppHeader extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                (account.id == MasterAccount.masterAccount)
-                    ? Image.asset(
-                        Assets.images.badge.path,
-                        fit: BoxFit.fill,
-                        width: 40,
-                      )
-                    : const SizedBox.shrink(),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 45),
+                  child: (account.id == MasterAccount.masterAccount)
+                      ? Image.asset(
+                          Assets.images.badge.path,
+                          fit: BoxFit.fill,
+                          width: 40,
+                        )
+                      : const SizedBox.shrink(),
+                ),
                 const SizedBox(width: 10),
                 Column(
                   children: [
