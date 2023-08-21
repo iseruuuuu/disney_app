@@ -115,6 +115,12 @@ abstract class L10n {
   /// **'編集'**
   String get edit;
 
+  /// No description provided for @sns_edit.
+  ///
+  /// In ja, this message translates to:
+  /// **'SNS'**
+  String get sns_edit;
+
   /// No description provided for @post.
   ///
   /// In ja, this message translates to:
@@ -166,7 +172,7 @@ abstract class L10n {
   /// No description provided for @update.
   ///
   /// In ja, this message translates to:
-  /// **'更新する'**
+  /// **'更新'**
   String get update;
 
   /// No description provided for @log_out.
@@ -210,6 +216,30 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'ネタバレなし!'**
   String get is_spoiler_false;
+
+  /// No description provided for @twitter_hint_text.
+  ///
+  /// In ja, this message translates to:
+  /// **'TwitterのID'**
+  String get twitter_hint_text;
+
+  /// No description provided for @instagram_hint_text.
+  ///
+  /// In ja, this message translates to:
+  /// **'InstagramのID'**
+  String get instagram_hint_text;
+
+  /// No description provided for @sns_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'🚫 SNS情報公開に関する警告 🚫'**
+  String get sns_title;
+
+  /// No description provided for @sns_description.
+  ///
+  /// In ja, this message translates to:
+  /// **'SNS上での情報公開には慎重な取り扱いが求められます。\n よく理解し、自身の情報を保護するための対策を講じてください。\n 公開情報の管理は各自の責任で行ってください。'**
+  String get sns_description;
 
   /// No description provided for @register_screen.
   ///

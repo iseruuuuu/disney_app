@@ -17,6 +17,9 @@ class L10nJa extends L10n {
   String get edit => '編集';
 
   @override
+  String get sns_edit => 'SNS';
+
+  @override
   String get post => '投稿';
 
   @override
@@ -41,7 +44,7 @@ class L10nJa extends L10n {
   String get tweet => 'tweet';
 
   @override
-  String get update => '更新する';
+  String get update => '更新';
 
   @override
   String get log_out => 'ログアウト';
@@ -63,6 +66,18 @@ class L10nJa extends L10n {
 
   @override
   String get is_spoiler_false => 'ネタバレなし!';
+
+  @override
+  String get twitter_hint_text => 'TwitterのID';
+
+  @override
+  String get instagram_hint_text => 'InstagramのID';
+
+  @override
+  String get sns_title => '🚫 SNS情報公開に関する警告 🚫';
+
+  @override
+  String get sns_description => 'SNS上での情報公開には慎重な取り扱いが求められます。\n よく理解し、自身の情報を保護するための対策を講じてください。\n 公開情報の管理は各自の責任で行ってください。';
 
   @override
   String get register_screen => '新規登録はこちら';

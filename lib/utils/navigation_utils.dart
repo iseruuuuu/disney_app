@@ -5,6 +5,7 @@ import 'package:disney_app/screen/create_account/create_account_screen.dart';
 import 'package:disney_app/screen/detail/detail_account_screen.dart';
 import 'package:disney_app/screen/detail/detail_screen.dart';
 import 'package:disney_app/screen/edit/edit_screen.dart';
+import 'package:disney_app/screen/edit/sns_edit_screen.dart';
 import 'package:disney_app/screen/login/login_screen.dart';
 import 'package:disney_app/screen/login/password_reset_screen.dart';
 import 'package:disney_app/screen/post/post_screen.dart';
@@ -94,6 +95,13 @@ class NavigationUtils {
     return Navigator.push(
       context,
       slideIn(const EditScreen()),
+    );
+  }
+
+  static dynamic snsEditScreen(BuildContext context) {
+    return Navigator.push(
+      context,
+      slideIn(const SNSEditScreen()),
     );
   }
 }

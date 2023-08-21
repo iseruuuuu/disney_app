@@ -26,6 +26,15 @@ class AccountScreen extends ConsumerWidget {
               onTapEdit: () => ref
                   .read(accountScreenViewModelProvider.notifier)
                   .onTapEdit(context),
+              onTapSNS: () => ref
+                  .read(accountScreenViewModelProvider.notifier)
+                  .onTapSNS(context),
+              onTapTwitter: () => ref
+                  .read(accountScreenViewModelProvider.notifier)
+                  .openTwitter(context),
+              onTapInstagram: () => ref
+                  .read(accountScreenViewModelProvider.notifier)
+                  .openInstagram(context),
               isMyAccount: true,
             ),
             Expanded(

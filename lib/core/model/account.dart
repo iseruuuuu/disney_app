@@ -9,6 +9,8 @@ class Account {
     this.userId = '',
     this.createdTime,
     this.updateTime,
+    this.twitter = '',
+    this.instagram = '',
   });
 
   factory Account.fromMap(Map<String, dynamic> data, String uid) {
@@ -20,6 +22,8 @@ class Account {
       imagePath: data['image_path'],
       createdTime: data['created_time'],
       updateTime: data['updated_time'],
+      twitter: data['twitter'],
+      instagram: data['instagram'],
     );
   }
 
@@ -30,6 +34,8 @@ class Account {
   String userId;
   Timestamp? createdTime;
   Timestamp? updateTime;
+  String twitter;
+  String instagram;
 
   @override
   bool operator ==(Object other) {
@@ -43,7 +49,9 @@ class Account {
         other.selfIntroduction == selfIntroduction &&
         other.imagePath == imagePath &&
         other.createdTime == createdTime &&
-        other.updateTime == updateTime;
+        other.updateTime == updateTime &&
+        other.twitter == twitter &&
+        other.instagram == instagram;
   }
 
   @override
@@ -53,5 +61,7 @@ class Account {
       selfIntroduction.hashCode ^
       imagePath.hashCode ^
       (createdTime?.hashCode ?? 0) ^
-      (updateTime?.hashCode ?? 0);
+      (updateTime?.hashCode ?? 0) ^
+      twitter.hashCode ^
+      instagram.hashCode;
 }

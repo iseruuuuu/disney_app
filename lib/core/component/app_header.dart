@@ -3,6 +3,7 @@ import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/gen/gen.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AppHeader extends StatelessWidget {
   const AppHeader({
@@ -10,10 +11,16 @@ class AppHeader extends StatelessWidget {
     required this.account,
     required this.isMyAccount,
     this.onTapEdit,
+    this.onTapSNS,
+    this.onTapTwitter,
+    this.onTapInstagram,
   });
 
   final Account account;
   final VoidCallback? onTapEdit;
+  final VoidCallback? onTapSNS;
+  final VoidCallback? onTapTwitter;
+  final VoidCallback? onTapInstagram;
   final bool isMyAccount;
 
   @override
@@ -52,6 +59,24 @@ class AppHeader extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: AppTextStyle.accountUserIdTextStyle,
                       ),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: onTapTwitter,
+                            icon: const Icon(
+                              FontAwesomeIcons.twitter,
+                              color: Colors.lightBlue,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: onTapInstagram,
+                            icon: const Icon(
+                              FontAwesomeIcons.instagram,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -64,17 +89,32 @@ class AppHeader extends StatelessWidget {
                       )
                     : const SizedBox.shrink(),
                 const SizedBox(width: 10),
-                isMyAccount
-                    ? OutlinedButton(
-                        onPressed: onTapEdit,
-                        child: Text(
-                          l10n.edit,
-                          style: const TextStyle(
-                            color: AppColorStyle.appColor,
-                          ),
-                        ),
-                      )
-                    : const SizedBox.shrink(),
+                Column(
+                  children: [
+                    isMyAccount
+                        ? OutlinedButton(
+                            onPressed: onTapEdit,
+                            child: Text(
+                              l10n.edit,
+                              style: const TextStyle(
+                                color: AppColorStyle.appColor,
+                              ),
+                            ),
+                          )
+                        : const SizedBox.shrink(),
+                    isMyAccount
+                        ? OutlinedButton(
+                            onPressed: onTapSNS,
+                            child: Text(
+                              l10n.sns_edit,
+                              style: const TextStyle(
+                                color: AppColorStyle.appColor,
+                              ),
+                            ),
+                          )
+                        : const SizedBox.shrink(),
+                  ],
+                ),
               ],
             ),
           ),
@@ -103,12 +143,9 @@ class AppHeader extends StatelessWidget {
                 ),
               ),
             ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                l10n.post,
-                style: AppTextStyle.appBold17TextStyle,
-              ),
+            child: Text(
+              l10n.post,
+              style: AppTextStyle.appBold17TextStyle,
             ),
           ),
         ],
