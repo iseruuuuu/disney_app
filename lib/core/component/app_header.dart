@@ -10,17 +10,17 @@ class AppHeader extends StatelessWidget {
     super.key,
     required this.account,
     required this.isMyAccount,
-    this.onTapEdit,
-    this.onTapSNS,
-    this.onTapTwitter,
-    this.onTapInstagram,
+    this.onTapEditProfile,
+    this.onTapEditSNS,
+    required this.onTapTwitter,
+    required this.onTapInstagram,
   });
 
   final Account account;
-  final VoidCallback? onTapEdit;
-  final VoidCallback? onTapSNS;
-  final VoidCallback? onTapTwitter;
-  final VoidCallback? onTapInstagram;
+  final VoidCallback? onTapEditProfile;
+  final VoidCallback? onTapEditSNS;
+  final VoidCallback onTapTwitter;
+  final VoidCallback onTapInstagram;
   final bool isMyAccount;
 
   @override
@@ -93,7 +93,7 @@ class AppHeader extends StatelessWidget {
                   children: [
                     isMyAccount
                         ? OutlinedButton(
-                            onPressed: onTapEdit,
+                            onPressed: onTapEditProfile,
                             child: Text(
                               l10n.edit,
                               style: const TextStyle(
@@ -104,7 +104,7 @@ class AppHeader extends StatelessWidget {
                         : const SizedBox.shrink(),
                     isMyAccount
                         ? OutlinedButton(
-                            onPressed: onTapSNS,
+                            onPressed: onTapEditSNS,
                             child: Text(
                               l10n.sns_edit,
                               style: const TextStyle(
