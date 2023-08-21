@@ -27,42 +27,11 @@ class LoginScreenViewModel extends ChangeNotifier {
   final TextEditingController passwordController = TextEditingController();
   final Ref ref;
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  bool isAutoLogin = false;
 
   Loading get loading => ref.read(loadingProvider.notifier);
 
   void fetch() {
     readFromStorage();
-  }
-
-  Future<void> checkLogin(BuildContext context, WidgetRef ref) async {
-    final prefs = await _prefs;
-    isAutoLogin = prefs.getBool('IS_AUTO_LOGIN') ?? false;
-    if (isAutoLogin) {
-      loading.isLoading = true;
-      final email = await storage.read(key: 'KEY_USERNAME') ?? '';
-      final password = await storage.read(key: 'KEY_PASSWORD') ?? '';
-      if (email != '' && password != '') {
-        final result = await ref.read(authenticationServiceProvider).signIn(
-              email: email,
-              pass: password,
-            );
-        if (result is UserCredential) {
-          final result0 =
-              await ref.read(userUsecaseProvider).getUser(result.user!.uid);
-
-          if (result0 == true) {
-            await Future<void>.delayed(const Duration(seconds: 1)).then((_) {
-              loading.isLoading = false;
-              return NavigationUtils.tabScreen(context);
-            });
-          }
-          return;
-        }
-      }
-    }
-    loading.isLoading = false;
-    return;
   }
 
   @override
@@ -95,13 +64,14 @@ class LoginScreenViewModel extends ChangeNotifier {
           await ref.read(userUsecaseProvider).getUser(result.user!.uid);
       if (result0 == true) {
         await store();
-        await Future<void>.delayed(const Duration(seconds: 2)).then((_) {
+        await Future<void>.delayed(const Duration(seconds: 1)).then((_) {
           loading.isLoading = false;
           return NavigationUtils.tabScreen(context);
         });
       }
+      return;
     } else {
-      await Future<void>.delayed(const Duration(seconds: 2)).then((_) {
+      await Future<void>.delayed(const Duration(seconds: 1)).then((_) {
         final errorMessage = FunctionUtils().checkLoginError(
           result.toString(),
           context,
@@ -110,6 +80,7 @@ class LoginScreenViewModel extends ChangeNotifier {
         SnackBarUtils.snackBar(context, errorMessage);
       });
     }
+    return;
   }
 
   void createAccountScreen(BuildContext context) {
@@ -118,5 +89,30 @@ class LoginScreenViewModel extends ChangeNotifier {
 
   void passwordResetScreen(BuildContext context) {
     NavigationUtils.passwordResetScreen(context);
+  }
+
+  Future<void> checkLogin(BuildContext context, WidgetRef ref) async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) {
+      await Future<void>.delayed(Duration.zero).then((_) {
+        return NavigationUtils.loginScreen(context);
+      });
+    } else if (!currentUser.emailVerified) {
+      await Future<void>.delayed(Duration.zero).then((_) {
+        return NavigationUtils.loginScreen(context);
+      });
+    } else {
+      final result =
+          await ref.read(userUsecaseProvider).getUser(currentUser.uid);
+      if (result == false) {
+        await Future<void>.delayed(Duration.zero).then((_) {
+          return NavigationUtils.loginScreen(context);
+        });
+      } else {
+        await Future<void>.delayed(Duration.zero).then((_) {
+          return NavigationUtils.tabScreen(context);
+        });
+      }
+    }
   }
 }

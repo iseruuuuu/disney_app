@@ -16,6 +16,7 @@ class AppErrorScreen extends StatelessWidget {
     final l10n = L10n.of(context)!;
     return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
             width: 100,
@@ -24,10 +25,12 @@ class AppErrorScreen extends StatelessWidget {
               'assets/images/empty.png',
             ),
           ),
+          const SizedBox(height: 30),
           Text(
             l10n.error_screen,
-            style: AppTextStyle.appBold17TextStyle,
+            style: AppTextStyle.appBold18TextStyle,
           ),
+          const SizedBox(height: 10),
           AppTextButton(
             onPressed: onPressed,
             title: l10n.retry,
