@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/usecase/post_usecase.dart';
 import 'package:disney_app/gen/gen.dart';
@@ -5,6 +7,7 @@ import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final detailScreenViewModelProvider =
@@ -78,6 +81,21 @@ class DetailScreenViewModel extends ChangeNotifier {
           SnackBarUtils.snackBar(context, 'URLが開けませんでした');
         });
       }
+    }
+  }
+
+  void share(
+    String attractionName,
+    String description,
+  ) {
+    if (Platform.isIOS) {
+      //TODO リリースされたら、AppleStoreのリンクを載せる。
+      Share.share('$attractionName\n\n'
+          '$description\n\n');
+    } else {
+      //TODO リリースされたら、GooglePlayのリンクを載せる。
+      Share.share('$attractionName\n\n'
+          '$description\n\n');
     }
   }
 }

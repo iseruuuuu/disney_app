@@ -5,8 +5,10 @@ import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/gen/gen.dart';
 import 'package:disney_app/screen/detail/detail_screen_view_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 class DetailScreen extends ConsumerWidget {
@@ -139,6 +141,18 @@ class DetailScreen extends ConsumerWidget {
                             style: AppTextStyle.detailCreatedTimeTextStyle,
                           ),
                           const Spacer(),
+                          IconButton(
+                            onPressed: () =>
+                                ref.read(detailScreenViewModelProvider).share(
+                                      post.attractionName,
+                                      post.content,
+                                    ),
+                            iconSize: 30,
+                            icon: const Icon(
+                              CupertinoIcons.share,
+                              color: AppColorStyle.appColor,
+                            ),
+                          ),
                           (post.postAccountId == myAccount)
                               ? GestureDetector(
                                   onTap: () => ref
