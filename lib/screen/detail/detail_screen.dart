@@ -8,7 +8,6 @@ import 'package:disney_app/screen/detail/detail_screen_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 class DetailScreen extends ConsumerWidget {
@@ -55,7 +54,7 @@ class DetailScreen extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width / 1.6,
+                    width: MediaQuery.of(context).size.width / 1.5,
                     child: Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: Text(
@@ -68,11 +67,13 @@ class DetailScreen extends ConsumerWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 5, right: 10),
-                    child: Text(
-                      '@${account.userId}',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.grey.shade600,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width / 1.5,
+                      child: Text(
+                        '@${account.userId}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTextStyle.app15GreyTextStyle,
                       ),
                     ),
                   ),
