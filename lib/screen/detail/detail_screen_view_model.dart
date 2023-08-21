@@ -46,7 +46,6 @@ class DetailScreenViewModel extends ChangeNotifier {
   }
 
   Future<void> openTwitter(BuildContext context, String twitter) async {
-    //TODO あとで別のアカウントで開けるか調査する。
     if (twitter.isNotEmpty) {
       final url = 'twitter://user?screen_name=$twitter';
       final secondUrl = 'https://twitter.com/$twitter';
@@ -65,7 +64,6 @@ class DetailScreenViewModel extends ChangeNotifier {
   }
 
   Future<void> openInstagram(BuildContext context, String instagram) async {
-    //TODO あとで別のアカウントで開けるか調査する。
     if (instagram.isNotEmpty) {
       final nativeUrl = 'instagram://user?username=$instagram';
       final webUrl = 'https://www.instagram.com/$instagram/';
