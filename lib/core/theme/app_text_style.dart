@@ -23,6 +23,12 @@ class AppTextStyle {
     color: Colors.black,
   );
 
+  static const app16TextStyle = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 15,
+    color: Colors.black,
+  );
+
   static const appBold17TextStyle = TextStyle(
     color: Colors.black,
     fontSize: 17,
