@@ -4,7 +4,7 @@ import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/gen/gen.dart';
-import 'package:disney_app/screen/detail/detail_screen_view_model.dart';
+import 'package:disney_app/screen/detail/detail_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,7 +41,7 @@ class DetailScreen extends ConsumerWidget {
           ),
           Screenshot(
             controller:
-                ref.watch(detailScreenViewModelProvider).screenshotController,
+                ref.watch(detailViewModelProvider).screenshotController,
             child: Column(
               children: [
                 Row(
@@ -158,7 +158,7 @@ class DetailScreen extends ConsumerWidget {
                             const Spacer(),
                             IconButton(
                               onPressed: () => ref
-                                  .read(detailScreenViewModelProvider)
+                                  .read(detailViewModelProvider)
                                   .share(post),
                               iconSize: 30,
                               icon: const Icon(
@@ -169,7 +169,7 @@ class DetailScreen extends ConsumerWidget {
                             (post.postAccountId == myAccount)
                                 ? GestureDetector(
                                     onTap: () => ref
-                                        .read(detailScreenViewModelProvider)
+                                        .read(detailViewModelProvider)
                                         .openCheckDialog(
                                           context,
                                           post.id,
