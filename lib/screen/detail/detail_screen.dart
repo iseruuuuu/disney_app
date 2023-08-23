@@ -1,4 +1,5 @@
 import 'package:disney_app/core/component/component.dart';
+import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/theme/theme.dart';
@@ -86,11 +87,17 @@ class DetailScreen extends ConsumerWidget {
                     const Spacer(),
                     account.isOfficial
                         ? Image.asset(
-                            Assets.images.badge.path,
+                            Assets.images.official.path,
                             fit: BoxFit.fill,
                             width: 45,
                           )
-                        : const SizedBox.shrink(),
+                        : (post.postAccountId == MasterAccount.masterAccount)
+                            ? Image.asset(
+                                Assets.images.dev.path,
+                                fit: BoxFit.fill,
+                                width: 45,
+                              )
+                            : const SizedBox.shrink(),
                     const SizedBox(width: 10),
                   ],
                 ),

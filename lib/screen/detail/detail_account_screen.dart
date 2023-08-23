@@ -1,3 +1,4 @@
+import 'package:disney_app/core/component/app_skeletons_loading.dart';
 import 'package:disney_app/core/component/component.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
@@ -69,7 +70,6 @@ class DetailAccountScreen extends ConsumerWidget {
                                 account: postAccount,
                                 post: data[index],
                                 myAccount: myAccountId,
-                                isMaster: false,
                                 onTapImage: () {
                                   NavigationUtils.detailAccountScreen(
                                     context,
@@ -89,11 +89,7 @@ class DetailAccountScreen extends ConsumerWidget {
                     postsWithAccountIdFamily(postAccount.id),
                   ),
                 ),
-                loading: () {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
+                loading: AppSkeletonsLoading.new,
               ),
             ),
           ),

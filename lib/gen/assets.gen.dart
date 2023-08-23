@@ -27,8 +27,8 @@ class $AssetsHeaderGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/badge.png
-  AssetGenImage get badge => const AssetGenImage('assets/images/badge.png');
+  /// File path: assets/images/dev.png
+  AssetGenImage get dev => const AssetGenImage('assets/images/dev.png');
 
   /// File path: assets/images/empty.png
   AssetGenImage get empty => const AssetGenImage('assets/images/empty.png');
@@ -37,8 +37,12 @@ class $AssetsImagesGen {
   AssetGenImage get imageEmpty =>
       const AssetGenImage('assets/images/image_empty.png');
 
+  /// File path: assets/images/official.png
+  AssetGenImage get official =>
+      const AssetGenImage('assets/images/official.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [badge, empty, imageEmpty];
+  List<AssetGenImage> get values => [dev, empty, imageEmpty, official];
 }
 
 class Assets {
