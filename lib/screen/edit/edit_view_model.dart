@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 final editViewModelProvider =
     StateNotifierProvider<EditScreenViewModel, ImageProvider>(
@@ -152,17 +151,6 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
       loading.isLoading = false;
       await Future<void>.delayed(const Duration(seconds: 2)).then((_) {
         SnackBarUtils.snackBar(context, l10n.error_empty_post);
-      });
-    }
-  }
-
-  Future<void> report(BuildContext context) async {
-    final reportUrl = Uri.parse('https://forms.gle/tRwqBuU6Bz89R1tk9');
-    if (await canLaunchUrl(reportUrl)) {
-      await launchUrl(reportUrl);
-    } else {
-      await Future.microtask(() {
-        SnackBarUtils.snackBar(context, 'URLが開けませんでした');
       });
     }
   }

@@ -4,10 +4,10 @@ import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/core/usecase/post_usecase.dart';
 import 'package:disney_app/gen/gen.dart';
+import 'package:disney_app/provider/launch_url_provider.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AppDisneyCell extends ConsumerWidget {
   const AppDisneyCell({
@@ -130,14 +130,8 @@ class AppDisneyCell extends ConsumerWidget {
                             context: context,
                             title: l10n.dialog_contact_title,
                             content: l10n.dialog_contact_contents,
-                            onTap: () async {
-                              final url = Uri.parse(
-                                'https://forms.gle/Mo71XmZtA74AKBTo9',
-                              );
-                              if (!await launchUrl(url)) {
-                                throw Exception('Could not launch $url');
-                              }
-                            },
+                            onTap: () =>
+                                ref.read(launchUrlProvider).reportPost(context),
                           );
                         },
                         child: const Icon(Icons.reorder),
