@@ -69,7 +69,6 @@ class DetailAccountScreen extends ConsumerWidget {
                                 account: postAccount,
                                 post: data[index],
                                 myAccount: myAccountId,
-                                isMaster: false,
                                 onTapImage: () {
                                   NavigationUtils.detailAccountScreen(
                                     context,

@@ -56,7 +56,6 @@ class TimeLineScreen extends ConsumerWidget {
                               account: postAccount,
                               post: post,
                               myAccount: myAccount.id,
-                              isMaster: isMaster,
                               onTapImage: () {
                                 NavigationUtils.detailAccountScreen(
                                   context,

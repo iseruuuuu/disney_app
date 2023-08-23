@@ -69,7 +69,6 @@ class SearchScreen extends ConsumerWidget {
                                     account: myAccount,
                                     post: post,
                                     myAccount: myAccount.id,
-                                    isMaster: false,
                                     onTapImage: () {
                                       NavigationUtils.detailAccountScreen(
                                         context,

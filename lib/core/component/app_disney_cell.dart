@@ -1,3 +1,4 @@
+import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/theme/theme.dart';
@@ -16,7 +17,6 @@ class AppDisneyCell extends ConsumerWidget {
     required this.post,
     required this.onTapImage,
     required this.myAccount,
-    required this.isMaster,
   });
 
   final int index;
@@ -24,7 +24,6 @@ class AppDisneyCell extends ConsumerWidget {
   final Post post;
   final VoidCallback onTapImage;
   final String myAccount;
-  final bool isMaster;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -96,13 +95,20 @@ class AppDisneyCell extends ConsumerWidget {
               const Spacer(),
               account.isOfficial
                   ? Image.asset(
-                      Assets.images.badge.path,
+                      Assets.images.official.path,
                       fit: BoxFit.fill,
                       width: 30,
                     )
-                  : const SizedBox.shrink(),
+                  : (post.postAccountId == MasterAccount.masterAccount)
+                      ? Image.asset(
+                          Assets.images.dev.path,
+                          fit: BoxFit.fill,
+                          width: 30,
+                        )
+                      : const SizedBox.shrink(),
               const Spacer(),
-              (post.postAccountId == myAccount) || isMaster
+              (post.postAccountId == myAccount) ||
+                      (post.postAccountId == MasterAccount.masterAccount)
                   ? Padding(
                       padding: const EdgeInsets.only(top: 10, right: 10),
                       child: GestureDetector(
