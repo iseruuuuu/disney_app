@@ -2,7 +2,7 @@ import 'package:disney_app/core/component/component.dart';
 import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/gen/gen.dart';
 import 'package:disney_app/provider/loading_provider.dart';
-import 'package:disney_app/screen/edit/edit_screen_view_model.dart';
+import 'package:disney_app/screen/edit/edit_view_model.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,8 +13,8 @@ class EditScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(editScreenViewModelProvider.notifier);
-    final image = ref.watch(editScreenViewModelProvider);
+    final controller = ref.watch(editViewModelProvider.notifier);
+    final image = ref.watch(editViewModelProvider);
     final loading = ref.watch(loadingProvider);
     final l10n = L10n.of(context)!;
     return Scaffold(
@@ -25,7 +25,7 @@ class EditScreen extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => ref
-                .read(editScreenViewModelProvider.notifier)
+                .read(editViewModelProvider.notifier)
                 .update(context, ref),
             child: Text(
               l10n.update,
@@ -49,7 +49,7 @@ class EditScreen extends ConsumerWidget {
               children: [
                 GestureDetector(
                   onTap: () => ref
-                      .read(editScreenViewModelProvider.notifier)
+                      .read(editViewModelProvider.notifier)
                       .selectImage(),
                   child: CircleAvatar(
                     foregroundImage: image,
@@ -83,7 +83,7 @@ class EditScreen extends ConsumerWidget {
                       title: l10n.dialog_log_out_check_title,
                       content: l10n.dialog_log_out_check_content,
                       onTap: () => ref
-                          .read(editScreenViewModelProvider.notifier)
+                          .read(editViewModelProvider.notifier)
                           .signOut(context, ref),
                     );
                   },
@@ -97,7 +97,7 @@ class EditScreen extends ConsumerWidget {
                       title: l10n.dialog_delete_account_title,
                       content: l10n.dialog_delete_account_content,
                       onTap: () => ref
-                          .read(editScreenViewModelProvider.notifier)
+                          .read(editViewModelProvider.notifier)
                           .delete(context, ref),
                     );
                   },

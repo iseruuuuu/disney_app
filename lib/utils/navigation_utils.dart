@@ -1,13 +1,13 @@
 import 'package:disney_app/core/component/app_animation.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
-import 'package:disney_app/screen/create_account/create_account_screen.dart';
+import 'package:disney_app/screen/authentication/create_account/create_account_screen.dart';
+import 'package:disney_app/screen/authentication/login/login_screen.dart';
+import 'package:disney_app/screen/authentication/password_reset/password_reset_screen.dart';
 import 'package:disney_app/screen/detail/detail_account_screen.dart';
 import 'package:disney_app/screen/detail/detail_screen.dart';
 import 'package:disney_app/screen/edit/edit_screen.dart';
-import 'package:disney_app/screen/edit/sns_edit_screen.dart';
-import 'package:disney_app/screen/login/login_screen.dart';
-import 'package:disney_app/screen/login/password_reset_screen.dart';
+import 'package:disney_app/screen/edit/edit_sns_screen.dart';
 import 'package:disney_app/screen/post/post_screen.dart';
 import 'package:disney_app/screen/tab/tab_screen.dart';
 import 'package:flutter/material.dart';
@@ -101,7 +101,7 @@ class NavigationUtils {
   static dynamic snsEditScreen(BuildContext context) {
     return Navigator.push(
       context,
-      slideIn(const SNSEditScreen()),
+      slideIn(const EditSNSScreen()),
     );
   }
 }

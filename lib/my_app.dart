@@ -1,5 +1,5 @@
 import 'package:disney_app/gen/gen.dart';
-import 'package:disney_app/screen/login/login_screen.dart';
+import 'package:disney_app/screen/authentication/login/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {

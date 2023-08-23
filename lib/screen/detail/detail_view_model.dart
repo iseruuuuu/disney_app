@@ -12,15 +12,15 @@ import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-final detailScreenViewModelProvider =
-    ChangeNotifierProvider.autoDispose<DetailScreenViewModel>(
+final detailViewModelProvider =
+    ChangeNotifierProvider.autoDispose<DetailViewModel>(
   (ref) {
-    return DetailScreenViewModel();
+    return DetailViewModel();
   },
 );
 
-class DetailScreenViewModel extends ChangeNotifier {
-  DetailScreenViewModel();
+class DetailViewModel extends ChangeNotifier {
+  DetailViewModel();
 
   ScreenshotController screenshotController = ScreenshotController();
 

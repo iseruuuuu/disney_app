@@ -1,7 +1,7 @@
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/usecase/user_usecase.dart';
-import 'package:disney_app/screen/edit/edit_screen_view_model.dart';
+import 'package:disney_app/screen/edit/edit_view_model.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -58,7 +58,7 @@ void main() {
       when(mockAccount.imagePath).thenReturn('Test Image Path');
       final container = ProviderContainer(
         overrides: [
-          editScreenViewModelProvider.overrideWith(
+          editViewModelProvider.overrideWith(
             (ref) {
               return EditScreenViewModel(
                 state: NetworkImage(mockAccount.imagePath),
@@ -71,7 +71,7 @@ void main() {
       AuthenticationService.myAccount = mockAccount;
       viewModel = EditScreenViewModel(
         state: NetworkImage(mockAccount.imagePath),
-        ref: container.read(editScreenViewModelProvider.notifier).ref,
+        ref: container.read(editViewModelProvider.notifier).ref,
       );
     });
 
