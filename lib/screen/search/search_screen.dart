@@ -54,25 +54,25 @@ class SearchScreen extends ConsumerWidget {
                             final users = ref
                                 .watch(usersFamily(post[index].postAccountId));
                             return users.when(
-                              data: (account) {
+                              data: (postAccount) {
                                 return GestureDetector(
                                   onTap: () {
                                     NavigationUtils.detailScreen(
                                       context,
-                                      account,
+                                      postAccount,
                                       post[index],
                                       myAccount.id,
                                     );
                                   },
                                   child: AppDisneyCell(
                                     index: index,
-                                    account: account,
+                                    account: postAccount,
                                     post: post[index],
                                     myAccount: myAccount.id,
                                     onTapImage: () {
                                       NavigationUtils.detailAccountScreen(
                                         context,
-                                        account,
+                                        postAccount,
                                         post[index],
                                         myAccount.id,
                                       );
