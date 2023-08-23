@@ -1,3 +1,4 @@
+import 'package:disney_app/core/component/app_skeletons_loading.dart';
 import 'package:disney_app/core/component/component.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/core/repository/user_repository.dart';
@@ -66,7 +67,7 @@ class TimeLineScreen extends ConsumerWidget {
                           );
                         },
                         error: (error, track) => const SizedBox(),
-                        loading: SizedBox.new,
+                        loading: AppSkeletonsCellLoading.new,
                       );
                     },
                   )
@@ -75,11 +76,7 @@ class TimeLineScreen extends ConsumerWidget {
           error: (error, track) => AppErrorScreen(
             onPressed: () => ref.read(postsProvider),
           ),
-          loading: () {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
+          loading: AppSkeletonsLoading.new,
         ),
       ),
       floatingActionButton: FloatingActionButton(

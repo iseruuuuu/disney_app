@@ -1,4 +1,5 @@
 import 'package:disney_app/core/component/app_no_search_screen.dart';
+import 'package:disney_app/core/component/app_skeletons_loading.dart';
 import 'package:disney_app/core/component/component.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/core/repository/user_repository.dart';
@@ -81,7 +82,7 @@ class SearchScreen extends ConsumerWidget {
                                 );
                               },
                               error: (error, track) => const SizedBox(),
-                              loading: SizedBox.new,
+                              loading: AppSkeletonsLoading.new,
                             );
                           },
                         )
@@ -92,11 +93,7 @@ class SearchScreen extends ConsumerWidget {
                     postWithAttractionNameFamily(state.attractionName),
                   ),
                 ),
-                loading: () {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
+                loading: AppSkeletonsLoading.new,
               ),
             ),
           ),
