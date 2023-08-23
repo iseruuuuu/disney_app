@@ -157,9 +157,9 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
   }
 
   Future<void> report(BuildContext context) async {
-    final instagramUrl = Uri.parse('https://forms.gle/tRwqBuU6Bz89R1tk9');
-    if (await canLaunchUrl(instagramUrl)) {
-      await launchUrl(instagramUrl);
+    final reportUrl = Uri.parse('https://forms.gle/tRwqBuU6Bz89R1tk9');
+    if (await canLaunchUrl(reportUrl)) {
+      await launchUrl(reportUrl);
     } else {
       await Future.microtask(() {
         SnackBarUtils.snackBar(context, 'URLが開けませんでした');
