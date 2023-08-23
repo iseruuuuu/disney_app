@@ -42,8 +42,10 @@ migrate_working_dir/
 # L10n
 lib/l10n/*.dart
 
-# account
-lib/core/constants/account.dart
+
+
+# constans
+lib/core/constants/
 
 # Symbolication related
 app.*.symbols
