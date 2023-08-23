@@ -80,7 +80,7 @@ class SNSEditScreen extends ConsumerWidget {
                 title: l10n.sns_report,
                 color: Colors.red,
               ),
-              const Spacer(flex: 2,),
+              const Spacer(flex: 2),
             ],
           ),
           loading
