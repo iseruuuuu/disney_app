@@ -17,79 +17,90 @@ class EditSNSScreen extends ConsumerWidget {
     final controller = ref.watch(editViewModelProvider.notifier);
     final loading = ref.watch(loadingProvider);
     final l10n = L10n.of(context)!;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
         backgroundColor: Colors.white,
-        elevation: 0,
-        actions: [
-          TextButton(
-            onPressed: () =>
-                ref.read(editViewModelProvider.notifier).updateSNS(context),
-            child: Text(
-              l10n.update,
-              style: AppTextStyle.appBoldBlue18TextStyle,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          actions: [
+            TextButton(
+              onPressed: () =>
+                  ref.read(editViewModelProvider.notifier).updateSNS(context),
+              child: Text(
+                l10n.update,
+                style: AppTextStyle.appBoldBlue18TextStyle,
+              ),
+            ),
+          ],
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+              color: Colors.black,
             ),
           ),
-        ],
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.black,
-          ),
         ),
-      ),
-      body: Stack(
-        children: [
-          Column(
+        body: SingleChildScrollView(
+          child: Stack(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: AppTextField(
-                  controller: controller.twitterController,
-                  hintText: l10n.twitter_hint_text,
-                  maxLines: 1,
+              SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: AppTextField(
+                        controller: controller.twitterController,
+                        hintText: l10n.twitter_hint_text,
+                        maxLines: 1,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: AppTextField(
+                        controller: controller.instagramController,
+                        hintText: l10n.instagram_hint_text,
+                        maxLines: 1,
+                      ),
+                    ),
+                    Text(
+                      l10n.sns_title,
+                      style: AppTextStyle.appBold20TextStyle,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      child: Text(
+                        l10n.sns_description,
+                        style: AppTextStyle.app16TextStyle,
+                      ),
+                    ),
+                    const Spacer(),
+                    AppTextButton(
+                      onPressed: () =>
+                          ref.read(launchUrlProvider).reportSNS(context),
+                      title: l10n.sns_report,
+                      color: Colors.red,
+                    ),
+                    const Spacer(flex: 2),
+                  ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: AppTextField(
-                  controller: controller.instagramController,
-                  hintText: l10n.instagram_hint_text,
-                  maxLines: 1,
-                ),
-              ),
-              Text(
-                l10n.sns_title,
-                style: AppTextStyle.appBold20TextStyle,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Text(
-                  l10n.sns_description,
-                  style: AppTextStyle.app16TextStyle,
-                ),
-              ),
-              const Spacer(),
-              AppTextButton(
-                onPressed: () => ref.read(launchUrlProvider).reportSNS(context),
-                title: l10n.sns_report,
-                color: Colors.red,
-              ),
-              const Spacer(flex: 2),
+              loading
+                  ? Center(
+                      child: LoadingAnimationWidget.dotsTriangle(
+                        color: AppColorStyle.appColor,
+                        size: 50,
+                      ),
+                    )
+                  : const SizedBox(),
             ],
           ),
-          loading
-              ? Center(
-                  child: LoadingAnimationWidget.dotsTriangle(
-                    color: AppColorStyle.appColor,
-                    size: 50,
-                  ),
-                )
-              : const SizedBox(),
-        ],
+        ),
       ),
     );
   }

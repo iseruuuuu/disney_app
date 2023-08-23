@@ -15,64 +15,67 @@ class PasswordResetScreen extends ConsumerWidget {
     final state = ref.watch(passwordResetScreenViewModelProvider);
     final loading = ref.watch(loadingProvider);
     final l10n = L10n.of(context)!;
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColorStyle.appColor,
-        elevation: 0,
-      ),
-      body: Center(
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                const Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      Assets.images.empty.path,
-                      width: 40,
-                      height: 40,
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      l10n.reset_password,
-                      style: AppTextStyle.resetPasswordTextStyle,
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                AppTextField(
-                  controller: state.emailController,
-                  hintText: l10n.email,
-                  maxLines: 1,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Text(
-                    l10n.send_reset_message,
-                    style: AppTextStyle.sendResetMessageTextStyle,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: AppColorStyle.appColor,
+          elevation: 0,
+        ),
+        body: Center(
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  const Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        Assets.images.empty.path,
+                        width: 40,
+                        height: 40,
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        l10n.reset_password,
+                        style: AppTextStyle.resetPasswordTextStyle,
+                      ),
+                    ],
                   ),
-                ),
-                const Spacer(),
-                AppElevatedButton(
-                  onPressed: () => ref
-                      .read(passwordResetScreenViewModelProvider)
-                      .sendEmail(context, ref),
-                  title: l10n.send_email,
-                ),
-                const Spacer(),
-              ],
-            ),
-            loading
-                ? Center(
-                    child: LoadingAnimationWidget.dotsTriangle(
-                      color: AppColorStyle.appColor,
-                      size: 50,
+                  const Spacer(),
+                  AppTextField(
+                    controller: state.emailController,
+                    hintText: l10n.email,
+                    maxLines: 1,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Text(
+                      l10n.send_reset_message,
+                      style: AppTextStyle.sendResetMessageTextStyle,
                     ),
-                  )
-                : const SizedBox(),
-          ],
+                  ),
+                  const Spacer(),
+                  AppElevatedButton(
+                    onPressed: () => ref
+                        .read(passwordResetScreenViewModelProvider)
+                        .sendEmail(context, ref),
+                    title: l10n.send_email,
+                  ),
+                  const Spacer(),
+                ],
+              ),
+              loading
+                  ? Center(
+                      child: LoadingAnimationWidget.dotsTriangle(
+                        color: AppColorStyle.appColor,
+                        size: 50,
+                      ),
+                    )
+                  : const SizedBox(),
+            ],
+          ),
         ),
       ),
     );

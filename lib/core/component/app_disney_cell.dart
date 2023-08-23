@@ -1,4 +1,3 @@
-import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/theme/theme.dart';
@@ -60,12 +59,9 @@ class AppDisneyCell extends ConsumerWidget {
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 1.5,
+                width: MediaQuery.of(context).size.width / 1.6,
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: 10,
-                    left: 10,
-                  ),
+                  padding: const EdgeInsets.only(top: 10, left: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -73,39 +69,42 @@ class AppDisneyCell extends ConsumerWidget {
                         children: [
                           SizedBox(
                             width: MediaQuery.of(context).size.width / 2,
-                            child: Text(
-                              account.name,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyle.cellNameTextStyle,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  account.name,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: AppTextStyle.cellNameTextStyle,
+                                ),
+                                Text(
+                                  '@${account.userId}',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: AppTextStyle.cellUserIdTextStyle,
+                                ),
+                              ],
                             ),
                           ),
-                          (post.postAccountId == MasterAccount.masterAccount)
-                              ? Image.asset(
-                                  Assets.images.badge.path,
-                                  fit: BoxFit.fill,
-                                  width: 30,
-                                )
-                              : const SizedBox.shrink(),
                         ],
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 2,
-                        child: Text(
-                          '@${account.userId}',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: AppTextStyle.cellUserIdTextStyle,
-                        ),
                       ),
                     ],
                   ),
                 ),
               ),
               const Spacer(),
+              account.isOfficial
+                  ? Image.asset(
+                      Assets.images.badge.path,
+                      fit: BoxFit.fill,
+                      width: 30,
+                    )
+                  : const SizedBox.shrink(),
+              const Spacer(),
               (post.postAccountId == myAccount) || isMaster
                   ? Padding(
-                      padding: const EdgeInsets.only(top: 10, right: 20),
+                      padding: const EdgeInsets.only(top: 10, right: 10),
                       child: GestureDetector(
                         onTap: () {
                           FunctionUtils.openDialog(
@@ -123,7 +122,7 @@ class AppDisneyCell extends ConsumerWidget {
                       ),
                     )
                   : Padding(
-                      padding: const EdgeInsets.only(top: 15, right: 20),
+                      padding: const EdgeInsets.only(top: 15, right: 10),
                       child: GestureDetector(
                         onTap: () {
                           FunctionUtils.openDialog(

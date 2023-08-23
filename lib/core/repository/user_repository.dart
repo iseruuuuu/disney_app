@@ -49,6 +49,7 @@ class UserRepository {
         'update_time': Timestamp.now(),
         'twitter': newAccount.twitter,
         'instagram': newAccount.instagram,
+        'is_official': newAccount.isOfficial,
       });
       return true;
     } on FirebaseException catch (_) {
@@ -71,8 +72,8 @@ class UserRepository {
           updateTime: data['updated_time'],
           twitter: data['twitter'],
           instagram: data['instagram'],
+          isOfficial: data['is_official'],
         );
-
         AuthenticationService.myAccount = myAccount;
         return true;
       } else {
@@ -93,6 +94,7 @@ class UserRepository {
         'updated_time': Timestamp.now(),
         'twitter': updateAccount.twitter,
         'instagram': updateAccount.instagram,
+        'is_official': updateAccount.isOfficial,
       });
       return true;
     } on FirebaseException catch (_) {

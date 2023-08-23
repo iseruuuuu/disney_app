@@ -16,91 +16,94 @@ class PostScreen extends ConsumerWidget {
     final state = ref.watch(postScreenViewModelProvider);
     final loading = ref.watch(loadingProvider);
     final l10n = L10n.of(context)!;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
         backgroundColor: Colors.white,
-        elevation: 0,
-        actions: [
-          TextButton(
-            onPressed: () => ref
-                .read(postScreenViewModelProvider.notifier)
-                .post(context, ref),
-            child: Text(
-              l10n.post,
-              style: AppTextStyle.appBoldBlue18TextStyle,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          actions: [
+            TextButton(
+              onPressed: () => ref
+                  .read(postScreenViewModelProvider.notifier)
+                  .post(context, ref),
+              child: Text(
+                l10n.post,
+                style: AppTextStyle.appBoldBlue18TextStyle,
+              ),
             ),
-          ),
-        ],
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.black,
+          ],
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+              color: Colors.black,
+            ),
           ),
         ),
-      ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                AppRating(
-                  onTap: controller.rankPicker,
-                  rank: state.rank,
-                  isSelect: true,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 50,
-                    horizontal: 10,
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  AppRating(
+                    onTap: controller.rankPicker,
+                    rank: state.rank,
+                    isSelect: true,
                   ),
-                  child: AppAttraction(
-                    onTap: () => ref
-                        .read(postScreenViewModelProvider.notifier)
-                        .attractionPicker(context),
-                    attractionName: state.attractionName,
-                    isSelected: state.isSelected,
-                  ),
-                ),
-                AppTextField(
-                  controller: controller.controller,
-                  hintText: l10n.impressions,
-                  maxLines: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      state.isSpoiler
-                          ? l10n.is_spoiler_true
-                          : l10n.is_spoiler_false,
-                      style: AppTextStyle.appBold20TextStyle,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 50,
+                      horizontal: 10,
                     ),
-                    Transform.scale(
-                      scale: 1.5,
-                      child: Checkbox(
-                        activeColor: AppColorStyle.appColor,
-                        value: state.isSpoiler,
-                        onChanged: (value) => ref
-                            .read(postScreenViewModelProvider.notifier)
-                            .onChanged(value: value!),
+                    child: AppAttraction(
+                      onTap: () => ref
+                          .read(postScreenViewModelProvider.notifier)
+                          .attractionPicker(context),
+                      attractionName: state.attractionName,
+                      isSelected: state.isSelected,
+                    ),
+                  ),
+                  AppTextField(
+                    controller: controller.controller,
+                    hintText: l10n.impressions,
+                    maxLines: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        state.isSpoiler
+                            ? l10n.is_spoiler_true
+                            : l10n.is_spoiler_false,
+                        style: AppTextStyle.appBold20TextStyle,
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          loading
-              ? Center(
-                  child: LoadingAnimationWidget.dotsTriangle(
-                    color: AppColorStyle.appColor,
-                    size: 50,
+                      Transform.scale(
+                        scale: 1.5,
+                        child: Checkbox(
+                          activeColor: AppColorStyle.appColor,
+                          value: state.isSpoiler,
+                          onChanged: (value) => ref
+                              .read(postScreenViewModelProvider.notifier)
+                              .onChanged(value: value!),
+                        ),
+                      ),
+                    ],
                   ),
-                )
-              : const SizedBox(),
-        ],
+                ],
+              ),
+            ),
+            loading
+                ? Center(
+                    child: LoadingAnimationWidget.dotsTriangle(
+                      color: AppColorStyle.appColor,
+                      size: 50,
+                    ),
+                  )
+                : const SizedBox(),
+          ],
+        ),
       ),
     );
   }

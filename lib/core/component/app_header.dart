@@ -1,4 +1,3 @@
-import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/gen/gen.dart';
@@ -83,7 +82,7 @@ class AppHeader extends StatelessWidget {
                 const Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 45),
-                  child: (account.id == MasterAccount.masterAccount)
+                  child: account.isOfficial
                       ? Image.asset(
                           Assets.images.badge.path,
                           fit: BoxFit.fill,

@@ -74,6 +74,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
         userId: userIdController.text,
         selfIntroduction: selfIntroductionController.text,
         imagePath: imagePath,
+        isOfficial: myAccount.isOfficial,
       );
       AuthenticationService.myAccount = updateAccount;
       final result =
@@ -135,6 +136,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
       userId: userIdController.text,
       selfIntroduction: selfIntroductionController.text,
       imagePath: myAccount.imagePath,
+      isOfficial: myAccount.isOfficial,
       twitter: twitterController.text,
       instagram: instagramController.text,
     );

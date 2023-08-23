@@ -1,5 +1,4 @@
 import 'package:disney_app/core/component/component.dart';
-import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/theme/theme.dart';
@@ -40,8 +39,7 @@ class DetailScreen extends ConsumerWidget {
             ),
           ),
           Screenshot(
-            controller:
-                ref.watch(detailViewModelProvider).screenshotController,
+            controller: ref.watch(detailViewModelProvider).screenshotController,
             child: Column(
               children: [
                 Row(
@@ -60,7 +58,7 @@ class DetailScreen extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: MediaQuery.of(context).size.width / 1.5,
+                          width: MediaQuery.of(context).size.width / 2,
                           child: Padding(
                             padding: const EdgeInsets.only(right: 10),
                             child: Text(
@@ -74,7 +72,7 @@ class DetailScreen extends ConsumerWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 5, right: 10),
                           child: SizedBox(
-                            width: MediaQuery.of(context).size.width / 1.5,
+                            width: MediaQuery.of(context).size.width / 1.8,
                             child: Text(
                               '@${account.userId}',
                               maxLines: 1,
@@ -85,13 +83,15 @@ class DetailScreen extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    (account.id == MasterAccount.masterAccount)
+                    const Spacer(),
+                    account.isOfficial
                         ? Image.asset(
                             Assets.images.badge.path,
                             fit: BoxFit.fill,
                             width: 45,
                           )
                         : const SizedBox.shrink(),
+                    const SizedBox(width: 10),
                   ],
                 ),
                 Column(
@@ -157,9 +157,8 @@ class DetailScreen extends ConsumerWidget {
                             ),
                             const Spacer(),
                             IconButton(
-                              onPressed: () => ref
-                                  .read(detailViewModelProvider)
-                                  .share(post),
+                              onPressed: () =>
+                                  ref.read(detailViewModelProvider).share(post),
                               iconSize: 30,
                               icon: const Icon(
                                 CupertinoIcons.share,

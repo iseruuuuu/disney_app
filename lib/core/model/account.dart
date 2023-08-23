@@ -11,6 +11,7 @@ class Account {
     this.updateTime,
     this.twitter = '',
     this.instagram = '',
+    this.isOfficial = false,
   });
 
   factory Account.fromMap(Map<String, dynamic> data, String uid) {
@@ -24,6 +25,7 @@ class Account {
       updateTime: data['updated_time'],
       twitter: data['twitter'],
       instagram: data['instagram'],
+      isOfficial: data['is_official'],
     );
   }
 
@@ -36,6 +38,7 @@ class Account {
   Timestamp? updateTime;
   String twitter;
   String instagram;
+  bool isOfficial;
 
   @override
   bool operator ==(Object other) {
@@ -51,7 +54,8 @@ class Account {
         other.createdTime == createdTime &&
         other.updateTime == updateTime &&
         other.twitter == twitter &&
-        other.instagram == instagram;
+        other.instagram == instagram &&
+        other.isOfficial == isOfficial;
   }
 
   @override
@@ -63,5 +67,6 @@ class Account {
       (createdTime?.hashCode ?? 0) ^
       (updateTime?.hashCode ?? 0) ^
       twitter.hashCode ^
-      instagram.hashCode;
+      instagram.hashCode ^
+      isOfficial.hashCode;
 }
