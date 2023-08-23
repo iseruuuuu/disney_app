@@ -1,4 +1,4 @@
-import 'package:disney_app/screen/create_account/create_account_screen_view_model.dart';
+import 'package:disney_app/screen/authentication/create_account/create_account_screen_view_model.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';

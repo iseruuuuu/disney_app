@@ -2,7 +2,7 @@ import 'package:disney_app/core/component/component.dart';
 import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/gen/gen.dart';
 import 'package:disney_app/provider/loading_provider.dart';
-import 'package:disney_app/screen/login/password_reset_screen_view_model.dart';
+import 'package:disney_app/screen/authentication/password_reset/password_reset_screen_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
