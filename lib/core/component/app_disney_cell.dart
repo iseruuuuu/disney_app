@@ -1,4 +1,3 @@
-import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/theme/theme.dart';
@@ -80,7 +79,8 @@ class AppDisneyCell extends ConsumerWidget {
                               style: AppTextStyle.cellNameTextStyle,
                             ),
                           ),
-                          (post.postAccountId == MasterAccount.masterAccount)
+                          // (post.postAccountId == MasterAccount.masterAccount)
+                          account.isOfficial
                               ? Image.asset(
                                   Assets.images.badge.path,
                                   fit: BoxFit.fill,

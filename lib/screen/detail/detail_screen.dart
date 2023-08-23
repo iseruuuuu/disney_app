@@ -40,8 +40,7 @@ class DetailScreen extends ConsumerWidget {
             ),
           ),
           Screenshot(
-            controller:
-                ref.watch(detailViewModelProvider).screenshotController,
+            controller: ref.watch(detailViewModelProvider).screenshotController,
             child: Column(
               children: [
                 Row(
@@ -85,7 +84,8 @@ class DetailScreen extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    (account.id == MasterAccount.masterAccount)
+                    // (account.id == MasterAccount.masterAccount)
+                    account.isOfficial
                         ? Image.asset(
                             Assets.images.badge.path,
                             fit: BoxFit.fill,
@@ -157,9 +157,8 @@ class DetailScreen extends ConsumerWidget {
                             ),
                             const Spacer(),
                             IconButton(
-                              onPressed: () => ref
-                                  .read(detailViewModelProvider)
-                                  .share(post),
+                              onPressed: () =>
+                                  ref.read(detailViewModelProvider).share(post),
                               iconSize: 30,
                               icon: const Icon(
                                 CupertinoIcons.share,
