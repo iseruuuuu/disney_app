@@ -71,7 +71,9 @@ class EditSNSScreen extends ConsumerWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
                       child: Text(
                         l10n.sns_description,
                         style: AppTextStyle.app16TextStyle,
