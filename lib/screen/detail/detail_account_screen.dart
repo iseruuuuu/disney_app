@@ -3,7 +3,7 @@ import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/gen/gen.dart';
-import 'package:disney_app/screen/detail/detail_view_model.dart';
+import 'package:disney_app/provider/launch_url_provider.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,16 +37,12 @@ class DetailAccountScreen extends ConsumerWidget {
           AppHeader(
             account: postAccount,
             isMyAccount: false,
-            onTapTwitter: () =>
-                ref.read(detailViewModelProvider).openTwitter(
-                      context,
-                      postAccount.twitter,
-                    ),
-            onTapInstagram: () =>
-                ref.read(detailViewModelProvider).openInstagram(
-                      context,
-                      postAccount.instagram,
-                    ),
+            onTapTwitter: () => ref
+                .read(launchUrlProvider)
+                .openTwitter(context, postAccount.twitter),
+            onTapInstagram: () => ref
+                .read(launchUrlProvider)
+                .openInstagram(context, postAccount.instagram),
           ),
           Expanded(
             child: RefreshIndicator(

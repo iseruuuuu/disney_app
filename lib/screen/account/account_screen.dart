@@ -3,6 +3,7 @@ import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/core/repository/user_repository.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/theme/theme.dart';
+import 'package:disney_app/provider/launch_url_provider.dart';
 import 'package:disney_app/screen/account/account_screen_view_model.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:flutter/material.dart';
@@ -30,11 +31,11 @@ class AccountScreen extends ConsumerWidget {
                   .read(accountScreenViewModelProvider.notifier)
                   .onTapSNS(context),
               onTapTwitter: () => ref
-                  .read(accountScreenViewModelProvider.notifier)
-                  .openTwitter(context),
+                  .read(launchUrlProvider)
+                  .openTwitter(context, state.myAccount.twitter),
               onTapInstagram: () => ref
-                  .read(accountScreenViewModelProvider.notifier)
-                  .openInstagram(context),
+                  .read(launchUrlProvider)
+                  .openInstagram(context, state.myAccount.instagram),
               isMyAccount: true,
             ),
             Expanded(
