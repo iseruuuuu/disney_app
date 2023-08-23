@@ -3,17 +3,17 @@ import 'package:disney_app/core/component/app_text_field.dart';
 import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/gen/l10n.dart';
 import 'package:disney_app/provider/loading_provider.dart';
-import 'package:disney_app/screen/edit/edit_screen_view_model.dart';
+import 'package:disney_app/screen/edit/edit_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-class SNSEditScreen extends ConsumerWidget {
-  const SNSEditScreen({super.key});
+class EditSNSScreen extends ConsumerWidget {
+  const EditSNSScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(editScreenViewModelProvider.notifier);
+    final controller = ref.watch(editViewModelProvider.notifier);
     final loading = ref.watch(loadingProvider);
     final l10n = L10n.of(context)!;
     return Scaffold(
@@ -23,9 +23,8 @@ class SNSEditScreen extends ConsumerWidget {
         elevation: 0,
         actions: [
           TextButton(
-            onPressed: () => ref
-                .read(editScreenViewModelProvider.notifier)
-                .updateSNS(context),
+            onPressed: () =>
+                ref.read(editViewModelProvider.notifier).updateSNS(context),
             child: Text(
               l10n.update,
               style: AppTextStyle.appBoldBlue18TextStyle,
@@ -74,9 +73,8 @@ class SNSEditScreen extends ConsumerWidget {
               ),
               const Spacer(),
               AppTextButton(
-                onPressed: () => ref
-                    .read(editScreenViewModelProvider.notifier)
-                    .report(context),
+                onPressed: () =>
+                    ref.read(editViewModelProvider.notifier).report(context),
                 title: l10n.sns_report,
                 color: Colors.red,
               ),
