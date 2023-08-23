@@ -7,11 +7,14 @@ class AppSkeletonsLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
-      child: ListView.builder(
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          return const AppSkeletonsCellLoading();
-        },
+      child: SizedBox(
+        height: MediaQuery.of(context).size.width,
+        child: ListView.builder(
+          itemCount: 5,
+          itemBuilder: (context, index) {
+            return const AppSkeletonsCellLoading();
+          },
+        ),
       ),
     );
   }
