@@ -8,7 +8,7 @@ class AppSkeletonsLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Skeletonizer(
       child: SizedBox(
-        height: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         child: ListView.builder(
           itemCount: 5,
           itemBuilder: (context, index) {
