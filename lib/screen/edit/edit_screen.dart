@@ -17,106 +17,114 @@ class EditScreen extends ConsumerWidget {
     final image = ref.watch(editViewModelProvider);
     final loading = ref.watch(loadingProvider);
     final l10n = L10n.of(context)!;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
         backgroundColor: Colors.white,
-        elevation: 0,
-        actions: [
-          TextButton(
-            onPressed: () => ref
-                .read(editViewModelProvider.notifier)
-                .update(context, ref),
-            child: Text(
-              l10n.update,
-              style: AppTextStyle.appBoldBlue18TextStyle,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          actions: [
+            TextButton(
+              onPressed: () =>
+                  ref.read(editViewModelProvider.notifier).update(context, ref),
+              child: Text(
+                l10n.update,
+                style: AppTextStyle.appBoldBlue18TextStyle,
+              ),
             ),
-          ),
-        ],
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.black,
+          ],
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+              color: Colors.black,
+            ),
           ),
         ),
-      ),
-      body: Stack(
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: Column(
-              children: [
-                GestureDetector(
-                  onTap: () => ref
-                      .read(editViewModelProvider.notifier)
-                      .selectImage(),
-                  child: CircleAvatar(
-                    foregroundImage: image,
-                    radius: 70,
-                    child: const Icon(Icons.add),
-                  ),
-                ),
-                const Spacer(),
-                AppTextField(
-                  controller: controller.nameController,
-                  hintText: l10n.name,
-                  maxLines: 1,
-                ),
-                const Spacer(),
-                AppTextField(
-                  controller: controller.userIdController,
-                  hintText: l10n.user_id,
-                  maxLines: 1,
-                ),
-                const Spacer(),
-                AppTextField(
-                  controller: controller.selfIntroductionController,
-                  hintText: l10n.self_introduction,
-                  maxLines: 3,
-                ),
-                const Spacer(),
-                AppTextButton(
-                  onPressed: () {
-                    FunctionUtils.openDialog(
-                      context: context,
-                      title: l10n.dialog_log_out_check_title,
-                      content: l10n.dialog_log_out_check_content,
+        body: SingleChildScrollView(
+          child: Stack(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                  children: [
+                    GestureDetector(
                       onTap: () => ref
                           .read(editViewModelProvider.notifier)
-                          .signOut(context, ref),
-                    );
-                  },
-                  title: l10n.log_out,
-                  color: Colors.red,
+                          .selectImage(),
+                      child: CircleAvatar(
+                        foregroundImage: image,
+                        radius: 70,
+                        child: const Icon(Icons.add),
+                      ),
+                    ),
+                    const Spacer(),
+                    AppTextField(
+                      controller: controller.nameController,
+                      hintText: l10n.name,
+                      maxLines: 1,
+                    ),
+                    const Spacer(),
+                    AppTextField(
+                      controller: controller.userIdController,
+                      hintText: l10n.user_id,
+                      maxLines: 1,
+                    ),
+                    const Spacer(),
+                    AppTextField(
+                      controller: controller.selfIntroductionController,
+                      hintText: l10n.self_introduction,
+                      maxLines: 3,
+                    ),
+                    const Spacer(),
+                    AppTextButton(
+                      onPressed: () {
+                        FunctionUtils.openDialog(
+                          context: context,
+                          title: l10n.dialog_log_out_check_title,
+                          content: l10n.dialog_log_out_check_content,
+                          onTap: () => ref
+                              .read(editViewModelProvider.notifier)
+                              .signOut(context, ref),
+                        );
+                      },
+                      title: l10n.log_out,
+                      color: Colors.red,
+                    ),
+                    AppTextButton(
+                      onPressed: () {
+                        FunctionUtils.openDialog(
+                          context: context,
+                          title: l10n.dialog_delete_account_title,
+                          content: l10n.dialog_delete_account_content,
+                          onTap: () => ref
+                              .read(editViewModelProvider.notifier)
+                              .delete(context, ref),
+                        );
+                      },
+                      title: l10n.dialog_delete_account,
+                      color: Colors.red,
+                    ),
+                    const Spacer(flex: 3),
+                  ],
                 ),
-                AppTextButton(
-                  onPressed: () {
-                    FunctionUtils.openDialog(
-                      context: context,
-                      title: l10n.dialog_delete_account_title,
-                      content: l10n.dialog_delete_account_content,
-                      onTap: () => ref
-                          .read(editViewModelProvider.notifier)
-                          .delete(context, ref),
-                    );
-                  },
-                  title: l10n.dialog_delete_account,
-                  color: Colors.red,
-                ),
-                const Spacer(),
-              ],
-            ),
+              ),
+              loading
+                  ? SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: Center(
+                        child: LoadingAnimationWidget.dotsTriangle(
+                          color: AppColorStyle.appColor,
+                          size: 50,
+                        ),
+                      ),
+                    )
+                  : const SizedBox(),
+            ],
           ),
-          loading
-              ? Center(
-                  child: LoadingAnimationWidget.dotsTriangle(
-                    color: AppColorStyle.appColor,
-                    size: 50,
-                  ),
-                )
-              : const SizedBox(),
-        ],
+        ),
       ),
     );
   }
