@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/usecase/post_usecase.dart';
 import 'package:disney_app/gen/gen.dart';
@@ -5,6 +7,9 @@ import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final detailScreenViewModelProvider =
@@ -16,6 +21,8 @@ final detailScreenViewModelProvider =
 
 class DetailScreenViewModel extends ChangeNotifier {
   DetailScreenViewModel();
+
+  ScreenshotController screenshotController = ScreenshotController();
 
   void openCheckDialog(
     BuildContext context,
@@ -79,5 +86,32 @@ class DetailScreenViewModel extends ChangeNotifier {
         });
       }
     }
+  }
+
+  void share(Post post) {
+    screenshotController.capture().then((capturedImage) async {
+      if (capturedImage != null) {
+        final directory = await getApplicationDocumentsDirectory();
+        final imagePath = await File('${directory.path}/image.png').create();
+        await imagePath.writeAsBytes(capturedImage);
+        if (Platform.isIOS) {
+          //リリースされたら、AppleStoreのリンクを載せる。
+          await Share.shareXFiles(
+            [XFile(imagePath.path)],
+            subject: '${post.attractionName}の評価は${post.rank}点でした!!\n\n'
+                '${post.content}\n\n'
+                '#TDL_APP',
+          );
+        } else {
+          //リリースされたら、GooglePlayのリンクを載せる。
+          await Share.shareXFiles(
+            [XFile(imagePath.path)],
+            subject: '${post.attractionName}の評価は${post.rank}点でした!!\n\n'
+                '${post.content}\n\n'
+                '#TDL_APP',
+          );
+        }
+      }
+    });
   }
 }

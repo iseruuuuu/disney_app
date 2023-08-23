@@ -1,3 +1,4 @@
+import 'package:disney_app/core/component/app_text_button.dart';
 import 'package:disney_app/core/component/app_text_field.dart';
 import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/gen/l10n.dart';
@@ -68,9 +69,18 @@ class SNSEditScreen extends ConsumerWidget {
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Text(
                   l10n.sns_description,
-                  style: AppTextStyle.appBold15TextStyle,
+                  style: AppTextStyle.app16TextStyle,
                 ),
               ),
+              const Spacer(),
+              AppTextButton(
+                onPressed: () => ref
+                    .read(editScreenViewModelProvider.notifier)
+                    .report(context),
+                title: l10n.sns_report,
+                color: Colors.red,
+              ),
+              const Spacer(flex: 2),
             ],
           ),
           loading

@@ -5,9 +5,11 @@ import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/gen/gen.dart';
 import 'package:disney_app/screen/detail/detail_screen_view_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:screenshot/screenshot.dart';
 
 class DetailScreen extends ConsumerWidget {
   const DetailScreen({
@@ -37,131 +39,157 @@ class DetailScreen extends ConsumerWidget {
               style: AppTextStyle.tweetTextStyle,
             ),
           ),
-          Row(
-            children: [
-              GestureDetector(
-                onTap: onTapImage,
-                child: Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: CircleAvatar(
-                    radius: 28,
-                    foregroundImage: NetworkImage(account.imagePath),
-                  ),
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 1.6,
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Text(
-                        account.name,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTextStyle.appBold18TextStyle,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5, right: 10),
-                    child: Text(
-                      '@${account.userId}',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.grey.shade600,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              (account.id == MasterAccount.masterAccount)
-                  ? Image.asset(
-                      Assets.images.badge.path,
-                      fit: BoxFit.fill,
-                      width: 45,
-                    )
-                  : const SizedBox.shrink(),
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: Row(
+          Screenshot(
+            controller:
+                ref.watch(detailScreenViewModelProvider).screenshotController,
+            child: Column(
+              children: [
+                Row(
                   children: [
-                    AppRating(
-                      rank: post.rank,
-                      isSelect: false,
+                    GestureDetector(
+                      onTap: onTapImage,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: CircleAvatar(
+                          radius: 28,
+                          foregroundImage: NetworkImage(account.imagePath),
+                        ),
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 1.5,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: Text(
+                              account.name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: AppTextStyle.appBold18TextStyle,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5, right: 10),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width / 1.5,
+                            child: Text(
+                              '@${account.userId}',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: AppTextStyle.app15GreyTextStyle,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    (account.id == MasterAccount.masterAccount)
+                        ? Image.asset(
+                            Assets.images.badge.path,
+                            fit: BoxFit.fill,
+                            width: 45,
+                          )
+                        : const SizedBox.shrink(),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 10,
+                      ),
+                      child: Row(
+                        children: [
+                          AppRating(
+                            rank: post.rank,
+                            isSelect: false,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Text(
+                              '${post.rank}${l10n.score}',
+                              style: AppTextStyle.detailRankTextStyle,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 20),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
                       child: Text(
-                        '${post.rank}${l10n.score}',
-                        style: AppTextStyle.detailRankTextStyle,
+                        post.attractionName,
+                        style: AppTextStyle.detailAttractionNameTextStyle,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      child: Text(
+                        post.content,
+                        style: AppTextStyle.detailContentTextStyle,
+                      ),
+                    ),
+                    const Divider(color: Colors.grey),
+                  ],
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Row(
+                          children: [
+                            Text(
+                              DateFormat('yyyy/MM/dd').format(
+                                post.createdTime!.toDate(),
+                              ),
+                              style: AppTextStyle.detailCreatedTimeTextStyle,
+                            ),
+                            const Spacer(),
+                            IconButton(
+                              onPressed: () => ref
+                                  .read(detailScreenViewModelProvider)
+                                  .share(post),
+                              iconSize: 30,
+                              icon: const Icon(
+                                CupertinoIcons.share,
+                                color: AppColorStyle.appColor,
+                              ),
+                            ),
+                            (post.postAccountId == myAccount)
+                                ? GestureDetector(
+                                    onTap: () => ref
+                                        .read(detailScreenViewModelProvider)
+                                        .openCheckDialog(
+                                          context,
+                                          post.id,
+                                          post,
+                                          ref,
+                                        ),
+                                    child: const Icon(
+                                      Icons.more_horiz,
+                                      color: Colors.black,
+                                    ),
+                                  )
+                                : Container(),
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Text(
-                  post.attractionName,
-                  style: AppTextStyle.detailAttractionNameTextStyle,
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Text(
-                  post.content,
-                  style: AppTextStyle.detailContentTextStyle,
-                ),
-              ),
-              const Divider(color: Colors.grey),
-              Row(
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Row(
-                        children: [
-                          Text(
-                            DateFormat('yyyy/MM/dd').format(
-                              post.createdTime!.toDate(),
-                            ),
-                            style: AppTextStyle.detailCreatedTimeTextStyle,
-                          ),
-                          const Spacer(),
-                          (post.postAccountId == myAccount)
-                              ? GestureDetector(
-                                  onTap: () => ref
-                                      .read(detailScreenViewModelProvider)
-                                      .openCheckDialog(
-                                        context,
-                                        post.id,
-                                        post,
-                                        ref,
-                                      ),
-                                  child: const Icon(
-                                    Icons.more_horiz,
-                                    color: Colors.black,
-                                  ),
-                                )
-                              : Container(),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

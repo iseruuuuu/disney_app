@@ -77,7 +77,10 @@ class L10nJa extends L10n {
   String get sns_title => '🚫 SNS情報公開に関する警告 🚫';
 
   @override
-  String get sns_description => 'SNS上での情報公開には慎重な取り扱いが求められます。\n よく理解し、自身の情報を保護するための対策を講じてください。\n 公開情報の管理は各自の責任で行ってください。';
+  String get sns_description => 'SNS上での情報公開には慎重な取り扱いが求められます。よく理解し、自身の情報を保護するための対策を講じてください。\n\n公開情報の管理は各自の責任で行ってください。\n\nもし、なりすましを疑われるアカウントを発見された場合、以下のフォームに情報を入力してください。';
+
+  @override
+  String get sns_report => '報告する';
 
   @override
   String get register_screen => '新規登録はこちら';

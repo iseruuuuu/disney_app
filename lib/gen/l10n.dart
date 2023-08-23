@@ -238,8 +238,14 @@ abstract class L10n {
   /// No description provided for @sns_description.
   ///
   /// In ja, this message translates to:
-  /// **'SNS上での情報公開には慎重な取り扱いが求められます。\n よく理解し、自身の情報を保護するための対策を講じてください。\n 公開情報の管理は各自の責任で行ってください。'**
+  /// **'SNS上での情報公開には慎重な取り扱いが求められます。よく理解し、自身の情報を保護するための対策を講じてください。\n\n公開情報の管理は各自の責任で行ってください。\n\nもし、なりすましを疑われるアカウントを発見された場合、以下のフォームに情報を入力してください。'**
   String get sns_description;
+
+  /// No description provided for @sns_report.
+  ///
+  /// In ja, this message translates to:
+  /// **'報告する'**
+  String get sns_report;
 
   /// No description provided for @register_screen.
   ///

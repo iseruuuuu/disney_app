@@ -11,8 +11,20 @@ class AppTextStyle {
     color: Colors.black,
   );
 
+  static const app15GreyTextStyle = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 15,
+    color: Colors.grey,
+  );
+
   static const appBold15TextStyle = TextStyle(
     fontWeight: FontWeight.bold,
+    fontSize: 15,
+    color: Colors.black,
+  );
+
+  static const app16TextStyle = TextStyle(
+    fontWeight: FontWeight.w500,
     fontSize: 15,
     color: Colors.black,
   );
