@@ -42,8 +42,6 @@ migrate_working_dir/
 # L10n
 lib/l10n/*.dart
 
-
-
 # constans
 lib/core/constants/
 
