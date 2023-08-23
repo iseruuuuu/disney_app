@@ -46,35 +46,34 @@ class SearchScreen extends ConsumerWidget {
                 postWithAttractionNameFamily(state.attractionName),
               ),
               child: posts.when(
-                data: (data) {
-                  return data.isNotEmpty
+                data: (post) {
+                  return post.isNotEmpty
                       ? ListView.builder(
-                          itemCount: data.length,
+                          itemCount: post.length,
                           itemBuilder: (context, index) {
-                            final post = data[index];
-                            final users =
-                                ref.watch(usersFamily(post.postAccountId));
+                            final users = ref
+                                .watch(usersFamily(post[index].postAccountId));
                             return users.when(
-                              data: (data) {
+                              data: (postAccount) {
                                 return GestureDetector(
                                   onTap: () {
                                     NavigationUtils.detailScreen(
                                       context,
-                                      myAccount,
-                                      post,
+                                      postAccount,
+                                      post[index],
                                       myAccount.id,
                                     );
                                   },
                                   child: AppDisneyCell(
                                     index: index,
-                                    account: myAccount,
-                                    post: post,
+                                    account: postAccount,
+                                    post: post[index],
                                     myAccount: myAccount.id,
                                     onTapImage: () {
                                       NavigationUtils.detailAccountScreen(
                                         context,
-                                        myAccount,
-                                        post,
+                                        postAccount,
+                                        post[index],
                                         myAccount.id,
                                       );
                                     },
