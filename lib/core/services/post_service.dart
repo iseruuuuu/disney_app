@@ -2,15 +2,16 @@ import 'package:disney_app/core/firebase/firebase.dart';
 import 'package:disney_app/core/firebase/firebase_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final postSnapshotsProvider = StreamProvider<QuerySnapshot<Object?>>((ref) {
+final postSnapshotsProvider =
+    StreamProvider.autoDispose<QuerySnapshot<Object?>>((ref) {
   final posts = ref.watch(firebaseFirestoreProvider).collection('post');
   final data =
       posts.orderBy('created_time', descending: true).limit(100).snapshots();
   return data;
 });
 
-final postSnapshotWithAccountIdFamily =
-    StreamProvider.family<QuerySnapshot<Object?>, String>((ref, id) {
+final postSnapshotWithAccountIdFamily = StreamProvider.autoDispose
+    .family<QuerySnapshot<Object?>, String>((ref, id) {
   final posts = ref.watch(firebaseFirestoreProvider).collection('post');
   final data = posts
       .where('post_account_id', isEqualTo: id)
@@ -19,9 +20,8 @@ final postSnapshotWithAccountIdFamily =
   return data;
 });
 
-final postSnapshotWithAttractionNameFamily =
-    StreamProvider.family<QuerySnapshot<Object?>, String>(
-        (ref, attractionName) {
+final postSnapshotWithAttractionNameFamily = StreamProvider.autoDispose
+    .family<QuerySnapshot<Object?>, String>((ref, attractionName) {
   final posts = ref.watch(firebaseFirestoreProvider).collection('post');
   final data = posts
       .where('attraction_name', isEqualTo: attractionName)
