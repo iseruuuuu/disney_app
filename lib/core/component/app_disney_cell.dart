@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
@@ -52,7 +53,8 @@ class AppDisneyCell extends ConsumerWidget {
                     onTap: onTapImage,
                     child: CircleAvatar(
                       radius: 30,
-                      foregroundImage: NetworkImage(account.imagePath),
+                      foregroundImage:
+                          CachedNetworkImageProvider(account.imagePath),
                     ),
                   ),
                 ),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/theme/theme.dart';
@@ -38,7 +39,8 @@ class AppHeader extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: CircleAvatar(
                     radius: 40,
-                    foregroundImage: NetworkImage(account.imagePath),
+                    foregroundImage:
+                        CachedNetworkImageProvider(account.imagePath),
                   ),
                 ),
                 SizedBox(
