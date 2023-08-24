@@ -8,6 +8,7 @@ environment:
   sdk: '>=2.19.0-374.1.beta <3.0.0'
 
 dependencies:
+  cached_network_image: ^3.2.3
   cloud_firestore: ^4.3.2
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.2.2
