@@ -37,7 +37,15 @@ jobs:
 
       - name: Test
         run: |
-          fvm flutter test --machine > test_report.log
+          fvm flutter test --machine > ${{ github.workspace }}/test_report.log
+
+      # ファイルが正常に生成されているか確認するステップ
+      - name: Check if test_report.log exists
+        run: ls -la ${{ github.workspace }}/test_report.log
+
+      # 必要に応じて、test_report.logの内容をダンプするステップ
+      - name: Display test_report.log content
+        run: cat ${{ github.workspace }}/test_report.log
 
       - name: Test Report
         uses: dorny/test-reporter@v1
