@@ -44,6 +44,6 @@ jobs:
         if: always()
         with:
           name: 'fvm flutter test'
-          path: 'test_report.log'
+          path: '${{ github.workspace }}/test_report.log'
           reporter: 'flutter-json'
           fail-on-error: 'false'
