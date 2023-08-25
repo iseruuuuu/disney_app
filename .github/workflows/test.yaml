@@ -20,6 +20,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
+      - name: Retrieve the secret and decode it to a file
+        env:
+          ACCONT_BASE64: ${{ secrets.ACCOUNT }}
+          ATTRACTION_BASE64: ${{ secrets.ATTRACTION }}
+          URL_BASE64: ${{ secrets.URL }}
+        run: |
+          echo $ACCONT_BASE64 | base64 --decode > lib/core/constants/account.dart
+          echo $ATTRACTION_BASE64 | base64 --decode > lib/core/constants/attraction.dart
+          echo $URL_BASE64 | base64 --decode > lib/core/constants/url.dart
+
       - name: fvm
         uses: kuhnroyal/flutter-fvm-config-action@v1
         id: fvm-config-action
