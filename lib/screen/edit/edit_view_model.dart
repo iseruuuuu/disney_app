@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/usecase/user_usecase.dart';
@@ -18,7 +19,7 @@ final editViewModelProvider =
   (ref) {
     final myAccount = AuthenticationService.myAccount!;
     return EditScreenViewModel(
-      state: NetworkImage(myAccount.imagePath),
+      state: CachedNetworkImageProvider(myAccount.imagePath),
       ref: ref,
     );
   },
@@ -50,7 +51,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
     userIdController = TextEditingController(text: myAccount.userId);
     selfIntroductionController =
         TextEditingController(text: myAccount.selfIntroduction);
-    state = NetworkImage(myAccount.imagePath);
+    state = CachedNetworkImageProvider(myAccount.imagePath);
     twitterController = TextEditingController(text: myAccount.twitter);
     instagramController = TextEditingController(text: myAccount.instagram);
   }
