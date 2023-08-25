@@ -43,7 +43,7 @@ migrate_working_dir/
 lib/l10n/*.dart
 
 # constans
-lib/core/constants/
+lib/core/constants/*.dart
 
 # Symbolication related
 app.*.symbols
