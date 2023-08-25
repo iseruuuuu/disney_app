@@ -125,22 +125,34 @@ class L10nJa extends L10n {
   String get error_already => 'このメールアドレスはすでに使用されています。';
 
   @override
-  String get error_other => '不鮮明のエラーです。運営側にお伝えください。';
-
-  @override
-  String get error_password => 'パスワード or メールアドレスが間違っています';
-
-  @override
-  String get error_disabled => 'ログイン試行過多により、アカウントが一時ロックされています。';
-
-  @override
-  String get error_no_user => 'アカウントが存在しない or 削除された可能性があります。';
+  String get error_other => '予期せぬエラーが発生しました。';
 
   @override
   String get error_no_mail => 'メールアドレスの認証が完了していません。';
 
   @override
   String get error_screen => 'アプリに問題が発生しました。';
+
+  @override
+  String get error_invalid_email => 'メールアドレスが間違っています。';
+
+  @override
+  String get error_wrong_password => 'パスワードが間違っています。';
+
+  @override
+  String get error_user_not_found => 'このアカウントは存在しません。';
+
+  @override
+  String get error_user_disabled => 'このメールアドレスは無効になっています。';
+
+  @override
+  String get error_too_many_requests => '回線が混雑しています。もう一度試してみてください';
+
+  @override
+  String get error_operation_not_allowed => 'メールアドレスとパスワードでのログインは有効になっていません。';
+
+  @override
+  String get error_email_already_exists => 'このメールアドレスはすでに登録されています。';
 
   @override
   String get retry => 'リトライ';

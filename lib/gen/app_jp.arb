@@ -46,11 +46,17 @@
 "error_6_characters": "パスワードは６文字以上に設定してください。",
 "error_already": "このメールアドレスはすでに使用されています。",
 "error_other": "不鮮明のエラーです。運営側にお伝えください。",
-"error_password": "パスワード or メールアドレスが間違っています",
-"error_disabled": "ログイン試行過多により、アカウントが一時ロックされています。",
-"error_no_user": "アカウントが存在しない or 削除された可能性があります。",
 "error_no_mail": "メールアドレスの認証が完了していません。",
 "error_screen": "アプリに問題が発生しました。",
+
+"error_invalid_email": "メールアドレスが間違っています。",
+"error_wrong_password": "パスワードが間違っています。",
+"error_user_not_found": "このアカウントは存在しません。",
+"error_user_disabled": "このメールアドレスは無効になっています。",
+"error_too_many_requests": "回線が混雑しています。もう一度試してみてください",
+"error_operation_not_allowed": "メールアドレスとパスワードでのログインは有効になっていません。",
+"error_email_already_exists": "このメールアドレスはすでに登録されています。",
+"error_other": "予期せぬエラーが発生しました。",
 
 "retry": "リトライ",
 
