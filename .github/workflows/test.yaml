@@ -34,6 +34,10 @@ jobs:
         run: |
           flutter pub get
 
+      - name: build runner
+        run: |
+          flutter pub run build_runner build --delete-conflicting-outputs
+
       - name: Test
         run: |
           flutter test --machine > test_report.log
