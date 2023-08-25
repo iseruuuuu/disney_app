@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  FLUTTER_VERSION: '2.5.3'
+  FLUTTER_VERSION: '3.10.2'
 
 jobs:
   test:
@@ -20,16 +20,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Cache Flutter dependencies
-        uses: actions/cache@v2
-        with:
-          path: /opt/hostedtoolcache/flutter
-          key: ${{ runner.OS }}-flutter-install-cache-${{ env.FLUTTER_VERSION }}
+      - name: fvm
+        uses: kuhnroyal/flutter-fvm-config-action@v1
+        id: fvm-config-action
 
-      - name: Install Flutter
-        uses: subosito/flutter-action@v1
-        with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
+      - name: install flutter
+        uses: subosito/flutter-action@v2
+          with:
+            flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+            channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
 
       - name: Install dependencies
         run: |
