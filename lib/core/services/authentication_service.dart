@@ -1,3 +1,4 @@
+import 'package:disney_app/core/error/error_login_handling.dart';
 import 'package:disney_app/core/firebase/firebase.dart';
 import 'package:disney_app/core/firebase/firebase_provider.dart';
 import 'package:disney_app/core/model/account.dart';
@@ -48,8 +49,8 @@ class AuthenticationService {
       }
       currentFirebaseUser = result.user;
       return result;
-    } on FirebaseException catch (error) {
-      return error;
+    } on FirebaseAuthException catch (error) {
+      return ErrorLoginHandling.handleException(error);
     }
   }
 
