@@ -19,7 +19,7 @@ final editViewModelProvider =
   (ref) {
     final myAccount = AuthenticationService.myAccount!;
     return EditScreenViewModel(
-      state: NetworkImage(myAccount.imagePath),
+      state: CachedNetworkImageProvider(myAccount.imagePath),
       ref: ref,
     );
   },
@@ -51,7 +51,6 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
     userIdController = TextEditingController(text: myAccount.userId);
     selfIntroductionController =
         TextEditingController(text: myAccount.selfIntroduction);
-    // state = NetworkImage(myAccount.imagePath);
     state = CachedNetworkImageProvider(myAccount.imagePath);
     twitterController = TextEditingController(text: myAccount.twitter);
     instagramController = TextEditingController(text: myAccount.instagram);
