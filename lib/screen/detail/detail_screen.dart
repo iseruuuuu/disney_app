@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:disney_app/core/component/component.dart';
 import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/model/account.dart';
@@ -51,7 +52,8 @@ class DetailScreen extends ConsumerWidget {
                         padding: const EdgeInsets.all(15),
                         child: CircleAvatar(
                           radius: 28,
-                          foregroundImage: NetworkImage(account.imagePath),
+                          foregroundImage:
+                              CachedNetworkImageProvider(account.imagePath),
                         ),
                       ),
                     ),

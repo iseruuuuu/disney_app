@@ -4,7 +4,7 @@ import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/services/post_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final postsProvider = StreamProvider<List<Post>>((ref) {
+final postsProvider = StreamProvider.autoDispose<List<Post>>((ref) {
   return ref.watch(postSnapshotsProvider.stream).map((event) {
     return event.docs.map((doc) {
       final dataMap = doc.data();
@@ -15,7 +15,7 @@ final postsProvider = StreamProvider<List<Post>>((ref) {
 });
 
 final postsWithAccountIdFamily =
-    FutureProvider.family<List<Post>, String>((ref, id) {
+    FutureProvider.autoDispose.family<List<Post>, String>((ref, id) {
   return ref.watch(postSnapshotWithAccountIdFamily(id).future).then((event) {
     return event.docs.map((doc) {
       final dataMap = doc.data();
@@ -25,8 +25,8 @@ final postsWithAccountIdFamily =
   });
 });
 
-final postWithAttractionNameFamily =
-    FutureProvider.family<List<Post>, String>((ref, attractionName) {
+final postWithAttractionNameFamily = FutureProvider.autoDispose
+    .family<List<Post>, String>((ref, attractionName) {
   return ref
       .watch(postSnapshotWithAttractionNameFamily(attractionName).future)
       .then((event) {
