@@ -71,10 +71,6 @@ class ErrorHandling {
       case FirebaseAuthResultStatus.emailAlreadyExists:
         message = 'このメールアドレスはすでに登録されています。';
         break;
-
-      default:
-        message = '予期せぬエラーが発生しました。';
-        break;
     }
     return message;
   }

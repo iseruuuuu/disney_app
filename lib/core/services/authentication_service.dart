@@ -1,7 +1,7 @@
-import 'package:disney_app/core/error/error_handling.dart';
 import 'package:disney_app/core/firebase/firebase.dart';
 import 'package:disney_app/core/firebase/firebase_provider.dart';
 import 'package:disney_app/core/model/account.dart';
+import 'package:disney_app/utils/error_handling.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final authenticationServiceProvider = Provider<AuthenticationService>((ref) {
