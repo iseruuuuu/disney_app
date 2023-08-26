@@ -56,7 +56,7 @@
 "error_too_many_requests": "回線が混雑しています。もう一度試してみてください",
 "error_operation_not_allowed": "メールアドレスとパスワードでのログインは有効になっていません。",
 "error_email_already_exists": "このメールアドレスはすでに登録されています。",
-"error_other": "予期せぬエラーが発生しました。",
+"error_undefined": "予期せぬエラーが発生しました。",
 
 "retry": "リトライ",
 

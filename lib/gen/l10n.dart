@@ -334,7 +334,7 @@ abstract class L10n {
   /// No description provided for @error_other.
   ///
   /// In ja, this message translates to:
-  /// **'予期せぬエラーが発生しました。'**
+  /// **'不鮮明のエラーです。運営側にお伝えください。'**
   String get error_other;
 
   /// No description provided for @error_no_mail.
@@ -390,6 +390,12 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'このメールアドレスはすでに登録されています。'**
   String get error_email_already_exists;
+
+  /// No description provided for @error_undefined.
+  ///
+  /// In ja, this message translates to:
+  /// **'予期せぬエラーが発生しました。'**
+  String get error_undefined;
 
   /// No description provided for @retry.
   ///

@@ -125,7 +125,7 @@ class L10nJa extends L10n {
   String get error_already => 'このメールアドレスはすでに使用されています。';
 
   @override
-  String get error_other => '予期せぬエラーが発生しました。';
+  String get error_other => '不鮮明のエラーです。運営側にお伝えください。';
 
   @override
   String get error_no_mail => 'メールアドレスの認証が完了していません。';
@@ -153,6 +153,9 @@ class L10nJa extends L10n {
 
   @override
   String get error_email_already_exists => 'このメールアドレスはすでに登録されています。';
+
+  @override
+  String get error_undefined => '予期せぬエラーが発生しました。';
 
   @override
   String get retry => 'リトライ';

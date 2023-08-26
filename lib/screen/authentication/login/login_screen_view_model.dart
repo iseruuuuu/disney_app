@@ -72,7 +72,7 @@ class LoginScreenViewModel extends ChangeNotifier {
       return;
     } else {
       await Future<void>.delayed(Duration.zero).then((_) {
-        final errorMessage = ErrorHandling.exceptionMessage(result);
+        final errorMessage = ErrorHandling.exceptionMessage(result, context);
         loading.isLoading = false;
         SnackBarUtils.snackBar(context, errorMessage);
       });

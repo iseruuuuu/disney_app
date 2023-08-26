@@ -1,4 +1,6 @@
 import 'package:disney_app/core/firebase/firebase.dart';
+import 'package:disney_app/gen/l10n.dart';
+import 'package:flutter/cupertino.dart';
 
 class ErrorHandling {
   ErrorHandling();
@@ -41,35 +43,43 @@ class ErrorHandling {
     return result;
   }
 
-  static String exceptionMessage(FirebaseAuthResultStatus result) {
+  static String exceptionMessage(
+    FirebaseAuthResultStatus result,
+    BuildContext context,
+  ) {
+    final l10n = L10n.of(context)!;
     var message = '';
     switch (result) {
       case FirebaseAuthResultStatus.invalidEmail:
-        message = 'メールアドレスが間違っています。';
+        message = l10n.error_invalid_email;
         break;
 
       case FirebaseAuthResultStatus.wrongPassword:
-        message = 'パスワードが間違っています。';
+        message = l10n.error_wrong_password;
         break;
 
       case FirebaseAuthResultStatus.userNotFound:
-        message = 'このアカウントは存在しません。';
+        message = l10n.error_user_not_found;
         break;
 
       case FirebaseAuthResultStatus.userDisabled:
-        message = 'このメールアドレスは無効になっています。';
+        message = l10n.error_user_disabled;
         break;
 
       case FirebaseAuthResultStatus.tooManyRequests:
-        message = '回線が混雑しています。もう一度試してみてください。';
+        message = l10n.error_too_many_requests;
         break;
 
       case FirebaseAuthResultStatus.operationNotAllowed:
-        message = 'メールアドレスとパスワードでのログインは有効になっていません。';
+        message = l10n.error_operation_not_allowed;
         break;
 
       case FirebaseAuthResultStatus.emailAlreadyExists:
-        message = 'このメールアドレスはすでに登録されています。';
+        message = l10n.error_email_already_exists;
+        break;
+
+      case FirebaseAuthResultStatus.undefined:
+        message = l10n.error_undefined;
         break;
     }
     return message;
@@ -77,7 +87,6 @@ class ErrorHandling {
 }
 
 enum FirebaseAuthResultStatus {
-  successful,
   emailAlreadyExists,
   wrongPassword,
   invalidEmail,

@@ -99,7 +99,7 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
         if (!mounted) {
           return;
         }
-        final errorMessage = ErrorHandling.exceptionMessage(result);
+        final errorMessage = ErrorHandling.exceptionMessage(result, context);
         SnackBarUtils.snackBar(context, errorMessage);
       }
     } else {

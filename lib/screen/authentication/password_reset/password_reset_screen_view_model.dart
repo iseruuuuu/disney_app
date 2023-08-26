@@ -42,7 +42,7 @@ class PasswordResetScreenViewModel extends ChangeNotifier {
       } on FirebaseAuthException catch (e) {
         loading.isLoading = false;
         final error = ErrorHandling.handleException(e);
-        final errorMessage = ErrorHandling.exceptionMessage(error);
+        final errorMessage = ErrorHandling.exceptionMessage(error, context);
         SnackBarUtils.snackBar(context, errorMessage);
       }
     } else {
