@@ -5,9 +5,9 @@ import 'theme.dart';
 class AppTextStyle {
   AppTextStyle._();
 
-  static const app15TextStyle = TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 15,
+  static const app18TextStyle = TextStyle(
+    fontWeight: FontWeight.normal,
+    fontSize: 18,
     color: Colors.black,
   );
 
@@ -19,8 +19,8 @@ class AppTextStyle {
 
   static const appBold15TextStyle = TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: 15,
-    color: Colors.black,
+    fontSize: 16,
+    color: Colors.blueAccent,
   );
 
   static const app16TextStyle = TextStyle(

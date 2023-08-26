@@ -79,12 +79,6 @@ class AppDisneyCell extends ConsumerWidget {
                                   overflow: TextOverflow.ellipsis,
                                   style: AppTextStyle.cellNameTextStyle,
                                 ),
-                                Text(
-                                  '@${account.userId}',
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: AppTextStyle.cellUserIdTextStyle,
-                                ),
                               ],
                             ),
                           ),
@@ -144,24 +138,24 @@ class AppDisneyCell extends ConsumerWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 5, left: 70),
+            padding: const EdgeInsets.only(left: 75),
             child: SizedBox(
               width: MediaQuery.of(context).size.width - 80,
               child: Text(
-                post.attractionName,
+                '#${post.attractionName}',
                 style: AppTextStyle.appBold15TextStyle,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 15, bottom: 15, left: 70),
+            padding: const EdgeInsets.only(top: 15, bottom: 15, left: 75),
             child: SizedBox(
               width: MediaQuery.of(context).size.width - 100,
               child: !post.isSpoiler
                   ? Text(
                       post.content,
-                      style: AppTextStyle.app15TextStyle,
+                      style: AppTextStyle.app18TextStyle,
                       overflow: TextOverflow.visible,
                     )
                   : Row(
