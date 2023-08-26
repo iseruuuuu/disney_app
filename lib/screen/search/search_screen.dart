@@ -7,6 +7,7 @@ import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/screen/search/search_screen_view_model.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -41,7 +42,7 @@ class SearchScreen extends ConsumerWidget {
             ),
           ),
           Expanded(
-            child: RefreshIndicator(
+            child: EasyRefresh(
               onRefresh: () async => ref.read(
                 postWithAttractionNameFamily(state.attractionName),
               ),
