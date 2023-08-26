@@ -109,11 +109,11 @@ class AppDisneyCell extends ConsumerWidget {
                         )
                       : const SizedBox.shrink(),
               const Spacer(),
-              (post.postAccountId == myAccount) ||
-                      (post.postAccountId == MasterAccount.masterAccount)
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 10, right: 10),
-                      child: GestureDetector(
+              Padding(
+                padding: const EdgeInsets.only(top: 10, right: 25),
+                child: (post.postAccountId == myAccount) ||
+                        (post.postAccountId == MasterAccount.masterAccount)
+                    ? GestureDetector(
                         onTap: () {
                           FunctionUtils.openDialog(
                             context: context,
@@ -127,11 +127,8 @@ class AppDisneyCell extends ConsumerWidget {
                           );
                         },
                         child: const Icon(Icons.more_horiz),
-                      ),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.only(top: 15, right: 10),
-                      child: GestureDetector(
+                      )
+                    : GestureDetector(
                         onTap: () {
                           FunctionUtils.openDialog(
                             context: context,
@@ -143,7 +140,7 @@ class AppDisneyCell extends ConsumerWidget {
                         },
                         child: const Icon(Icons.reorder),
                       ),
-                    ),
+              ),
             ],
           ),
           Padding(
