@@ -77,7 +77,7 @@ class PostScreen extends ConsumerWidget {
                         state.isSpoiler
                             ? l10n.is_spoiler_true
                             : l10n.is_spoiler_false,
-                        style: AppTextStyle.appBold20TextStyle,
+                        style: AppTextStyle.appBold20GoogleFontsTextStyle,
                       ),
                       Transform.scale(
                         scale: 1.5,

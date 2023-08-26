@@ -50,7 +50,7 @@ class LoginScreen extends HookConsumerWidget {
                       ),
                       Text(
                         l10n.app_name,
-                        style: AppTextStyle.appBold20TextStyle,
+                        style: AppTextStyle.appBold20GoogleFontsTextStyle,
                       ),
                     ],
                   ),

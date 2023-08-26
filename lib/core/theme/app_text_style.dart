@@ -17,13 +17,19 @@ class AppTextStyle {
     color: Colors.grey,
   );
 
+  static const app18GreyTextStyle = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 18,
+    color: Colors.grey,
+  );
+
   static const appBold15TextStyle = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 16,
     color: Colors.blueAccent,
   );
 
-  static const app16TextStyle = TextStyle(
+  static const appBlack15TextStyle = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 15,
     color: Colors.black,
@@ -41,16 +47,40 @@ class AppTextStyle {
     color: Colors.black,
   );
 
+  static const appBold20TextStyle = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+  );
+
   static const appBoldBlue18TextStyle = TextStyle(
     color: Colors.blue,
     fontWeight: FontWeight.bold,
     fontSize: 18,
   );
 
-  static TextStyle appBold20TextStyle = GoogleFonts.pattaya(
+  static TextStyle appBold20GoogleFontsTextStyle = GoogleFonts.pattaya(
     color: Colors.black,
     fontSize: 20,
     fontWeight: FontWeight.bold,
+  );
+
+  static const appBoldBlue20TextStyle = TextStyle(
+    color: Colors.blue,
+    fontWeight: FontWeight.bold,
+    fontSize: 20,
+  );
+
+  static const appNormal25TextStyle = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.normal,
+    color: Colors.black,
+  );
+
+  static const appBold25TextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+    fontSize: 25,
   );
 
   static const cellNameTextStyle = TextStyle(
@@ -94,24 +124,15 @@ class AppTextStyle {
     fontWeight: FontWeight.bold,
   );
 
-  static const detailRankTextStyle = TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 23,
-  );
-
   static const detailAttractionNameTextStyle = TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.bold,
     fontSize: 19,
   );
 
-  static const detailContentTextStyle = TextStyle(
+  static TextStyle appNormalGrey15TextStyle = TextStyle(
     fontSize: 18,
-    color: Colors.black,
-  );
-
-  static TextStyle detailCreatedTimeTextStyle = TextStyle(
-    fontSize: 15,
+    fontWeight: FontWeight.normal,
     color: Colors.grey.shade600,
   );
 

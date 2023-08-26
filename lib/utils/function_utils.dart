@@ -43,7 +43,7 @@ class FunctionUtils {
           ),
           content: Text(
             content,
-            style: AppTextStyle.appBold15TextStyle,
+            style: AppTextStyle.appBlack15TextStyle,
             textAlign: TextAlign.center,
           ),
           actions: [
