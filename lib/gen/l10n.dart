@@ -337,24 +337,6 @@ abstract class L10n {
   /// **'不鮮明のエラーです。運営側にお伝えください。'**
   String get error_other;
 
-  /// No description provided for @error_password.
-  ///
-  /// In ja, this message translates to:
-  /// **'パスワード or メールアドレスが間違っています'**
-  String get error_password;
-
-  /// No description provided for @error_disabled.
-  ///
-  /// In ja, this message translates to:
-  /// **'ログイン試行過多により、アカウントが一時ロックされています。'**
-  String get error_disabled;
-
-  /// No description provided for @error_no_user.
-  ///
-  /// In ja, this message translates to:
-  /// **'アカウントが存在しない or 削除された可能性があります。'**
-  String get error_no_user;
-
   /// No description provided for @error_no_mail.
   ///
   /// In ja, this message translates to:
@@ -366,6 +348,54 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'アプリに問題が発生しました。'**
   String get error_screen;
+
+  /// No description provided for @error_invalid_email.
+  ///
+  /// In ja, this message translates to:
+  /// **'メールアドレスが間違っています。'**
+  String get error_invalid_email;
+
+  /// No description provided for @error_wrong_password.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワードが間違っています。'**
+  String get error_wrong_password;
+
+  /// No description provided for @error_user_not_found.
+  ///
+  /// In ja, this message translates to:
+  /// **'このアカウントは存在しません。'**
+  String get error_user_not_found;
+
+  /// No description provided for @error_user_disabled.
+  ///
+  /// In ja, this message translates to:
+  /// **'このメールアドレスは無効になっています。'**
+  String get error_user_disabled;
+
+  /// No description provided for @error_too_many_requests.
+  ///
+  /// In ja, this message translates to:
+  /// **'回線が混雑しています。もう一度試してみてください'**
+  String get error_too_many_requests;
+
+  /// No description provided for @error_operation_not_allowed.
+  ///
+  /// In ja, this message translates to:
+  /// **'メールアドレスとパスワードでのログインは有効になっていません。'**
+  String get error_operation_not_allowed;
+
+  /// No description provided for @error_email_already_exists.
+  ///
+  /// In ja, this message translates to:
+  /// **'このメールアドレスはすでに登録されています。'**
+  String get error_email_already_exists;
+
+  /// No description provided for @error_undefined.
+  ///
+  /// In ja, this message translates to:
+  /// **'予期せぬエラーが発生しました。'**
+  String get error_undefined;
 
   /// No description provided for @retry.
   ///

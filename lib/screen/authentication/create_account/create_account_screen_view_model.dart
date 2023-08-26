@@ -6,6 +6,7 @@ import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/usecase/user_usecase.dart';
 import 'package:disney_app/gen/gen.dart';
 import 'package:disney_app/provider/loading_provider.dart';
+import 'package:disney_app/utils/error_handling.dart';
 import 'package:disney_app/utils/function_utils.dart';
 import 'package:disney_app/utils/snack_bar_utils.dart';
 import 'package:flutter/material.dart';
@@ -98,10 +99,7 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
         if (!mounted) {
           return;
         }
-        final errorMessage = FunctionUtils().checkRegisterError(
-          result.toString(),
-          context,
-        );
+        final errorMessage = ErrorHandling.exceptionMessage(result, context);
         SnackBarUtils.snackBar(context, errorMessage);
       }
     } else {

@@ -84,34 +84,6 @@ class FunctionUtils {
     }
   }
 
-  String checkRegisterError(String error, BuildContext context) {
-    final l10n = L10n.of(context)!;
-    switch (error) {
-      case '[firebase_auth/invalid-email] The email address is badly formatted.':
-        return l10n.error_badly_formatted;
-      case '[firebase_auth/weak-password] Password should be at least 6 characters':
-        return l10n.error_6_characters;
-      case '[firebase_auth/email-already-in-use] The email address is already in use by another account.':
-        return l10n.error_already;
-    }
-    return l10n.error_other;
-  }
-
-  String checkLoginError(String error, BuildContext context) {
-    final l10n = L10n.of(context)!;
-    switch (error) {
-      case '[firebase_auth/invalid-email] The email address is badly formatted.':
-        return l10n.error_badly_formatted;
-      case '[firebase_auth/wrong-password] The password is invalid or the user does not have a password.':
-        return l10n.error_password;
-      case '[firebase_auth/too-many-requests] Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.':
-        return l10n.error_disabled;
-      case '[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.':
-        return l10n.error_no_user;
-    }
-    return l10n.error_no_mail;
-  }
-
   Future<void> createAccountDialog({
     required BuildContext context,
     required VoidCallback onTap,
