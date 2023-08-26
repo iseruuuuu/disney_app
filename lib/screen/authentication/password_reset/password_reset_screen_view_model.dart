@@ -1,4 +1,4 @@
-import 'package:disney_app/core/error/error_login_handling.dart';
+import 'package:disney_app/core/error/error_handling.dart';
 import 'package:disney_app/core/firebase/firebase.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/gen/gen.dart';
@@ -41,8 +41,8 @@ class PasswordResetScreenViewModel extends ChangeNotifier {
         });
       } on FirebaseAuthException catch (e) {
         loading.isLoading = false;
-        final error = ErrorLoginHandling.handleException(e);
-        final errorMessage = ErrorLoginHandling.exceptionMessage(error);
+        final error = ErrorHandling.handleException(e);
+        final errorMessage = ErrorHandling.exceptionMessage(error);
         SnackBarUtils.snackBar(context, errorMessage);
       }
     } else {

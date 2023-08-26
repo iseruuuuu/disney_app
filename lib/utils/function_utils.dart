@@ -84,19 +84,6 @@ class FunctionUtils {
     }
   }
 
-  String checkRegisterError(String error, BuildContext context) {
-    final l10n = L10n.of(context)!;
-    switch (error) {
-      case '[firebase_auth/invalid-email] The email address is badly formatted.':
-        return l10n.error_badly_formatted;
-      case '[firebase_auth/weak-password] Password should be at least 6 characters':
-        return l10n.error_6_characters;
-      case '[firebase_auth/email-already-in-use] The email address is already in use by another account.':
-        return l10n.error_already;
-    }
-    return l10n.error_other;
-  }
-
   Future<void> createAccountDialog({
     required BuildContext context,
     required VoidCallback onTap,

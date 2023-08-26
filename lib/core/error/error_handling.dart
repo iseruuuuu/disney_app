@@ -1,7 +1,7 @@
 import 'package:disney_app/core/firebase/firebase.dart';
 
-class ErrorLoginHandling {
-  ErrorLoginHandling();
+class ErrorHandling {
+  ErrorHandling();
 
   static FirebaseAuthResultStatus handleException(FirebaseAuthException e) {
     FirebaseAuthResultStatus result;

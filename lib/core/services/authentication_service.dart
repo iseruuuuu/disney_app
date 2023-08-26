@@ -1,4 +1,4 @@
-import 'package:disney_app/core/error/error_login_handling.dart';
+import 'package:disney_app/core/error/error_handling.dart';
 import 'package:disney_app/core/firebase/firebase.dart';
 import 'package:disney_app/core/firebase/firebase_provider.dart';
 import 'package:disney_app/core/model/account.dart';
@@ -28,8 +28,8 @@ class AuthenticationService {
       );
       await firebaseAuth.currentUser?.sendEmailVerification();
       return newAccount;
-    } on FirebaseException catch (error) {
-      return error;
+    } on FirebaseAuthException catch (error) {
+      return ErrorHandling.handleException(error);
     }
   }
 
@@ -50,7 +50,7 @@ class AuthenticationService {
       currentFirebaseUser = result.user;
       return result;
     } on FirebaseAuthException catch (error) {
-      return ErrorLoginHandling.handleException(error);
+      return ErrorHandling.handleException(error);
     }
   }
 

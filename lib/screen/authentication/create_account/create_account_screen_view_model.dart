@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:disney_app/core/error/error_handling.dart';
 import 'package:disney_app/core/firebase/firebase.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
@@ -98,10 +99,7 @@ class CreateAccountScreenViewModel extends StateNotifier<File?> {
         if (!mounted) {
           return;
         }
-        final errorMessage = FunctionUtils().checkRegisterError(
-          result.toString(),
-          context,
-        );
+        final errorMessage = ErrorHandling.exceptionMessage(result);
         SnackBarUtils.snackBar(context, errorMessage);
       }
     } else {

@@ -1,4 +1,4 @@
-import 'package:disney_app/core/error/error_login_handling.dart';
+import 'package:disney_app/core/error/error_handling.dart';
 import 'package:disney_app/core/firebase/firebase.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/usecase/user_usecase.dart';
@@ -72,7 +72,7 @@ class LoginScreenViewModel extends ChangeNotifier {
       return;
     } else {
       await Future<void>.delayed(Duration.zero).then((_) {
-        final errorMessage = ErrorLoginHandling.exceptionMessage(result);
+        final errorMessage = ErrorHandling.exceptionMessage(result);
         loading.isLoading = false;
         SnackBarUtils.snackBar(context, errorMessage);
       });
