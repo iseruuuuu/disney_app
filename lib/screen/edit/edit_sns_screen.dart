@@ -76,7 +76,7 @@ class EditSNSScreen extends ConsumerWidget {
                       ),
                       child: Text(
                         l10n.sns_description,
-                        style: AppTextStyle.appBlack15TextStyle,
+                        style: AppTextStyle.app500Black15TextStyle,
                       ),
                     ),
                     const Spacer(),

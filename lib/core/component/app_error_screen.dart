@@ -28,7 +28,7 @@ class AppErrorScreen extends StatelessWidget {
           const SizedBox(height: 30),
           Text(
             l10n.error_screen,
-            style: AppTextStyle.appBold18TextStyle,
+            style: AppTextStyle.appBoldBlack18TextStyle,
           ),
           const SizedBox(height: 10),
           AppTextButton(

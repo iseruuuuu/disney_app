@@ -52,14 +52,14 @@ class AppHeader extends StatelessWidget {
                         account.name,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: AppTextStyle.accountNameTextStyle,
+                        style: AppTextStyle.appBoldBlack20TextStyle,
                       ),
                       const SizedBox(height: 5),
                       Text(
                         '@${account.userId}',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: AppTextStyle.accountUserIdTextStyle,
+                        style: AppTextStyle.appBoldGrey16TextStyle,
                       ),
                       Row(
                         children: [
@@ -139,7 +139,7 @@ class AppHeader extends StatelessWidget {
               width: double.infinity,
               child: Text(
                 account.selfIntroduction,
-                style: AppTextStyle.accountSelfIntroductionTextStyle,
+                style: AppTextStyle.app500Black16TextStyle,
               ),
             ),
           ),
@@ -156,7 +156,7 @@ class AppHeader extends StatelessWidget {
             ),
             child: Text(
               l10n.post,
-              style: AppTextStyle.appBold17TextStyle,
+              style: AppTextStyle.appBoldBlack17TextStyle,
             ),
           ),
         ],

@@ -14,7 +14,7 @@ class AppNoSearchScreen extends StatelessWidget {
         children: [
           Text(
             l10n.no_post,
-            style: AppTextStyle.noPostTextStyle,
+            style: AppTextStyle.appBoldBlack25TextStyle,
           ),
           const Text(
             '🎢',

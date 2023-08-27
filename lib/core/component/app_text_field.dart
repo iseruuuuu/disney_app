@@ -21,7 +21,7 @@ class AppTextField extends StatelessWidget {
         controller: controller,
         maxLines: maxLines,
         autocorrect: false,
-        style: AppTextStyle.textFieldTextStyle,
+        style: AppTextStyle.appBoldBlack17TextStyle,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: const TextStyle(color: AppColorStyle.appColor),
@@ -38,7 +38,7 @@ class AppTextField extends StatelessWidget {
           ),
           alignLabelWithHint: true,
           labelText: hintText,
-          labelStyle: AppTextStyle.labelTextStyle,
+          labelStyle: AppTextStyle.appBoldGrey17TextStyle,
           filled: true,
           fillColor: Colors.white,
           border: InputBorder.none,

@@ -39,7 +39,7 @@ class PasswordResetScreen extends ConsumerWidget {
                       const SizedBox(width: 10),
                       Text(
                         l10n.reset_password,
-                        style: AppTextStyle.resetPasswordTextStyle,
+                        style: AppTextStyle.appBoldAppColor23TextStyle,
                       ),
                     ],
                   ),
@@ -53,7 +53,7 @@ class PasswordResetScreen extends ConsumerWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
                       l10n.send_reset_message,
-                      style: AppTextStyle.sendResetMessageTextStyle,
+                      style: AppTextStyle.appNormalBlack13TextStyle,
                     ),
                   ),
                   const Spacer(),

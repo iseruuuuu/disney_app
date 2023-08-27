@@ -35,7 +35,7 @@ class CreateAccountScreen extends ConsumerWidget {
               padding: const EdgeInsets.only(top: 20),
               child: Text(
                 l10n.app_bar_create_account,
-                style: AppTextStyle.appBarCreateAccountTextStyle,
+                style: AppTextStyle.appGoogleFonts30TextStyle,
               ),
             ),
           ),

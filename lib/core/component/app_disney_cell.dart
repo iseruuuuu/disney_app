@@ -77,7 +77,7 @@ class AppDisneyCell extends ConsumerWidget {
                                   account.name,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: AppTextStyle.cellNameTextStyle,
+                                  style: AppTextStyle.appBoldBlack18TextStyle,
                                 ),
                               ],
                             ),
@@ -143,7 +143,7 @@ class AppDisneyCell extends ConsumerWidget {
               width: MediaQuery.of(context).size.width - 80,
               child: Text(
                 '#${post.attractionName}',
-                style: AppTextStyle.appBold15TextStyle,
+                style: AppTextStyle.appBoldBlue15TextStyle,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -155,7 +155,7 @@ class AppDisneyCell extends ConsumerWidget {
               child: !post.isSpoiler
                   ? Text(
                       post.content,
-                      style: AppTextStyle.app18TextStyle,
+                      style: AppTextStyle.appNormalBlack18TextStyle,
                       overflow: TextOverflow.visible,
                     )
                   : Row(
@@ -163,7 +163,7 @@ class AppDisneyCell extends ConsumerWidget {
                       children: [
                         Text(
                           l10n.dialog_spoiler_cell_text,
-                          style: AppTextStyle.cellSpoilerDescriptionTextStyle,
+                          style: AppTextStyle.appBoldRed15TextStyle,
                           overflow: TextOverflow.visible,
                         ),
                         const Icon(

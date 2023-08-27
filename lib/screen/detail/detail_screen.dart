@@ -37,7 +37,7 @@ class DetailScreen extends ConsumerWidget {
             image: Assets.header.detailHeader.path,
             text: Text(
               l10n.tweet,
-              style: AppTextStyle.tweetTextStyle,
+              style: AppTextStyle.app30WhiteBoldTextStyle,
             ),
           ),
           Screenshot(
@@ -68,7 +68,7 @@ class DetailScreen extends ConsumerWidget {
                               account.name,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: AppTextStyle.appBold20TextStyle,
+                              style: AppTextStyle.appBoldBlack20TextStyle,
                             ),
                           ),
                         ),
@@ -80,7 +80,7 @@ class DetailScreen extends ConsumerWidget {
                               '@${account.userId}',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: AppTextStyle.app18GreyTextStyle,
+                              style: AppTextStyle.app500Grey18TextStyle,
                             ),
                           ),
                         ),
@@ -121,7 +121,7 @@ class DetailScreen extends ConsumerWidget {
                             padding: const EdgeInsets.only(left: 20),
                             child: Text(
                               '${post.rank}${l10n.score}',
-                              style: AppTextStyle.appBold25TextStyle,
+                              style: AppTextStyle.appBoldBlack25TextStyle,
                             ),
                           ),
                         ],
@@ -144,7 +144,7 @@ class DetailScreen extends ConsumerWidget {
                       ),
                       child: Text(
                         post.content,
-                        style: AppTextStyle.appNormal25TextStyle,
+                        style: AppTextStyle.appNormalBlack20TextStyle,
                       ),
                     ),
                     const Divider(color: Colors.grey),
