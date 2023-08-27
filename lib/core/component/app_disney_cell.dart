@@ -77,13 +77,7 @@ class AppDisneyCell extends ConsumerWidget {
                                   account.name,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: AppTextStyle.cellNameTextStyle,
-                                ),
-                                Text(
-                                  '@${account.userId}',
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: AppTextStyle.cellUserIdTextStyle,
+                                  style: AppTextStyle.appBoldBlack18TextStyle,
                                 ),
                               ],
                             ),
@@ -109,11 +103,11 @@ class AppDisneyCell extends ConsumerWidget {
                         )
                       : const SizedBox.shrink(),
               const Spacer(),
-              (post.postAccountId == myAccount) ||
-                      (post.postAccountId == MasterAccount.masterAccount)
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 10, right: 10),
-                      child: GestureDetector(
+              Padding(
+                padding: const EdgeInsets.only(top: 10, right: 25),
+                child: (post.postAccountId == myAccount) ||
+                        (post.postAccountId == MasterAccount.masterAccount)
+                    ? GestureDetector(
                         onTap: () {
                           FunctionUtils.openDialog(
                             context: context,
@@ -127,11 +121,8 @@ class AppDisneyCell extends ConsumerWidget {
                           );
                         },
                         child: const Icon(Icons.more_horiz),
-                      ),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.only(top: 15, right: 10),
-                      child: GestureDetector(
+                      )
+                    : GestureDetector(
                         onTap: () {
                           FunctionUtils.openDialog(
                             context: context,
@@ -143,28 +134,28 @@ class AppDisneyCell extends ConsumerWidget {
                         },
                         child: const Icon(Icons.reorder),
                       ),
-                    ),
+              ),
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 5, left: 70),
+            padding: const EdgeInsets.only(left: 75),
             child: SizedBox(
               width: MediaQuery.of(context).size.width - 80,
               child: Text(
-                post.attractionName,
-                style: AppTextStyle.appBold15TextStyle,
+                '#${post.attractionName}',
+                style: AppTextStyle.appBoldBlue15TextStyle,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 15, bottom: 15, left: 70),
+            padding: const EdgeInsets.only(top: 15, bottom: 15, left: 75),
             child: SizedBox(
               width: MediaQuery.of(context).size.width - 100,
               child: !post.isSpoiler
                   ? Text(
                       post.content,
-                      style: AppTextStyle.app15TextStyle,
+                      style: AppTextStyle.appNormalBlack18TextStyle,
                       overflow: TextOverflow.visible,
                     )
                   : Row(
@@ -172,7 +163,7 @@ class AppDisneyCell extends ConsumerWidget {
                       children: [
                         Text(
                           l10n.dialog_spoiler_cell_text,
-                          style: AppTextStyle.cellSpoilerDescriptionTextStyle,
+                          style: AppTextStyle.appBoldRed15TextStyle,
                           overflow: TextOverflow.visible,
                         ),
                         const Icon(

@@ -67,7 +67,7 @@ class EditSNSScreen extends ConsumerWidget {
                     ),
                     Text(
                       l10n.sns_title,
-                      style: AppTextStyle.appBold20TextStyle,
+                      style: AppTextStyle.appBold20GoogleFontsTextStyle,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -76,7 +76,7 @@ class EditSNSScreen extends ConsumerWidget {
                       ),
                       child: Text(
                         l10n.sns_description,
-                        style: AppTextStyle.app16TextStyle,
+                        style: AppTextStyle.app500Black15TextStyle,
                       ),
                     ),
                     const Spacer(),

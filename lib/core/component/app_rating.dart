@@ -30,7 +30,7 @@ class AppRating extends StatelessWidget {
           )
         : RatingBarIndicator(
             rating: rank.toDouble(),
-            itemSize: 30,
+            itemSize: 35,
             itemBuilder: (context, _) => const Icon(
               Icons.star,
               color: Colors.amber,

@@ -28,7 +28,7 @@ class LoginScreen extends HookConsumerWidget {
               padding: const EdgeInsets.only(top: 20),
               child: Text(
                 l10n.app_bar_login,
-                style: AppTextStyle.appBarLoginTextStyle,
+                style: AppTextStyle.appGoogleFontsBoldWhite30TextStyle,
               ),
             ),
           ),
@@ -50,7 +50,7 @@ class LoginScreen extends HookConsumerWidget {
                       ),
                       Text(
                         l10n.app_name,
-                        style: AppTextStyle.appBold20TextStyle,
+                        style: AppTextStyle.appBold20GoogleFontsTextStyle,
                       ),
                     ],
                   ),

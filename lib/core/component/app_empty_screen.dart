@@ -14,7 +14,7 @@ class AppEmptyScreen extends StatelessWidget {
         children: [
           Text(
             l10n.no_post,
-            style: AppTextStyle.noPostTextStyle,
+            style: AppTextStyle.appBoldBlack25TextStyle,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 30),

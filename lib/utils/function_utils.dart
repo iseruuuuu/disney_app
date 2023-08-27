@@ -38,12 +38,12 @@ class FunctionUtils {
         return AlertDialog(
           title: Text(
             title,
-            style: AppTextStyle.appBold17TextStyle,
+            style: AppTextStyle.appBoldBlack17TextStyle,
             textAlign: TextAlign.center,
           ),
           content: Text(
             content,
-            style: AppTextStyle.appBold15TextStyle,
+            style: AppTextStyle.app500Black15TextStyle,
             textAlign: TextAlign.center,
           ),
           actions: [
@@ -52,7 +52,7 @@ class FunctionUtils {
               child: TextButton(
                 child: Text(
                   l10n.dialog_cancel,
-                  style: AppTextStyle.cancelTextStyle,
+                  style: AppTextStyle.appBoldRed17TextStyle,
                 ),
                 onPressed: () => Navigator.pop(context),
               ),
@@ -66,7 +66,7 @@ class FunctionUtils {
                 },
                 child: Text(
                   l10n.dialog_ok,
-                  style: AppTextStyle.okTextStyle,
+                  style: AppTextStyle.appBoldBlue17TextStyle,
                 ),
               ),
             ),
@@ -96,7 +96,7 @@ class FunctionUtils {
         return AlertDialog(
           title: Text(
             l10n.dialog_register_account_title,
-            style: AppTextStyle.appBold18TextStyle,
+            style: AppTextStyle.appBoldBlack18TextStyle,
             textAlign: TextAlign.center,
           ),
           content: Column(
@@ -104,7 +104,7 @@ class FunctionUtils {
             children: [
               Text(
                 l10n.dialog_register_account_content,
-                style: AppTextStyle.appBold15TextStyle,
+                style: AppTextStyle.appBoldBlue15TextStyle,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
@@ -114,7 +114,7 @@ class FunctionUtils {
                   onPressed: onTap,
                   child: Text(
                     l10n.dialog_ok,
-                    style: AppTextStyle.okTextStyle,
+                    style: AppTextStyle.appBoldBlue17TextStyle,
                   ),
                 ),
               ),

@@ -7,6 +7,7 @@ import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/provider/launch_url_provider.dart';
 import 'package:disney_app/screen/account/account_screen_view_model.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -40,7 +41,7 @@ class AccountScreen extends ConsumerWidget {
               isMyAccount: true,
             ),
             Expanded(
-              child: RefreshIndicator(
+              child: EasyRefresh(
                 onRefresh: () async => ref.read(
                   postsWithAccountIdFamily(state.myAccount.id),
                 ),

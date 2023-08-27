@@ -5,120 +5,165 @@ import 'theme.dart';
 class AppTextStyle {
   AppTextStyle._();
 
-  static const app15TextStyle = TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 15,
+  static const appNormalBlack13TextStyle = TextStyle(
+    fontWeight: FontWeight.normal,
     color: Colors.black,
+    fontSize: 13,
   );
 
-  static const app15GreyTextStyle = TextStyle(
+  static const app500Grey15TextStyle = TextStyle(
     fontWeight: FontWeight.w500,
-    fontSize: 15,
     color: Colors.grey,
+    fontSize: 15,
   );
 
-  static const appBold15TextStyle = TextStyle(
+  static const appBoldGrey15TextStyle = TextStyle(
     fontWeight: FontWeight.bold,
+    color: Colors.grey,
     fontSize: 15,
-    color: Colors.black,
   );
 
-  static const app16TextStyle = TextStyle(
+  static const appBoldBlue15TextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.blueAccent,
+    fontSize: 16,
+  );
+
+  static const appBoldRed15TextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.red,
+    fontSize: 15,
+  );
+
+  static const app500Black15TextStyle = TextStyle(
     fontWeight: FontWeight.w500,
-    fontSize: 15,
     color: Colors.black,
+    fontSize: 15,
   );
 
-  static const appBold17TextStyle = TextStyle(
+  static TextStyle appNormalGrey15TextStyle = TextStyle(
+    fontWeight: FontWeight.normal,
+    color: Colors.grey.shade600,
+    fontSize: 18,
+  );
+
+  static const appBoldGrey16TextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.grey,
+    fontSize: 16,
+  );
+
+  static const app500Black16TextStyle = TextStyle(
+    fontWeight: FontWeight.w500,
+    color: Colors.black,
+    fontSize: 16,
+  );
+
+  static const appBoldBlack17TextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
     color: Colors.black,
     fontSize: 17,
-    fontWeight: FontWeight.bold,
   );
 
-  static const appBold18TextStyle = TextStyle(
+  static const appBoldGrey17TextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.grey,
+    fontSize: 17,
+  );
+
+  static const appBoldRed17TextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.red,
+    fontSize: 17,
+  );
+
+  static const appBoldBlue17TextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.blue,
+    fontSize: 17,
+  );
+
+  static const appNormalBlack18TextStyle = TextStyle(
+    fontWeight: FontWeight.normal,
+    color: Colors.black,
     fontSize: 18,
+  );
+
+  static const appBoldBlack18TextStyle = TextStyle(
     fontWeight: FontWeight.bold,
     color: Colors.black,
+    fontSize: 18,
+  );
+
+  static const app500Grey18TextStyle = TextStyle(
+    fontWeight: FontWeight.w500,
+    color: Colors.grey,
+    fontSize: 18,
   );
 
   static const appBoldBlue18TextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
     color: Colors.blue,
-    fontWeight: FontWeight.bold,
     fontSize: 18,
   );
 
-  static TextStyle appBold20TextStyle = GoogleFonts.pattaya(
-    color: Colors.black,
-    fontSize: 20,
-    fontWeight: FontWeight.bold,
-  );
-
-  static const cellNameTextStyle = TextStyle(
-    fontSize: 18,
+  static const appBlackBold19TextStyle = TextStyle(
     fontWeight: FontWeight.bold,
     color: Colors.black,
-  );
-
-  static const cellUserIdTextStyle = TextStyle(
-    fontSize: 15,
-    fontWeight: FontWeight.bold,
-    color: Colors.grey,
-  );
-
-  static const cellSpoilerDescriptionTextStyle = TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 15,
-    color: Colors.red,
-  );
-
-  static const accountNameTextStyle = TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 20,
-    color: Colors.black,
-  );
-  static const accountUserIdTextStyle = TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 16,
-    color: Colors.grey,
-  );
-
-  static const accountSelfIntroductionTextStyle = TextStyle(
-    color: Colors.black,
-    fontWeight: FontWeight.w500,
-    fontSize: 16,
-  );
-
-  static TextStyle tweetTextStyle = GoogleFonts.pattaya(
-    fontSize: 30,
-    color: Colors.white,
-    fontWeight: FontWeight.bold,
-  );
-
-  static const detailRankTextStyle = TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 23,
-  );
-
-  static const detailAttractionNameTextStyle = TextStyle(
-    color: Colors.black,
-    fontWeight: FontWeight.bold,
     fontSize: 19,
   );
 
-  static const detailContentTextStyle = TextStyle(
-    fontSize: 18,
+  static const appNormalBlack20TextStyle = TextStyle(
+    fontWeight: FontWeight.normal,
     color: Colors.black,
+    fontSize: 20,
   );
 
-  static TextStyle detailCreatedTimeTextStyle = TextStyle(
-    fontSize: 15,
-    color: Colors.grey.shade600,
+  static const appBoldBlack20TextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+    fontSize: 20,
   );
 
-  static const noPostTextStyle = TextStyle(
+  static TextStyle appBold20GoogleFontsTextStyle = GoogleFonts.pattaya(
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+    fontSize: 20,
+  );
+
+  static const appBoldBlue20TextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.blue,
+    fontSize: 20,
+  );
+
+  static const appBoldAppColor23TextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: AppColorStyle.appColor,
+    fontSize: 23,
+  );
+
+  static const appBoldBlack25TextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
     color: Colors.black,
     fontSize: 25,
+  );
+
+  static TextStyle app30WhiteBoldTextStyle = GoogleFonts.pattaya(
     fontWeight: FontWeight.bold,
+    color: Colors.white,
+    fontSize: 30,
+  );
+
+  static TextStyle appGoogleFonts30TextStyle = GoogleFonts.pattaya(
+    fontWeight: FontWeight.bold,
+    fontSize: 30,
+  );
+
+  static TextStyle appGoogleFontsBoldWhite30TextStyle = GoogleFonts.pattaya(
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+    fontSize: 30,
   );
 
   static const iconTextStyle = TextStyle(
@@ -127,50 +172,5 @@ class AppTextStyle {
 
   static const iconAppBarStyle = TextStyle(
     fontSize: 50,
-  );
-
-  static const labelTextStyle = TextStyle(
-    color: Colors.grey,
-    fontWeight: FontWeight.bold,
-    fontSize: 17,
-  );
-  static const textFieldTextStyle = TextStyle(
-    color: Colors.black,
-    fontSize: 17,
-    fontWeight: FontWeight.bold,
-  );
-
-  static TextStyle appBarCreateAccountTextStyle = GoogleFonts.pattaya(
-    fontSize: 30,
-    fontWeight: FontWeight.bold,
-  );
-
-  static const cancelTextStyle = TextStyle(
-    color: Colors.red,
-    fontWeight: FontWeight.bold,
-    fontSize: 17,
-  );
-
-  static const okTextStyle = TextStyle(
-    color: Colors.blue,
-    fontWeight: FontWeight.bold,
-    fontSize: 17,
-  );
-
-  static TextStyle appBarLoginTextStyle = GoogleFonts.pattaya(
-    color: Colors.white,
-    fontSize: 30,
-    fontWeight: FontWeight.bold,
-  );
-
-  static const resetPasswordTextStyle = TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 23,
-    color: AppColorStyle.appColor,
-  );
-
-  static const sendResetMessageTextStyle = TextStyle(
-    fontSize: 13,
-    color: Colors.black,
   );
 }

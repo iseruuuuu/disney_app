@@ -37,7 +37,7 @@ class DetailScreen extends ConsumerWidget {
             image: Assets.header.detailHeader.path,
             text: Text(
               l10n.tweet,
-              style: AppTextStyle.tweetTextStyle,
+              style: AppTextStyle.app30WhiteBoldTextStyle,
             ),
           ),
           Screenshot(
@@ -51,7 +51,7 @@ class DetailScreen extends ConsumerWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(15),
                         child: CircleAvatar(
-                          radius: 28,
+                          radius: 35,
                           foregroundImage:
                               CachedNetworkImageProvider(account.imagePath),
                         ),
@@ -68,7 +68,7 @@ class DetailScreen extends ConsumerWidget {
                               account.name,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: AppTextStyle.appBold18TextStyle,
+                              style: AppTextStyle.appBoldBlack20TextStyle,
                             ),
                           ),
                         ),
@@ -80,7 +80,7 @@ class DetailScreen extends ConsumerWidget {
                               '@${account.userId}',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: AppTextStyle.app15GreyTextStyle,
+                              style: AppTextStyle.app500Grey18TextStyle,
                             ),
                           ),
                         ),
@@ -121,7 +121,7 @@ class DetailScreen extends ConsumerWidget {
                             padding: const EdgeInsets.only(left: 20),
                             child: Text(
                               '${post.rank}${l10n.score}',
-                              style: AppTextStyle.detailRankTextStyle,
+                              style: AppTextStyle.appBoldBlack25TextStyle,
                             ),
                           ),
                         ],
@@ -134,7 +134,7 @@ class DetailScreen extends ConsumerWidget {
                       ),
                       child: Text(
                         post.attractionName,
-                        style: AppTextStyle.detailAttractionNameTextStyle,
+                        style: AppTextStyle.appBoldBlue20TextStyle,
                       ),
                     ),
                     Padding(
@@ -144,7 +144,7 @@ class DetailScreen extends ConsumerWidget {
                       ),
                       child: Text(
                         post.content,
-                        style: AppTextStyle.detailContentTextStyle,
+                        style: AppTextStyle.appNormalBlack20TextStyle,
                       ),
                     ),
                     const Divider(color: Colors.grey),
@@ -162,7 +162,7 @@ class DetailScreen extends ConsumerWidget {
                               DateFormat('yyyy/MM/dd').format(
                                 post.createdTime!.toDate(),
                               ),
-                              style: AppTextStyle.detailCreatedTimeTextStyle,
+                              style: AppTextStyle.appNormalGrey15TextStyle,
                             ),
                             const Spacer(),
                             IconButton(
@@ -174,22 +174,26 @@ class DetailScreen extends ConsumerWidget {
                                 color: AppColorStyle.appColor,
                               ),
                             ),
-                            (post.postAccountId == myAccount)
-                                ? GestureDetector(
-                                    onTap: () => ref
-                                        .read(detailViewModelProvider)
-                                        .openCheckDialog(
-                                          context,
-                                          post.id,
-                                          post,
-                                          ref,
-                                        ),
-                                    child: const Icon(
-                                      Icons.more_horiz,
-                                      color: Colors.black,
-                                    ),
-                                  )
-                                : Container(),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: (post.postAccountId == myAccount)
+                                  ? GestureDetector(
+                                      onTap: () => ref
+                                          .read(detailViewModelProvider)
+                                          .openCheckDialog(
+                                            context,
+                                            post.id,
+                                            post,
+                                            ref,
+                                          ),
+                                      child: const Icon(
+                                        Icons.more_horiz,
+                                        color: Colors.black,
+                                      ),
+                                    )
+                                  : Container(),
+                            ),
                           ],
                         ),
                       ),

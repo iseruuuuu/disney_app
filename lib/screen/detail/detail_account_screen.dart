@@ -6,6 +6,7 @@ import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/gen/gen.dart';
 import 'package:disney_app/provider/launch_url_provider.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -46,7 +47,7 @@ class DetailAccountScreen extends ConsumerWidget {
                 .openInstagram(context, postAccount.instagram),
           ),
           Expanded(
-            child: RefreshIndicator(
+            child: EasyRefresh(
               onRefresh: () async => ref.read(
                 postsWithAccountIdFamily(postAccount.id),
               ),
