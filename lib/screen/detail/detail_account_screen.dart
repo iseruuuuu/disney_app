@@ -27,12 +27,9 @@ class DetailAccountScreen extends ConsumerWidget {
     final posts = ref.watch(postsWithAccountIdFamily(postAccount.id));
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(80),
-        child: AppAppBar(
-          image: Assets.header.detailAccountHeader.path,
-          text: const SizedBox.shrink(),
-        ),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(70),
+        child: AppAppBar(icon: '🚢'),
       ),
       body: Column(
         children: [

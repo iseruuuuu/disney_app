@@ -1,53 +1,45 @@
+import 'package:disney_app/core/theme/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class AppAppBar extends StatelessWidget {
   const AppAppBar({
     super.key,
-    required this.image,
-    required this.text,
+    required this.icon,
   });
 
-  final String image;
-  final Widget text;
+  final String icon;
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: 110,
-          color: Colors.grey.shade300,
-          child: Image.asset(
-            image,
-            fit: BoxFit.cover,
-          ),
-        ),
-        AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: text,
-          leading: Center(
-            child: Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const Icon(
-                  Icons.arrow_back_ios_new,
-                  color: Colors.white,
-                ),
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      title: Text(
+        icon,
+        style: AppTextStyle.iconAppBarStyle,
+      ),
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 15),
+        child: Center(
+          child: Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Icon(
+                Icons.arrow_back_ios_new,
+                color: Colors.white,
               ),
             ),
           ),
         ),
-      ],
+      ),
     );
   }
 }

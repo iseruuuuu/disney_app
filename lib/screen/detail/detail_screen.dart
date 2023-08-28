@@ -33,13 +33,7 @@ class DetailScreen extends ConsumerWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          AppAppBar(
-            image: Assets.header.detailHeader.path,
-            text: Text(
-              l10n.tweet,
-              style: AppTextStyle.app30WhiteBoldTextStyle,
-            ),
-          ),
+          const AppAppBar(icon: '🎠'),
           Screenshot(
             controller: ref.watch(detailViewModelProvider).screenshotController,
             child: Column(

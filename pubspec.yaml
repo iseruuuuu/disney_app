@@ -76,7 +76,6 @@ flutter:
   uses-material-design: true
   generate: true
   assets:
-    - assets/header/
     - assets/images/
 
 flutter_gen:
