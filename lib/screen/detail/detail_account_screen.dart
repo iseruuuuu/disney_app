@@ -3,7 +3,6 @@ import 'package:disney_app/core/component/component.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
-import 'package:disney_app/gen/gen.dart';
 import 'package:disney_app/provider/launch_url_provider.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:easy_refresh/easy_refresh.dart';
