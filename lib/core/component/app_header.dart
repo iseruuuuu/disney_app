@@ -16,6 +16,8 @@ class AppHeader extends StatelessWidget {
     this.onTapEditSNS,
     required this.onTapTwitter,
     required this.onTapInstagram,
+    required this.isHasTwitter,
+    required this.isHasInstagram,
   });
 
   final Account account;
@@ -24,6 +26,8 @@ class AppHeader extends StatelessWidget {
   final VoidCallback onTapTwitter;
   final VoidCallback onTapInstagram;
   final bool isMyAccount;
+  final bool isHasTwitter;
+  final bool isHasInstagram;
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +43,8 @@ class AppHeader extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: GestureDetector(
-                    onTap: () {
-                      FunctionUtils().imageDialog(context, account.imagePath);
-                    },
+                    onTap: () =>
+                        FunctionUtils().imageDialog(context, account.imagePath),
                     child: CircleAvatar(
                       radius: 40,
                       foregroundImage:
@@ -70,17 +73,18 @@ class AppHeader extends StatelessWidget {
                       Row(
                         children: [
                           IconButton(
-                            onPressed: onTapTwitter,
-                            icon: const Icon(
+                            onPressed: isHasTwitter ? onTapTwitter : null,
+                            icon: Icon(
                               FontAwesomeIcons.twitter,
-                              color: Colors.lightBlue,
+                              color:
+                                  isHasTwitter ? Colors.lightBlue : Colors.grey,
                             ),
                           ),
                           IconButton(
-                            onPressed: onTapInstagram,
-                            icon: const Icon(
+                            onPressed: isHasInstagram ? onTapInstagram : null,
+                            icon: Icon(
                               FontAwesomeIcons.instagram,
-                              color: Colors.red,
+                              color: isHasInstagram ? Colors.red : Colors.grey,
                             ),
                           ),
                         ],

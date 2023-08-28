@@ -39,6 +39,8 @@ class AccountScreen extends ConsumerWidget {
                   .read(launchUrlProvider)
                   .openInstagram(context, state.myAccount.instagram),
               isMyAccount: true,
+              isHasTwitter: myAccount.twitter.isNotEmpty,
+              isHasInstagram: myAccount.instagram.isNotEmpty,
             ),
             Expanded(
               child: EasyRefresh(

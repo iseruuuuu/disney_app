@@ -41,6 +41,8 @@ class DetailAccountScreen extends ConsumerWidget {
             onTapInstagram: () => ref
                 .read(launchUrlProvider)
                 .openInstagram(context, postAccount.instagram),
+            isHasTwitter: postAccount.twitter.isNotEmpty,
+            isHasInstagram: postAccount.instagram.isNotEmpty,
           ),
           Expanded(
             child: EasyRefresh(
