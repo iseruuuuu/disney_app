@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/theme/app_text_style.dart';
 import 'package:disney_app/gen/gen.dart';
@@ -119,6 +121,25 @@ class FunctionUtils {
                 ),
               ),
             ],
+          ),
+        );
+      },
+    );
+  }
+
+  void imageDialog(BuildContext context, String image) {
+    showDialog<void>(
+      context: context,
+      builder: (_) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+          child: AlertDialog(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            content: CircleAvatar(
+              radius: MediaQuery.of(context).size.width / 1.8,
+              foregroundImage: CachedNetworkImageProvider(image),
+            ),
           ),
         );
       },
