@@ -9,21 +9,6 @@
 
 import 'package:flutter/widgets.dart';
 
-class $AssetsHeaderGen {
-  const $AssetsHeaderGen();
-
-  /// File path: assets/header/detail_account_header.jpg
-  AssetGenImage get detailAccountHeader =>
-      const AssetGenImage('assets/header/detail_account_header.jpg');
-
-  /// File path: assets/header/detail_header.jpg
-  AssetGenImage get detailHeader =>
-      const AssetGenImage('assets/header/detail_header.jpg');
-
-  /// List of all assets
-  List<AssetGenImage> get values => [detailAccountHeader, detailHeader];
-}
-
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -48,7 +33,6 @@ class $AssetsImagesGen {
 class Assets {
   Assets._();
 
-  static const $AssetsHeaderGen header = $AssetsHeaderGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
