@@ -171,6 +171,6 @@ class AppTextStyle {
   );
 
   static const iconAppBarStyle = TextStyle(
-    fontSize: 50,
+    fontSize: 35,
   );
 }

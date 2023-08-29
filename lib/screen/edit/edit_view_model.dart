@@ -76,6 +76,8 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
         selfIntroduction: selfIntroductionController.text,
         imagePath: imagePath,
         isOfficial: myAccount.isOfficial,
+        twitter: myAccount.twitter,
+        instagram: myAccount.instagram,
       );
       AuthenticationService.myAccount = updateAccount;
       final result =

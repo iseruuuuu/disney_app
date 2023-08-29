@@ -19,11 +19,11 @@ class AppAppBar extends StatelessWidget {
         style: AppTextStyle.iconAppBarStyle,
       ),
       leading: Padding(
-        padding: const EdgeInsets.only(left: 15),
+        padding: const EdgeInsets.only(left: 15, top: 10),
         child: Center(
           child: Container(
-            width: 40,
-            height: 40,
+            width: 35,
+            height: 35,
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.5),
               borderRadius: BorderRadius.circular(100),
@@ -35,6 +35,7 @@ class AppAppBar extends StatelessWidget {
               child: const Icon(
                 Icons.arrow_back_ios_new,
                 color: Colors.white,
+                size: 20,
               ),
             ),
           ),

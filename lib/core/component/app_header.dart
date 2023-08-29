@@ -53,7 +53,7 @@ class AppHeader extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width / 2.5,
+                  width: MediaQuery.of(context).size.width - 200,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -93,55 +93,62 @@ class AppHeader extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 45),
-                  child: account.isOfficial
-                      ? Image.asset(
-                          Assets.images.official.path,
-                          fit: BoxFit.fill,
-                          width: 40,
-                        )
-                      : (account.id == MasterAccount.masterAccount)
-                          ? Image.asset(
-                              Assets.images.dev.path,
-                              fit: BoxFit.fill,
-                              width: 30,
-                            )
-                          : const SizedBox.shrink(),
-                ),
-                const SizedBox(width: 10),
                 Column(
                   children: [
-                    isMyAccount
-                        ? OutlinedButton(
-                            onPressed: onTapEditProfile,
-                            child: Text(
-                              l10n.edit,
-                              style: const TextStyle(
-                                color: AppColorStyle.appColor,
-                              ),
-                            ),
-                          )
-                        : const SizedBox.shrink(),
-                    isMyAccount
-                        ? OutlinedButton(
-                            onPressed: onTapEditSNS,
-                            child: Text(
-                              l10n.sns_edit,
-                              style: const TextStyle(
-                                color: AppColorStyle.appColor,
-                              ),
-                            ),
-                          )
-                        : const SizedBox.shrink(),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 45),
+                      child: account.isOfficial
+                          ? Image.asset(
+                              Assets.images.official.path,
+                              fit: BoxFit.fill,
+                              width: 40,
+                            )
+                          : (account.id == MasterAccount.masterAccount)
+                              ? Image.asset(
+                                  Assets.images.dev.path,
+                                  fit: BoxFit.fill,
+                                  width: 30,
+                                )
+                              : const SizedBox.shrink(),
+                    ),
                   ],
                 ),
+                const SizedBox(width: 10),
               ],
             ),
           ),
+          Row(
+            children: [
+              const Spacer(),
+              isMyAccount
+                  ? OutlinedButton(
+                      onPressed: onTapEditProfile,
+                      child: Text(
+                        l10n.edit,
+                        style: const TextStyle(
+                          color: AppColorStyle.appColor,
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+              const SizedBox(width: 20),
+              isMyAccount
+                  ? OutlinedButton(
+                      onPressed: onTapEditSNS,
+                      child: Text(
+                        l10n.sns_edit,
+                        style: const TextStyle(
+                          color: AppColorStyle.appColor,
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+              const SizedBox(width: 20),
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.only(
-              top: 30,
+              top: 10,
               right: 15,
               left: 15,
             ),

@@ -48,28 +48,23 @@ class FunctionUtils {
             style: AppTextStyle.app500Black15TextStyle,
             textAlign: TextAlign.center,
           ),
+          actionsAlignment: MainAxisAlignment.spaceEvenly,
           actions: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: TextButton(
-                child: Text(
-                  l10n.dialog_cancel,
-                  style: AppTextStyle.appBoldRed17TextStyle,
-                ),
-                onPressed: () => Navigator.pop(context),
+            TextButton(
+              child: Text(
+                l10n.dialog_cancel,
+                style: AppTextStyle.appBoldRed17TextStyle,
               ),
+              onPressed: () => Navigator.pop(context),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  onTap();
-                },
-                child: Text(
-                  l10n.dialog_ok,
-                  style: AppTextStyle.appBoldBlue17TextStyle,
-                ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                onTap();
+              },
+              child: Text(
+                l10n.dialog_ok,
+                style: AppTextStyle.appBoldBlue17TextStyle,
               ),
             ),
           ],

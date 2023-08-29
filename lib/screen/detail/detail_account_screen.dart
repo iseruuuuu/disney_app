@@ -27,7 +27,7 @@ class DetailAccountScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(70),
+        preferredSize: Size.fromHeight(80),
         child: AppAppBar(icon: '🚢'),
       ),
       body: Column(

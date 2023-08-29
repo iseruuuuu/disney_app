@@ -69,7 +69,7 @@ class AppDisneyCell extends ConsumerWidget {
                       Row(
                         children: [
                           SizedBox(
-                            width: MediaQuery.of(context).size.width / 2,
+                            width: MediaQuery.of(context).size.width / 1.8,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -89,24 +89,27 @@ class AppDisneyCell extends ConsumerWidget {
                 ),
               ),
               const Spacer(),
-              account.isOfficial
-                  ? Image.asset(
-                      Assets.images.official.path,
-                      fit: BoxFit.fill,
-                      width: 30,
-                    )
-                  : (post.postAccountId == MasterAccount.masterAccount)
-                      ? Image.asset(
-                          Assets.images.dev.path,
-                          fit: BoxFit.fill,
-                          width: 30,
-                        )
-                      : const SizedBox.shrink(),
+              Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: account.isOfficial
+                    ? Image.asset(
+                        Assets.images.official.path,
+                        fit: BoxFit.fill,
+                        width: 25,
+                      )
+                    : (post.postAccountId == MasterAccount.masterAccount)
+                        ? Image.asset(
+                            Assets.images.dev.path,
+                            fit: BoxFit.fill,
+                            width: 25,
+                          )
+                        : const SizedBox.shrink(),
+              ),
               const Spacer(),
               Padding(
-                padding: const EdgeInsets.only(top: 10, right: 25),
+                padding: const EdgeInsets.only(top: 10, right: 15, left: 5),
                 child: (post.postAccountId == myAccount) ||
-                        (post.postAccountId == MasterAccount.masterAccount)
+                        (myAccount == MasterAccount.masterAccount)
                     ? GestureDetector(
                         onTap: () {
                           FunctionUtils.openDialog(
@@ -120,7 +123,10 @@ class AppDisneyCell extends ConsumerWidget {
                             },
                           );
                         },
-                        child: const Icon(Icons.more_horiz),
+                        child: const Icon(
+                          Icons.more_horiz,
+                          size: 20,
+                        ),
                       )
                     : GestureDetector(
                         onTap: () {
