@@ -109,7 +109,7 @@ class AppDisneyCell extends ConsumerWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 10, right: 15, left: 5),
                 child: (post.postAccountId == myAccount) ||
-                        (post.postAccountId == MasterAccount.masterAccount)
+                        (myAccount == MasterAccount.masterAccount)
                     ? GestureDetector(
                         onTap: () {
                           FunctionUtils.openDialog(
