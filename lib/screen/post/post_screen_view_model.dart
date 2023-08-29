@@ -45,19 +45,17 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
         pickerData: const JsonDecoder().convert(attraction),
       ),
       changeToFirst: true,
-      height: 400,
+      height: 300,
       textStyle: const TextStyle(
-        fontSize: 15,
+        fontSize: 17,
         color: Colors.black,
         fontWeight: FontWeight.bold,
       ),
       onConfirm: (Picker picker, List<dynamic> value) {
-        final text1 = picker.adapter.text.replaceAll('[', '');
-        final result2 = text1.replaceAll(']', '');
-        final result3 = result2.replaceAll(' ', '');
-        final result4 = result3.split(',');
+        final attractionName =
+            picker.adapter.text.replaceAll(RegExp(r'[\[\]]'), '');
         state = state.copyWith(
-          attractionName: result4[1],
+          attractionName: attractionName,
           isSelected: true,
         );
       },
