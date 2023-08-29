@@ -14,10 +14,10 @@ class L10nJa extends L10n {
   String get no_post => '投稿がまだありません';
 
   @override
-  String get edit => '編集';
+  String get edit => 'アカウント編集';
 
   @override
-  String get sns_edit => 'SNS';
+  String get sns_edit => 'SNS編集';
 
   @override
   String get post => '投稿';

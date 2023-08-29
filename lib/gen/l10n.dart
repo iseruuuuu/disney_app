@@ -112,13 +112,13 @@ abstract class L10n {
   /// No description provided for @edit.
   ///
   /// In ja, this message translates to:
-  /// **'編集'**
+  /// **'アカウント編集'**
   String get edit;
 
   /// No description provided for @sns_edit.
   ///
   /// In ja, this message translates to:
-  /// **'SNS'**
+  /// **'SNS編集'**
   String get sns_edit;
 
   /// No description provided for @post.
