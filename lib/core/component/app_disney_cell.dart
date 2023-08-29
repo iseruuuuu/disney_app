@@ -95,19 +95,19 @@ class AppDisneyCell extends ConsumerWidget {
                     ? Image.asset(
                         Assets.images.official.path,
                         fit: BoxFit.fill,
-                        width: 30,
+                        width: 25,
                       )
                     : (post.postAccountId == MasterAccount.masterAccount)
                         ? Image.asset(
                             Assets.images.dev.path,
                             fit: BoxFit.fill,
-                            width: 30,
+                            width: 25,
                           )
                         : const SizedBox.shrink(),
               ),
               const Spacer(),
               Padding(
-                padding: const EdgeInsets.only(top: 10, right: 25),
+                padding: const EdgeInsets.only(top: 10, right: 15, left: 5),
                 child: (post.postAccountId == myAccount) ||
                         (post.postAccountId == MasterAccount.masterAccount)
                     ? GestureDetector(
