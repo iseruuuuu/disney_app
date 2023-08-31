@@ -60,16 +60,16 @@ class DetailViewModel extends ChangeNotifier {
           //TODO リリースされたら、AppleStoreのリンクを載せる。
           await Share.shareXFiles(
             [XFile(imagePath.path)],
-            subject: '${post.attractionName}の評価は${post.rank}点でした!!\n\n'
-                '${post.content}\n\n'
+            text: '${post.attractionName}は、５点中${post.rank}点でした!!\n\n'
+                '乗車した感想を思い思いに書いて投稿しよう🏰\n\n'
                 '#TDL_APP',
           );
         } else {
           //TODO リリースされたら、GooglePlayのリンクを載せる。
           await Share.shareXFiles(
             [XFile(imagePath.path)],
-            subject: '${post.attractionName}の評価は${post.rank}点でした!!\n\n'
-                '${post.content}\n\n'
+            text: '${post.attractionName}は、５点中${post.rank}点でした!!\n\n'
+                '乗車した感想を思い思いに書いて投稿しよう🏰\n\n'
                 '#TDL_APP',
           );
         }
