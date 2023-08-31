@@ -149,7 +149,7 @@ class AppDisneyCell extends ConsumerWidget {
               width: MediaQuery.of(context).size.width - 80,
               child: Text(
                 '#${post.attractionName}',
-                style: AppTextStyle.appBoldBlue15TextStyle,
+                style: AppTextStyle.appBoldBlack16TextStyle,
                 overflow: TextOverflow.ellipsis,
               ),
             ),

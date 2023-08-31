@@ -12,10 +12,14 @@ class TabScreen extends ConsumerWidget {
     final controller = ref.watch(tabScreenViewModelProvider.notifier);
     return Scaffold(
       body: controller.pageList[state.selectedIndex],
-      bottomNavigationBar: DecoratedBox(
-        decoration: BoxDecoration(
+      bottomNavigationBar: Container(
+        width: MediaQuery.of(context).size.width,
+        decoration: const BoxDecoration(
           border: Border(
-            top: BorderSide(color: Colors.grey.shade400),
+            top: BorderSide(
+              width: 2,
+              color: AppColorStyle.appColor,
+            ),
           ),
         ),
         child: BottomNavigationBar(
