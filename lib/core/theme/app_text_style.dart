@@ -41,6 +41,12 @@ class AppTextStyle {
     fontSize: 15,
   );
 
+  static const appBoldBlack16TextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+    fontSize: 16,
+  );
+
   static TextStyle appNormalGrey15TextStyle = TextStyle(
     fontWeight: FontWeight.normal,
     color: Colors.grey.shade600,
@@ -128,12 +134,6 @@ class AppTextStyle {
   static TextStyle appBold20GoogleFontsTextStyle = GoogleFonts.pattaya(
     fontWeight: FontWeight.bold,
     color: Colors.black,
-    fontSize: 20,
-  );
-
-  static const appBoldBlue20TextStyle = TextStyle(
-    fontWeight: FontWeight.bold,
-    color: Colors.blue,
     fontSize: 20,
   );
 

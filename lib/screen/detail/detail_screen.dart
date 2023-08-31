@@ -128,7 +128,7 @@ class DetailScreen extends ConsumerWidget {
                       ),
                       child: Text(
                         post.attractionName,
-                        style: AppTextStyle.appBoldBlue20TextStyle,
+                        style: AppTextStyle.appBoldBlack20TextStyle,
                       ),
                     ),
                     Padding(

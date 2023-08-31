@@ -27,13 +27,13 @@ class AppAttraction extends StatelessWidget {
       title: !isSelected
           ? Text(
               l10n.attraction,
-              style: AppTextStyle.appBoldBlue15TextStyle,
+              style: AppTextStyle.appBoldBlack16TextStyle,
             )
           : SizedBox(
               width: MediaQuery.of(context).size.width - 20,
               child: Text(
                 attractionName,
-                style: AppTextStyle.appBoldBlue15TextStyle,
+                style: AppTextStyle.appBoldBlack16TextStyle,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
