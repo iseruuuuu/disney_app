@@ -8,6 +8,7 @@ import 'package:disney_app/gen/gen.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
 
 class FunctionUtils {
   Future<dynamic> getImageFromGallery() async {
@@ -34,41 +35,18 @@ class FunctionUtils {
     required VoidCallback onTap,
   }) {
     final l10n = L10n.of(context)!;
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(
-            title,
-            style: AppTextStyle.appBoldBlack17TextStyle,
-            textAlign: TextAlign.center,
-          ),
-          content: Text(
-            content,
-            style: AppTextStyle.app500Black15TextStyle,
-            textAlign: TextAlign.center,
-          ),
-          actionsAlignment: MainAxisAlignment.spaceEvenly,
-          actions: [
-            TextButton(
-              child: Text(
-                l10n.dialog_cancel,
-                style: AppTextStyle.appBoldRed17TextStyle,
-              ),
-              onPressed: () => Navigator.pop(context),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-                onTap();
-              },
-              child: Text(
-                l10n.dialog_ok,
-                style: AppTextStyle.appBoldBlue17TextStyle,
-              ),
-            ),
-          ],
-        );
+    return PanaraConfirmDialog.show(
+      context,
+      panaraDialogType: PanaraDialogType.error,
+      barrierDismissible: false,
+      title: title,
+      message: content,
+      confirmButtonText: l10n.dialog_ok,
+      cancelButtonText: l10n.dialog_cancel,
+      onTapCancel: () => Navigator.pop(context),
+      onTapConfirm: () {
+        Navigator.pop(context);
+        onTap();
       },
     );
   }
