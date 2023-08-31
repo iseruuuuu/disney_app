@@ -56,21 +56,22 @@ class DetailViewModel extends ChangeNotifier {
         final directory = await getApplicationDocumentsDirectory();
         final imagePath = await File('${directory.path}/image.png').create();
         await imagePath.writeAsBytes(capturedImage);
+        final text = '${post.attractionName}は、５点中${post.rank}点でした!!\n\n'
+            '乗車した感想を思い思いに書いて投稿しよう🏰\n\n'
+            '#TDL_APP';
         if (Platform.isIOS) {
           //TODO リリースされたら、AppleStoreのリンクを載せる。
           await Share.shareXFiles(
             [XFile(imagePath.path)],
-            text: '${post.attractionName}は、５点中${post.rank}点でした!!\n\n'
-                '乗車した感想を思い思いに書いて投稿しよう🏰\n\n'
-                '#TDL_APP',
+            text: text,
+            subject: text,
           );
         } else {
           //TODO リリースされたら、GooglePlayのリンクを載せる。
           await Share.shareXFiles(
             [XFile(imagePath.path)],
-            text: '${post.attractionName}は、５点中${post.rank}点でした!!\n\n'
-                '乗車した感想を思い思いに書いて投稿しよう🏰\n\n'
-                '#TDL_APP',
+            text: text,
+            subject: text,
           );
         }
       }
