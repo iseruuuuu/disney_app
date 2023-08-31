@@ -15,7 +15,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final editViewModelProvider =
-    StateNotifierProvider<EditScreenViewModel, ImageProvider>(
+    StateNotifierProvider.autoDispose<EditScreenViewModel, ImageProvider>(
   (ref) {
     final myAccount = AuthenticationService.myAccount!;
     return EditScreenViewModel(
