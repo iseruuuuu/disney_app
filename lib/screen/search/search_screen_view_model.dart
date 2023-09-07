@@ -39,12 +39,10 @@ class SearchScreenViewModel extends StateNotifier<SearchScreenState> {
         fontWeight: FontWeight.bold,
       ),
       onConfirm: (Picker picker, List<dynamic> value) {
-        final text1 = picker.adapter.text.replaceAll('[', '');
-        final result2 = text1.replaceAll(']', '');
-        final result3 = result2.replaceAll(' ', '');
-        final result4 = result3.split(',');
+        final attractionName =
+        picker.adapter.text.replaceAll(RegExp(r'[\[\]]'), '');
         state = state.copyWith(
-          attractionName: result4[1],
+          attractionName: attractionName,
         );
         ref.read(postWithAttractionNameFamily(state.attractionName));
       },
