@@ -7,7 +7,7 @@ class Post {
     this.postAccountId = '',
     this.postId = '',
     this.createdTime,
-    this.rank = 0,
+    this.rank = 0.0,
     this.attractionName = '',
     this.isSpoiler = false,
   });
@@ -31,7 +31,7 @@ class Post {
   String postId;
   Timestamp? createdTime;
   bool isSpoiler;
-  int rank;
+  double rank;
   String attractionName;
 
   @override
