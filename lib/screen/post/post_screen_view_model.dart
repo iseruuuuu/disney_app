@@ -35,7 +35,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
 
   void rankPicker(double rating) {
     state = state.copyWith(
-      rank: rating.round(),
+      rank: rating,
     );
   }
 

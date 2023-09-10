@@ -176,7 +176,8 @@ class DetailScreen extends ConsumerWidget {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 15),
+                                    horizontal: 15,
+                                  ),
                                   child: (post.postAccountId == myAccount)
                                       ? GestureDetector(
                                           onTap: () => ref

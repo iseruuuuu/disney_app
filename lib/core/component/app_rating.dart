@@ -9,7 +9,7 @@ class AppRating extends StatelessWidget {
     this.onTap,
   });
 
-  final int rank;
+  final double rank;
   final bool isSelect;
   final void Function(double)? onTap;
 
@@ -19,8 +19,7 @@ class AppRating extends StatelessWidget {
         ? Padding(
             padding: const EdgeInsets.only(right: 20, left: 20, top: 50),
             child: RatingBar.builder(
-              initialRating: 1,
-              minRating: 1,
+              allowHalfRating: true,
               itemBuilder: (context, _) => const Icon(
                 Icons.star,
                 color: Colors.amber,
@@ -29,7 +28,7 @@ class AppRating extends StatelessWidget {
             ),
           )
         : RatingBarIndicator(
-            rating: rank.toDouble(),
+            rating: rank,
             itemSize: 35,
             itemBuilder: (context, _) => const Icon(
               Icons.star,
