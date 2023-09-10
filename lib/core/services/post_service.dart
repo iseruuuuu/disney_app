@@ -60,6 +60,21 @@ class PostService {
     return _userPosts(accountId).doc(postId).set(userPostData);
   }
 
+  Future<void> updatePost(
+    String postId,
+    Map<String, dynamic> data,
+  ) {
+    return posts.doc(postId).update(data);
+  }
+
+  Future<void> updateUserPost(
+    String accountId,
+    String postId,
+    Map<String, dynamic> data,
+  ) {
+    return _userPosts(accountId).doc(postId).update(data);
+  }
+
   Future<DocumentSnapshot> getPost(String postId) {
     return posts.doc(postId).get();
   }

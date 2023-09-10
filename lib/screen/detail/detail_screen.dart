@@ -59,7 +59,7 @@ class DetailScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              width: MediaQuery.of(context).size.width / 2,
+                              width: MediaQuery.of(context).size.width / 1.5,
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 10),
                                 child: Text(
@@ -120,7 +120,7 @@ class DetailScreen extends ConsumerWidget {
                                 padding: const EdgeInsets.only(left: 20),
                                 child: Text(
                                   '${post.rank}${l10n.score}',
-                                  style: AppTextStyle.appBoldBlack25TextStyle,
+                                  style: AppTextStyle.appBoldBlack20TextStyle,
                                 ),
                               ),
                             ],
@@ -144,6 +144,37 @@ class DetailScreen extends ConsumerWidget {
                           child: Text(
                             post.content,
                             style: AppTextStyle.appNormalBlack20TextStyle,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 10,
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                CupertinoIcons.heart_fill,
+                                color: Colors.pinkAccent,
+                                size: 30,
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                post.heart.toString(),
+                                style: AppTextStyle.appNormalBlack18TextStyle,
+                              ),
+                              const SizedBox(width: 30),
+                              const Icon(
+                                CupertinoIcons.hand_thumbsup_fill,
+                                color: Colors.green,
+                                size: 30,
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                post.superGood.toString(),
+                                style: AppTextStyle.appNormalBlack18TextStyle,
+                              ),
+                            ],
                           ),
                         ),
                         const Divider(color: Colors.grey),

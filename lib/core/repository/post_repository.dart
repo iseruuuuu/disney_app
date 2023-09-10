@@ -60,6 +60,8 @@ class PostRepository {
         'rank': newPost.rank,
         'attraction_name': newPost.attractionName,
         'is_spoiler': newPost.isSpoiler,
+        'heart': newPost.heart,
+        'super_good': newPost.superGood,
       };
       final result = await postFirestoreService.addPost(postData);
       await updatePosts(result.id, {'post_id': result.id});
@@ -71,6 +73,8 @@ class PostRepository {
         'rank': newPost.rank,
         'attraction_name': newPost.attractionName,
         'is_spoiler': newPost.isSpoiler,
+        'heart': newPost.heart,
+        'super_good': newPost.superGood,
       };
       await postFirestoreService.addUserPost(
         newPost.postAccountId,
@@ -84,7 +88,15 @@ class PostRepository {
   }
 
   Future<void> updatePosts(String postId, Map<String, dynamic> data) async {
-    return postFirestoreService.posts.doc(postId).update(data);
+    return postFirestoreService.updatePost(postId, data);
+  }
+
+  Future<void> updateUserPost(
+    String accountId,
+    String postId,
+    Map<String, dynamic> data,
+  ) {
+    return postFirestoreService.updateUserPost(accountId, postId, data);
   }
 
   Future<dynamic> deleteAllPosts(String accountId) async {

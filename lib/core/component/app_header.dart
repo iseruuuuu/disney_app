@@ -53,7 +53,7 @@ class AppHeader extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width - 200,
+                  width: MediaQuery.of(context).size.width / 1.6,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
