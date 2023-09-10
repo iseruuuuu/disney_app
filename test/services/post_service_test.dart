@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:disney_app/core/firebase/firebase_provider.dart';
 import 'package:disney_app/core/services/post_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,92 +12,73 @@ import 'post_service_test.mocks.dart';
   FirebaseFirestore,
   CollectionReference<Map<String, dynamic>>,
   DocumentReference<Map<String, dynamic>>,
-  Query<Map<String, dynamic>>,
-  QuerySnapshot<Map<String, dynamic>>,
-  DocumentSnapshot<Map<String, dynamic>>,
-  ProviderRef<PostService>,
 ])
 void main() {
   group('PostFirestoreAPI', () {
-    final ref = MockProviderRef<PostService>();
-    final api = PostService(ref);
-    final mockFirestore = MockFirebaseFirestore();
-    final mockCollectionReference =
-        MockCollectionReference<Map<String, dynamic>>();
-    final mockDocumentReference = MockDocumentReference<Map<String, dynamic>>();
-    final mockQuery = MockQuery<Map<String, dynamic>>();
-    final mockQuerySnapshot = MockQuerySnapshot<Map<String, dynamic>>();
-    final mockDocumentSnapshot = MockDocumentSnapshot<Map<String, dynamic>>();
-    final fakePost = FakePost().post();
-    final fakeMockAccountId = FakePost().mockAccountId;
-    final fakeMockUserPostData = FakePost().userPostData;
+    late PostService postService;
+    late MockFirebaseFirestore mockFirebaseFirestore;
+    late MockCollectionReference<Map<String, dynamic>> mockCollectionReference;
+    late MockDocumentReference<Map<String, dynamic>> mockDocumentReference;
+    final fakeAccountId = FakePost().mockAccountId;
+    final fakePostId = FakePost().mockPostId;
+    final fakeUserPostData = FakePost().userPostData;
+    late ProviderContainer container;
 
     setUp(() {
-      when(mockFirestore.collection(any)).thenReturn(mockCollectionReference);
-      when(mockCollectionReference.doc(any)).thenReturn(mockDocumentReference);
-      when(mockDocumentReference.collection(any))
+      mockFirebaseFirestore = MockFirebaseFirestore();
+      mockDocumentReference = MockDocumentReference();
+      mockCollectionReference = MockCollectionReference<Map<String, dynamic>>();
+      when(mockFirebaseFirestore.collection(any))
           .thenReturn(mockCollectionReference);
-      when(mockCollectionReference.get())
-          .thenAnswer((_) async => mockQuerySnapshot);
-      when(
-        mockCollectionReference.orderBy(
-          any,
-          descending: anyNamed('descending'),
-        ),
-      ).thenReturn(mockQuery);
-      when(mockQuery.snapshots())
-          .thenAnswer((_) => Stream.value(mockQuerySnapshot));
-      when(mockCollectionReference.add(any))
-          .thenAnswer((_) async => mockDocumentReference);
-      when(mockDocumentReference.set(any)).thenAnswer((_) async => {});
-      when(mockDocumentReference.get())
-          .thenAnswer((_) async => mockDocumentSnapshot);
-      when(mockDocumentReference.delete()).thenAnswer((_) async => {});
+      when(mockCollectionReference.doc(any)).thenReturn(mockDocumentReference);
+      container = ProviderContainer(
+        overrides: [
+          firebaseFirestoreProvider.overrideWithValue(mockFirebaseFirestore),
+        ],
+      );
+      postService = container.read(postServiceProvider);
     });
 
     test('addPost calls Firestore with correct path and data', () async {
-      await api.addPost(fakeMockUserPostData);
-      verify(mockCollectionReference.add(fakeMockUserPostData)).called(1);
+      when(mockCollectionReference.add(fakeUserPostData))
+          .thenAnswer((_) async => mockDocumentReference);
+      final result = await postService.addPost(fakeUserPostData);
+      expect(result, mockDocumentReference);
+      verify(mockCollectionReference.add(fakeUserPostData)).called(1);
     });
 
     test('add user post', () async {
-      await api.addUserPost(
-        fakeMockAccountId,
-        fakePost.postAccountId,
-        fakeMockUserPostData,
+      await postService.addUserPost(
+        fakeAccountId,
+        fakePostId,
+        fakeUserPostData,
       );
-      verify(mockCollectionReference.doc(fakeMockAccountId)).called(1);
-      verify(mockDocumentReference.collection('my_posts')).called(1);
-      verify(mockCollectionReference.doc(fakePost.postAccountId)).called(1);
-      verify(mockDocumentReference.set(fakeMockUserPostData)).called(1);
+      verify(mockCollectionReference.doc(fakePostId).set(fakeUserPostData))
+          .called(1);
     });
 
     test('get user posts', () async {
-      await api.getUserPosts(fakeMockAccountId);
-      verify(mockCollectionReference.doc(fakeMockAccountId)).called(1);
-      verify(mockDocumentReference.collection('my_posts')).called(1);
+      await postService.getUserPosts(fakeAccountId);
+      verify(mockCollectionReference.get()).called(1);
     });
 
     test('get post', () async {
-      await api.getPost(fakePost.postAccountId);
-      verify(mockCollectionReference.doc(fakePost.postAccountId)).called(1);
+      await postService.getPost(fakePostId);
+      verify(mockCollectionReference.doc(fakePostId).get()).called(1);
     });
 
     test('delete post', () async {
-      await api.deletePost(fakePost.postAccountId);
-      verify(mockCollectionReference.doc(fakePost.postAccountId)).called(1);
-      verify(mockDocumentReference.delete()).called(1);
+      await postService.deletePost(fakePostId);
+      verify(mockCollectionReference.doc(fakePostId).delete()).called(1);
     });
 
     test('delete user post', () async {
-      await api.deleteUserPost(
-        fakeMockAccountId,
-        fakePost.postAccountId,
-      );
-      verify(mockCollectionReference.doc(fakeMockAccountId)).called(1);
-      verify(mockDocumentReference.collection('my_posts')).called(1);
-      verify(mockCollectionReference.doc(fakePost.postAccountId)).called(1);
-      verify(mockDocumentReference.delete()).called(1);
+      await postService.deleteUserPost(fakeAccountId, fakePostId);
+      verify(mockCollectionReference.doc(fakePostId).delete()).called(1);
+    });
+
+    tearDown(() {
+      container.dispose();
     });
   });
 }

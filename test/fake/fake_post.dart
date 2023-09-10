@@ -50,7 +50,9 @@ class FakePost {
 
   List<Post> get mockPosts => _mockPosts;
 
-  String mockAccountId = 'test';
+  String mockAccountId = 'mockAccountId';
+
+  String mockPostId = 'mockPostId';
 
   List<String> mockGetPostsFromIds = ['id1', 'id2'];
 
