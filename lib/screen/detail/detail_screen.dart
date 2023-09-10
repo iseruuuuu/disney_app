@@ -59,7 +59,7 @@ class DetailScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              width: MediaQuery.of(context).size.width / 2,
+                              width: MediaQuery.of(context).size.width / 1.5,
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 10),
                                 child: Text(
@@ -120,7 +120,7 @@ class DetailScreen extends ConsumerWidget {
                                 padding: const EdgeInsets.only(left: 20),
                                 child: Text(
                                   '${post.rank}${l10n.score}',
-                                  style: AppTextStyle.appBoldBlack25TextStyle,
+                                  style: AppTextStyle.appBoldBlack20TextStyle,
                                 ),
                               ),
                             ],
