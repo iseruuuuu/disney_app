@@ -24,4 +24,16 @@ class PostUsecase {
   Future<dynamic> deletePost(String accountId, Post newPost) async {
     return postRepository.deletePost(accountId, newPost);
   }
+
+  Future<void> updatePosts(String postId, Map<String, dynamic> data) {
+    return postRepository.updatePosts(postId, data);
+  }
+
+  Future<void> updateUserPost(
+    String accountId,
+    String postId,
+    Map<String, dynamic> data,
+  ) {
+    return postRepository.updateUserPost(accountId, postId, data);
+  }
 }
