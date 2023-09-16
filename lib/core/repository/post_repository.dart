@@ -15,8 +15,8 @@ final postsProvider = StreamProvider.autoDispose<List<Post>>((ref) {
 });
 
 final postsWithAccountIdFamily =
-    FutureProvider.autoDispose.family<List<Post>, String>((ref, id) {
-  return ref.watch(postSnapshotWithAccountIdFamily(id).future).then((event) {
+    StreamProvider.autoDispose.family<List<Post>, String>((ref, id) {
+  return ref.watch(postSnapshotWithAccountIdFamily(id).stream).map((event) {
     return event.docs.map((doc) {
       final dataMap = doc.data();
       final data = dataMap! as Map<String, dynamic>;
@@ -25,11 +25,11 @@ final postsWithAccountIdFamily =
   });
 });
 
-final postWithAttractionNameFamily = FutureProvider.autoDispose
+final postWithAttractionNameFamily = StreamProvider.autoDispose
     .family<List<Post>, String>((ref, attractionName) {
   return ref
-      .watch(postSnapshotWithAttractionNameFamily(attractionName).future)
-      .then((event) {
+      .watch(postSnapshotWithAttractionNameFamily(attractionName).stream)
+      .map((event) {
     return event.docs.map((doc) {
       final dataMap = doc.data();
       final data = dataMap! as Map<String, dynamic>;
