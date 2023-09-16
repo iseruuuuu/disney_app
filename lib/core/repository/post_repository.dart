@@ -2,6 +2,7 @@ import 'package:disney_app/core/firebase/firebase.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/services/post_service.dart';
+import 'package:disney_app/utils/log.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final postsProvider = StreamProvider.autoDispose<List<Post>>((ref) {
@@ -82,7 +83,8 @@ class PostRepository {
         userPostData,
       );
       return true;
-    } on FirebaseException catch (_) {
+    } on FirebaseException catch (error) {
+      Log.e(error);
       return false;
     }
   }
@@ -107,7 +109,8 @@ class PostRepository {
         await postFirestoreService.deleteUserPost(accountId, doc.id);
       });
       return true;
-    } on FirebaseException catch (_) {
+    } on FirebaseException catch (error) {
+      Log.e(error);
       return false;
     }
   }
@@ -117,7 +120,8 @@ class PostRepository {
       await postFirestoreService.deletePost(post.postId);
       await postFirestoreService.deleteUserPost(accountId, post.postId);
       return true;
-    } on FirebaseException catch (_) {
+    } on FirebaseException catch (error) {
+      Log.e(error);
       return false;
     }
   }

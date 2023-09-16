@@ -5,6 +5,7 @@ import 'package:disney_app/core/repository/user_repository.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/gen/gen.dart';
+import 'package:disney_app/utils/log.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,10 @@ class TimeLineScreen extends ConsumerWidget {
                             ),
                           );
                         },
-                        error: (error, track) => const SizedBox(),
+                        error: (error, track) {
+                          Log.e(error);
+                          return const SizedBox();
+                        },
                         loading: AppSkeletonsCellLoading.new,
                       );
                     },

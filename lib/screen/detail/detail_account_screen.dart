@@ -4,6 +4,7 @@ import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/provider/launch_url_provider.dart';
+import 'package:disney_app/utils/log.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
@@ -83,11 +84,14 @@ class DetailAccountScreen extends ConsumerWidget {
                         )
                       : const AppEmptyScreen();
                 },
-                error: (error, track) => AppErrorScreen(
-                  onPressed: () => ref.read(
-                    postsWithAccountIdFamily(postAccount.id),
-                  ),
-                ),
+                error: (error, track) {
+                  Log.e(error);
+                  return AppErrorScreen(
+                    onPressed: () => ref.read(
+                      postsWithAccountIdFamily(postAccount.id),
+                    ),
+                  );
+                },
                 loading: AppSkeletonsLoading.new,
               ),
             ),
