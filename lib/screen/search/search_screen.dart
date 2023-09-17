@@ -48,13 +48,11 @@ class SearchScreen extends ConsumerWidget {
       ),
       body: state.isAttractionSearch
           ? AttractionSearchBody(
-              ref: ref,
               state: state,
               attractionPosts: attractionPosts,
               myAccount: myAccount,
             )
           : RankSearchBody(
-              ref: ref,
               state: state,
               rankPosts: rankPosts,
               myAccount: myAccount,

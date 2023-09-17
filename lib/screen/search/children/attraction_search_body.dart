@@ -16,22 +16,20 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AttractionSearchBody extends StatelessWidget {
+class AttractionSearchBody extends ConsumerWidget {
   const AttractionSearchBody({
     super.key,
-    required this.ref,
     required this.state,
     required this.attractionPosts,
     required this.myAccount,
   });
 
-  final WidgetRef ref;
   final SearchScreenState state;
   final AsyncValue<List<Post>> attractionPosts;
   final Account myAccount;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
         Padding(
