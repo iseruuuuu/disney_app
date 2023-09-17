@@ -39,6 +39,7 @@ class AppAttraction extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
+      trailing: const Icon(Icons.arrow_drop_down_sharp, size: 40),
     );
   }
 }

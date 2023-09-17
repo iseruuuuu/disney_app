@@ -39,7 +39,7 @@ class RankSearchBody extends ConsumerWidget {
                 ref.read(searchScreenProvider.notifier).pickRank(context),
             attractionName: state.rank.toString(),
             isSelected: true,
-            style: AppTextStyle.appBoldBlack20TextStyle,
+            style: AppTextStyle.appNormalBlack18TextStyle,
           ),
         ),
         Expanded(

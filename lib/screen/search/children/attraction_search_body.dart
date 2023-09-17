@@ -39,7 +39,7 @@ class AttractionSearchBody extends ConsumerWidget {
                 ref.read(searchScreenProvider.notifier).pickAttraction(context),
             attractionName: state.attractionName,
             isSelected: true,
-            style: AppTextStyle.appBoldBlack16TextStyle,
+            style: AppTextStyle.appNormalBlack13TextStyle,
           ),
         ),
         Expanded(
