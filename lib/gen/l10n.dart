@@ -217,6 +217,18 @@ abstract class L10n {
   /// **'ネタバレなし!'**
   String get is_spoiler_false;
 
+  /// No description provided for @confirm.
+  ///
+  /// In ja, this message translates to:
+  /// **'決定'**
+  String get confirm;
+
+  /// No description provided for @cancel.
+  ///
+  /// In ja, this message translates to:
+  /// **'キャンセル'**
+  String get cancel;
+
   /// No description provided for @twitter_hint_text.
   ///
   /// In ja, this message translates to:

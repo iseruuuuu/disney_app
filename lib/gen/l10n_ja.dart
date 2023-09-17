@@ -68,6 +68,12 @@ class L10nJa extends L10n {
   String get is_spoiler_false => 'ネタバレなし!';
 
   @override
+  String get confirm => '決定';
+
+  @override
+  String get cancel => 'キャンセル';
+
+  @override
   String get twitter_hint_text => 'TwitterのID';
 
   @override

@@ -30,6 +30,16 @@ final postSnapshotWithAttractionNameFamily = StreamProvider.autoDispose
   return data;
 });
 
+final postSnapshotWithRankAttractionNameFamily = StreamProvider.autoDispose
+    .family<QuerySnapshot<Object?>, double>((ref, rank) {
+  final posts = ref.watch(firebaseFirestoreProvider).collection('post');
+  final data = posts
+      .where('rank', isEqualTo: rank)
+      .orderBy('created_time', descending: true)
+      .snapshots();
+  return data;
+});
+
 final postServiceProvider = Provider<PostService>((ref) {
   return PostService(ref);
 });

@@ -8,11 +8,13 @@ class AppAttraction extends StatelessWidget {
     required this.onTap,
     required this.attractionName,
     required this.isSelected,
+    required this.style,
   });
 
   final VoidCallback onTap;
   final String attractionName;
   final bool isSelected;
+  final TextStyle style;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class AppAttraction extends StatelessWidget {
               width: MediaQuery.of(context).size.width - 20,
               child: Text(
                 attractionName,
-                style: AppTextStyle.appBoldBlack16TextStyle,
+                style: style,
                 overflow: TextOverflow.ellipsis,
               ),
             ),

@@ -21,6 +21,8 @@
 "impressions": "感想",
 "is_spoiler_true": "ネタバレあり!",
 "is_spoiler_false": "ネタバレなし!",
+"confirm": "決定",
+"cancel": "キャンセル",
 
 "twitter_hint_text": "TwitterのID",
 "instagram_hint_text": "InstagramのID",

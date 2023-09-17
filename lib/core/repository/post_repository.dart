@@ -40,6 +40,20 @@ final postWithAttractionNameFamily = StreamProvider.autoDispose
   });
 });
 
+final postWithRankAttractionNameFamily =
+    StreamProvider.autoDispose.family<List<Post>, double>((ref, rank) {
+  return ref
+      .watch(postSnapshotWithRankAttractionNameFamily(rank).stream)
+      .map((event) {
+    return event.docs.map((doc) {
+      final dataMap = doc.data();
+      final data = dataMap! as Map<String, dynamic>;
+      final myAccount = AuthenticationService.myAccount!;
+      return Post.fromMap(data, myAccount.id);
+    }).toList();
+  });
+});
+
 final postRepositoryProvider = Provider<PostRepository>((ref) {
   return PostRepository(ref);
 });
