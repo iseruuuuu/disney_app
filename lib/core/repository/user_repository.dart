@@ -3,6 +3,7 @@ import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/services/user_service.dart';
+import 'package:disney_app/utils/log.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final usersFamily =
@@ -52,7 +53,8 @@ class UserRepository {
         'is_official': newAccount.isOfficial,
       });
       return true;
-    } on FirebaseException catch (_) {
+    } on FirebaseException catch (error) {
+      Log.e(error);
       return false;
     }
   }
@@ -79,7 +81,8 @@ class UserRepository {
       } else {
         return false;
       }
-    } on FirebaseException catch (_) {
+    } on FirebaseException catch (error) {
+      Log.e(error);
       return false;
     }
   }
@@ -97,7 +100,8 @@ class UserRepository {
         'is_official': updateAccount.isOfficial,
       });
       return true;
-    } on FirebaseException catch (_) {
+    } on FirebaseException catch (error) {
+      Log.e(error);
       return false;
     }
   }
@@ -112,7 +116,8 @@ class UserRepository {
       await storageReference.delete();
       await firestoreAPI.deleteUserDocument(myAccount.id);
       return true;
-    } on FirebaseException catch (_) {
+    } on FirebaseException catch (error) {
+      Log.e(error);
       return false;
     }
   }

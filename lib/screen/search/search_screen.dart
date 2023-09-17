@@ -6,6 +6,7 @@ import 'package:disney_app/core/repository/user_repository.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/screen/search/search_screen_view_model.dart';
+import 'package:disney_app/utils/log.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
@@ -81,18 +82,24 @@ class SearchScreen extends ConsumerWidget {
                                   ),
                                 );
                               },
-                              error: (error, track) => const SizedBox(),
+                              error: (error, track) {
+                                Log.e(error);
+                                return const SizedBox();
+                              },
                               loading: AppSkeletonsLoading.new,
                             );
                           },
                         )
                       : const AppNoSearchScreen();
                 },
-                error: (error, track) => AppErrorScreen(
-                  onPressed: () => ref.read(
-                    postWithAttractionNameFamily(state.attractionName),
-                  ),
-                ),
+                error: (error, track) {
+                  Log.e(error);
+                  return AppErrorScreen(
+                    onPressed: () => ref.read(
+                      postWithAttractionNameFamily(state.attractionName),
+                    ),
+                  );
+                },
                 loading: AppSkeletonsLoading.new,
               ),
             ),

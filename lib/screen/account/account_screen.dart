@@ -6,6 +6,7 @@ import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/theme/theme.dart';
 import 'package:disney_app/provider/launch_url_provider.dart';
 import 'package:disney_app/screen/account/account_screen_view_model.dart';
+import 'package:disney_app/utils/log.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
@@ -83,18 +84,24 @@ class AccountScreen extends ConsumerWidget {
                                     ),
                                   );
                                 },
-                                error: (error, track) => const SizedBox(),
+                                error: (error, track) {
+                                  Log.e(error);
+                                  return const SizedBox();
+                                },
                                 loading: AppSkeletonsCellLoading.new,
                               );
                             },
                           )
                         : const AppEmptyScreen();
                   },
-                  error: (error, track) => AppErrorScreen(
-                    onPressed: () => ref.read(
-                      postsWithAccountIdFamily(state.myAccount.id),
-                    ),
-                  ),
+                  error: (error, track) {
+                    Log.e(error);
+                    return AppErrorScreen(
+                      onPressed: () => ref.read(
+                        postsWithAccountIdFamily(state.myAccount.id),
+                      ),
+                    );
+                  },
                   loading: AppSkeletonsLoading.new,
                 ),
               ),

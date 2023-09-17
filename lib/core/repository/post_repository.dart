@@ -2,6 +2,7 @@ import 'package:disney_app/core/firebase/firebase.dart';
 import 'package:disney_app/core/model/post.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
 import 'package:disney_app/core/services/post_service.dart';
+import 'package:disney_app/utils/log.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final postsProvider = StreamProvider.autoDispose<List<Post>>((ref) {
@@ -15,8 +16,8 @@ final postsProvider = StreamProvider.autoDispose<List<Post>>((ref) {
 });
 
 final postsWithAccountIdFamily =
-    FutureProvider.autoDispose.family<List<Post>, String>((ref, id) {
-  return ref.watch(postSnapshotWithAccountIdFamily(id).future).then((event) {
+    StreamProvider.autoDispose.family<List<Post>, String>((ref, id) {
+  return ref.watch(postSnapshotWithAccountIdFamily(id).stream).map((event) {
     return event.docs.map((doc) {
       final dataMap = doc.data();
       final data = dataMap! as Map<String, dynamic>;
@@ -25,11 +26,11 @@ final postsWithAccountIdFamily =
   });
 });
 
-final postWithAttractionNameFamily = FutureProvider.autoDispose
+final postWithAttractionNameFamily = StreamProvider.autoDispose
     .family<List<Post>, String>((ref, attractionName) {
   return ref
-      .watch(postSnapshotWithAttractionNameFamily(attractionName).future)
-      .then((event) {
+      .watch(postSnapshotWithAttractionNameFamily(attractionName).stream)
+      .map((event) {
     return event.docs.map((doc) {
       final dataMap = doc.data();
       final data = dataMap! as Map<String, dynamic>;
@@ -82,7 +83,8 @@ class PostRepository {
         userPostData,
       );
       return true;
-    } on FirebaseException catch (_) {
+    } on FirebaseException catch (error) {
+      Log.e(error);
       return false;
     }
   }
@@ -107,7 +109,8 @@ class PostRepository {
         await postFirestoreService.deleteUserPost(accountId, doc.id);
       });
       return true;
-    } on FirebaseException catch (_) {
+    } on FirebaseException catch (error) {
+      Log.e(error);
       return false;
     }
   }
@@ -117,7 +120,8 @@ class PostRepository {
       await postFirestoreService.deletePost(post.postId);
       await postFirestoreService.deleteUserPost(accountId, post.postId);
       return true;
-    } on FirebaseException catch (_) {
+    } on FirebaseException catch (error) {
+      Log.e(error);
       return false;
     }
   }
