@@ -6,24 +6,38 @@ class AppSearchElevatedButton extends StatelessWidget {
     super.key,
     required this.title,
     required this.onTap,
+    required this.isSelected,
   });
 
   final String title;
   final VoidCallback? onTap;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width / 2.5,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColorStyle.appColor,
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            width: 2,
+            color: isSelected ? AppColorStyle.appColor : Colors.grey,
+          ),
+        ),
+      ),
+      width: MediaQuery.of(context).size.width / 2.3,
+      child: TextButton(
+        style: TextButton.styleFrom(
           foregroundColor: Colors.white,
-          disabledForegroundColor: Colors.white,
-          splashFactory: InkRipple.splashFactory,
+          disabledForegroundColor: Colors.grey,
         ),
         onPressed: onTap,
-        child: Text(title),
+        child: Text(
+          title,
+          style: TextStyle(
+            color: isSelected ? AppColorStyle.appColor : Colors.grey,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }

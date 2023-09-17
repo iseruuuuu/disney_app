@@ -25,7 +25,6 @@ class SearchScreen extends ConsumerWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AppSearchElevatedButton(
               onTap: state.isAttractionSearch
@@ -34,7 +33,9 @@ class SearchScreen extends ConsumerWidget {
                       .read(searchScreenProvider.notifier)
                       .changeSearch(isAttractionSearch: true),
               title: l10n.search_attraction,
+              isSelected: state.isAttractionSearch,
             ),
+            const Spacer(),
             AppSearchElevatedButton(
               onTap: state.isAttractionSearch
                   ? () => ref
@@ -42,6 +43,7 @@ class SearchScreen extends ConsumerWidget {
                       .changeSearch(isAttractionSearch: false)
                   : null,
               title: l10n.search_star,
+              isSelected: !state.isAttractionSearch,
             ),
           ],
         ),
