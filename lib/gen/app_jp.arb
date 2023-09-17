@@ -76,5 +76,8 @@
 "dialog_register_account_content": "アカウントの登録が完了しました。\n確認用のメールをお送りしました。\nメール内のリンクをクリックし、\n認証を行ってください。",
 
 "app_bar_create_account": "Create Account",
-"app_bar_login" : "Login"
+"app_bar_login" : "Login",
+
+"search_attraction": "アトラクション",
+"search_star": "評価"
 }

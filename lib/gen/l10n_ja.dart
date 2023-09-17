@@ -207,4 +207,10 @@ class L10nJa extends L10n {
 
   @override
   String get app_bar_login => 'Login';
+
+  @override
+  String get search_attraction => 'アトラクション';
+
+  @override
+  String get search_star => '評価';
 }

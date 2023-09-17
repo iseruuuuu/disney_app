@@ -1,10 +1,11 @@
 import 'package:disney_app/core/component/app_no_search_screen.dart';
+import 'package:disney_app/core/component/app_search_elevated_button.dart';
 import 'package:disney_app/core/component/app_skeletons_loading.dart';
 import 'package:disney_app/core/component/component.dart';
 import 'package:disney_app/core/repository/post_repository.dart';
 import 'package:disney_app/core/repository/user_repository.dart';
 import 'package:disney_app/core/services/authentication_service.dart';
-import 'package:disney_app/core/theme/theme.dart';
+import 'package:disney_app/gen/l10n.dart';
 import 'package:disney_app/screen/search/search_screen_view_model.dart';
 import 'package:disney_app/utils/log.dart';
 import 'package:disney_app/utils/navigation_utils.dart';
@@ -20,14 +21,32 @@ class SearchScreen extends ConsumerWidget {
     final myAccount = AuthenticationService.myAccount!;
     final state = ref.watch(searchScreenProvider);
     final posts = ref.watch(postWithAttractionNameFamily(state.attractionName));
+    final l10n = L10n.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text(
-          '🎢',
-          style: AppTextStyle.iconAppBarStyle,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppSearchElevatedButton(
+              onTap: state.isAttractionSearch
+                  ? null
+                  : () => ref
+                      .read(searchScreenProvider.notifier)
+                      .changeSearch(isAttractionSearch: true),
+              title: l10n.search_attraction,
+            ),
+            AppSearchElevatedButton(
+              onTap: state.isAttractionSearch
+                  ? () => ref
+                      .read(searchScreenProvider.notifier)
+                      .changeSearch(isAttractionSearch: false)
+                  : null,
+              title: l10n.search_star,
+            ),
+          ],
         ),
       ),
       body: Column(

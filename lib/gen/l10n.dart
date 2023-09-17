@@ -498,6 +498,18 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'Login'**
   String get app_bar_login;
+
+  /// No description provided for @search_attraction.
+  ///
+  /// In ja, this message translates to:
+  /// **'アトラクション'**
+  String get search_attraction;
+
+  /// No description provided for @search_star.
+  ///
+  /// In ja, this message translates to:
+  /// **'評価'**
+  String get search_star;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

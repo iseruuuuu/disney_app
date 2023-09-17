@@ -40,12 +40,16 @@ class SearchScreenViewModel extends StateNotifier<SearchScreenState> {
       ),
       onConfirm: (Picker picker, List<dynamic> value) {
         final attractionName =
-        picker.adapter.text.replaceAll(RegExp(r'[\[\]]'), '');
+            picker.adapter.text.replaceAll(RegExp(r'[\[\]]'), '');
         state = state.copyWith(
           attractionName: attractionName,
         );
         ref.read(postWithAttractionNameFamily(state.attractionName));
       },
     ).showModal<void>(context);
+  }
+
+  void changeSearch({required bool isAttractionSearch}) {
+    state = state.copyWith(isAttractionSearch: isAttractionSearch);
   }
 }
