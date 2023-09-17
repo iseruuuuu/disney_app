@@ -21,6 +21,8 @@
 "impressions": "感想",
 "is_spoiler_true": "ネタバレあり!",
 "is_spoiler_false": "ネタバレなし!",
+"confirm": "決定",
+"cancel": "キャンセル",
 
 "twitter_hint_text": "TwitterのID",
 "instagram_hint_text": "InstagramのID",
@@ -76,5 +78,8 @@
 "dialog_register_account_content": "アカウントの登録が完了しました。\n確認用のメールをお送りしました。\nメール内のリンクをクリックし、\n認証を行ってください。",
 
 "app_bar_create_account": "Create Account",
-"app_bar_login" : "Login"
+"app_bar_login" : "Login",
+
+"search_attraction": "アトラクション",
+"search_star": "評価"
 }

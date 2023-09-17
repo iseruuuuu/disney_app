@@ -5,6 +5,8 @@ part 'search_screen_state.freezed.dart';
 @freezed
 class SearchScreenState with _$SearchScreenState {
   const factory SearchScreenState({
-    @Default('オムニバス') String attractionName,
+    @Default('アクアトピア') String attractionName,
+    @Default(5.0) double rank,
+    @Default(true) bool isAttractionSearch,
   }) = _SearchScreennState;
 }

@@ -63,6 +63,7 @@ class PostScreen extends ConsumerWidget {
                           .attractionPicker(context),
                       attractionName: state.attractionName,
                       isSelected: state.isSelected,
+                      style: AppTextStyle.appBoldBlack16TextStyle,
                     ),
                   ),
                   AppTextField(
