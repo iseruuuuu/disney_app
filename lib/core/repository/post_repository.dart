@@ -76,7 +76,6 @@ class PostRepository {
         'attraction_name': newPost.attractionName,
         'is_spoiler': newPost.isSpoiler,
         'heart': newPost.heart,
-        'super_good': newPost.superGood,
       };
       final result = await postFirestoreService.addPost(postData);
       await updatePosts(result.id, {'post_id': result.id});
@@ -89,7 +88,6 @@ class PostRepository {
         'attraction_name': newPost.attractionName,
         'is_spoiler': newPost.isSpoiler,
         'heart': newPost.heart,
-        'super_good': newPost.superGood,
       };
       await postFirestoreService.addUserPost(
         newPost.postAccountId,

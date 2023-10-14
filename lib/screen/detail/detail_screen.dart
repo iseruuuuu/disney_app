@@ -146,40 +146,40 @@ class DetailScreen extends ConsumerWidget {
                             style: AppTextStyle.appNormalBlack20TextStyle,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 10,
-                          ),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                CupertinoIcons.heart_fill,
-                                color: Colors.pinkAccent,
-                                size: 30,
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                post.heart.toString(),
-                                style: AppTextStyle.appNormalBlack18TextStyle,
-                              ),
-                              const SizedBox(width: 30),
-                              const Icon(
-                                CupertinoIcons.hand_thumbsup_fill,
-                                color: Colors.green,
-                                size: 30,
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                post.superGood.toString(),
-                                style: AppTextStyle.appNormalBlack18TextStyle,
-                              ),
-                            ],
-                          ),
-                        ),
                         const Divider(color: Colors.grey),
                       ],
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 5,
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            CupertinoIcons.heart_fill,
+                            color: Colors.pinkAccent,
+                            size: 30,
+                          ),
+                          const SizedBox(width: 15),
+                          RichText(
+                            text: TextSpan(
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: '${post.heart}',
+                                  style: AppTextStyle.appBoldBlack18TextStyle,
+                                ),
+                                const TextSpan(
+                                  text: ' 件のいいね',
+                                  style: AppTextStyle.appNormalBlack18TextStyle,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Divider(color: Colors.grey),
                     Row(
                       children: [
                         SizedBox(

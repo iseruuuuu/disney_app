@@ -117,7 +117,7 @@ class AppDisneyCell extends ConsumerWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 15, bottom: 15, left: 75),
+            padding: const EdgeInsets.only(top: 15, left: 75),
             child: SizedBox(
               width: MediaQuery.of(context).size.width - 100,
               child: !post.isSpoiler
@@ -144,7 +144,7 @@ class AppDisneyCell extends ConsumerWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 5, left: 60),
+            padding: const EdgeInsets.only(top: 5, bottom: 5, left: 60),
             child: Row(
               children: [
                 IconButton(
@@ -158,7 +158,6 @@ class AppDisneyCell extends ConsumerWidget {
                       'attraction_name': post.attractionName,
                       'is_spoiler': post.isSpoiler,
                       'heart': post.heart + 1,
-                      'super_good': post.superGood,
                     };
                     ref.read(postUsecaseProvider).updatePosts(
                           post.postId,
@@ -170,7 +169,7 @@ class AppDisneyCell extends ConsumerWidget {
                           updatePost,
                         );
                   },
-                  iconSize: 20,
+                  iconSize: 25,
                   icon: const Icon(
                     CupertinoIcons.heart,
                     color: Colors.pinkAccent,
@@ -178,41 +177,7 @@ class AppDisneyCell extends ConsumerWidget {
                 ),
                 Text(
                   post.heart.toString(),
-                  style: AppTextStyle.appNormalBlack18TextStyle,
-                ),
-                const SizedBox(width: 10),
-                IconButton(
-                  onPressed: () {
-                    final updatePost = {
-                      'content': post.content,
-                      'post_account_id': post.postAccountId,
-                      'post_id': post.postId,
-                      'created_time': post.createdTime,
-                      'rank': post.rank,
-                      'attraction_name': post.attractionName,
-                      'is_spoiler': post.isSpoiler,
-                      'heart': post.heart,
-                      'super_good': post.superGood + 1,
-                    };
-                    ref.read(postUsecaseProvider).updatePosts(
-                          post.postId,
-                          updatePost,
-                        );
-                    ref.read(postUsecaseProvider).updateUserPost(
-                          post.postAccountId,
-                          post.postId,
-                          updatePost,
-                        );
-                  },
-                  iconSize: 20,
-                  icon: const Icon(
-                    CupertinoIcons.hand_thumbsup,
-                    color: Colors.green,
-                  ),
-                ),
-                Text(
-                  post.superGood.toString(),
-                  style: AppTextStyle.appNormalBlack18TextStyle,
+                  style: AppTextStyle.appNormalBlack20TextStyle,
                 ),
                 const Spacer(),
                 Padding(
