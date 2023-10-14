@@ -57,6 +57,7 @@ class EditScreenViewModel extends StateNotifier<ImageProvider> {
   }
 
   Future<void> update(BuildContext context, WidgetRef ref) async {
+    FocusScope.of(context).unfocus();
     final l10n = L10n.of(context)!;
     loading.isLoading = true;
     if (nameController.text.isNotEmpty &&
