@@ -11,7 +11,6 @@ class Post {
     this.attractionName = '',
     this.isSpoiler = false,
     this.heart = 0,
-    this.superGood = 0,
   });
 
   factory Post.fromMap(Map<String, dynamic> map, String id) {
@@ -25,7 +24,6 @@ class Post {
       attractionName: map['attraction_name'],
       isSpoiler: map['is_spoiler'],
       heart: map['heart'],
-      superGood: map['super_good'],
     );
   }
 
@@ -38,7 +36,6 @@ class Post {
   double rank;
   String attractionName;
   int heart;
-  int superGood;
 
   @override
   bool operator ==(Object other) {
@@ -55,8 +52,7 @@ class Post {
         other.isSpoiler == isSpoiler &&
         other.rank == rank &&
         other.attractionName == attractionName &&
-        other.heart == heart &&
-        other.superGood == superGood;
+        other.heart == heart;
   }
 
   @override
@@ -69,21 +65,19 @@ class Post {
       isSpoiler.hashCode ^
       rank.hashCode ^
       attractionName.hashCode ^
-      heart.hashCode ^
-      superGood.hashCode;
+      heart.hashCode;
+}
 
-  Post fromMap(Map<String, dynamic> map) {
-    return Post(
-      id: map['id'],
-      content: map['content'],
-      postAccountId: map['post_account_id'],
-      postId: map['post_id'],
-      createdTime: map['created_time'],
-      rank: map['rank'],
-      attractionName: map['attraction_name'],
-      isSpoiler: map['is_spoiler'],
-      heart: map['heart'],
-      superGood: map['super_good'],
-    );
-  }
+Post fromMap(Map<String, dynamic> map) {
+  return Post(
+    id: map['id'],
+    content: map['content'],
+    postAccountId: map['post_account_id'],
+    postId: map['post_id'],
+    createdTime: map['created_time'],
+    rank: map['rank'],
+    attractionName: map['attraction_name'],
+    isSpoiler: map['is_spoiler'],
+    heart: map['heart'],
+  );
 }
