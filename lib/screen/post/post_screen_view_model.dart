@@ -65,7 +65,7 @@ class PostScreenViewModel extends StateNotifier<PostScreenState> {
   Future<void> post(BuildContext context, WidgetRef ref) async {
     final l10n = L10n.of(context)!;
     loading.isLoading = true;
-    if (controller.text.isNotEmpty && state.attractionName != '') {
+    if (state.attractionName != '') {
       final newPost = Post(
         content: controller.text,
         postAccountId: AuthenticationService.myAccount!.id,

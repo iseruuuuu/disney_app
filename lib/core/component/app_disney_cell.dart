@@ -124,41 +124,44 @@ class AppDisneyCell extends ConsumerWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 75),
-            child: Container(
-              width: MediaQuery.of(context).size.width - 100,
-              decoration: BoxDecoration(
-                color:
-                    !post.isSpoiler ? Colors.grey.shade200 : Colors.transparent,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: !post.isSpoiler
-                  ? Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Text(
-                        post.content,
-                        style: AppTextStyle.appNormalBlack18TextStyle,
-                        overflow: TextOverflow.visible,
-                      ),
-                    )
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          l10n.dialog_spoiler_cell_text,
-                          style: AppTextStyle.appBoldRed15TextStyle,
-                          overflow: TextOverflow.visible,
-                        ),
-                        const Icon(
-                          Icons.arrow_forward,
-                          color: Colors.red,
-                          size: 30,
-                        ),
-                      ],
+          post.content.isNotEmpty
+              ? Padding(
+                  padding: const EdgeInsets.only(left: 75),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width - 100,
+                    decoration: BoxDecoration(
+                      color: !post.isSpoiler
+                          ? Colors.grey.shade200
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(5),
                     ),
-            ),
-          ),
+                    child: !post.isSpoiler
+                        ? Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Text(
+                              post.content,
+                              style: AppTextStyle.appNormalBlack18TextStyle,
+                              overflow: TextOverflow.visible,
+                            ),
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                l10n.dialog_spoiler_cell_text,
+                                style: AppTextStyle.appBoldRed15TextStyle,
+                                overflow: TextOverflow.visible,
+                              ),
+                              const Icon(
+                                Icons.arrow_forward,
+                                color: Colors.red,
+                                size: 30,
+                              ),
+                            ],
+                          ),
+                  ),
+                )
+              : SizedBox(),
           Padding(
             padding: const EdgeInsets.only(bottom: 5, left: 60),
             child: Row(

@@ -25,12 +25,16 @@ class PostScreen extends ConsumerWidget {
           elevation: 0,
           actions: [
             TextButton(
-              onPressed: () => ref
-                  .read(postScreenViewModelProvider.notifier)
-                  .post(context, ref),
+              onPressed: (state.attractionName.isNotEmpty)
+                  ? () => ref
+                      .read(postScreenViewModelProvider.notifier)
+                      .post(context, ref)
+                  : null,
               child: Text(
                 l10n.post,
-                style: AppTextStyle.appBoldBlue18TextStyle,
+                style: (state.attractionName.isNotEmpty)
+                    ? AppTextStyle.appBoldBlue18TextStyle
+                    : AppTextStyle.appBoldGrey18TextStyle,
               ),
             ),
           ],
