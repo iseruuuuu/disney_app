@@ -1,3 +1,4 @@
+import 'package:disney_app/core/component/app_loading.dart';
 import 'package:disney_app/core/component/app_text_button.dart';
 import 'package:disney_app/core/component/app_text_field.dart';
 import 'package:disney_app/core/theme/theme.dart';
@@ -7,7 +8,6 @@ import 'package:disney_app/provider/loading_provider.dart';
 import 'package:disney_app/screen/edit/edit_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class EditSNSScreen extends ConsumerWidget {
   const EditSNSScreen({super.key});
@@ -45,59 +45,55 @@ class EditSNSScreen extends ConsumerWidget {
         body: SingleChildScrollView(
           child: Stack(
             children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: AppTextField(
-                        controller: controller.twitterController,
-                        hintText: l10n.twitter_hint_text,
-                        maxLines: 1,
+              AbsorbPointer(
+                absorbing: loading,
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: AppTextField(
+                          controller: controller.twitterController,
+                          hintText: l10n.twitter_hint_text,
+                          maxLines: 1,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: AppTextField(
-                        controller: controller.instagramController,
-                        hintText: l10n.instagram_hint_text,
-                        maxLines: 1,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: AppTextField(
+                          controller: controller.instagramController,
+                          hintText: l10n.instagram_hint_text,
+                          maxLines: 1,
+                        ),
                       ),
-                    ),
-                    Text(
-                      l10n.sns_title,
-                      style: AppTextStyle.appBold20GoogleFontsTextStyle,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 10,
+                      Text(
+                        l10n.sns_title,
+                        style: AppTextStyle.appBold20GoogleFontsTextStyle,
                       ),
-                      child: Text(
-                        l10n.sns_description,
-                        style: AppTextStyle.app500Black15TextStyle,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
+                        child: Text(
+                          l10n.sns_description,
+                          style: AppTextStyle.app500Black15TextStyle,
+                        ),
                       ),
-                    ),
-                    const Spacer(),
-                    AppTextButton(
-                      onPressed: () =>
-                          ref.read(launchUrlProvider).reportSNS(context),
-                      title: l10n.sns_report,
-                      color: Colors.red,
-                    ),
-                    const Spacer(flex: 2),
-                  ],
+                      const Spacer(),
+                      AppTextButton(
+                        onPressed: () =>
+                            ref.read(launchUrlProvider).reportSNS(context),
+                        title: l10n.sns_report,
+                        color: Colors.red,
+                      ),
+                      const Spacer(flex: 2),
+                    ],
+                  ),
                 ),
               ),
-              loading
-                  ? Center(
-                      child: LoadingAnimationWidget.dotsTriangle(
-                        color: AppColorStyle.appColor,
-                        size: 50,
-                      ),
-                    )
-                  : const SizedBox(),
+              if (loading) const AppLoading(),
             ],
           ),
         ),
