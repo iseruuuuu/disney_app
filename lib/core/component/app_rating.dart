@@ -37,3 +37,24 @@ class AppRating extends StatelessWidget {
           );
   }
 }
+
+class AppCellRating extends StatelessWidget {
+  const AppCellRating({
+    super.key,
+    required this.rank,
+  });
+
+  final double rank;
+
+  @override
+  Widget build(BuildContext context) {
+    return RatingBarIndicator(
+      rating: rank,
+      itemSize: 25,
+      itemBuilder: (context, _) => const Icon(
+        Icons.star,
+        color: Colors.amber,
+      ),
+    );
+  }
+}
