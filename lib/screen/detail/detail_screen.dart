@@ -59,7 +59,7 @@ class DetailScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              width: MediaQuery.of(context).size.width / 1.5,
+                              width: MediaQuery.of(context).size.width / 1.8,
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 10),
                                 child: Text(
@@ -89,14 +89,14 @@ class DetailScreen extends ConsumerWidget {
                             ? Image.asset(
                                 Assets.images.official.path,
                                 fit: BoxFit.fill,
-                                width: 45,
+                                width: 35,
                               )
                             : (post.postAccountId ==
                                     MasterAccount.masterAccount)
                                 ? Image.asset(
                                     Assets.images.dev.path,
                                     fit: BoxFit.fill,
-                                    width: 45,
+                                    width: 35,
                                   )
                                 : const SizedBox.shrink(),
                         const SizedBox(width: 10),
@@ -151,7 +151,7 @@ class DetailScreen extends ConsumerWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
+                        horizontal: 15,
                         vertical: 5,
                       ),
                       child: Row(
@@ -159,7 +159,7 @@ class DetailScreen extends ConsumerWidget {
                           const Icon(
                             CupertinoIcons.heart_fill,
                             color: Colors.pinkAccent,
-                            size: 30,
+                            size: 25,
                           ),
                           const SizedBox(width: 15),
                           RichText(
@@ -167,11 +167,11 @@ class DetailScreen extends ConsumerWidget {
                               children: <TextSpan>[
                                 TextSpan(
                                   text: '${post.heart}',
-                                  style: AppTextStyle.appBoldBlack18TextStyle,
+                                  style: AppTextStyle.appBoldBlack16TextStyle,
                                 ),
                                 const TextSpan(
                                   text: ' 件のいいね',
-                                  style: AppTextStyle.appNormalBlack18TextStyle,
+                                  style: AppTextStyle.appNormalBlack16TextStyle,
                                 ),
                               ],
                             ),
@@ -185,7 +185,7 @@ class DetailScreen extends ConsumerWidget {
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: Padding(
-                            padding: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Row(
                               children: [
                                 Text(

@@ -72,6 +72,20 @@ class AppHeader extends StatelessWidget {
                       ),
                       Row(
                         children: [
+                          account.isOfficial
+                              ? Image.asset(
+                                  Assets.images.official.path,
+                                  fit: BoxFit.fill,
+                                  width: 30,
+                                )
+                              : (account.id == MasterAccount.masterAccount)
+                                  ? Image.asset(
+                                      Assets.images.dev.path,
+                                      fit: BoxFit.fill,
+                                      width: 30,
+                                    )
+                                  : const SizedBox.shrink(),
+                          const SizedBox(width: 5),
                           IconButton(
                             onPressed: isHasTwitter ? onTapTwitter : null,
                             icon: Icon(
@@ -93,26 +107,6 @@ class AppHeader extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 45),
-                      child: account.isOfficial
-                          ? Image.asset(
-                              Assets.images.official.path,
-                              fit: BoxFit.fill,
-                              width: 40,
-                            )
-                          : (account.id == MasterAccount.masterAccount)
-                              ? Image.asset(
-                                  Assets.images.dev.path,
-                                  fit: BoxFit.fill,
-                                  width: 30,
-                                )
-                              : const SizedBox.shrink(),
-                    ),
-                  ],
-                ),
                 const SizedBox(width: 10),
               ],
             ),

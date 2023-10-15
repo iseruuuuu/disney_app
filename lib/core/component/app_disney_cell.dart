@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:disney_app/core/component/component.dart';
 import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/model/account.dart';
 import 'package:disney_app/core/model/post.dart';
@@ -78,6 +79,11 @@ class AppDisneyCell extends ConsumerWidget {
                                 overflow: TextOverflow.ellipsis,
                                 style: AppTextStyle.appBoldBlack18TextStyle,
                               ),
+                              Text(
+                                post.attractionName,
+                                style: AppTextStyle.appBoldGrey16TextStyle,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ],
                           ),
                         ),
@@ -88,7 +94,7 @@ class AppDisneyCell extends ConsumerWidget {
               ),
               const Spacer(),
               Padding(
-                padding: const EdgeInsets.only(top: 5),
+                padding: const EdgeInsets.only(top: 5, right: 20),
                 child: account.isOfficial
                     ? Image.asset(
                         Assets.images.official.path,
@@ -106,45 +112,58 @@ class AppDisneyCell extends ConsumerWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 75),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width - 80,
-              child: Text(
-                '#${post.attractionName}',
-                style: AppTextStyle.appBoldBlack16TextStyle,
-                overflow: TextOverflow.ellipsis,
-              ),
+            padding: const EdgeInsets.only(left: 75, top: 5, bottom: 10),
+            child: Row(
+              children: [
+                AppCellRating(rank: post.rank),
+                const SizedBox(width: 10),
+                Text(
+                  '${post.rank}点',
+                  style: AppTextStyle.appBoldBlack17TextStyle,
+                ),
+              ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 15, left: 75),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width - 100,
-              child: !post.isSpoiler
-                  ? Text(
-                      post.content,
-                      style: AppTextStyle.appNormalBlack18TextStyle,
-                      overflow: TextOverflow.visible,
-                    )
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          l10n.dialog_spoiler_cell_text,
-                          style: AppTextStyle.appBoldRed15TextStyle,
-                          overflow: TextOverflow.visible,
-                        ),
-                        const Icon(
-                          Icons.arrow_forward,
-                          color: Colors.red,
-                          size: 40,
-                        ),
-                      ],
+          post.content.isNotEmpty
+              ? Padding(
+                  padding: const EdgeInsets.only(left: 75),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width - 100,
+                    decoration: BoxDecoration(
+                      color: !post.isSpoiler
+                          ? Colors.grey.shade200
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(5),
                     ),
-            ),
-          ),
+                    child: !post.isSpoiler
+                        ? Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Text(
+                              post.content,
+                              style: AppTextStyle.appNormalBlack18TextStyle,
+                              overflow: TextOverflow.visible,
+                            ),
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                l10n.dialog_spoiler_cell_text,
+                                style: AppTextStyle.appBoldRed15TextStyle,
+                                overflow: TextOverflow.visible,
+                              ),
+                              const Icon(
+                                Icons.arrow_forward,
+                                color: Colors.red,
+                                size: 30,
+                              ),
+                            ],
+                          ),
+                  ),
+                )
+              : const SizedBox(),
           Padding(
-            padding: const EdgeInsets.only(top: 5, bottom: 5, left: 60),
+            padding: const EdgeInsets.only(bottom: 5, left: 60),
             child: Row(
               children: [
                 IconButton(
@@ -169,7 +188,7 @@ class AppDisneyCell extends ConsumerWidget {
                           updatePost,
                         );
                   },
-                  iconSize: 25,
+                  iconSize: 23,
                   icon: const Icon(
                     CupertinoIcons.heart,
                     color: Colors.pinkAccent,
@@ -177,7 +196,7 @@ class AppDisneyCell extends ConsumerWidget {
                 ),
                 Text(
                   post.heart.toString(),
-                  style: AppTextStyle.appNormalBlack20TextStyle,
+                  style: AppTextStyle.appNormalBlack18TextStyle,
                 ),
                 const Spacer(),
                 Padding(
