@@ -59,7 +59,7 @@ class DetailScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              width: MediaQuery.of(context).size.width / 1.5,
+                              width: MediaQuery.of(context).size.width / 1.8,
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 10),
                                 child: Text(
@@ -89,14 +89,14 @@ class DetailScreen extends ConsumerWidget {
                             ? Image.asset(
                                 Assets.images.official.path,
                                 fit: BoxFit.fill,
-                                width: 45,
+                                width: 35,
                               )
                             : (post.postAccountId ==
                                     MasterAccount.masterAccount)
                                 ? Image.asset(
                                     Assets.images.dev.path,
                                     fit: BoxFit.fill,
-                                    width: 45,
+                                    width: 35,
                                   )
                                 : const SizedBox.shrink(),
                         const SizedBox(width: 10),

@@ -94,7 +94,7 @@ class AppDisneyCell extends ConsumerWidget {
               ),
               const Spacer(),
               Padding(
-                padding: const EdgeInsets.only(top: 5),
+                padding: const EdgeInsets.only(top: 5, right: 20),
                 child: account.isOfficial
                     ? Image.asset(
                         Assets.images.official.path,
@@ -161,7 +161,7 @@ class AppDisneyCell extends ConsumerWidget {
                           ),
                   ),
                 )
-              : SizedBox(),
+              : const SizedBox(),
           Padding(
             padding: const EdgeInsets.only(bottom: 5, left: 60),
             child: Row(
