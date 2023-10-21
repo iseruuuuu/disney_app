@@ -74,7 +74,6 @@ class PostRepository {
         'created_time': Timestamp.now(),
         'rank': newPost.rank,
         'attraction_name': newPost.attractionName,
-        'is_spoiler': newPost.isSpoiler,
         'heart': newPost.heart,
       };
       final result = await postFirestoreService.addPost(postData);
@@ -86,7 +85,6 @@ class PostRepository {
         'created_time': Timestamp.now(),
         'rank': newPost.rank,
         'attraction_name': newPost.attractionName,
-        'is_spoiler': newPost.isSpoiler,
         'heart': newPost.heart,
       };
       await postFirestoreService.addUserPost(

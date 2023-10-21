@@ -9,7 +9,6 @@ class Post {
     this.createdTime,
     this.rank = 0.0,
     this.attractionName = '',
-    this.isSpoiler = false,
     this.heart = 0,
   });
 
@@ -22,7 +21,6 @@ class Post {
       createdTime: map['created_time'],
       rank: map['rank'],
       attractionName: map['attraction_name'],
-      isSpoiler: map['is_spoiler'],
       heart: map['heart'],
     );
   }
@@ -32,7 +30,6 @@ class Post {
   String postAccountId;
   String postId;
   Timestamp? createdTime;
-  bool isSpoiler;
   double rank;
   String attractionName;
   int heart;
@@ -49,7 +46,6 @@ class Post {
         other.postAccountId == postAccountId &&
         other.postId == postId &&
         other.createdTime == createdTime &&
-        other.isSpoiler == isSpoiler &&
         other.rank == rank &&
         other.attractionName == attractionName &&
         other.heart == heart;
@@ -62,7 +58,6 @@ class Post {
       postAccountId.hashCode ^
       postId.hashCode ^
       (createdTime?.hashCode ?? 0) ^
-      isSpoiler.hashCode ^
       rank.hashCode ^
       attractionName.hashCode ^
       heart.hashCode;
@@ -77,7 +72,6 @@ Post fromMap(Map<String, dynamic> map) {
     createdTime: map['created_time'],
     rank: map['rank'],
     attractionName: map['attraction_name'],
-    isSpoiler: map['is_spoiler'],
     heart: map['heart'],
   );
 }

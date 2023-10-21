@@ -12,7 +12,6 @@ class FakePost {
       createdTime: Timestamp.now(),
       rank: 5,
       attractionName: 'attraction_name',
-      isSpoiler: true,
     );
   }
 
@@ -26,7 +25,6 @@ class FakePost {
       createdTime: Timestamp.now(),
       rank: 5,
       attractionName: 'attraction_name',
-      isSpoiler: true,
     ),
     Post(
       id: '2',
@@ -35,7 +33,6 @@ class FakePost {
       createdTime: Timestamp.now(),
       rank: 5,
       attractionName: 'attraction_name2',
-      isSpoiler: true,
     ),
     Post(
       id: '3',
@@ -44,7 +41,6 @@ class FakePost {
       createdTime: Timestamp.now(),
       rank: 5,
       attractionName: 'attraction_name3',
-      isSpoiler: true,
     ),
   ];
 

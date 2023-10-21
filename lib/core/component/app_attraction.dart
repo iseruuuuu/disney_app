@@ -28,7 +28,7 @@ class AppAttraction extends StatelessWidget {
       tileColor: Colors.white,
       title: !isSelected
           ? Text(
-              l10n.attraction,
+              l10n.theme_park,
               style: AppTextStyle.appBoldBlack16TextStyle,
             )
           : SizedBox(
