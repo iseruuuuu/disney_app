@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:disney_app/core/constants/account.dart';
 import 'package:disney_app/core/theme/app_color_style.dart';
 import 'package:disney_app/core/theme/app_text_style.dart';
 import 'package:disney_app/gen/l10n.dart';
@@ -87,7 +88,7 @@ class PostPlaceScreenState extends State<PostPlaceScreen> {
   }
 
   Future<List<String>> fetchDisneyAttractions([String? pageToken]) async {
-    const apiKey = 'AIzaSyBH0tg0LPhmEVp8LwIYnLTBHb19dZR84kY';
+    const apiKey = ApiKey.googleMapApiKey;
     var location = '35.6895,139.6917';
     const radius = '50000';
     const type = 'tourist_attraction';
