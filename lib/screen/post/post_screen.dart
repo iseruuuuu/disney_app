@@ -25,14 +25,14 @@ class PostScreen extends ConsumerWidget {
           elevation: 0,
           actions: [
             TextButton(
-              onPressed: (state.attractionName.isNotEmpty)
+              onPressed: (state.place.isNotEmpty)
                   ? () => ref
                       .read(postScreenViewModelProvider.notifier)
                       .post(context, ref)
                   : null,
               child: Text(
                 l10n.post,
-                style: (state.attractionName.isNotEmpty)
+                style: (state.place.isNotEmpty)
                     ? AppTextStyle.appBoldBlue18TextStyle
                     : AppTextStyle.appBoldGrey18TextStyle,
               ),
@@ -65,7 +65,7 @@ class PostScreen extends ConsumerWidget {
                       onTap: () => ref
                           .read(postScreenViewModelProvider.notifier)
                           .attractionPicker(context),
-                      attractionName: state.attractionName,
+                      attractionName: state.place,
                       isSelected: state.isSelected,
                       style: AppTextStyle.appBoldBlack16TextStyle,
                     ),
@@ -74,27 +74,6 @@ class PostScreen extends ConsumerWidget {
                     controller: controller.controller,
                     hintText: l10n.impressions,
                     maxLines: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        state.isSpoiler
-                            ? l10n.is_spoiler_true
-                            : l10n.is_spoiler_false,
-                        style: AppTextStyle.appBold20GoogleFontsTextStyle,
-                      ),
-                      Transform.scale(
-                        scale: 1.5,
-                        child: Checkbox(
-                          activeColor: AppColorStyle.appColor,
-                          value: state.isSpoiler,
-                          onChanged: (value) => ref
-                              .read(postScreenViewModelProvider.notifier)
-                              .onChanged(value: value!),
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
