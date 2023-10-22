@@ -11,6 +11,9 @@ class L10nJa extends L10n {
   String get attraction => 'アトラクション';
 
   @override
+  String get theme_park => 'テーマパーク';
+
+  @override
   String get no_post => '投稿がまだありません';
 
   @override
@@ -219,4 +222,7 @@ class L10nJa extends L10n {
 
   @override
   String get search_star => '評価';
+
+  @override
+  String get post_place_title => 'テーマパークを探す';
 }

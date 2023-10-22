@@ -103,6 +103,12 @@ abstract class L10n {
   /// **'アトラクション'**
   String get attraction;
 
+  /// No description provided for @theme_park.
+  ///
+  /// In ja, this message translates to:
+  /// **'テーマパーク'**
+  String get theme_park;
+
   /// No description provided for @no_post.
   ///
   /// In ja, this message translates to:
@@ -522,6 +528,12 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'評価'**
   String get search_star;
+
+  /// No description provided for @post_place_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'テーマパークを探す'**
+  String get post_place_title;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

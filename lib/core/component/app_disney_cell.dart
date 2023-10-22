@@ -130,35 +130,17 @@ class AppDisneyCell extends ConsumerWidget {
                   child: Container(
                     width: MediaQuery.of(context).size.width - 100,
                     decoration: BoxDecoration(
-                      color: !post.isSpoiler
-                          ? Colors.grey.shade200
-                          : Colors.transparent,
+                      color: Colors.grey.shade200,
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: !post.isSpoiler
-                        ? Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Text(
-                              post.content,
-                              style: AppTextStyle.appNormalBlack18TextStyle,
-                              overflow: TextOverflow.visible,
-                            ),
-                          )
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                l10n.dialog_spoiler_cell_text,
-                                style: AppTextStyle.appBoldRed15TextStyle,
-                                overflow: TextOverflow.visible,
-                              ),
-                              const Icon(
-                                Icons.arrow_forward,
-                                color: Colors.red,
-                                size: 30,
-                              ),
-                            ],
-                          ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(
+                        post.content,
+                        style: AppTextStyle.appNormalBlack18TextStyle,
+                        overflow: TextOverflow.visible,
+                      ),
+                    ),
                   ),
                 )
               : const SizedBox(),
@@ -175,7 +157,6 @@ class AppDisneyCell extends ConsumerWidget {
                       'created_time': post.createdTime,
                       'rank': post.rank,
                       'attraction_name': post.attractionName,
-                      'is_spoiler': post.isSpoiler,
                       'heart': post.heart + 1,
                     };
                     ref.read(postUsecaseProvider).updatePosts(

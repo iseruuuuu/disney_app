@@ -32,6 +32,12 @@
 	<string>プロフィールの登録のためにMicroPhoneの許可が必要となります。</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>プロフィールの登録のためにアルバムの許可が必要となります。。</string>
+
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>近くの遊園地を取得するために許可が必要となります。</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>近くの遊園地を取得するために許可が必要となります。</string>
+
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>items</string>
